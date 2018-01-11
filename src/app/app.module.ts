@@ -22,6 +22,7 @@ const appRoutes: Routes = [
   { path: 'book-details/:id', component: BookDetailComponent },
   { path: 'book-create', component: BookCreateComponent },
   { path: 'book-edit/:id', component: BookEditComponent },
+  { path: 'promos', component: PromosComponent },
   
 
 ];
