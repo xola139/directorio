@@ -14,6 +14,7 @@ import { BookDetailComponent } from './book-detail/book-detail.component';
 import { BookCreateComponent } from './book-create/book-create.component';
 import { BookEditComponent } from './book-edit/book-edit.component';
 import { PromosComponent } from './promos/promos.component';
+import { ModelComponent } from './model/model.component';
 
 
 const appRoutes: Routes = [
@@ -23,6 +24,7 @@ const appRoutes: Routes = [
   { path: 'book-create', component: BookCreateComponent },
   { path: 'book-edit/:id', component: BookEditComponent },
   { path: 'promos', component: PromosComponent },
+  { path: 'model', component: ModelComponent },
   
 
 ];
@@ -34,16 +36,15 @@ const appRoutes: Routes = [
     BookDetailComponent,
     BookCreateComponent,
     BookEditComponent,
-    PromosComponent
+    PromosComponent,
+    ModelComponent
     
   ],
   imports: [
     BrowserModule,
     FormsModule,
     HttpModule,
-    
     FormsModule,
-    
     RouterModule.forRoot(appRoutes)
   ],
   providers: [
