@@ -4,8 +4,8 @@ import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { RouterModule, Routes } from '@angular/router';
 import { HashLocationStrategy, LocationStrategy } from '@angular/common';
-
-
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {MatButtonModule, MatCardModule, MatMenuModule,MatToolbarModule,MatIconModule} from '@angular/material';
 
 import { AppComponent } from './app.component';
 import { BookComponent } from './book/book.component';
@@ -39,12 +39,22 @@ const appRoutes: Routes = [
     PromosComponent,
     ModelComponent
     
+    
   ],
   imports: [
     BrowserModule,
     FormsModule,
     HttpModule,
     FormsModule,
+    BrowserModule,
+    FormsModule,
+    HttpModule,
+    BrowserAnimationsModule,
+    MatButtonModule, 
+    MatCardModule, 
+    MatMenuModule,
+    MatToolbarModule,
+    MatIconModule,
     RouterModule.forRoot(appRoutes)
   ],
   providers: [
