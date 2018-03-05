@@ -8,7 +8,7 @@ var mongoose = require('mongoose');
 mongoose.Promise = global.Promise;
 
 
-mongoose.connect('tu conexion')
+mongoose.connect('tu conexion aqui')
 .then(() =>  console.log('connection successful'))
 .catch((err) => console.error(err));
   

@@ -4,11 +4,43 @@ import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { RouterModule, Routes } from '@angular/router';
 import { HashLocationStrategy, LocationStrategy } from '@angular/common';
-import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {MatButtonModule, MatCardModule, MatMenuModule,MatToolbarModule,MatIconModule,  MatTableModule,    MatSortModule,   MatDialogModule } from '@angular/material';
-import { MatFormFieldModule } from '@angular/material';
-import { MatInputModule } from '@angular/material';
-import { MatGridListModule} from '@angular/material/grid-list';
+import { BrowserAnimationsModule} from '@angular/platform-browser/animations';
+
+
+import { MatFormFieldModule, MatAutocompleteModule,
+  MatButtonModule,
+  MatButtonToggleModule,
+  MatCardModule,
+  MatCheckboxModule,
+  MatChipsModule,
+  MatDatepickerModule,
+  MatDialogModule,
+  MatDividerModule,
+  MatExpansionModule,
+  MatGridListModule,
+  MatIconModule,
+  MatInputModule,
+  MatListModule,
+  MatMenuModule,
+  MatNativeDateModule,
+  MatPaginatorModule,
+  MatProgressBarModule,
+  MatProgressSpinnerModule,
+  MatRadioModule,
+  MatRippleModule,
+  MatSelectModule,
+  MatSidenavModule,
+  MatSliderModule,
+  MatSlideToggleModule,
+  MatSnackBarModule,
+  MatSortModule,
+  MatStepperModule,
+  MatTableModule,
+  MatTabsModule,
+  MatToolbarModule,
+  MatTooltipModule, } from '@angular/material'
+
+
 
 import { AppComponent } from './app.component';
 import { BookComponent } from './book/book.component';
@@ -21,6 +53,7 @@ import { ModelComponent } from './model/model.component';
 
 import { ModelService } from './model.service';
 import { PromosService } from './promos/promos.service';
+import { SidenavResponsiveComponent } from './sidenav-responsive/sidenav-responsive.component';
 
 
 
@@ -32,6 +65,7 @@ const appRoutes: Routes = [
   { path: 'book-edit/:id', component: BookEditComponent },
   { path: 'promos', component: PromosComponent },
   { path: 'model', component: ModelComponent },
+  { path: 'sidebavmenu', component: SidenavResponsiveComponent },
   
 
 ];
@@ -44,7 +78,8 @@ const appRoutes: Routes = [
     BookCreateComponent,
     BookEditComponent,
     PromosComponent,
-    ModelComponent
+    ModelComponent,
+    SidenavResponsiveComponent
     
     
   ],
@@ -57,17 +92,38 @@ const appRoutes: Routes = [
     FormsModule,
     HttpModule,
     BrowserAnimationsModule,
-    MatButtonModule, 
-    MatCardModule, 
-    MatMenuModule,
-    MatToolbarModule,
+    MatFormFieldModule, MatAutocompleteModule,
+    MatButtonModule,
+    MatButtonToggleModule,
+    MatCardModule,
+    MatCheckboxModule,
+    MatChipsModule,
+    MatDatepickerModule,
+    MatDialogModule,
+    MatDividerModule,
+    MatExpansionModule,
+    MatGridListModule,
     MatIconModule,
     MatInputModule,
-    MatGridListModule,
-    MatFormFieldModule,
+    MatListModule,
+    MatMenuModule,
+    MatNativeDateModule,
+    MatPaginatorModule,
+    MatProgressBarModule,
+    MatProgressSpinnerModule,
+    MatRadioModule,
+    MatRippleModule,
+    MatSelectModule,
+    MatSidenavModule,
+    MatSliderModule,
+    MatSlideToggleModule,
+    MatSnackBarModule,
+    MatSortModule,
+    MatStepperModule,
     MatTableModule,
-    MatSortModule,   
-    MatDialogModule,
+    MatTabsModule,
+    MatToolbarModule,
+    MatTooltipModule,
     RouterModule.forRoot(appRoutes)
   ],
   providers: [
