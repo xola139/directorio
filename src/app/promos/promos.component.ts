@@ -1,28 +1,57 @@
-import { Component, OnInit } from '@angular/core';
-import  {Http} from '@angular/http';
-import { Observable } from "rxjs/Observable";
+import {Component,OnInit} from '@angular/core';
+import {MatTableDataSource} from '@angular/material';
 
+import { PromosService } from './promos.service';
 
 @Component({
   selector: 'app-promos',
   templateUrl: './promos.component.html',
   styleUrls: ['./promos.component.css']
 })
-export class PromosComponent implements OnInit {
 
-    myData:Array<any>;
+export class PromosComponent  implements OnInit {
 
-  constructor(private http:Http){
-  	this.http.get('https://jsonplaceholder.typicode.com/photos')
-  	.map(response => response.json())
-  	.subscribe(res => this.myData = res);
+ promos: any;
+
+constructor(private promosService: PromosService) { }
+
+
+displayedColumns = ['id','descripcion','idTwit'];
+  dataSource :any;
+
+  applyFilter(filterValue: string) {
+    filterValue = filterValue.trim(); // Remove whitespace
+    filterValue = filterValue.toLowerCase(); // MatTableDataSource defaults to lowercase matches
+    this.dataSource.filter = filterValue;
+  }
+
+ngOnInit() {
+    this.getPromosList();
+  }
+
+  getPromosList() {
+    this.promosService.getAllPromos().then((res) => {
+      this.promos = res;
+      const ELEMENT_DATES: Element[] = this.promos;
+
+      this.dataSource = new MatTableDataSource(ELEMENT_DATES);      
+
+      console.log("=====>"+this.dataSource );
+    }, (err) => {
+      console.log(err);
+    });
   }
 
 
 
-  ngOnInit() {
-  }
 
+
+}
+export interface Element {
+  id: string;
+  idTwit: string;
+  descripcion: string;
+  timemsString: string;
 }
 
 

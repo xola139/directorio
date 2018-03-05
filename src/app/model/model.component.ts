@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import  {Http} from '@angular/http';
 import { Observable } from "rxjs/Observable";
-
+import { ModelService } from '../model.service';
 
 
 

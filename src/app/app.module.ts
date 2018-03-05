@@ -5,7 +5,10 @@ import { HttpModule } from '@angular/http';
 import { RouterModule, Routes } from '@angular/router';
 import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {MatButtonModule, MatCardModule, MatMenuModule,MatToolbarModule,MatIconModule} from '@angular/material';
+import {MatButtonModule, MatCardModule, MatMenuModule,MatToolbarModule,MatIconModule,  MatTableModule,    MatSortModule,   MatDialogModule } from '@angular/material';
+import { MatFormFieldModule } from '@angular/material';
+import { MatInputModule } from '@angular/material';
+import { MatGridListModule} from '@angular/material/grid-list';
 
 import { AppComponent } from './app.component';
 import { BookComponent } from './book/book.component';
@@ -15,6 +18,10 @@ import { BookCreateComponent } from './book-create/book-create.component';
 import { BookEditComponent } from './book-edit/book-edit.component';
 import { PromosComponent } from './promos/promos.component';
 import { ModelComponent } from './model/model.component';
+
+import { ModelService } from './model.service';
+import { PromosService } from './promos/promos.service';
+
 
 
 const appRoutes: Routes = [
@@ -55,10 +62,16 @@ const appRoutes: Routes = [
     MatMenuModule,
     MatToolbarModule,
     MatIconModule,
+    MatInputModule,
+    MatGridListModule,
+    MatFormFieldModule,
+    MatTableModule,
+    MatSortModule,   
+    MatDialogModule,
     RouterModule.forRoot(appRoutes)
   ],
   providers: [
-    BookService,
+    BookService,ModelService,PromosService,
     {provide: LocationStrategy, useClass: HashLocationStrategy}
   ],
   bootstrap: [AppComponent]
