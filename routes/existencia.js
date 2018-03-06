@@ -1,13 +1,15 @@
 var express = require('express');
 var router = express.Router();
 var mongoose = require('mongoose');
-var Disponible = require('../models/Disponible.js');
+var existencia = require('../models/Existencia.js');
 
-/* GET ALL DISPONIBLE */
+/* GET ALL IMAGES */
 router.get('/', function(req, res, next) {
-  Disponible.find(function (err,disponible) {
+    existencia.find(function (err, existencia) {
+        console.log(existencia);
     if (err) return next(err);
-    res.json(disponible);
+    res.json(existencia);
   });
 });
+
 module.exports = router;

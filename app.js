@@ -13,10 +13,11 @@ mongoose.connect('tu conexion aqui')
 .catch((err) => console.error(err));
   
 //var book = require('./routes/book');
-//var disponible = require('./routes/disponible');
+var disponible = require('./routes/disponible');
 var promos = require('./routes/promos');
 var images = require('./routes/images');
 var alertas = require('./routes/alertas');
+var existencia = require('./routes/existencia');
 
 
 var app = express();
@@ -29,9 +30,10 @@ app.use(express.static(path.join(__dirname, 'dist')));
 //app.use('/book', book);
 
 app.use('/promos', promos);
-//app.use('/disponible', disponible);
+app.use('/disponible', disponible);
 app.use('/images', images);
 app.use('/alertas', alertas);
+app.use('/existencia', existencia);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
