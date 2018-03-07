@@ -4,11 +4,16 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
+var passport = require('passport');
 
 mongoose.Promise = global.Promise;
 
+// Importamos el modelo usuario y la configuración de passport
+require('./models/user');
+require('./passport')(passport);
 
-mongoose.connect('tu conexion aqui')
+
+mongoose.connect('tu conexion a mongolab')
 .then(() =>  console.log('connection successful'))
 .catch((err) => console.error(err));
   
@@ -17,7 +22,8 @@ var disponible = require('./routes/disponible');
 var promos = require('./routes/promos');
 var images = require('./routes/images');
 var alertas = require('./routes/alertas');
-var existencia = require('./routes/existencia');
+
+
 
 
 var app = express();
@@ -27,13 +33,29 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({'extended':'false'}));
 app.use(express.static(path.join(__dirname, 'dist')));
 
+// Configuración de Passport. Lo inicializamos
+// y le indicamos que Passport maneje la Sesión
+app.use(passport.initialize());
+app.use(passport.session());
+
+
 //app.use('/book', book);
 
 app.use('/promos', promos);
 app.use('/disponible', disponible);
 app.use('/images', images);
 app.use('/alertas', alertas);
-app.use('/existencia', existencia);
+
+// Ruta para autenticarse con Twitter (enlace de login)
+app.get('/auth/twitter', passport.authenticate('twitter'));
+
+
+
+// Ruta de callback, a la que redirigirá tras autenticarse con Twitter.
+// En caso de fallo redirige a otra vista '/login'
+app.get('/auth/twitter/callback', passport.authenticate('twitter',
+  { successRedirect: '/', failureRedirect: '/login' }
+));
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -41,6 +63,11 @@ app.use(function(req, res, next) {
   err.status = 404;
   next(err);
 });
+
+
+
+
+
 
 // error handler
 app.use(function(err, req, res, next) {
