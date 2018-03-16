@@ -6,7 +6,7 @@ var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
 var passport = require('passport');
 var Strategy = require('passport-twitter').Strategy;
-
+var ejs = require('ejs');
 require('./config');
 
 mongoose.Promise = global.Promise;
@@ -55,7 +55,7 @@ passport.deserializeUser(function(obj, cb) {
 
 
 
-mongoose.connect('tu conexion aqui man!')
+mongoose.connect('tu connect')
 .then(() =>  console.log('connection successful'))
 .catch((err) => console.error(err));
   
@@ -64,6 +64,7 @@ var disponible = require('./routes/disponible');
 var promos = require('./routes/promos');
 var images = require('./routes/images');
 var alertas = require('./routes/alertas');
+var login = require('./routes/login');
 
 
 
@@ -71,13 +72,28 @@ var alertas = require('./routes/alertas');
 var app = express();
 
 // Configure view engine to render EJS templates.
-app.set('views', __dirname + '/views');
+app.set('views', __dirname + '/src/views');
 app.set('view engine', 'ejs');
+
+
+
+// Use application-level middleware for common functionality, including
+// logging, parsing, and session handling.
+app.use(require('morgan')('combined'));
+app.use(require('cookie-parser')());
+app.use(require('body-parser').urlencoded({ extended: true }));
+app.use(require('express-session')({ secret: 'keyboard cat', resave: true, saveUninitialized: true }));
 
 app.use(logger('dev'));
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({'extended':'false'}));
+//app.use(bodyParser.urlencoded({'extended':'false'}));
 app.use(express.static(path.join(__dirname, 'dist')));
+
+
+
+
+
+
 
 
 // Initialize Passport and restore authentication state, if any, from the
@@ -92,15 +108,18 @@ app.use('/promos', promos);
 app.use('/disponible', disponible);
 app.use('/images', images);
 app.use('/alertas', alertas);
+app.use('/login', login);
 
-app.get('/login/twitter',
-  passport.authenticate('twitter'));
+app.all('*', function(req, res, next) {
+   res.header("Access-Control-Allow-Origin", "*");
+   res.header("Access-Control-Allow-Credentials", true);
+   res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
+   res.header("Access-Control-Allow-Headers",
+    'Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept');
+   next();
+});
 
-app.get('/login/twitter/return', 
-  passport.authenticate('twitter', { failureRedirect: '/login' }),
-  function(req, res) {
-    res.redirect('/');
-  });
+
 
 
 // catch 404 and forward to error handler

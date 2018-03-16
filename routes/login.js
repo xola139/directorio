@@ -5,13 +5,13 @@ var passport = require('passport');
 
 
 // Ruta para autenticarse con Twitter (enlace de login)
-//router.get('/', passport.authenticate('twitter'));
+router.get('/', passport.authenticate('twitter'));
 
 
 	// route for twitter authentication and login
 	// different scopes while logging in
-	router.get('/login/twitter', 
-		passport.authenticate('twitter'));
+router.get('/login/twitter', 
+	passport.authenticate('twitter'));
 
 
 
