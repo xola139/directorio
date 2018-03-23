@@ -6,11 +6,11 @@ var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
 var passport = require('passport');
 var Strategy = require('passport-twitter').Strategy;
-var ejs = require('ejs');
-require('./config');
+
+var config  = require('./config');
 
 mongoose.Promise = global.Promise;
-
+var Strategy = require('passport-twitter').Strategy;
 // Configure the Twitter strategy for use by Passport.
 //
 // OAuth 1.0-based strategies require a `verify` function which receives the
@@ -19,8 +19,8 @@ mongoose.Promise = global.Promise;
 // with a user object, which will be set at `req.user` in route handlers after
 // authentication.
 passport.use(new Strategy({
-    consumerKey: process.env.CONSUMER_KEY,
-    consumerSecret: process.env.CONSUMER_SECRET,
+    consumerKey: config.twitter.key,//process.env.CONSUMER_KEY,
+    consumerSecret: config.twitter.secret,//,process.env.CONSUMER_SECRET,
     callbackURL: 'http://127.0.0.1:3000/login/twitter/return'
   },
   function(token, tokenSecret, profile, cb) {
@@ -52,10 +52,7 @@ passport.deserializeUser(function(obj, cb) {
 
 
 
-
-
-
-mongoose.connect('tu connect')
+mongoose.connect('')
 .then(() =>  console.log('connection successful'))
 .catch((err) => console.error(err));
   
@@ -67,33 +64,20 @@ var alertas = require('./routes/alertas');
 var login = require('./routes/login');
 
 
-
-
 var app = express();
 
 // Configure view engine to render EJS templates.
-app.set('views', __dirname + '/src/views');
+app.set('views', __dirname + '/views');
 app.set('view engine', 'ejs');
 
-
-
-// Use application-level middleware for common functionality, including
-// logging, parsing, and session handling.
+app.use(logger('dev'));
 app.use(require('morgan')('combined'));
 app.use(require('cookie-parser')());
-app.use(require('body-parser').urlencoded({ extended: true }));
-app.use(require('express-session')({ secret: 'keyboard cat', resave: true, saveUninitialized: true }));
 
-app.use(logger('dev'));
 app.use(bodyParser.json());
-//app.use(bodyParser.urlencoded({'extended':'false'}));
+app.use(bodyParser.urlencoded({'extended':'true'}));
 app.use(express.static(path.join(__dirname, 'dist')));
-
-
-
-
-
-
+app.use(require('express-session')({ secret: 'keyboard cat', resave: true, saveUninitialized: true }));
 
 
 // Initialize Passport and restore authentication state, if any, from the
@@ -104,22 +88,11 @@ app.use(passport.session());
 
 //app.use('/book', book);
 
-app.use('/promos', promos);
+app.use('/promos', require('connect-ensure-login').ensureLoggedIn(),promos);
 app.use('/disponible', disponible);
 app.use('/images', images);
 app.use('/alertas', alertas);
 app.use('/login', login);
-
-app.all('*', function(req, res, next) {
-   res.header("Access-Control-Allow-Origin", "*");
-   res.header("Access-Control-Allow-Credentials", true);
-   res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
-   res.header("Access-Control-Allow-Headers",
-    'Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept');
-   next();
-});
-
-
 
 
 // catch 404 and forward to error handler

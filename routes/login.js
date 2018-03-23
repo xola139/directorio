@@ -8,22 +8,21 @@ var passport = require('passport');
 router.get('/', passport.authenticate('twitter'));
 
 
-	// route for twitter authentication and login
-	// different scopes while logging in
-router.get('/login/twitter', 
-	passport.authenticate('twitter'));
+router.get('/twitter/return', 
+  passport.authenticate('twitter', { failureRedirect: '/model' }),
+  function(req, res) {
+  	console.log(req.user);
+    res.redirect('/');
+  });
 
 
 
 
-
-
-// Ruta de callback, a la que redirigirá tras autenticarse con Twitter.
-// En caso de fallo redirige a otra vista '/login'
-router.get('/auth/twitter/callback', passport.authenticate('twitter',
-  { successRedirect: '/', failureRedirect: '/model' }
-));
-
+router.get('/profile',
+  require('connect-ensure-login').ensureLoggedIn(),
+  function(req, res){
+    res.render('profile', { user: req.user });
+  });
 
 
 module.exports = router;
