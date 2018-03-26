@@ -52,7 +52,7 @@ passport.deserializeUser(function(obj, cb) {
 
 
 
-mongoose.connect('')
+mongoose.connect('conection')
 .then(() =>  console.log('connection successful'))
 .catch((err) => console.error(err));
   
@@ -67,8 +67,10 @@ var login = require('./routes/login');
 var app = express();
 
 // Configure view engine to render EJS templates.
-app.set('views', __dirname + '/views');
-app.set('view engine', 'ejs');
+//app.set('views', __dirname + '/views');
+//app.set('view engine', 'ejs');
+
+app.engine('html', require('ejs').renderFile);
 
 app.use(logger('dev'));
 app.use(require('morgan')('combined'));
@@ -88,11 +90,22 @@ app.use(passport.session());
 
 //app.use('/book', book);
 
-app.use('/promos', require('connect-ensure-login').ensureLoggedIn(),promos);
+//app.use('/promos', require('connect-ensure-login').ensureLoggedIn(),promos);
+app.use('/promos',promos);
 app.use('/disponible', disponible);
 app.use('/images', images);
 app.use('/alertas', alertas);
 app.use('/login', login);
+
+
+app.all('*', function(req, res, next) {
+   res.header("Access-Control-Allow-Origin", "*");
+   res.header("Access-Control-Allow-Credentials", true);
+   res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
+   res.header("Access-Control-Allow-Headers",
+    'Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept');
+   next();
+});
 
 
 // catch 404 and forward to error handler

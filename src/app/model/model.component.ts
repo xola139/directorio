@@ -14,7 +14,8 @@ export class ModelComponent implements OnInit {
   myData:Array<any>;
 
   constructor(private http:Http){
-    this.http.get('https://jsonplaceholder.typicode.com/photos')
+    
+    this.http.get('http://127.0.0.1:3000/images')
     .map(response => response.json())
     .subscribe(res => this.myData = res);
   }

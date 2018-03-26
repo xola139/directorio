@@ -58,7 +58,7 @@ import { SidenavResponsiveComponent } from './sidenav-responsive/sidenav-respons
 
 
 const appRoutes: Routes = [
-  { path: '', redirectTo: 'books', pathMatch: 'full' },
+  { path: '', redirectTo: 'model', pathMatch: 'full' },
   { path: 'books', component: BookComponent },
   { path: 'book-details/:id', component: BookDetailComponent },
   { path: 'book-create', component: BookCreateComponent },
