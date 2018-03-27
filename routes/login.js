@@ -12,7 +12,7 @@ router.get('/twitter/return',
   passport.authenticate('twitter', { failureRedirect: '/model' }),
   function(req, res) {
   	console.log(req.user);
-    res.redirect('/');
+    res.redirect('/login/profile');
   });
 
 

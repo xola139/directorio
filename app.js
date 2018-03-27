@@ -52,7 +52,7 @@ passport.deserializeUser(function(obj, cb) {
 
 
 
-mongoose.connect('')
+mongoose.connect('mongodb://usuariogeneric:sharkesink139@ds041603.mlab.com:41603/generic')
 .then(() =>  console.log('connection successful'))
 .catch((err) => console.error(err));
   
@@ -67,7 +67,7 @@ var login = require('./routes/login');
 var app = express();
 
 // Configure view engine to render EJS templates.
-app.set('views', __dirname + '/views');
+app.set('views', __dirname + '/src/views');
 app.set('view engine', 'ejs');
 
 app.use(logger('dev'));
@@ -88,7 +88,7 @@ app.use(passport.session());
 
 //app.use('/book', book);
 
-app.use('/promos', require('connect-ensure-login').ensureLoggedIn(),promos);
+app.use('/promos',promos);
 app.use('/disponible', disponible);
 app.use('/images', images);
 app.use('/alertas', alertas);

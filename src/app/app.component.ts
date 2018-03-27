@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { SidenavResponsiveComponent } from './sidenav-responsive/sidenav-responsive.component';
+import { AsyncLocalStorage } from 'angular-async-local-storage';
 
 @Component({
   selector: 'app-root',
@@ -7,5 +8,23 @@ import { SidenavResponsiveComponent } from './sidenav-responsive/sidenav-respons
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
+  usuario: string;
+  otheruser: any;
+
+  constructor(protected localStorage: AsyncLocalStorage) {}
+
+
+ 
   title = 'app';
+
+
+  ngOnInit() {
+    this.localStorage.getItem('usuario').subscribe((data) => {
+
+      
+      this.usuario = localStorage.getItem('usuario');
+
+    });
+  }
+  
 }

@@ -5,7 +5,7 @@ import { HttpModule } from '@angular/http';
 import { RouterModule, Routes } from '@angular/router';
 import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 import { BrowserAnimationsModule} from '@angular/platform-browser/animations';
-
+import { AsyncLocalStorageModule } from 'angular-async-local-storage';
 
 import { MatFormFieldModule, MatAutocompleteModule,
   MatButtonModule,
@@ -79,12 +79,14 @@ const appRoutes: Routes = [
     BookEditComponent,
     PromosComponent,
     ModelComponent,
-    SidenavResponsiveComponent
+    SidenavResponsiveComponent,
+    
     
     
   ],
   imports: [
     BrowserModule,
+    AsyncLocalStorageModule,
     FormsModule,
     HttpModule,
     FormsModule,
