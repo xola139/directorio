@@ -2,6 +2,8 @@
 
 var ImagesSchema = new mongoose.Schema({
   id: String,
+  avatar: String,
+  telefono: String,
   images: Array,
   
 });
