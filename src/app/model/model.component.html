@@ -1,19 +1,18 @@
   <div class="container">
       <div class="row" >
           <div class="col-md-4 col-sm-12 mt-3" *ngFor="let data of (myData ? myData.slice(0,10):[]);let i = index">
-              <mat-card class="example-card" >
-                  <mat-card-header>
+              <mat-card class="example-card p-0" >
+                  <mat-card-header class="m-2">
                     <div mat-card-avatar class="example-header-image"></div>
                     <mat-card-title>{{data.id}}</mat-card-title>
                     <mat-card-subtitle>{{data.telefono}}</mat-card-subtitle>
                   </mat-card-header>
                   <mat-card-content>
-                    
                     <mat-card>
                       <mat-card-content>
                         <mat-tab-group class="demo-tab-group">
                           <mat-tab label="Tab 1">
-                            <ng-template mat-tab-label>
+                            <ng-template mat-tab-label class="marginIcon">
                               <mat-icon>security</mat-icon>
                             </ng-template>
                             <div class="demo-tab-content">
@@ -40,17 +39,57 @@
                               <mat-icon>attach_file</mat-icon>
                             </ng-template>
                             <div class="demo-tab-content">
-                              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla venenatis ante augue.
-                              Phasellus volutpat neque ac dui mattis vulputate. Etiam consequat aliquam cursus.
-                              In sodales pretium ultrices. Maecenas lectus est, sollicitudin consectetur felis nec,
-                              feugiat ultricies mi. Aliquam erat volutpat. Nam placerat, tortor in ultrices porttitor,
-                              orci enim rutrum enim, vel tempor sapien arcu a tellus.
-                            </div>  
+                              <ul class="list-group">
+                                <li class="list-group-item">Cras justo odio</li>
+                                <li class="list-group-item">Dapibus ac facilisis in</li>
+                                <li class="list-group-item">Morbi leo risus</li>
+                                <li class="list-group-item">Porta ac consectetur ac</li>
+                                <li class="list-group-item">Vestibulum at eros</li>
+                              </ul>
+                            </div>
+                            <div class="table-responsive">
+                              <table class="table table-bordered">
+                                <thead>
+                                  <tr>
+                                
+                                    <th scope="col">Lunes</th>
+                                    <th scope="col">Martes</th>
+                                    <th scope="col">Miercoles</th>
+                                    <th scope="col">Jueves</th>
+                                    <th scope="col">Viernes</th>
+                                    <th scope="col">Sabado</th>
+                                    <th scope="col">Domingo</th>
+                                  </tr>
+                                </thead>
+                                <tbody>
+                                  <tr>
+                                
+                                    <td>Mark</td>
+                                    <td>Otto</td>
+                                    <td>@mdo</td>
+                                    <td>Otto</td>
+                                    <td>@mdo</td>
+                                    <td>Otto</td>
+                                    <td>@mdo</td>
+                                  </tr>
+                                 
+                                  <tr>
+                                 
+                                    <td colspan="2">Larry the Bird</td>
+                                    <td>@twitter</td>
+                                    <td>Otto</td>
+                                    <td>@mdo</td>
+                                    <td>Otto</td>
+                                    <td>@mdo</td>
+                                  </tr>
+                                </tbody>
+                              </table>  
+                             </div> 
                           </mat-tab>
                                                    
                         </mat-tab-group>
                       </mat-card-content>
-                    </mat-card>s
+                    </mat-card>
                   </mat-card-content>
                   <mat-card-actions>
                     <button mat-button>LIKE</button>

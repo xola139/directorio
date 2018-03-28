@@ -13,7 +13,7 @@ router.get('/twitter/return',
   function(req, res) {
   	console.log(req.user);
     res.redirect('/login/profile');
-  });
+});
 
 
 
