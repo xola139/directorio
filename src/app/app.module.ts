@@ -50,10 +50,13 @@ import { BookCreateComponent } from './book-create/book-create.component';
 import { BookEditComponent } from './book-edit/book-edit.component';
 import { PromosComponent } from './promos/promos.component';
 import { ModelComponent } from './model/model.component';
+import { PerfilComponent } from './perfil/perfil.component';
 
 import { ModelService } from './model.service';
 import { PromosService } from './promos/promos.service';
+import { PerfilService } from './perfil/perfil.service';
 import { SidenavResponsiveComponent } from './sidenav-responsive/sidenav-responsive.component';
+
 
 
 
@@ -65,6 +68,7 @@ const appRoutes: Routes = [
   { path: 'book-edit/:id', component: BookEditComponent },
   { path: 'promos', component: PromosComponent },
   { path: 'model', component: ModelComponent },
+  { path: 'perfil', component: PerfilComponent },
   { path: 'sidebavmenu', component: SidenavResponsiveComponent },
   
 
@@ -80,6 +84,7 @@ const appRoutes: Routes = [
     PromosComponent,
     ModelComponent,
     SidenavResponsiveComponent,
+    PerfilComponent,
     
     
     
@@ -129,7 +134,7 @@ const appRoutes: Routes = [
     RouterModule.forRoot(appRoutes)
   ],
   providers: [
-    BookService,ModelService,PromosService,
+    BookService,ModelService,PromosService,PerfilService,
     {provide: LocationStrategy, useClass: HashLocationStrategy}
   ],
   bootstrap: [AppComponent]

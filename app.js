@@ -52,7 +52,7 @@ passport.deserializeUser(function(obj, cb) {
 
 
 
-mongoose.connect('tu conexion')
+mongoose.connect(config.conectDB.link)
 .then(() =>  console.log('connection successful'))
 .catch((err) => console.error(err));
   
