@@ -52,11 +52,11 @@ passport.deserializeUser(function(obj, cb) {
 
 
 
-mongoose.connect('mi conecc')
+mongoose.connect('tu conexion')
 .then(() =>  console.log('connection successful'))
 .catch((err) => console.error(err));
   
-//var book = require('./routes/book');
+var book = require('./routes/book');
 var disponible = require('./routes/disponible');
 var promos = require('./routes/promos');
 var images = require('./routes/images');
@@ -88,11 +88,12 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 
-//app.use('/book', book);
+
 
 
 /*Service REST all */
 //app.use('/promos', require('connect-ensure-login').ensureLoggedIn(),promos);
+app.use('/book', book);
 app.use('/promos',promos);
 app.use('/disponible', disponible);
 app.use('/images', images);
