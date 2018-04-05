@@ -23,6 +23,7 @@ export class PerfilService {
 
   updatePerfil(id, data) {
     return new Promise((resolve, reject) => {
+    	console.log(data);
         this.http.put('/images/'+id, data)
           .map(res => res.json())
           .subscribe(res => {

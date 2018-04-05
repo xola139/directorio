@@ -68,7 +68,8 @@ const appRoutes: Routes = [
   { path: 'book-edit/:id', component: BookEditComponent },
   { path: 'promos', component: PromosComponent },
   { path: 'model', component: ModelComponent },
-  { path: 'perfil', component: PerfilComponent },
+  { path: 'perfil/:id', component: PerfilComponent },
+
   { path: 'sidebavmenu', component: SidenavResponsiveComponent },
   
 

@@ -21,7 +21,7 @@ var Strategy = require('passport-twitter').Strategy;
 passport.use(new Strategy({
     consumerKey: config.twitter.key,//process.env.CONSUMER_KEY,
     consumerSecret: config.twitter.secret,//,process.env.CONSUMER_SECRET,
-    callbackURL: 'http://127.0.0.1:3000/login/twitter/return'
+    callbackURL: '/login/twitter/return'
   },
   function(token, tokenSecret, profile, cb) {
     // In this example, the user's Twitter profile is supplied as the user
@@ -88,7 +88,14 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 
+app.all('*', function(req, res, next) {
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE'); // If needed
+    res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,contenttype'); // If needed
+    res.setHeader('Access-Control-Allow-Credentials', true); // If needed
 
+   next();
+});
 
 
 /*Service REST all */
@@ -101,14 +108,7 @@ app.use('/alertas', alertas);
 app.use('/login', login);
 
 
-app.all('*', function(req, res, next) {
-   res.header("Access-Control-Allow-Origin", "*");
-   res.header("Access-Control-Allow-Credentials", true);
-   res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
-   res.header("Access-Control-Allow-Headers",
-    'Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept');
-   next();
-});
+
 
 
 // catch 404 and forward to error handler

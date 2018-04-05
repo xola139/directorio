@@ -5,6 +5,9 @@ import { PerfilService } from './perfil.service';
 
 
 
+
+
+
 @Component({
   selector: 'app-perfil',
   templateUrl: './perfil.component.html',
@@ -19,21 +22,29 @@ export class PerfilComponent implements OnInit {
 
 
   	ngOnInit() {
+  		
+  		this.getPerfil(this.route.snapshot.params['id']);
 		
   	}
 
   	getPerfil(id) {
+
+  		console.log(">>>>>>>>>>>>>>>>>>>>>><"+id);
     	this.perfilService.showPerfil(id).then((res) => {
       	this.perfil = res;
+
+      	console.log(this.perfil);
+
     	}, (err) => {
       	console.log(err);
     	});
   	}
 
   	updatePerfil(id) {
+
 	    this.perfilService.updatePerfil(id, this.perfil).then((result) => {
       	let id = result['_id'];
-      	this.router.navigate(['/book-details', id]);
+      	console.log("Excelente");
     	}, (err) => {
       	console.log(err);
     });

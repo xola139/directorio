@@ -7,6 +7,7 @@ export class BookService {
 
   constructor(private http: Http) { }
 
+
   getAllBooks() {
     return new Promise((resolve, reject) => {
       this.http.get('/book')
