@@ -52,7 +52,7 @@ import { PromosComponent } from './promos/promos.component';
 import { ModelComponent } from './model/model.component';
 import { PerfilComponent } from './perfil/perfil.component';
 
-import { ModelService } from './model.service';
+import { ModelService } from './model/model.service';
 import { PromosService } from './promos/promos.service';
 import { PerfilService } from './perfil/perfil.service';
 import { SidenavResponsiveComponent } from './sidenav-responsive/sidenav-responsive.component';

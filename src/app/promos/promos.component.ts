@@ -35,14 +35,17 @@ ngOnInit() {
       const ELEMENT_DATES: Element[] = this.promos;
 
       this.dataSource = new MatTableDataSource(ELEMENT_DATES);      
-
-      console.log("=====>"+this.dataSource );
     }, (err) => {
       console.log(err);
     });
   }
 
-
+  copyItem(event, item) {
+    console.log(item);
+    item.descripcion.select();
+    /* Copy the text inside the text field */
+    document.execCommand("Copy");
+  }
 
 
 
