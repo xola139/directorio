@@ -1,13 +1,38 @@
   <div class="container">
       <div class="row" >
+          <div class="col-md-6 col-sm-12 mt-6">
+          <div class="card" style="width: 18rem;">
+            <img class="card-img-top" src="..." alt="Card image cap">
+            <div class="card-body">
+              <h5 class="card-title">Promos del Dia</h5>
+              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+              <a href="#" class="btn btn-primary">Go somewhere</a>
+            </div>
+          </div>
+          <div class="card" style="width: 18rem;">
+            <img class="card-img-top" src="..." alt="Card image cap">
+            <div class="card-body">
+              <h5 class="card-title">Disponibles</h5>
+              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+              <a href="#" class="btn btn-primary">Go somewhere</a>
+            </div>
+          </div>
+          </div>
+      </div>
+
+      <div class="row" >
           <div class="col-md-4 col-sm-12 mt-3" *ngFor="let data of (myData ? myData.slice(0,10):[]);let i = index">
               <mat-card class="example-card p-0" >
-                  <mat-card-header class="m-2">
+                  <div class="alert alert-success" role="alert">
+                    <mat-card-header class="m-2">
                     <div mat-card-avatar class="example-header-image"></div>
                     <mat-card-title>{{data.id}} <span class="badge badge-success">New</span></mat-card-title>
                     <mat-card-subtitle>{{data.telefono}}</mat-card-subtitle>
+                    <mat-card-subtitle>disponible en ??</mat-card-subtitle>
                   </mat-card-header>
                   <mat-card-content>
+                  </div>
+
                     <mat-card>
                       <mat-card-content>
                         <mat-tab-group class="demo-tab-group">
