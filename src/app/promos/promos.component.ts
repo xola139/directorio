@@ -1,6 +1,5 @@
 import {Component,OnInit} from '@angular/core';
-import {MatTableDataSource} from '@angular/material';
-
+import {MatTableDataSource,MatSnackBar} from '@angular/material';
 import { PromosService } from './promos.service';
 
 @Component({
@@ -12,8 +11,13 @@ import { PromosService } from './promos.service';
 export class PromosComponent  implements OnInit {
 
  promos: any;
+ text1: string;
+ isCopied1: boolean;
+ 
 
-constructor(private promosService: PromosService) { }
+constructor(private promosService: PromosService) {
+  
+ }
 
 
 displayedColumns = ['id','descripcion','idTwit'];
@@ -40,11 +44,10 @@ ngOnInit() {
     });
   }
 
-  copyItem(event, item) {
+  copyItem(item) {
     console.log(item);
-    item.descripcion.select();
-    /* Copy the text inside the text field */
-    document.execCommand("Copy");
+    
+    return item.descripcion;
   }
 
 
@@ -53,6 +56,7 @@ ngOnInit() {
 export interface Element {
   id: string;
   idTwit: string;
+  telefono: string;
   descripcion: string;
   timemsString: string;
 }

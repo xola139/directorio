@@ -6,6 +6,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 import { BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { AsyncLocalStorageModule } from 'angular-async-local-storage';
+import { ClipboardModule } from 'ngx-clipboard';
 
 import { MatFormFieldModule, MatAutocompleteModule,
   MatButtonModule,
@@ -95,6 +96,7 @@ const appRoutes: Routes = [
     AsyncLocalStorageModule,
     FormsModule,
     HttpModule,
+    ClipboardModule,
     FormsModule,
     BrowserModule,
     FormsModule,

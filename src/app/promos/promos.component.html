@@ -1,6 +1,10 @@
   <div class="container">
       <div class="row" >
           <div class="col-md-12 col-sm-12 ">
+          
+
+
+
             <div class="example-container mat-elevation-z8">
               <div class="example-header">
                 <mat-form-field>
@@ -14,6 +18,10 @@
                   <mat-header-cell *matHeaderCellDef> Twitter </mat-header-cell>
                   <mat-cell *matCellDef="let element"> {{element.id}} </mat-cell>
                 </ng-container>
+                <ng-container matColumnDef="telefono">
+                  <mat-header-cell *matHeaderCellDef> Telefono </mat-header-cell>
+                  <mat-cell *matCellDef="let element"> {{element.descripcion}} </mat-cell>
+                </ng-container>
                 <ng-container matColumnDef="descripcion">
                   <mat-header-cell *matHeaderCellDef> Descripcion </mat-header-cell>
                   <mat-cell *matCellDef="let element"> {{element.descripcion}} </mat-cell>
@@ -22,9 +30,8 @@
                     <mat-header-cell *matHeaderCellDef> Acción </mat-header-cell>
                     <mat-cell *matCellDef="let element">
                       
-                        <button  mat-icon-button color="primary"  (click)="copyItem($event, element)" >
-                            clikeando ando
-                          </button>
+                      <button mat-button ngxClipboard [cbContent]="copyItem(element)" >Click me!</button>
+
                     
                     </mat-cell>
                   </ng-container>
