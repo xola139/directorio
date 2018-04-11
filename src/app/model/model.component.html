@@ -1,4 +1,24 @@
   <div class="container">
+    <div class="row" >
+      <div class="col-md-4 col-sm-12 mt-3">
+        <mat-form-field>
+          <mat-select placeholder="Estatus">
+            <mat-option *ngFor="let food of foods" [value]="food.value">
+              {{ food.viewValue }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field>
+          <mat-select placeholder="Ciudad">
+            <mat-option *ngFor="let food of foods" [value]="food.value">
+              {{ food.viewValue }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+    </div>
+    
+
       <div class="row" >
           <div class="col-md-4 col-sm-12 mt-3" *ngFor="let data of (myData ? myData.slice(0,10):[]);let i = index">
               <mat-card class="example-card p-0" >

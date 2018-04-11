@@ -7,6 +7,7 @@ var ImagesSchema = new mongoose.Schema({
   nacionalidad: String,
   images: Array,
   
+  
 });
 
 module.exports = mongoose.model('Images', ImagesSchema);

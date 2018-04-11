@@ -6,6 +6,7 @@ var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
 var passport = require('passport');
 var Strategy = require('passport-twitter').Strategy;
+var cors = require('cors');
 
 var config  = require('./config');
 
@@ -66,6 +67,8 @@ var login = require('./routes/login');
 
 var app = express();
 
+//enabled cors
+app.use(cors())
 // Configure view engine to render EJS templates.
 app.set('views', __dirname + '/src/views');
 app.set('view engine', 'ejs');

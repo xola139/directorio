@@ -13,6 +13,12 @@ import { ModelService } from './model.service';
 export class ModelComponent implements OnInit {
   myData = {};
 
+  foods = [
+    {value: 'steak-0', viewValue: 'Todos'},
+    {value: 'pizza-1', viewValue: 'Disponible'},
+    {value: 'tacos-2', viewValue: 'Indispoble'}
+  ];
+
 constructor(  private modelService: ModelService) { }
 
 

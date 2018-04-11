@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { SidenavResponsiveComponent } from './sidenav-responsive/sidenav-responsive.component';
 import { AsyncLocalStorage } from 'angular-async-local-storage';
 
 @Component({

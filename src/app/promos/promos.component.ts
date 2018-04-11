@@ -10,18 +10,18 @@ import { PromosService } from './promos.service';
 
 export class PromosComponent  implements OnInit {
 
- promos: any;
- text1: string;
- isCopied1: boolean;
- 
+  promos: any;
+  disponibles: any;
 
-constructor(private promosService: PromosService) {
-  
- }
+  constructor(private promosService: PromosService,public snackBar: MatSnackBar) {
+  }
 
 
-displayedColumns = ['id','descripcion','idTwit'];
+  displayedColumns = ['id','telefono','descripcion','idTwit'];
+  displayedColumnsDisponoble = ['id','descripcion'];
+
   dataSource :any;
+  dsDisponible :any;
 
   applyFilter(filterValue: string) {
     filterValue = filterValue.trim(); // Remove whitespace
@@ -29,13 +29,22 @@ displayedColumns = ['id','descripcion','idTwit'];
     this.dataSource.filter = filterValue;
   }
 
-ngOnInit() {
+
+  applyFilterDisponible(filterValue: string) {
+    filterValue = filterValue.trim(); // Remove whitespace
+    filterValue = filterValue.toLowerCase(); // MatTableDataSource defaults to lowercase matches
+    this.dsDisponible.filter = filterValue;
+  }
+
+  ngOnInit() {
     this.getPromosList();
+    this.getDisponiblesList(); 
   }
 
   getPromosList() {
     this.promosService.getAllPromos().then((res) => {
       this.promos = res;
+      console.log(this.promos);
       const ELEMENT_DATES: Element[] = this.promos;
 
       this.dataSource = new MatTableDataSource(ELEMENT_DATES);      
@@ -44,12 +53,31 @@ ngOnInit() {
     });
   }
 
-  copyItem(item) {
-    console.log(item);
-    
-    return item.descripcion;
+  getDisponiblesList() {
+    this.promosService.getDisponibles().then((res) => {
+      this.disponibles = res;
+      
+      const ELEMENT_DATES: ElementDisponible[] = this.disponibles;
+
+      this.dsDisponible = new MatTableDataSource(ELEMENT_DATES);      
+    }, (err) => {
+      console.log(err);
+    });
   }
 
+  copyItem(item) {
+    let  theCopy =  item.images[0] ? 
+                item.id +"  "+item.images[0].telefono +"  "+ item.descripcion:
+                item.id +"  "+ item.descripcion;
+    
+    return theCopy;
+  }
+
+  openSnackBar() {
+    this.snackBar.open("copiado", "Acción", {
+      duration: 2000,
+    });
+  }
 
 
 }
@@ -61,4 +89,8 @@ export interface Element {
   timemsString: string;
 }
 
-
+export interface ElementDisponible {
+  id: string;
+  descripcion: string;
+  
+}

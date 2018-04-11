@@ -56,7 +56,7 @@ import { PerfilComponent } from './perfil/perfil.component';
 import { ModelService } from './model/model.service';
 import { PromosService } from './promos/promos.service';
 import { PerfilService } from './perfil/perfil.service';
-import { SidenavResponsiveComponent } from './sidenav-responsive/sidenav-responsive.component';
+
 
 
 
@@ -71,7 +71,6 @@ const appRoutes: Routes = [
   { path: 'model', component: ModelComponent },
   { path: 'perfil/:id', component: PerfilComponent },
 
-  { path: 'sidebavmenu', component: SidenavResponsiveComponent },
   
 
 ];
@@ -85,7 +84,6 @@ const appRoutes: Routes = [
     BookEditComponent,
     PromosComponent,
     ModelComponent,
-    SidenavResponsiveComponent,
     PerfilComponent,
     
     

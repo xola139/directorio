@@ -8,6 +8,7 @@ var PromosSchema = new mongoose.Schema({
   idTwit: String,
   estatus: Boolean,
   timemsString: String,
+  images: [{type: mongoose.Schema.Types.ObjectId, ref: 'Images'}],
 });
 
 module.exports = mongoose.model('Promos', PromosSchema);
