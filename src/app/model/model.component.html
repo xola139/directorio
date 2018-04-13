@@ -20,19 +20,23 @@
     
 
       <div class="row" >
-          <div class="col-md-4 col-sm-12 mt-3" *ngFor="let data of (myData ? myData.slice(0,10):[]);let i = index">
+          <div class="col-md-4 col-sm-12 mt-5 p-0 border border-success" *ngFor="let data of (myData ? myData.slice(0,10):[]);let i = index">
               <mat-card class="example-card p-0" >
-                  <div class="alert alert-success" role="alert">
-                    This is a success alert—check it out!
+                  <div class="alert alert-success p-0" role="alert">
+                    <mat-card-header class="m-2">
+                      
+                        <div mat-card-avatar class="example-header-image"></div>
+                        <mat-card-title>{{data.id}} <span class="badge badge-success">New</span></mat-card-title>
+                        <mat-card-subtitle>{{data.telefono}}</mat-card-subtitle>
+                        <mat-card-subtitle>disponible en ??</mat-card-subtitle>
+                    </mat-card-header>
+                    <button mat-button color="primary" data-toggle="modal" data-target="#exampleModalLong"  (click)="getPictures(i)" >Ver fotos</button>
+                    <button mat-button color="primary" data-toggle="modal" data-target="#exampleModalLong"  (click)="getPictures(i)">Clientes satisfechos</button>
                   </div>
-                  <mat-card-header class="m-2">
-                    <div mat-card-avatar class="example-header-image"></div>
-                    <mat-card-title>{{data.id}} <span class="badge badge-success">New</span></mat-card-title>
-                    <mat-card-subtitle>{{data.telefono}}</mat-card-subtitle>
-                    <mat-card-subtitle>disponible en ??</mat-card-subtitle>
-                  </mat-card-header>
+
+
                   <mat-card-content>
-                    <mat-card>
+                    <mat-card class="p-1 pr-1">
                       <mat-card-content>
                         <mat-tab-group class="demo-tab-group">
                           <mat-tab label="Tab 1">
@@ -40,29 +44,7 @@
                               <mat-icon>security</mat-icon>
                             </ng-template>
                             <div class="demo-tab-content">
-                              <div id="{{data.id}}" class="carousel slide" data-ride="carousel">
-                                <div class="carousel-inner">
-                                  <div *ngFor="let item of data.images; let i = index" class="carousel-item {{i== 1 ? 'active':''}}">
-                                    <img  class="d-block w-100" style="height: 300px;" src="{{item}}" alt="First slide">
-                                  </div>
-
-                                </div>
-                                <a class="carousel-control-prev" href="#{{data.id}}" role="button" data-slide="prev">
-                                  <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                                  <span class="sr-only">Previous</span>
-                                </a>
-                                <a class="carousel-control-next" href="#{{data.id}}" role="button" data-slide="next">
-                                  <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                                  <span class="sr-only">Next</span>
-                                </a>
-                              </div>
-                            </div>
-                          </mat-tab>
-                          <mat-tab label="Tab 2">
-                            <ng-template mat-tab-label>
-                              <mat-icon>attach_file</mat-icon>
-                            </ng-template>
-                            <div class="demo-tab-content">
+                              
                               <ul class="list-group">
                                 <li class="list-group-item">Cras justo odio</li>
                                 <li class="list-group-item">Dapibus ac facilisis in</li>
@@ -71,60 +53,63 @@
                                 <li class="list-group-item">Vestibulum at eros</li>
                               </ul>
                             </div>
-                            <div class="table-responsive">
-                              <table class="table table-bordered">
-                                <thead>
-                                  <tr>
-                                
-                                    <th scope="col">Lunes</th>
-                                    <th scope="col">Martes</th>
-                                    <th scope="col">Miercoles</th>
-                                    <th scope="col">Jueves</th>
-                                    <th scope="col">Viernes</th>
-                                    <th scope="col">Sabado</th>
-                                    <th scope="col">Domingo</th>
-                                  </tr>
-                                </thead>
-                                <tbody>
-                                  <tr>
-                                
-                                    <td>Mark</td>
-                                    <td>Otto</td>
-                                    <td>@mdo</td>
-                                    <td>Otto</td>
-                                    <td>@mdo</td>
-                                    <td>Otto</td>
-                                    <td>@mdo</td>
-                                  </tr>
-                                 
-                                  <tr>
-                                 
-                                    <td colspan="2">Larry the Bird</td>
-                                    <td>@twitter</td>
-                                    <td>Otto</td>
-                                    <td>@mdo</td>
-                                    <td>Otto</td>
-                                    <td>@mdo</td>
-                                  </tr>
-                                </tbody>
-                              </table>  
-                             </div> 
+                          </mat-tab>
+                          <mat-tab label="Tab 2">
+                            <ng-template mat-tab-label>
+                              <mat-icon>attach_file</mat-icon>
+                            </ng-template>
+                            
+                            <mat-list>
+                              <h3 mat-subheader>Atension semanal</h3>
+                              <mat-list-item *ngFor="let folder of folders">
+                                <mat-icon mat-list-icon>folder</mat-icon>
+                                <h4 mat-line>{{folder.name}}</h4>
+                                <p mat-line> {{folder.updated | date}} </p>
+                              </mat-list-item>
+                              <mat-divider></mat-divider>
+                              
+                            </mat-list>
+                            
                           </mat-tab>
                                                    
                         </mat-tab-group>
                       </mat-card-content>
                     </mat-card>
                   </mat-card-content>
-                  <mat-card-actions>
-                    <button mat-button>LIKE</button>
-                    <button mat-button>SHARE</button>
-                  </mat-card-actions>
+                 
               </mat-card>
 
 
 
           </div>
       </div>
+      <!-- Modal -->
+<div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header sticky-top" >
+        
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+
+         <div class="col-md-12 col-sm-12 mt-12" *ngFor="let pic of pictures;">
+          <img src="{{pic}}" class="img-fluid" alt="Responsive image">
+        </div>
+          
+          
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
     </div>
 
   

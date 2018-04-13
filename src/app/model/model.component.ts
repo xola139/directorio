@@ -12,6 +12,7 @@ import { ModelService } from './model.service';
 })
 export class ModelComponent implements OnInit {
   myData = {};
+  pictures:any;
 
   foods = [
     {value: 'steak-0', viewValue: 'Todos'},
@@ -19,21 +20,42 @@ export class ModelComponent implements OnInit {
     {value: 'tacos-2', viewValue: 'Indispoble'}
   ];
 
+ folders = [
+    {
+      name: 'Photos',
+      updated: new Date('1/1/16'),
+    },
+    {
+      name: 'Recipes',
+      updated: new Date('1/17/16'),
+    },
+    {
+      name: 'Work',
+      updated: new Date('1/28/16'),
+    }
+  ];
+
+
+
 constructor(  private modelService: ModelService) { }
-
-
   
   ngOnInit() {
     this.getModelos();
   }
 
-    getModelos() {
+  getModelos() {
+    this.modelService.showModelos().then((res) => {
+      this.myData  = res;
+    }, (err) => {
+      console.log(err);
+    });
+  }
 
-      
-      this.modelService.showModelos().then((res) => {
-        this.myData  = res;
-      }, (err) => {
-        console.log(err);
-      });
-    }
+  getPictures(id){
+    console.log(">>>>>>>>>>>>>>>>"+ id);
+    this.pictures = this.myData[id].images;
+    console.log(">>>>>>>>>>>>>>>>"+ this.pictures);
+  }
+
+
 }
