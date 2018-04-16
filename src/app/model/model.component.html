@@ -32,6 +32,7 @@
                     </mat-card-header>
                     <button mat-button color="primary" data-toggle="modal" data-target="#exampleModalLong"  (click)="getPictures(i)" >Ver fotos</button>
                     <button mat-button color="primary" data-toggle="modal" data-target="#exampleModalLong"  (click)="getPictures(i)">Clientes satisfechos</button>
+                    <a mat-button color="primary" class="nav-link" routerLink="/perfil/{{data._id}}">Perfil</a>
                   </div>
 
 
@@ -96,7 +97,7 @@
       <div class="modal-body">
 
          <div class="col-md-12 col-sm-12 mt-12" *ngFor="let pic of pictures;">
-          <img src="{{pic}}" class="img-fluid" alt="Responsive image">
+          <img src="{{pic.url}}" class="img-fluid" alt="Responsive image">
         </div>
           
           

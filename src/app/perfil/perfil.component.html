@@ -17,6 +17,29 @@
         </div>
       </form>
     </div>
+     <div class="col-md-12 col-sm-12 mt-12" *ngFor="let pic of perfil.images;">
+      <div class="card-columns">
+        <div class="card">
+          <img class="card-img-top" src="{{pic.url}}" alt="Card image cap">
+          <div class="card-body">
+            <h5 class="card-title">Card title that wraps to a new line</h5>
+            <p class="card-text">
+               <mat-radio-group>
+            <mat-radio-button value="1">Foto</mat-radio-button>
+            <mat-radio-button value="2">Satisfecho</mat-radio-button>
+            <mat-radio-button value="3">None</mat-radio-button>
+          </mat-radio-group>
+              
+            </p>
+          </div>
+        </div>
+      </div>
+
+
+     
+          
+           
+      </div>
   </div>
 </div>
 
