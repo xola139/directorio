@@ -5,9 +5,12 @@ var ImagesSchema = new mongoose.Schema({
   avatar: String,
   telefono: String,
   nacionalidad: String,
-  images: Array,
-  
-  
+  disponible: Boolean,
+  images: [{
+	  	url: String,
+	  	fecha: String,
+	  	status: String
+	}],
 });
 
 module.exports = mongoose.model('Images', ImagesSchema);

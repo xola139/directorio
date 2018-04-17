@@ -1,8 +1,9 @@
 <div class="container">
   <h1>{{perfil.id}}</h1>
   <div class="row">
+    <form (ngSubmit)="updatePerfil(perfil._id)" #perfilForm="ngForm">
     <div class="col-md-6">
-      <form (ngSubmit)="updatePerfil(perfil._id)" #perfilForm="ngForm">
+      
         <div class="form-group">
           <label for="name">Telefono:</label>
           <input type="text" class="form-control" [(ngModel)]="perfil.telefono" name="telefono" required>
@@ -15,31 +16,28 @@
         <div class="form-group">
           <button type="submit" class="btn btn-success" [disabled]="!perfilForm.form.valid">Update</button>
         </div>
-      </form>
+     
     </div>
-     <div class="col-md-12 col-sm-12 mt-12" *ngFor="let pic of perfil.images;">
+    <div class="col-md-12 col-sm-12 mt-12" *ngFor="let pic of perfil.images;">
       <div class="card-columns">
         <div class="card">
           <img class="card-img-top" src="{{pic.url}}" alt="Card image cap">
           <div class="card-body">
             <h5 class="card-title">Card title that wraps to a new line</h5>
             <p class="card-text">
-               <mat-radio-group>
-            <mat-radio-button value="1">Foto</mat-radio-button>
-            <mat-radio-button value="2">Satisfecho</mat-radio-button>
-            <mat-radio-button value="3">None</mat-radio-button>
-          </mat-radio-group>
+               <mat-radio-group  >
+                <mat-radio-button  [checked]="pic.status =='foto'" value="foto" name="images.status" >Foto</mat-radio-button>
+                <mat-radio-button  [checked]="pic.status =='satisfecho'" value="satisfecho" name="images.status" >Satisfecho</mat-radio-button>
+                <mat-radio-button  [checked]="pic.status =='nada'" value="nada" name="images.status" >Nada</mat-radio-button>
+              </mat-radio-group>
               
             </p>
           </div>
         </div>
       </div>
+    </div>
+ </form>
 
-
-     
-          
-           
-      </div>
   </div>
 </div>
 

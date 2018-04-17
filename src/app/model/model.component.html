@@ -18,17 +18,18 @@
       </div>
     </div>
     
-
-      <div class="row" >
-          <div class="col-md-4 col-sm-12 mt-5 p-0 border border-success" *ngFor="let data of (myData ? myData.slice(0,10):[]);let i = index">
+    <div class="row" >
+          <div class="col-md-4 col-sm-12 mt-5 p-0 border border-success" *ngFor="let data of myData ;let i = index">
               <mat-card class="example-card p-0" >
-                  <div class="alert alert-success p-0" role="alert">
+                  <div class="alert  p-0 {{data.disponible ? 'alert-success':''}}" role="alert">
                     <mat-card-header class="m-2">
                       
                         <div mat-card-avatar class="example-header-image"></div>
                         <mat-card-title>{{data.id}} <span class="badge badge-success">New</span></mat-card-title>
                         <mat-card-subtitle>{{data.telefono}}</mat-card-subtitle>
                         <mat-card-subtitle>disponible en ??</mat-card-subtitle>
+                        <mat-card-subtitle>{{data.disponible}}</mat-card-subtitle>
+
                     </mat-card-header>
                     <button mat-button color="primary" data-toggle="modal" data-target="#exampleModalLong"  (click)="getPictures(i)" >Ver fotos</button>
                     <button mat-button color="primary" data-toggle="modal" data-target="#exampleModalLong"  (click)="getPictures(i)">Clientes satisfechos</button>
@@ -96,7 +97,7 @@
       </div>
       <div class="modal-body">
 
-         <div class="col-md-12 col-sm-12 mt-12" *ngFor="let pic of pictures;">
+        <div class="col-md-12 col-sm-12 mt-12" *ngFor="let pic of pictures;">
           <img src="{{pic.url}}" class="img-fluid" alt="Responsive image">
         </div>
           
