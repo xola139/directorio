@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {MatTableDataSource} from '@angular/material';
+import {MatTableDataSource,MatRadioChange} from '@angular/material';
 import { ActivatedRoute, Router } from '@angular/router';
 import { PerfilService } from './perfil.service';
 
@@ -15,7 +15,7 @@ import { PerfilService } from './perfil.service';
 })
 export class PerfilComponent implements OnInit {
 
-	perfil = {};
+	perfil:any;
   
   	
 	constructor(private route: ActivatedRoute, private router: Router, private perfilService: PerfilService) { }
@@ -32,8 +32,7 @@ export class PerfilComponent implements OnInit {
   		console.log(">>>>>>>>>>>>>>>>>>>>>><"+id);
     	this.perfilService.showPerfil(id).then((res) => {
       	this.perfil = res;
-
-      	console.log(this.perfil);
+        console.log(this.perfil);
 
     	}, (err) => {
       	console.log(err);
@@ -48,6 +47,16 @@ export class PerfilComponent implements OnInit {
     	}, (err) => {
       	console.log(err);
     });
+  }
+
+  radioChange(event: MatRadioChange,indice) {
+    console.log(event);
+    console.log(event.value);
+    console.log(event.source);
+    console.log(indice+"  $$$#$#$#$#")
+    this.perfil.images[indice].status =event.value;
+    //this.filter[l'property'] = this.selected;
+    //console.log(this.filter);
   }
 
 

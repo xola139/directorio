@@ -13,6 +13,7 @@ import { ModelService } from './model.service';
 export class ModelComponent implements OnInit {
   myData = {};
   pictures:any;
+  tipoFoto:any;
 
   foods = [
     {value: 'steak-0', viewValue: 'Todos'},
@@ -51,10 +52,12 @@ constructor(  private modelService: ModelService) { }
     });
   }
 
-  getPictures(id){
-    console.log(">>>>>>>>>>>>>>>>"+ id);
+  getPictures(id,tipoFoto){
+    
+    this.tipoFoto=tipoFoto;
     this.pictures = this.myData[id].images;
-    console.log(">>>>>>>>>>>>>>>>"+ this.pictures);
+    
+    console.log(">>>>>>>>>>>>>>>>"+ tipoFoto);
   }
 
 

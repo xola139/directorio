@@ -31,8 +31,8 @@
                         <mat-card-subtitle>{{data.disponible}}</mat-card-subtitle>
 
                     </mat-card-header>
-                    <button mat-button color="primary" data-toggle="modal" data-target="#exampleModalLong"  (click)="getPictures(i)" >Ver fotos</button>
-                    <button mat-button color="primary" data-toggle="modal" data-target="#exampleModalLong"  (click)="getPictures(i)">Clientes satisfechos</button>
+                    <button mat-button color="primary" data-toggle="modal" data-target="#exampleModalLong"  (click)="getPictures(i,'foto')" >Ver fotos</button>
+                    <button mat-button color="primary" data-toggle="modal" data-target="#exampleModalLong"  (click)="getPictures(i,'satisfecho')">Clientes satisfechos</button>
                     <a mat-button color="primary" class="nav-link" routerLink="/perfil/{{data._id}}">Perfil</a>
                   </div>
 
@@ -98,7 +98,7 @@
       <div class="modal-body">
 
         <div class="col-md-12 col-sm-12 mt-12" *ngFor="let pic of pictures;">
-          <img src="{{pic.url}}" class="img-fluid" alt="Responsive image">
+          <img  *ngIf="pic.status==tipoFoto" src="{{pic.url}}" class="img-fluid" alt="image model">
         </div>
           
           

@@ -18,17 +18,18 @@
         </div>
      
     </div>
-    <div class="col-md-12 col-sm-12 mt-12" *ngFor="let pic of perfil.images;">
+    <div class="col-md-12 col-sm-12 mt-12" *ngFor="let pic of perfil.images;let i = index">
       <div class="card-columns">
         <div class="card">
           <img class="card-img-top" src="{{pic.url}}" alt="Card image cap">
           <div class="card-body">
             <h5 class="card-title">Card title that wraps to a new line</h5>
             <p class="card-text">
-               <mat-radio-group  >
-                <mat-radio-button  [checked]="pic.status =='foto'" value="foto" name="images.status" >Foto</mat-radio-button>
-                <mat-radio-button  [checked]="pic.status =='satisfecho'" value="satisfecho" name="images.status" >Satisfecho</mat-radio-button>
-                <mat-radio-button  [checked]="pic.status =='nada'" value="nada" name="images.status" >Nada</mat-radio-button>
+               <mat-radio-group >
+               
+                <mat-radio-button  (change)="radioChange($event,i)" [checked]="pic.status ==='foto'" value="foto" name="images.status" >Foto</mat-radio-button>
+                <mat-radio-button  (change)="radioChange($event,i)" [checked]="pic.status ==='satisfecho'" value="satisfecho" name="images.status" >Satisfecho</mat-radio-button>
+                <mat-radio-button  (change)="radioChange($event,i)" [checked]="pic.status ==='nada'" value="nada" name="images.status" >Nada</mat-radio-button>
               </mat-radio-group>
               
             </p>
