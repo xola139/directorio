@@ -10,4 +10,14 @@ router.get('/', function(req, res, next) {
     res.json(disponible);
   });
 });
+
+
+/*router.get('/', function(req, res, next) {
+	
+	Disponible.find().distinct('id', function(error, disponible) {
+    	if (error) return next(err);
+    	res.json(disponible);
+	});
+});*/
+
 module.exports = router;

@@ -24,7 +24,7 @@ export class PromosService {
 
   getDisponibles() {
     return new Promise((resolve, reject) => {
-      this.http.get(this.baseApiUrl + '/disponibles')
+      this.http.get(this.baseApiUrl + '/disponible')
           .map(res => res.json())
           .subscribe(res => {
             resolve(res);

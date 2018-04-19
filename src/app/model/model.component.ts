@@ -12,6 +12,7 @@ import { ModelService } from './model.service';
 })
 export class ModelComponent implements OnInit {
   myData = {};
+  disponibles = {};
   pictures:any;
   tipoFoto:any;
 
@@ -42,6 +43,7 @@ constructor(  private modelService: ModelService) { }
   
   ngOnInit() {
     this.getModelos();
+    this.getDisponibles();
   }
 
   getModelos() {
@@ -52,12 +54,17 @@ constructor(  private modelService: ModelService) { }
     });
   }
 
+  getDisponibles(){
+     this.modelService.getDisponibles().then((res) => {
+      this.disponibles  = res;
+    }, (err) => {
+      console.log(err);
+    });
+  }
+
   getPictures(id,tipoFoto){
-    
-    this.tipoFoto=tipoFoto;
+    this.tipoFoto = tipoFoto;
     this.pictures = this.myData[id].images;
-    
-    console.log(">>>>>>>>>>>>>>>>"+ tipoFoto);
   }
 
 
