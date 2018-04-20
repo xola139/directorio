@@ -15,7 +15,8 @@ export class ModelComponent implements OnInit {
   disponibles = {};
   pictures:any;
   tipoFoto:any;
-
+  hideme=[];
+  
   foods = [
     {value: 'steak-0', viewValue: 'Todos'},
     {value: 'pizza-1', viewValue: 'Disponible'},
