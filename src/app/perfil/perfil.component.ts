@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {MatTableDataSource,MatRadioChange} from '@angular/material';
 import { ActivatedRoute, Router } from '@angular/router';
 import { PerfilService } from './perfil.service';
-
+import {Location} from '@angular/common';
 
 
 
@@ -18,7 +18,7 @@ export class PerfilComponent implements OnInit {
 	perfil:any;
   
   	
-	constructor(private route: ActivatedRoute, private router: Router, private perfilService: PerfilService) { }
+	constructor(private _location: Location,private route: ActivatedRoute, private router: Router, private perfilService: PerfilService) { }
 
 
   	ngOnInit() {
@@ -59,5 +59,7 @@ export class PerfilComponent implements OnInit {
     //console.log(this.filter);
   }
 
-
+	backClicked() {
+		this._location.back();
+}
 }

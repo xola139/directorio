@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import  {Http} from '@angular/http';
 import { Observable } from "rxjs/Observable";
 import { ModelService } from './model.service';
+import * as $ from 'jquery';
 
 
 
@@ -49,7 +50,27 @@ constructor(  private modelService: ModelService) { }
 
   getModelos() {
     this.modelService.showModelos().then((res) => {
+    
+      var datos = res;
+      
+      for (let i = 0; i < Object.keys(datos).length; i++) {
+        res[i].satisfechos = [];
+        res[i].fotos = [];
+
+        for (let x = 0; x < res[i].images.length; x++) {
+          if(res[i].images[x].status == 'foto')
+            res[i].fotos.push( res[i].images[x]);
+          else
+            res[i].satisfechos.push( res[i].images[x]);
+        }
+
+        
+      }
+
       this.myData  = res;
+      console.log(this.myData);
+
+
     }, (err) => {
       console.log(err);
     });
@@ -68,5 +89,11 @@ constructor(  private modelService: ModelService) { }
     this.pictures = this.myData[id].images;
   }
 
+  toggleCard(id){
+    $('.multi-collapse0').collapse('toggle');
+    console.log(id);
+    
+    
+  }
 
 }

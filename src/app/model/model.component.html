@@ -26,68 +26,128 @@
             </div>
             
           </div>
-          <div class="col-md-4 col-sm-12 mt-2 p-0 border border-success" *ngFor="let data of myData ;let i = index">
-              <mat-card class="example-card p-0" >
-                  <div class="alert  p-0 {{data.disponible ? 'alert-success':''}}" role="alert">
-                    <mat-card-header class="m-2">
-                      
-                        <div mat-card-avatar class="example-header-image"></div>
-                        <mat-card-title>{{data.id}} <span class="badge badge-success">New</span></mat-card-title>
-                        <mat-card-subtitle>{{data.telefono}}</mat-card-subtitle>
-                        <mat-card-subtitle>disponible en ??</mat-card-subtitle>
-                        <mat-card-subtitle>{{data.disponible}}</mat-card-subtitle>
+          <div class="col-md-4 col-sm-12 mt-2 p-0 " *ngFor="let data of myData ;let i = index">
+  
+              <div class="col pl-1 pr-1">
+                  
+                  
+                  <div class="collapse multi-collapse{{i}} show" id="multiCollapse1">
+                    <div class="card card-body p-1" >
+                        
+                            <img class="card-img-top" src="{{data.images[0].url}}" alt="Card image cap">
+                            <div class="card-body">
+                              <mat-card-title>{{data.id}} 
+                                
+                                <span class="badge badge-success">New</span></mat-card-title>
 
-                    </mat-card-header>
-                    <button mat-button color="primary" data-toggle="modal" data-target="#exampleModalLong"  (click)="getPictures(i,'foto')" >Ver fotos</button>
-                    <button mat-button color="primary" data-toggle="modal" data-target="#exampleModalLong"  (click)="getPictures(i,'satisfecho')">Clientes satisfechos</button>
-                    <a mat-button color="primary" class="nav-link" routerLink="/perfil/{{data._id}}">Perfil</a>
-                    <button mat-button color="primary"  (click)="hideme[i] = !hideme[i]">Ver fotos</button>
-                  </div>
-
-
-                  <mat-card-content  [hidden]="hideme[i]" >
-                    <mat-card class="p-1 pr-1">
-                      <mat-card-content>
-                        <mat-tab-group class="demo-tab-group">
-                          <mat-tab label="Tab 1">
-                            <ng-template mat-tab-label class="marginIcon">
-                              <mat-icon>security</mat-icon>
-                            </ng-template>
-                            <div class="demo-tab-content">
+                                <ul class="list-group">
+                                    <li class="list-group-item"><mat-icon>phone</mat-icon>{{data.telefono}}</li>
+                                    <li class="list-group-item"><mat-icon>place</mat-icon>disponible en ??</li>
+                                
+                                </ul>
                               
-                              <ul class="list-group">
-                                <li class="list-group-item">Cras justo odio</li>
-                                <li class="list-group-item">Dapibus ac facilisis in</li>
-                                <li class="list-group-item">Morbi leo risus</li>
-                                <li class="list-group-item">Porta ac consectetur ac</li>
-                                <li class="list-group-item">Vestibulum at eros</li>
-                              </ul>
+                              
+                              <button mat-button color="primary" data-toggle="modal" data-target="#exampleModalLong"  (click)="getPictures(i,'satisfecho')">Clientes satisfechos</button>
+                              <a mat-button color="primary" class="nav-link" routerLink="/perfil/{{data._id}}">Perfil</a>
+                              
                             </div>
-                          </mat-tab>
-                          <mat-tab label="Tab 2">
-                            <ng-template mat-tab-label>
-                              <mat-icon>attach_file</mat-icon>
-                            </ng-template>
-                            
-                            <mat-list>
-                              <h3 mat-subheader>Atension semanal</h3>
-                              <mat-list-item *ngFor="let folder of folders">
-                                <mat-icon mat-list-icon>folder</mat-icon>
-                                <h4 mat-line>{{folder.name}}</h4>
-                                <p mat-line> {{folder.updated | date}} </p>
-                              </mat-list-item>
-                              <mat-divider></mat-divider>
+                            <button class="btn btn-outline-primary" type="button" data-toggle="collapse" [attr.data-target]="'.multi-collapse'+i">
+                             + Mas detalles
+                            </button>
+                    </div>
+                   
+                  </div>
+                  
+                </div>
+                <div class="col pl-1 pr-1">
+                  <div class="collapse multi-collapse{{i}}" id="multiCollapse2">
+                    <div class="card card-body p-1">
+                        <button class="btn btn-outline-primary" type="button" data-toggle="collapse" [attr.data-target]="'.multi-collapse'+i">
+                            -Menos detalles
+                          </button>
+                        <mat-tab-group class="demo-tab-group">
+                            <mat-tab label="Tab 2">
+                                <ng-template mat-tab-label>
+                                  <mat-icon>collections</mat-icon>
+                                </ng-template>
+                                <h3 mat-subheader>Galeria</h3>
+                                <div id="carouselImages{{i}}" class="carousel slide" data-ride="carousel">
+                                    <div class="carousel-inner">
+                                      <div class="carousel-item {{indexim == 1  ? 'active':''}}" *ngFor="let im of data.fotos;let indexim = index">
+                                          <img   class="d-block w-100"   data-src="{{im.url}}" alt="First slide [800x400]" src="{{im.url}}" data-holder-rendered="true">
+                                      </div>
+                                    </div>
+                                    <a class="carousel-control-prev" href="#carouselImages{{i}}" role="button" data-slide="prev">
+                                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                        <span class="sr-only">Previous</span>
+                                      </a>
+                                      <a class="carousel-control-next" href="#carouselImages{{i}}" role="button" data-slide="next">
+                                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                        <span class="sr-only">Next</span>
+                                      </a>
+                                </div>  
+                                
+                            </mat-tab>
+                              <mat-tab label="Tab 2">
+                                <ng-template mat-tab-label>
+                                  <mat-icon>verified_user</mat-icon>
+                                </ng-template>
+                                <h3 mat-subheader>Clientes satisfechos</h3>
+                                <div id="carouselSatisfecho{{i}}" class="carousel slide" data-ride="carousel">
+                                    <div class="carousel-inner">
+                                      <div class="carousel-item {{indexim == 1  ? 'active':''}}" *ngFor="let im of data.satisfechos;let indexim = index">
+                                          <img   class="d-block w-100"   data-src="{{im.url}}" alt="First slide [800x400]" src="{{im.url}}" data-holder-rendered="true">
+                                      </div>
+                                    </div>
+                                    <a class="carousel-control-prev" href="#carouselSatisfecho{{i}}" role="button" data-slide="prev">
+                                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                        <span class="sr-only">Previous</span>
+                                      </a>
+                                      <a class="carousel-control-next" href="#carouselSatisfecho{{i}}" role="button" data-slide="next">
+                                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                        <span class="sr-only">Next</span>
+                                      </a>
+                                </div>
+                                  
+                                 
+                              </mat-tab>
+                            <mat-tab label="Tab 3">
+                              <ng-template mat-tab-label class="marginIcon">
+                                <mat-icon>security</mat-icon>
+                              </ng-template>
+                              <div class="demo-tab-content">
+                                  <h3 mat-subheader>Servicios</h3>
+                                <ul class="list-group">
+                                  <li class="list-group-item">Cras justo odio</li>
+                                  <li class="list-group-item">Dapibus ac facilisis in</li>
+                                  <li class="list-group-item">Morbi leo risus</li>
+                                  <li class="list-group-item">Porta ac consectetur ac</li>
+                                  <li class="list-group-item">Vestibulum at eros</li>
+                                </ul>
+                              </div>
+                            </mat-tab>
+                            <mat-tab label="Tab 4">
+                              <ng-template mat-tab-label>
+                                <mat-icon>today</mat-icon>
+                              </ng-template>
                               
-                            </mat-list>
-                            
-                          </mat-tab>
-                                                   
-                        </mat-tab-group>
-                      </mat-card-content>
-                    </mat-card>
-                  </mat-card-content>
-                 
-              </mat-card>
+                              <mat-list>
+                                <h3 mat-subheader>Atension semanal</h3>
+                                <mat-list-item *ngFor="let folder of folders">
+                                  <mat-icon mat-list-icon>folder</mat-icon>
+                                  <h4 mat-line>{{folder.name}}</h4>
+                                  <p mat-line> {{folder.updated | date}} </p>
+                                </mat-list-item>
+                                <mat-divider></mat-divider>
+                                
+                              </mat-list>
+                              
+                            </mat-tab>
+                                                     
+                          </mat-tab-group>
+                    </div>
+                  </div>
+                </div>
 
 
 
