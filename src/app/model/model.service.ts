@@ -27,6 +27,10 @@ export class ModelService   {
   getDisponibles(){
     return this.promosService.getDisponibles();
   }
+
+  getPromos(){
+    return this.promosService.getAllPromos();
+  }
 }
 
 

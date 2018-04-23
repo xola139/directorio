@@ -12,8 +12,9 @@ import * as $ from 'jquery';
   styleUrls: ['./model.component.css']
 })
 export class ModelComponent implements OnInit {
-  myData = {};
-  disponibles = {};
+  myData :any;
+  disponibles :any;
+  promos :any;
   pictures:any;
   tipoFoto:any;
   hideme=[];
@@ -41,11 +42,14 @@ export class ModelComponent implements OnInit {
 
 
 
-constructor(  private modelService: ModelService) { }
+constructor(  private modelService: ModelService) {
+  this.disponibles = [];
+  this.promos = [];
+ }
   
   ngOnInit() {
     this.getModelos();
-    this.getDisponibles();
+    this.getPromos();
   }
 
   getModelos() {
@@ -83,6 +87,14 @@ constructor(  private modelService: ModelService) { }
       console.log(err);
     });
   }
+
+  getPromos(){
+    this.modelService.getPromos().then((res) => {
+     this.promos  = res;
+   }, (err) => {
+     console.log(err);
+   });
+ }
 
   getPictures(id,tipoFoto){
     this.tipoFoto = tipoFoto;
