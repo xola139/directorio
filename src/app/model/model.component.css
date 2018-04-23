@@ -14,3 +14,10 @@
 .mat-tab-label{
 	min-width: 60px !important;
 }
+
+
+.carousel-caption-custom{
+	left:0 !important;
+	right: 0 !important;
+	top: 70px !important;
+}
