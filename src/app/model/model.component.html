@@ -1,16 +1,17 @@
   <div class="container">
     
     <div class="row" >
-          <div class="col-md-4 col-sm-12 p-0 " >
-              <small>Esta viendo 5  disponibles de {{disponibles['length']}}</small>
+          <div class="col-md-4 col-sm-12 p-0 " style="height: 300px;" >
+              <small>Esta viendo 5  disponibles de {{promos['length']}}</small>
               <div id="carouselExampleCaptions" class="carousel slide" data-ride="carousel">
     
                 <div class="carousel-inner">
                   <div class="carousel-item {{i == 1 ? 'active':''}}" *ngFor="let p of promos | slice:0:2;let i = index">
                     <img class="d-block w-100" data-src="{{p.avatar}}" alt="First slide [800x400]" src="{{p.avatar}}" data-holder-rendered="true">
-                    <div class="carousel-caption pt-0 pb-0   carousel-caption-custom ">
+
+                    <div class="carousel-caption pt-0 pb-0   carousel-caption-custom alert alert-warning" role="alert">
                       <h5>{{p.id}}</h5>
-                      <p>{{p.descripcion}}</p>
+                      <p class="text-primary">{{p.descripcion}}</p>
                     </div>
                   </div>
                   
@@ -27,15 +28,16 @@
             
           </div>
           <div class="col-md-4 col-sm-12 mt-2 p-0 " *ngFor="let data of myData ;let i = index">
-  
-              <div class="col pl-1 pr-1">
-                  
-                  
-                  <div class="collapse multi-collapse{{i}} show" id="multiCollapse1">
+            <button mat-fab color="primary" class="botonDetail" data-toggle="collapse" [attr.data-target]="'.multi-collapse'+i">
+              <mat-icon>keyboard_arrow_down</mat-icon>
+              
+            </button>
+              <div class="col pl-1 pr-1 ">
+                  <div class="collapse multi-collapse{{i}} show index-content" id="multiCollapse1">
                     <div class="card card-body p-1" >
                         
                             <img class="card-img-top" src="{{data.images[0].url}}" alt="Card image cap">
-                            <div class="card-body">
+                            <div class="card-body p-1">
                               <mat-card-title>{{data.id}} 
                                 
                                 <span class="badge badge-success">New</span></mat-card-title>
@@ -48,20 +50,16 @@
                               <a mat-button color="primary" class="nav-link" routerLink="/perfil/{{data._id}}">Perfil</a>
                               
                             </div>
-                            <button class="btn btn-outline-primary" type="button" data-toggle="collapse" [attr.data-target]="'.multi-collapse'+i">
-                             + Mas detalles
-                            </button>
+                            
                     </div>
                    
                   </div>
                   
                 </div>
                 <div class="col pl-1 pr-1">
-                  <div class="collapse multi-collapse{{i}}" id="multiCollapse2">
+                  <div class="collapse multi-collapse{{i}} index-content" id="multiCollapse2">
                     <div class="card card-body p-1">
-                        <button class="btn btn-outline-primary" type="button" data-toggle="collapse" [attr.data-target]="'.multi-collapse'+i">
-                            -Menos detalles
-                          </button>
+                        
                         <mat-tab-group class="demo-tab-group">
                             <mat-tab label="Tab 2">
                                 <ng-template mat-tab-label>
