@@ -6,13 +6,23 @@ var Disponible = require('../models/Disponible.js');
 
 
 /* GET ALL PROMOSS */
-router.get('/',
+/*router.get('/',
 	function(req, res, next) {
 		Promos.find().populate('images','telefono').exec(function(err, promos) {
     	if (err) throw err;
  	res.json(promos);
     });
-});
+});*/
+
+router.get('/',
+	function(req, res, next) {
+		Promos.find(function(err, promos) {
+    	if (err) throw err;
+ 	res.json(promos);
+    });
+})
+
+
 
 
 /* GET ALL DISPONIBLES */

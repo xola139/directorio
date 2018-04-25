@@ -2,16 +2,23 @@
     
     <div class="row" >
           <div class="col-md-4 col-sm-12 p-0 " style="height: 300px;" >
-              <small>Esta viendo 5  disponibles de {{promos['length']}}</small>
+              <small>Esta viendo 10  disponibles de {{promos['length']}}</small>
               <div id="carouselExampleCaptions" class="carousel slide" data-ride="carousel">
     
                 <div class="carousel-inner">
-                  <div class="carousel-item {{i == 1 ? 'active':''}}" *ngFor="let p of promos | slice:0:2;let i = index">
-                    <img class="d-block w-100" data-src="{{p.avatar}}" alt="First slide [800x400]" src="{{p.avatar}}" data-holder-rendered="true">
-                    <div class="carousel-caption pt-0 pb-0   carousel-caption-custom alert alert-warning" role="alert">
-                      <h5>{{p.id}}</h5>
-                      <p class="text-primary">{{p.descripcion}}</p>
+                  <div class="carousel-item {{i == 1 ? 'active':''}} max-img-promo" *ngFor="let p of promos | slice:0:10;let i = index">
+                     <div class="row">
+                      <div class="col">
+                        <img class="d-block w-100 img-fluid" data-src="{{p.avatar}}" alt="First slide [800x400]" src="{{p.avatar}}" data-holder-rendered="true" style=" max-width: 100%;max-height: 100%;">
+                      </div>
+                      <div class="col">
+                          <h5>{{p.id}}</h5>
+                          <p class="text-primary">{{p.promos[0].descripcion}}</p>
+                          <button mat-raised-button color="accent">Accent</button>
+                      </div>
                     </div>
+                    
+                    
                   </div>
                   
                 </div>
@@ -65,11 +72,11 @@
                                 <ng-template mat-tab-label>
                                   <mat-icon>collections</mat-icon>
                                 </ng-template>
-                                <h3 mat-subheader>Galeria</h3>
+                                <p class="font-weight-light">Galeria</p>
                                 <div id="carouselImages{{i}}" class="carousel slide" data-ride="carousel">
                                     <div class="carousel-inner">
-                                      <div class="carousel-item {{indexim == 1  ? 'active':''}}" *ngFor="let im of data.fotos;let indexim = index">
-                                          <img   class="d-block w-100"   data-src="{{im.url}}" alt="First slide [800x400]" src="{{im.url}}" data-holder-rendered="true">
+                                      <div class="carousel-item {{indexim == 1  ? 'active':''}}" *ngFor="let im of data.fotos;let indexim = index" style="max-width: 100%;max-height: 400px;">
+                                          <img   class="d-block w-100"   data-src="{{im.url}}" alt="First slide [800x400]" src="{{im.url}}" data-holder-rendered="true" style="max-width: 100%;max-height: 400px;">
                                       </div>
                                     </div>
                                     <a class="carousel-control-prev" href="#carouselImages{{i}}" role="button" data-slide="prev">
