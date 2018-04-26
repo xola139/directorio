@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {MatTableDataSource,MatRadioChange} from '@angular/material';
+import {MatDialog,MatTableDataSource,MatRadioChange} from '@angular/material';
 import { ActivatedRoute, Router } from '@angular/router';
 import { PerfilService } from './perfil.service';
 import {Location} from '@angular/common';
@@ -16,9 +16,9 @@ import {Location} from '@angular/common';
 export class PerfilComponent implements OnInit {
 
 	perfil:any;
-  
+  resourcesLoaded: Boolean;
   	
-	constructor(private _location: Location,private route: ActivatedRoute, private router: Router, private perfilService: PerfilService) { }
+	constructor(public dialog: MatDialog,private _location: Location,private route: ActivatedRoute, private router: Router, private perfilService: PerfilService) { }
 
 
   	ngOnInit() {
@@ -29,7 +29,7 @@ export class PerfilComponent implements OnInit {
 
   	getPerfil(id) {
 
-  		console.log(">>>>>>>>>>>>>>>>>>>>>><"+id);
+  		
     	this.perfilService.showPerfil(id).then((res) => {
       	this.perfil = res;
         console.log(this.perfil);
@@ -40,10 +40,11 @@ export class PerfilComponent implements OnInit {
   	}
 
   	updatePerfil(id) {
-
+      this.resourcesLoaded = true;
 	    this.perfilService.updatePerfil(id, this.perfil).then((result) => {
+        console.log(this.perfil);
       	let id = result['_id'];
-      	console.log("Excelente");
+      	this.resourcesLoaded = false;
     	}, (err) => {
       	console.log(err);
     });
@@ -59,7 +60,8 @@ export class PerfilComponent implements OnInit {
     //console.log(this.filter);
   }
 
-	backClicked() {
+	backClicked(){
 		this._location.back();
-}
+  }
+
 }
