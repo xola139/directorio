@@ -22,8 +22,7 @@ var ImagesSchema = new mongoose.Schema({
 	  	url: String,
 	  	fecha: String,
 	  	status: String
-	}],
-  promos: [{type: mongoose.Schema.Types.ObjectId, ref: 'Promos'}],
+	}]
 });
 
 module.exports = mongoose.model('Images', ImagesSchema);
