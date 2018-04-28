@@ -6,6 +6,7 @@ var config={
         facebook:{
                 id:'asdadasdasd',
                 secret:'zIYX0eY3GcfrwElGYYjuVm5LI421wG02C8WuMaLU107Owq6hay'
+
         }
         ,conectDB:{
                 link:'mongodb://usuariogeneric:sharkesink139@ds041603.mlab.com:41603/generic'

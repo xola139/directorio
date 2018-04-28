@@ -1,4 +1,4 @@
-  <div class="container">
+  <div class="container-fluid">
     
     <div class="row" >
           <div class="col-md-4 col-sm-12 p-0 " style="height: 300px;" >
@@ -37,11 +37,18 @@
           </div>
           <div class="col-md-4 col-sm-12 mt-2 p-0 border" *ngFor="let data of myData ;let i = index">
 
-            <div class="row alert-light" role="alert">
-              <div class="col-8">
-                {{data.id}}<span class="badge badge-success">New</span>
+            <div class="row alert-light mr-0 ml-0 " role="alert">
+              <div class="col-10 pr-0 pl-1">
+                 <h5 class="card-title font-weight-bold  mt-1 mb-0">{{data.id}} 
+                  
+                  <button type="button" class="btn {{data.disponible ? 'btn-primary': 'btn-light'}}  p-0">
+                  {{data.disponible ? 'Disponible': ''}} 
+                    <span class="badge {{data.ciudad ? 'badge-light': ''}}">{{data.ciudad}} </span>
+                  </button>
+                </h5>
+                <a href="#" class="badge badge-success">{{data.telefono}}</a>
               </div>
-              <div class="col">
+              <div class="col pr-0 pl-0">
                 <button mat-mini-fab color="primary" class="float-right" (click)="hideme[i] = !hideme[i]" data-toggle="collapse" [attr.data-target]="'.multi-collapse'+i">
                   <mat-icon  [hidden]="!hideme[i]" >keyboard_arrow_down</mat-icon>
                   <mat-icon  [hidden]="hideme[i]" >keyboard_arrow_up</mat-icon>
@@ -55,10 +62,7 @@
                     <div class="card card-body p-1" >
                             <img class="card-img-top" src="{{data.images[0].url}}" alt="Card image cap">
                             <div class="card-body p-1">
-                              <ul class="list-group">
-                                    <li class="list-group-item"><mat-icon>phone</mat-icon>{{data.telefono}}</li>
-                                    <li class="list-group-item"><mat-icon>place</mat-icon>disponible en ??</li>
-                              </ul>
+                              
                               <a mat-button color="primary" class="nav-link" routerLink="/perfil/{{data._id}}">Perfil</a>
                             </div>
                     </div>
@@ -74,53 +78,33 @@
                                 <ng-template mat-tab-label>
                                   <mat-icon>collections</mat-icon>
                                 </ng-template>
-                                <p class="font-weight-light">Galeria</p>
-                                <div id="carouselImages{{i}}" class="carousel slide" data-ride="carousel">
-                                    <div class="carousel-inner">
-                                      <div class="carousel-item {{indexim == 1  ? 'active':''}}" *ngFor="let im of data.fotos;let indexim = index" style="max-width: 100%;max-height: 400px;">
-                                          <img   class="d-block w-100"   data-src="{{im.url}}" alt="First slide [800x400]" src="{{im.url}}" data-holder-rendered="true" style="max-width: 100%;max-height: 400px;">
-                                      </div>
-                                    </div>
-                                    <a class="carousel-control-prev" href="#carouselImages{{i}}" role="button" data-slide="prev">
-                                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                                        <span class="sr-only">Previous</span>
-                                      </a>
-                                      <a class="carousel-control-next" href="#carouselImages{{i}}" role="button" data-slide="next">
-                                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                                        <span class="sr-only">Next</span>
-                                      </a>
-                                </div>  
+                                <p class="font-weight-bold mb-0">Galeria</p>
+                                <div class=""  style="height:350px; overflow: scroll;">
+                                    <img *ngFor="let im of data.fotos;let indexim = index" class="d-block w-100 img-fluid mb-2"  data-src="{{im.url}}" alt="Galeria" src="{{im.url}}" >
+
+                                </div>
+
+                                 
                                 
                             </mat-tab>
                               <mat-tab label="Tab 2">
                                 <ng-template mat-tab-label>
                                   <mat-icon>verified_user</mat-icon>
                                 </ng-template>
-                                <h3 mat-subheader>Clientes satisfechos</h3>
-                                <div id="carouselSatisfecho{{i}}" class="carousel slide" data-ride="carousel">
-                                    <div class="carousel-inner">
-                                      <div class="carousel-item {{indexim == 1  ? 'active':''}}" *ngFor="let im of data.satisfechos;let indexim = index">
-                                          <img   class="d-block w-100"   data-src="{{im.url}}" alt="First slide [800x400]" src="{{im.url}}" data-holder-rendered="true">
-                                      </div>
-                                    </div>
-                                    <a class="carousel-control-prev" href="#carouselSatisfecho{{i}}" role="button" data-slide="prev">
-                                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                                        <span class="sr-only">Previous</span>
-                                      </a>
-                                      <a class="carousel-control-next" href="#carouselSatisfecho{{i}}" role="button" data-slide="next">
-                                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                                        <span class="sr-only">Next</span>
-                                      </a>
+                                
+                                <p class="font-weight-bold mb-0">Clientes satisfechos</p>
+                                <div class=""  style="height:350px; overflow: scroll;">
+                                    <img *ngFor="let im of data.satisfechos;let indexim = index" class="d-block w-100 img-fluid mb-2"  data-src="{{im.url}}" alt="Galeria" src="{{im.url}}" >
+
                                 </div>
-                                  
-                                 
+                                
                               </mat-tab>
                             <mat-tab label="Tab 3">
                               <ng-template mat-tab-label class="marginIcon">
                                 <mat-icon>security</mat-icon>
                               </ng-template>
                               <div class="demo-tab-content">
-                                  <h3 mat-subheader>Servicios</h3>
+                                <p class="font-weight-bold mb-0">Servicios</p>
                                 <ul class="list-group">
                                   <li class="list-group-item">Cras justo odio</li>
                                   <li class="list-group-item">Dapibus ac facilisis in</li>
@@ -136,7 +120,7 @@
                               </ng-template>
                               
                               <mat-list>
-                                <h3 mat-subheader>Atension semanal</h3>
+                                <p class="font-weight-bold mb-0">Atención semanal</p>
                                 <mat-list-item *ngFor="let folder of folders">
                                   <mat-icon mat-list-icon>folder</mat-icon>
                                   <h4 mat-line>{{folder.name}}</h4>
@@ -156,7 +140,12 @@
 
 
           </div>
+           
+          
       </div>
+      <div class="mx-auto" style="width: 200px;">
+          <button type="button" class="btn btn-outline-primary">VER MAS</button>
+      </div> 
       <!-- Modal -->
 <div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
   <div class="modal-dialog" role="document">
