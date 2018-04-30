@@ -22,15 +22,17 @@ export class PerfilComponent implements OnInit {
 
 
   	ngOnInit() {
-  		
+			this.perfil = {};
+			this.perfil.
   		this.getPerfil(this.route.snapshot.params['id']);
 		
   	}
 
   	getPerfil(id) {
-
-  		
-    	this.perfilService.showPerfil(id).then((res) => {
+			
+	
+			this.perfilService.showPerfil(id).then((res) => {
+				console.log(res);
       	this.perfil = res;
         console.log(this.perfil);
 

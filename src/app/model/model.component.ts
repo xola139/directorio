@@ -13,6 +13,9 @@ import * as $ from 'jquery';
 })
 export class ModelComponent implements OnInit {
   myData :any;
+
+  verItems :number;
+
   disponibles :any;
   promos :any;
   pictures:any;
@@ -45,6 +48,7 @@ export class ModelComponent implements OnInit {
 constructor(  private modelService: ModelService) {
   this.disponibles = [];
   this.promos = [];
+  this.verItems = 5;
  }
   
   ngOnInit() {
@@ -104,8 +108,18 @@ constructor(  private modelService: ModelService) {
   toggleCard(id){
     $('.multi-collapse0').collapse('toggle');
     console.log(id);
-    
+  }
+
+  getVerMas(){
+
+    if(this.verItems < this.myData.length){
+      this.verItems +=3;
+    }
+
     
   }
 
+  scroll(el) {
+    el.scrollIntoView();
+}
 }

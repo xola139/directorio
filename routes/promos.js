@@ -6,27 +6,32 @@ var Images = require('../models/Images.js');
 var Disponible = require('../models/Disponible.js');
 
 
+
 /* GET ALL PROMOSS */
 router.get('/',
 	function(req, res, next) {
-		Images.find().populate('Prommos').exec(function(err, promos) {
-    	if (err) throw err;
- 	res.json(promos);
-		});
-		
-
-	
-
+        Promos.find().populate({
+            path:'fk_images',
+            model:'Images'}
+        ).exec(function(err, promos) {
+            if (err) { return console.log(err); }
+    
+            res.json(promos);
+        });
 
 });
 
 /*router.get('/',
 	function(req, res, next) {
-		Promos.find(function(err, promos) {
+		
+    /*Promos.find(function(err, promos) {
     	if (err) throw err;
- 	res.json(promos);
-    });
-})*/
+ 	  res.json(promos);
+    });*/
+
+    
+
+
 
 
 

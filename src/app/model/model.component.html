@@ -1,12 +1,9 @@
   <div class="container-fluid">
     
     <div class="row" >
-          <div class="col-md-4 col-sm-12 p-0 " style="height: 300px;" >
-              <small>Esta viendo 10  disponibles de {{promos['length']}}</small>
+          <div class="col-md-4 col-sm-12 p-0 ">
+              <small>Esta viendo 10  promos de {{promos['length']}}</small>
               <div id="carouselExampleCaptions" class="carousel slide" data-ride="carousel">
-    
-
-                
                 <div class="carousel-inner">
                   <div class="carousel-item {{i == 1 ? 'active':''}} max-img-promo" *ngFor="let p of promos | slice:0:10;let i = index">
                      <div class="row">
@@ -15,14 +12,11 @@
                       </div>
                       <div class="col">
                           <h5>{{p.id}}</h5>
-                          <p class="text-primary">{{p.promos[0].descripcion}}</p>
+                          <p class="text-primary small">{{p.promos[0].descripcion}}</p>
                           <button mat-raised-button color="accent">Accent</button>
                       </div>
                     </div>
-                    
-                    
                   </div>
-                  
                 </div>
                 <a class="carousel-control-prev" href="#carouselExampleCaptions" role="button" data-slide="prev">
                   <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -35,7 +29,7 @@
             </div>
             
           </div>
-          <div class="col-md-4 col-sm-12 mt-2 p-0 border" *ngFor="let data of myData ;let i = index">
+          <div class="col-md-4 col-sm-12 mt-2 p-0 border" *ngFor="let data of myData | slice:0:verItems ;let i = index">
 
             <div class="row alert-light mr-0 ml-0 " role="alert">
               <div class="col-10 pr-0 pl-1">
@@ -49,7 +43,7 @@
                 <a href="#" class="badge badge-success">{{data.telefono}}</a>
               </div>
               <div class="col pr-0 pl-0">
-                <button mat-mini-fab color="primary" class="float-right" (click)="hideme[i] = !hideme[i]" data-toggle="collapse" [attr.data-target]="'.multi-collapse'+i">
+                <button mat-mini-fab color="primary" class="float-right" (click)="hideme[i] = !hideme[i];" data-toggle="collapse" [attr.data-target]="'.multi-collapse'+i">
                   <mat-icon  [hidden]="!hideme[i]" >keyboard_arrow_down</mat-icon>
                   <mat-icon  [hidden]="hideme[i]" >keyboard_arrow_up</mat-icon>
                 </button>
@@ -63,7 +57,7 @@
                             <img class="card-img-top" src="{{data.images[0].url}}" alt="Card image cap">
                             <div class="card-body p-1">
                               
-                              <a mat-button color="primary" class="nav-link" routerLink="/perfil/{{data._id}}">Perfil</a>
+                              <a mat-button color="primary"  style="border-style: none" class="nav-link" routerLink="/perfil/{{data._id}}">Perfil</a>
                             </div>
                     </div>
                   </div>
@@ -79,8 +73,11 @@
                                   <mat-icon>collections</mat-icon>
                                 </ng-template>
                                 <p class="font-weight-bold mb-0">Galeria</p>
-                                <div class=""  style="height:350px; overflow: scroll;">
-                                    <img *ngFor="let im of data.fotos;let indexim = index" class="d-block w-100 img-fluid mb-2"  data-src="{{im.url}}" alt="Galeria" src="{{im.url}}" >
+
+                                
+
+                                <div #container class=""  style="height:350px; overflow: scroll;">
+                                    <img [container]="container"  *ngFor="let im of data.fotos;let indexim = index" class="d-block w-100 img-fluid mb-2"   alt="Galeria" lazy-load="{{im.url}}"   src="https://www.stseguros.com.mx/images/loader.gif" >
 
                                 </div>
 
@@ -143,8 +140,8 @@
            
           
       </div>
-      <div class="mx-auto" style="width: 200px;">
-          <button type="button" class="btn btn-outline-primary">VER MAS</button>
+      <div class="mx-auto mt-3" style="width: 200px;">
+          <button type="button" class="btn btn-outline-primary" (click)="getVerMas()">VER MAS</button>
       </div> 
       <!-- Modal -->
 <div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">

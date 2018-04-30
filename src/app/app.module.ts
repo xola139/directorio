@@ -7,7 +7,8 @@ import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 import { BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { AsyncLocalStorageModule } from 'angular-async-local-storage';
 import { ClipboardModule } from 'ngx-clipboard';
-
+// 1. Import lazy loading module;
+import { LazyLoadModule } from '@greg-md/ng-lazy-load';
 import { MatFormFieldModule, MatAutocompleteModule,
   MatButtonModule,
   MatButtonToggleModule,
@@ -91,6 +92,7 @@ const appRoutes: Routes = [
   ],
   imports: [
     BrowserModule,
+    LazyLoadModule,
     AsyncLocalStorageModule,
     FormsModule,
     HttpModule,

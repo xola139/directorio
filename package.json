@@ -25,6 +25,7 @@
     "@angular/platform-browser-dynamic": "^5.2.1",
     "@angular/platform-server": "^5.2.1",
     "@angular/router": "^5.2.1",
+    "@greg-md/ng-lazy-load": "^1.0.9",
     "angular-async-local-storage": "^3.1.4",
     "body-parser": "^1.18.2",
     "bootstrap": "^4.0.0",
