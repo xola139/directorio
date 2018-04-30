@@ -29,7 +29,7 @@
             </div>
             
           </div>
-          <div class="col-md-4 col-sm-12 mt-2 p-0 border" *ngFor="let data of myData | slice:0:verItems ;let i = index">
+          <div id="card_{{data.id}}" class="col-md-4 col-sm-12 mt-2 p-0 border" *ngFor="let data of myData | slice:0:verItems ;let i = index">
 
             <div class="row alert-light mr-0 ml-0 " role="alert">
               <div class="col-10 pr-0 pl-1">
@@ -43,7 +43,7 @@
                 <a href="#" class="badge badge-success">{{data.telefono}}</a>
               </div>
               <div class="col pr-0 pl-0">
-                <button mat-mini-fab color="primary" class="float-right" (click)="hideme[i] = !hideme[i];" data-toggle="collapse" [attr.data-target]="'.multi-collapse'+i">
+                <button mat-mini-fab color="primary" class="float-right" (click)="gotoCard(data.id);hideme[i] = !hideme[i];" data-toggle="collapse" [attr.data-target]="'.multi-collapse'+i">
                   <mat-icon  [hidden]="!hideme[i]" >keyboard_arrow_down</mat-icon>
                   <mat-icon  [hidden]="hideme[i]" >keyboard_arrow_up</mat-icon>
                 </button>

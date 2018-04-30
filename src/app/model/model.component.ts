@@ -119,7 +119,10 @@ constructor(  private modelService: ModelService) {
     
   }
 
-  scroll(el) {
-    el.scrollIntoView();
-}
+  gotoCard(id){
+      var top = $('#card_' + id).position().top;
+      $(window).scrollTop( top );
+  }
+
+   
 }
