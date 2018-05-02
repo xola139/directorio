@@ -12,9 +12,13 @@
 }
 
 .mat-tab-label{
-	min-width: 60px !important;
+    min-width: 60px !important;
+    padding: 0px !important;
 }
 
+.mat-tab-label-custom{
+    padding: 0px !important;
+}
 
 .carousel-caption-custom{
 	left:0 !important;
@@ -37,4 +41,15 @@
 
 .max-img-promo {
     max-height: 200px !important;
+}
+
+
+
+@media (min-width: 768px) { 
+
+ }
+
+
+@media (min-width: 992px) { 
+    
 }

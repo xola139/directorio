@@ -43,10 +43,9 @@
                 <a href="#" class="badge badge-success">{{data.telefono}}</a>
               </div>
               <div class="col pr-0 pl-0">
-                <button mat-mini-fab color="primary" class="float-right" (click)="gotoCard(data.id);hideme[i] = !hideme[i];" data-toggle="collapse" [attr.data-target]="'.multi-collapse'+i">
-                  <mat-icon  [hidden]="!hideme[i]" >keyboard_arrow_down</mat-icon>
-                  <mat-icon  [hidden]="hideme[i]" >keyboard_arrow_up</mat-icon>
-                </button>
+                <mat-icon class="float-right" [hidden]="!hideme[i]" (click)="gotoCard(data.id);hideme[i] = !hideme[i];" data-toggle="collapse" [attr.data-target]="'.multi-collapse'+i">keyboard_arrow_down</mat-icon>
+                <mat-icon class="float-right" [hidden]="hideme[i]"  (click)="gotoCard(data.id);hideme[i] = !hideme[i];" data-toggle="collapse" [attr.data-target]="'.multi-collapse'+i">keyboard_arrow_up</mat-icon>
+               
               </div>
             </div>
           
@@ -68,37 +67,29 @@
                     <div class="card card-body p-1">
                         
                         <mat-tab-group class="demo-tab-group">
-                            <mat-tab label="Tab 2">
-                                <ng-template mat-tab-label>
+                            <mat-tab label="Tab 1">
+                                <ng-template  mat-tab-label style="padding:1 px !important; " >
                                   <mat-icon>collections</mat-icon>
+                                  <br>Galeria  
                                 </ng-template>
-                                <p class="font-weight-bold mb-0">Galeria</p>
-
-                                
-
                                 <div #container class=""  style="height:350px; overflow: scroll;">
-                                    <img [container]="container"  *ngFor="let im of data.fotos;let indexim = index" class="d-block w-100 img-fluid mb-2"   alt="Galeria" lazy-load="{{im.url}}"   src="https://www.stseguros.com.mx/images/loader.gif" >
-
+                                    <img [container]="container"  *ngFor="let im of data.fotos;let indexim = index" class="d-block w-100 img-fluid mb-2"   alt="Galeria" lazy-load="{{im.url}}"   src="https://i.gifer.com/EXfl.gif" >
                                 </div>
-
-                                 
-                                
                             </mat-tab>
                               <mat-tab label="Tab 2">
-                                <ng-template mat-tab-label>
+                                <ng-template  mat-tab-label >
                                   <mat-icon>verified_user</mat-icon>
+                                  <br>Satisfechos  
                                 </ng-template>
-                                
-                                <p class="font-weight-bold mb-0">Clientes satisfechos</p>
                                 <div class=""  style="height:350px; overflow: scroll;">
                                     <img *ngFor="let im of data.satisfechos;let indexim = index" class="d-block w-100 img-fluid mb-2"  data-src="{{im.url}}" alt="Galeria" src="{{im.url}}" >
-
                                 </div>
                                 
                               </mat-tab>
                             <mat-tab label="Tab 3">
-                              <ng-template mat-tab-label class="marginIcon">
+                              <ng-template  mat-tab-label >
                                 <mat-icon>security</mat-icon>
+                                <br>Servicios  
                               </ng-template>
                               <div class="demo-tab-content">
                                 <p class="font-weight-bold mb-0">Servicios</p>
@@ -112,12 +103,11 @@
                               </div>
                             </mat-tab>
                             <mat-tab label="Tab 4">
-                              <ng-template mat-tab-label>
+                              <ng-template  mat-tab-label >
                                 <mat-icon>today</mat-icon>
+                                <br>Fechas  
                               </ng-template>
-                              
                               <mat-list>
-                                <p class="font-weight-bold mb-0">Atención semanal</p>
                                 <mat-list-item *ngFor="let folder of folders">
                                   <mat-icon mat-list-icon>folder</mat-icon>
                                   <h4 mat-line>{{folder.name}}</h4>
@@ -140,7 +130,8 @@
            
           
       </div>
-      <div class="mx-auto mt-3" style="width: 200px;">
+      
+      <div class="mx-auto mt-5" style="width: 100px;">
           <button type="button" class="btn btn-outline-primary" (click)="getVerMas()">VER MAS</button>
       </div> 
       <!-- Modal -->
