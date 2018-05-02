@@ -22,11 +22,7 @@ export class ModelComponent implements OnInit {
   tipoFoto:any;
   hideme=[];
   
-  foods = [
-    {value: 'steak-0', viewValue: 'Todos'},
-    {value: 'pizza-1', viewValue: 'Disponible'},
-    {value: 'tacos-2', viewValue: 'Indispoble'}
-  ];
+
 
  folders = [
     {

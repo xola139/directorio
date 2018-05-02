@@ -17,13 +17,28 @@ export class PerfilComponent implements OnInit {
 
 	perfil:any;
   resourcesLoaded: Boolean;
-  	
-	constructor(public dialog: MatDialog,private _location: Location,private route: ActivatedRoute, private router: Router, private perfilService: PerfilService) { }
+		
+	  idiomas = [
+    {value: 'espanol', viewValue: 'Español'},
+    {value: 'ingles', viewValue: 'Ingles'}
+	];
+	
+	horarios = [ ];
+
+	constructor(public dialog: MatDialog,private _location: Location,private route: ActivatedRoute, private router: Router, private perfilService: PerfilService) { 
+		
+      
+
+
+	}
 
 
   	ngOnInit() {
 			this.perfil = {};
-			this.perfil.
+			this.perfil.idiomas = [{espanol:false},{ingles:false}];
+			for (let i = 0; i < 24; i++) {
+        this.horarios.push({value: i, viewValue: i +':00'});
+      }	
   		this.getPerfil(this.route.snapshot.params['id']);
 		
   	}
@@ -66,4 +81,15 @@ export class PerfilComponent implements OnInit {
 		this._location.back();
   }
 
+  _keyPress(event: any) {
+    const pattern = /[0-9\+\-\ ]/;
+    let inputChar = String.fromCharCode(event.charCode);
+
+    if (!pattern.test(inputChar)) {
+      // invalid character, prevent input
+      event.preventDefault();
+    }
+}
+
+  
 }

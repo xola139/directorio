@@ -1,136 +1,120 @@
 <div class="container-fluid">
-  <h1>{{perfil.id}}</h1>
-<form (ngSubmit)="updatePerfil(perfil._id)" #perfilForm="ngForm">
-   
-  
-  <div class="row">
-
-
-    
-    <div class="col-sm-6">
-      
-        <div class="form-group">
-          
-          
-          <mat-form-field>
-            <input matInput placeholder="Tu telefono" [(ngModel)]="perfil.telefono" name="telefono" required>
-            
-          </mat-form-field>
-          <mat-checkbox class="example-margin" >LLamadas</mat-checkbox>
-          <mat-checkbox class="example-margin" >Whatsapp</mat-checkbox>
-          
-        </div>
-        <div class="form-group">
-          
-          
-          <mat-form-field>
-            <input matInput placeholder="Tu nacionalidad" [(ngModel)]="perfil.nacionalidad" name="nacionalidad">
-          </mat-form-field>
-        </div>
-        <div class="form-group">
-          <label for="name">Idioma:</label>
-          <input type="text" class="form-control" [(ngModel)]="perfil.idioma" name="idioma" required>
-        </div>
-        <div class="form-group">
-          <label for="name">horario:</label>
-          <input type="text" class="form-control" [(ngModel)]="perfil.horario" name="horario" required>
-        </div>
-        <div class="form-group">
-          <label for="name">viajes:</label>
-          <input type="text" class="form-control" [(ngModel)]="perfil.viajes" name="viajes" required>
-        </div>
-        <div class="form-group">
-          <label for="name">edad:</label>
-          <input type="text" class="form-control" [(ngModel)]="perfil.edad" name="edad" required>
-
-        </div>
-        <div class="form-group">
-          <label for="name">atiende:</label>
-          <input type="text" class="form-control" [(ngModel)]="perfil.atiende" name="atiende" required>
-        </div>
-        
-        
+    <h1>{{perfil.id}}</h1>
+  <form (ngSubmit)="updatePerfil(perfil._id)" #perfilForm="ngForm">
      
-    </div>
-    <div class="col-sm-6 ">
-      Cuerpo:
+
+  <div class="row">
+    <div class="col-sm-6">
       <div class="form-group">
-          <label for="name">estatura:</label>
-          <input type="text" class="form-control" [(ngModel)]="perfil.cuerpo[0].estatura" name="estatura" required>
-        </div>
-        <div class="form-group">
-          <label for="name">ojos:</label>
-          <input type="text" class="form-control" [(ngModel)]="perfil.cuerpo[0].ojos" name="ojos" required>
-        </div>
-         <div class="form-group">
-          <label for="name">cabello:</label>
-          <input type="text" class="form-control" [(ngModel)]="perfil.cuerpo[0].cabello" name="cabello" required>
-        </div>
-         <div class="form-group">
-          <label for="name">medidas:</label>
-          <input type="text" class="form-control" [(ngModel)]="perfil.cuerpo[0].medidas" name="medidas" required>
-        </div>
-        <div class="form-group">
-          <label for="name">peso:</label>
-          <input type="text" class="form-control" [(ngModel)]="perfil.cuerpo[0].peso" name="peso" required>
-        </div>
-    </div>
-    <div class="col-md-6">
-      <div class="form-group">
+        <mat-form-field>
+          <input matInput placeholder="Tu telefono" [(ngModel)]="perfil.telefono" name="telefono" required>
+        </mat-form-field>
+        
+        <mat-checkbox  [(ngModel)]="perfil.opcionesTelefono[0].llamadas" name="llamadas" >LLamadas</mat-checkbox>
+        <mat-checkbox [(ngModel)]="perfil.opcionesTelefono[0].whatsapp" name="Whatsapp" >Whatsapp</mat-checkbox>
             
+          </div>
+          <div class="form-group">
+            <mat-form-field>
+              <input matInput placeholder="Tu nacionalidad" [(ngModel)]="perfil.nacionalidad" name="nacionalidad">
+            </mat-form-field>
             
-          <button class="btn btn-success" type="button" (click)="backClicked()">
-            <mat-icon>keyboard_backspace</mat-icon>
-          </button>
-          <button type="submit" data-toggle="modal" data-target="#exampleModalCenter" class="btn btn-success" [disabled]="!perfilForm.form.valid">Update</button>
-        </div>
-    </div>
-    <div class="col-md-12 col-sm-12 mt-12" *ngFor="let pic of perfil.images;let i = index">
-      <div class="card-columns">
-        <div class="card">
-          <img class="card-img-top" src="{{pic.url}}" alt="Card image cap">
-          <div class="card-body">
-            <h5 class="card-title">Card title that wraps to a new line</h5>
-            <p class="card-text">
-               <mat-radio-group >
-               
-                <mat-radio-button  (change)="radioChange($event,i)" [checked]="pic.status ==='foto'" value="foto" name="images.status" >Foto</mat-radio-button>
-                <mat-radio-button  (change)="radioChange($event,i)" [checked]="pic.status ==='satisfecho'" value="satisfecho" name="images.status" >Satisfecho</mat-radio-button>
-                <mat-radio-button  (change)="radioChange($event,i)" [checked]="pic.status ==='nada'" value="nada" name="images.status" >Nada</mat-radio-button>
-              </mat-radio-group>
+          </div>
+          <div class="form-group">
+              <label>Idiomas</label><br>
+              <mat-checkbox  [(ngModel)]="perfil.idiomas[0].espanol" name="espanol" >Español</mat-checkbox>
+              <mat-checkbox  [(ngModel)]="perfil.idiomas[0].ingles" name="ingles" >Ingles</mat-checkbox>
+          </div>
+          <div class="form-group">
+              <label>Horarios de atención</label><br>
+            <mat-form-field>
+              <mat-select placeholder="Hora inicial" [(ngModel)]="perfil.horarioAtencion[0].hinicio" name="hinicio">
+                <mat-option *ngFor="let hora of horarios" [value]="hora.value">
+                    {{ hora.viewValue }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+            <mat-form-field>
+                <mat-select placeholder="Hora final" [(ngModel)]="perfil.horarioAtencion[0].hfin" name="hfin">
+                  <mat-option *ngFor="let hora of horarios" [value]="hora.value">
+                      {{ hora.viewValue }}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+          </div>
+          <div class="form-group">
+            <mat-form-field>
+              <input matInput type="number"  placeholder="Tu edad es:" [(ngModel)]="perfil.edad" name="edad"  min=0 max=100 step=5>
+            </mat-form-field>
+          </div>
+          <div class="form-group">
+            
+            <mat-form-field>
+                <textarea matInput placeholder="Atienes en :" [(ngModel)]="perfil.atiende" name="atiende"></textarea>
+            </mat-form-field>
+            
+          </div>
+          
+          
+       
+      </div>
+     
+      <div class="col-md-6">
+        <div class="form-group">
               
-            </p>
+              
+            <button class="btn btn-success" type="button" (click)="backClicked()" >
+              <mat-icon>keyboard_backspace</mat-icon>
+            </button>
+            <button type="submit" data-toggle="modal" data-target="#exampleModalCenter" class="btn btn-success" [disabled]="!perfilForm.form.valid">Update</button>
+          </div>
+      </div>
+      <div class="col-md-12 col-sm-12 mt-12" *ngFor="let pic of perfil.images;let i = index">
+        <div class="card-columns">
+          <div class="card">
+            <img class="card-img-top" src="{{pic.url}}" alt="Card image cap">
+            <div class="card-body">
+              <h5 class="card-title">Card title that wraps to a new line</h5>
+              <p class="card-text">
+                 <mat-radio-group >
+                 
+                  <mat-radio-button  (change)="radioChange($event,i)" [checked]="pic.status ==='foto'" value="foto" name="images.status" >Foto</mat-radio-button>
+                  <mat-radio-button  (change)="radioChange($event,i)" [checked]="pic.status ==='satisfecho'" value="satisfecho" name="images.status" >Satisfecho</mat-radio-button>
+                  <mat-radio-button  (change)="radioChange($event,i)" [checked]="pic.status ==='nada'" value="nada" name="images.status" >Nada</mat-radio-button>
+                </mat-radio-group>
+                
+              </p>
+            </div>
           </div>
         </div>
       </div>
+  
+  
     </div>
-
-
+   </form>
   </div>
- </form>
-</div>
-
-
-<!-- Modal -->
-<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenter" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLongTitle">Guardando Datos</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <mat-spinner *ngIf="resourcesLoaded === true" ></mat-spinner>
-        <div *ngIf="!resourcesLoaded === true" class="alert alert-success" role="alert">
-          La informacion se ha guadado con Exito!
+  
+  
+  <!-- Modal -->
+  <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenter" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLongTitle">Guardando Datos</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <mat-spinner *ngIf="resourcesLoaded === true" ></mat-spinner>
+          <div *ngIf="!resourcesLoaded === true" class="alert alert-success" role="alert">
+            La informacion se ha guadado con Exito!
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+          
         </div>
       </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-        
-      </div>
     </div>
   </div>
-</div>
