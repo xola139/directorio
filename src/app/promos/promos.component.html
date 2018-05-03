@@ -10,17 +10,26 @@
 
               <mat-table #table [dataSource]="dataSource">
                 <!-- Name Column -->
+                <ng-container matColumnDef="avatar">
+                  <mat-header-cell *matHeaderCellDef> Avatar </mat-header-cell>
+                  <mat-cell *matCellDef="let element">  
+                    <div class="chip">
+                      <img src="{{element.avatar}}" alt="Person" width="96" height="96">
+                      
+                    </div>
+                  </mat-cell>
+                </ng-container>
                 <ng-container matColumnDef="id">
                   <mat-header-cell *matHeaderCellDef> Twitter </mat-header-cell>
                   <mat-cell *matCellDef="let element"> {{element.id}} </mat-cell>
                 </ng-container>
                 <ng-container matColumnDef="telefono">
                   <mat-header-cell *matHeaderCellDef> Telefono </mat-header-cell>
-                  <mat-cell *matCellDef="let element"> {{ (element.images[0] ) ? element.images[0].telefono : ''}} </mat-cell>
+                  <mat-cell *matCellDef="let element"> {{ (element.fk_images[0] ) ? element.fk_images[0].telefono : ''}} </mat-cell>
                 </ng-container>
                 <ng-container matColumnDef="descripcion">
                   <mat-header-cell *matHeaderCellDef> Descripcion </mat-header-cell>
-                  <mat-cell *matCellDef="let element"> {{element.descripcion}} </mat-cell>
+                  <mat-cell *matCellDef="let element"> {{element.promos[element.promos.length -1].descripcion}} </mat-cell>
                 </ng-container>
                 <ng-container matColumnDef="idTwit">
                     <mat-header-cell *matHeaderCellDef> Acción </mat-header-cell>

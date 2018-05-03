@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var mongoose = require('mongoose');
-var Disponible = require('../models/Disponible.js');
+var Disponible = require('../models/Disponibles.js');
 
 /* GET ALL DISPONIBLE */
 router.get('/', function(req, res, next) {

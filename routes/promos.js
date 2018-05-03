@@ -3,7 +3,7 @@ var router = express.Router();
 var mongoose = require('mongoose');
 var Promos = require('../models/Promos.js');
 var Images = require('../models/Images.js');
-var Disponible = require('../models/Disponible.js');
+var Disponible = require('../models/Disponibles.js');
 
 
 

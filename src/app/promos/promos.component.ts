@@ -10,18 +10,14 @@ import { PromosService } from './promos.service';
 
 export class PromosComponent  implements OnInit {
 
-  promos: any;
-  disponibles: any;
-
+  
   constructor(private promosService: PromosService,public snackBar: MatSnackBar) {
   }
 
-
-  displayedColumns = ['id','telefono','descripcion','idTwit'];
-  displayedColumnsDisponoble = ['id','descripcion'];
-
+  promos: any;
+  displayedColumns = ['avatar','id','telefono','descripcion','idTwit'];
   dataSource :any;
-  dsDisponible :any;
+  
 
   applyFilter(filterValue: string) {
     filterValue = filterValue.trim(); // Remove whitespace
@@ -30,15 +26,10 @@ export class PromosComponent  implements OnInit {
   }
 
 
-  applyFilterDisponible(filterValue: string) {
-    filterValue = filterValue.trim(); // Remove whitespace
-    filterValue = filterValue.toLowerCase(); // MatTableDataSource defaults to lowercase matches
-    this.dsDisponible.filter = filterValue;
-  }
-
+  
   ngOnInit() {
     this.getPromosList();
-    this.getDisponiblesList(); 
+   
   }
 
   getPromosList() {
@@ -53,22 +44,11 @@ export class PromosComponent  implements OnInit {
     });
   }
 
-  getDisponiblesList() {
-    this.promosService.getDisponibles().then((res) => {
-      this.disponibles = res;
-      
-      const ELEMENT_DATES: ElementDisponible[] = this.disponibles;
-
-      this.dsDisponible = new MatTableDataSource(ELEMENT_DATES);      
-    }, (err) => {
-      console.log(err);
-    });
-  }
-
+ 
   copyItem(item) {
-    let  theCopy =  item.images[0] ? 
-                item.id +"  "+item.images[0].telefono +"  "+ item.descripcion:
-                item.id +"  "+ item.descripcion;
+    let  theCopy =  item.fk_images[0] ? 
+                item.id +"  "+item.fk_images[0].telefono +"  "+ item.promos[item.promos.length -1].descripcion:
+                item.id +"  "+ item.promos[item.promos.length -1].descripcion;
     
     return theCopy;
   }
@@ -83,14 +63,10 @@ export class PromosComponent  implements OnInit {
 }
 export interface Element {
   id: string;
+  avatar: string;
   idTwit: string;
   telefono: string;
   descripcion: string;
   timemsString: string;
 }
 
-export interface ElementDisponible {
-  id: string;
-  descripcion: string;
-  
-}

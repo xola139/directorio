@@ -80,15 +80,7 @@ constructor(  private modelService: ModelService) {
     });
   }
 
-  getDisponibles(){
-     this.modelService.getDisponibles().then((res) => {
-      this.disponibles  = res;
-    }, (err) => {
-      console.log(err);
-    });
-  }
-
-  getPromos(){
+   getPromos(){
     this.modelService.getPromos().then((res) => {
      this.promos  = res;
    }, (err) => {
