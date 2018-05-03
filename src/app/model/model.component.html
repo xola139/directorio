@@ -40,16 +40,16 @@
                     <span class="badge {{data.ciudad ? 'badge-light': ''}}">{{data.ciudad}} </span>
                   </button>
                 </h5>
-                <a href="https://api.whatsapp.com/send?phone=5215526793012" class="">
+                <a href="https://api.whatsapp.com/send?phone=5215526793012" class="" target="_blank">
                   <img src="http://www.ijctjournal.org/images/whatsapp.png" width="20"  height="20" class="" alt="abrir whatsapp">
                 </a>
-                <a href="https://api.whatsapp.com/send?phone=5215526793012" class="badge badge-success">
+                <a href="https://api.whatsapp.com/send?phone=5215526793012" class="badge badge-success" target="_blank">
                 {{data.telefono}}
                 </a>
               </div>
               <div class="col pr-0 pl-0">
-                <mat-icon class="float-right mr-1" [hidden]="!hideme[i]" (click)="gotoCard(data.id);hideme[i] = !hideme[i];" data-toggle="collapse" [attr.data-target]="'.multi-collapse'+i">keyboard_arrow_down</mat-icon>
-                <mat-icon class="float-right mr-1" [hidden]="hideme[i]"  (click)="gotoCard(data.id);hideme[i] = !hideme[i];" data-toggle="collapse" [attr.data-target]="'.multi-collapse'+i">keyboard_arrow_up</mat-icon>
+                <mat-icon class="float-right pointer mr-1 mt-1" [hidden]="!hideme[i]" (click)="gotoCard(data.id);hideme[i] = !hideme[i];" data-toggle="collapse" [attr.data-target]="'.multi-collapse'+i">keyboard_arrow_down</mat-icon>
+                <mat-icon class="float-right pointer mr-1 mt-1" [hidden]="hideme[i]"  (click)="gotoCard(data.id);hideme[i] = !hideme[i];" data-toggle="collapse" [attr.data-target]="'.multi-collapse'+i">keyboard_arrow_up</mat-icon>
                
               </div>
             </div>
