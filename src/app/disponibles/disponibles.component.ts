@@ -3,6 +3,8 @@ import { DisponibleService } from './disponible.service';
 import {MatTableDataSource,MatSnackBar} from '@angular/material';
 import * as $ from 'jquery';
 
+
+
 @Component({
   selector: 'app-disponibles',
   templateUrl: './disponibles.component.html',
@@ -12,7 +14,9 @@ export class DisponiblesComponent implements OnInit {
 	disponibles: any;
 	displayedColumnsDisponible = ['profile_image_url','id','ciudad','descripcion'];
 	dsDisponible :any;
-  msgPromo:string;
+  msgDisponible:string;
+  msgTitle:string;
+  itemDisponible:any;
  
   constructor(private disponibleService: DisponibleService,public snackBar: MatSnackBar) {
   }
@@ -27,7 +31,7 @@ applyFilterDisponible(filterValue: string) {
 
   ngOnInit() {
   	 this.getDisponiblesList(); 
-     $('.mypoper').popover('toggle');
+
   }
 
 
@@ -44,8 +48,29 @@ applyFilterDisponible(filterValue: string) {
   }
 
    showModalPromo(item){
-    this.msgPromo = item.disponibles[item.disponibles.length -1].descripcion;
+    this.msgDisponible = item.disponibles[item.disponibles.length -1].descripcion;
+    this.msgTitle = item.id;
+    this.itemDisponible = item;
   }
+
+  copyItem(item) {
+    let  theCopy;
+    if(item !=null){
+      console.log(item.id);
+      theCopy =  item.id;
+      return theCopy;
+    }
+    
+    
+    return theCopy;
+  }
+
+  openSnackBar() {
+    this.snackBar.open("copiado", "Acción", {
+      duration: 2000,
+    });
+  }
+
 }
 
 
