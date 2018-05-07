@@ -74,47 +74,37 @@
                         <mat-tab-group class="demo-tab-group">
                             <mat-tab label="Tab 1">
                                 <ng-template  mat-tab-label style="padding:1 px !important; " >
-                                  <mat-icon>collections</mat-icon>
-                                  <br>Galeria  
+                                  <mat-icon>people</mat-icon>
+                                  <br>Acerca  
                                 </ng-template>
-                                <div #container class=""  style="height:350px; overflow: scroll;">
-                                    <img [container]="container"  *ngFor="let im of data.fotos;let indexim = index" class="d-block w-100 img-fluid mb-2"   alt="Galeria" lazy-load="{{im.url}}"   src="https://i.gifer.com/EXfl.gif" >
-                                </div>
-                            </mat-tab>
-                              <mat-tab label="Tab 2">
-                                <ng-template  mat-tab-label >
-                                  <mat-icon>verified_user</mat-icon>
-                                  <br>Satisfechos  
-                                </ng-template>
-                                <div class=""  style="height:350px; overflow: scroll;">
-                                    <img *ngFor="let im of data.satisfechos;let indexim = index" class="d-block w-100 img-fluid mb-2"  data-src="{{im.url}}" alt="Galeria" src="{{im.url}}" >
-                                </div>
-                                
-                              </mat-tab>
-                            <mat-tab label="Tab 3">
-                              <ng-template  mat-tab-label >
-                                <mat-icon>security</mat-icon>
-                                <br>Servicios  
-                              </ng-template>
-                              <div class="demo-tab-content">
-                                <p class="font-weight-bold mb-0">Servicios</p>
+                                <p>
+                                  Lorem imposumLorem imposumLorem imposumLorem imposum Lorem imposum Lorem imposum
+                                  Lorem imposumLorem imposumLorem imposumLorem imposum
+                                </p>
                                 <ul class="list-group">
-                                  <li class="list-group-item">Cras justo odio</li>
-                                  <li class="list-group-item">Dapibus ac facilisis in</li>
-                                  <li class="list-group-item">Morbi leo risus</li>
-                                  <li class="list-group-item">Porta ac consectetur ac</li>
-                                  <li class="list-group-item">Vestibulum at eros</li>
+                                  <li class="list-group-item p-1">Nacionalidad:{{data.nacionalidad}}</li>
+                                  <li class="list-group-item p-1">Idiomas:{{data.idiomas[0]}}</li>
+                                  <li class="list-group-item p-1">Horarios:</li>
+                                  <li class="list-group-item p-1">Medidas:</li>
+                                  <li class="list-group-item p-1">Edad:{{data.edad}}</li>
+                                  <li class="list-group-item p-1">Peso:</li>
+                                  <li class="list-group-item p-1">Estatura:</li>
+                                  <li class="list-group-item p-1">Atiende en:{{data.atiende}}</li>
                                 </ul>
-                              </div>
+                                <button mat-button (click)="getPictures(data,'foto')" data-toggle="modal" data-target="#exampleModalLong"><mat-icon>collections</mat-icon>Galeria!</button>
+                                <button mat-button (click)="getPictures(data,'satisfechos')" data-toggle="modal" data-target="#exampleModalLong"><mat-icon>collections</mat-icon>Satisfecho!</button>
+                                
                             </mat-tab>
-                            <mat-tab label="Tab 4">
+                              
+                            
+                            <mat-tab label="Tab 2">
                               <ng-template  mat-tab-label >
                                 <mat-icon>today</mat-icon>
                                 <br>Fechas  
                               </ng-template>
                               <mat-list>
                                 <mat-list-item *ngFor="let folder of folders">
-                                  <mat-icon mat-list-icon>folder</mat-icon>
+                                  <mat-icon mat-list-icon>date_range</mat-icon>
                                   <h4 mat-line>{{folder.name}}</h4>
                                   <p mat-line> {{folder.updated | date}} </p>
                                 </mat-list-item>
@@ -139,36 +129,30 @@
       <div class="mx-auto mt-5" style="width: 100px;">
           <button type="button" class="btn btn-outline-primary" (click)="getVerMas()">VER MAS</button>
       </div> 
+     
+
+
       <!-- Modal -->
-<div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+<div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLong" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
-      <div class="modal-header sticky-top bg-white" >
-        
+      <div class="modal-header sticky-top" style="background:white">
+        <h5 class="modal-title" id="exampleModalLabel">{{pictures.id}}</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body p-0">
-
-        <div class="col-md-12 col-sm-12 mt-12 p-0" *ngFor="let pic of pictures;">
-          <img  *ngIf="pic.status==tipoFoto" src="{{pic.url}}" class="img-fluid" alt="image model">
-          <hr>
+        <div *ngIf="tipoFoto =='foto'" class=""  style="height:100%; overflow: scroll;">
+          <img  *ngFor="let im of pictures.fotos;let indexim = index" class="d-block w-100 img-fluid mb-2"  data-src="{{im.url}}" alt="Galeria" src="{{im.url}}" >
         </div>
-          
-          
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
       </div>
     </div>
   </div>
 </div>
-
-
-    </div>
-
   
   
   

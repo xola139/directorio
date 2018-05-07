@@ -45,6 +45,8 @@ constructor(  private modelService: ModelService) {
   this.disponibles = [];
   this.promos = [];
   this.verItems = 5;
+  this.pictures = [];
+  
  }
   
   ngOnInit() {
@@ -69,6 +71,7 @@ constructor(  private modelService: ModelService) {
         }
 
         
+        
       }
 
       this.myData  = res;
@@ -88,9 +91,10 @@ constructor(  private modelService: ModelService) {
    });
  }
 
-  getPictures(id,tipoFoto){
+  getPictures(data,tipoFoto){
     this.tipoFoto = tipoFoto;
-    this.pictures = this.myData[id].images;
+    data.fotos.reverse();
+    this.pictures = data;
   }
 
   toggleCard(id){

@@ -14,7 +14,7 @@
                   <mat-header-cell *matHeaderCellDef> Avatar </mat-header-cell>
                   <mat-cell *matCellDef="let element">  
                     <div class="chip">
-                      <img src="{{element.profile_image_url}}" alt="Person" width="96" height="96">
+                      <img   src="{{element.profile_image_url}}" alt="Person" width="96" height="96" (click)="showModalPromo(element)" data-toggle="modal" data-target="#exampleModalLong">
                       
                     </div>
                   </mat-cell>
@@ -29,14 +29,7 @@
                   <mat-header-cell *matHeaderCellDef> ciudad</mat-header-cell>
                   <mat-cell *matCellDef="let element"> {{element.disponibles[element.disponibles.length -1].ciudad}} </mat-cell>
                 </ng-container>
-                 <ng-container matColumnDef="descripcion">
-                  <mat-header-cell *matHeaderCellDef> descripcion </mat-header-cell>
-                  <mat-cell *matCellDef="let element"> 
-                    <button type="button" class="btn btn-primary" (click)="showModalPromo(element)" data-toggle="modal" data-target="#exampleModalLong">
-                    detallon
-                    </button>
-                  </mat-cell>
-                </ng-container>
+                 
                
                 
                 <mat-header-row *matHeaderRowDef="displayedColumnsDisponible"></mat-header-row>
@@ -55,6 +48,10 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
+          <div class="chip">
+              <img   src="{{msgUrl}}" alt="Person" width="96" height="96" >
+              
+            </div>
         <h5 class="modal-title" id="exampleModalLabel">{{msgTitle}}</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>

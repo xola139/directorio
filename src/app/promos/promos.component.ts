@@ -16,7 +16,7 @@ export class PromosComponent  implements OnInit {
   }
 
   promos: any;
-  displayedColumns = ['avatar','id','telefono','descripcion','idTwit'];
+  displayedColumns = ['avatar','id','telefono'];
   dataSource :any;
   msgPromo:string;
   msgTitle:string;

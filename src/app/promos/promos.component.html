@@ -14,7 +14,7 @@
                   <mat-header-cell *matHeaderCellDef> Avatar </mat-header-cell>
                   <mat-cell *matCellDef="let element">  
                     <div class="chip">
-                      <img src="{{element.avatar}}" alt="Person" width="96" height="96">
+                      <img (click)="showModalPromo(element)" data-toggle="modal" data-target="#exampleModalLong" src="{{element.avatar}}" alt="Person" width="96" height="96">
                       
                     </div>
                   </mat-cell>
@@ -27,19 +27,8 @@
                   <mat-header-cell *matHeaderCellDef> Telefono </mat-header-cell>
                   <mat-cell *matCellDef="let element"> {{ (element.fk_images[0] ) ? element.fk_images[0].telefono : ''}} </mat-cell>
                 </ng-container>
-                <ng-container matColumnDef="descripcion">
-                  <mat-header-cell *matHeaderCellDef> Descripcion </mat-header-cell>
-                  <mat-cell *matCellDef="let element"> {{element.promos[element.promos.length -1].descripcion}} </mat-cell>
-                </ng-container>
-                <ng-container matColumnDef="idTwit">
-                    <mat-header-cell *matHeaderCellDef> Acción </mat-header-cell>
-                    <mat-cell *matCellDef="let element">
-                      
-                      <button type="button" class="btn btn-primary" (click)="showModalPromo(element)" data-toggle="modal" data-target="#exampleModalLong">
-                          detallon
-                          </button>
-                    </mat-cell>
-                </ng-container>
+                
+               
                
                 
                 <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>

@@ -12,13 +12,15 @@ import * as $ from 'jquery';
 })
 export class DisponiblesComponent implements OnInit {
 	disponibles: any;
-	displayedColumnsDisponible = ['profile_image_url','id','ciudad','descripcion'];
+	displayedColumnsDisponible = ['profile_image_url','id','ciudad'];
 	dsDisponible :any;
   msgDisponible:string;
   msgTitle:string;
+  msgUrl:string;
   itemDisponible:any;
  
   constructor(private disponibleService: DisponibleService,public snackBar: MatSnackBar) {
+    
   }
 
 
@@ -50,7 +52,8 @@ applyFilterDisponible(filterValue: string) {
    showModalPromo(item){
     this.msgDisponible = item.disponibles[item.disponibles.length -1].descripcion;
     this.msgTitle = item.id;
-    this.itemDisponible = item;
+    console.log(item);
+    this.msgUrl = item.profile_image_url;
   }
 
   copyItem(item) {

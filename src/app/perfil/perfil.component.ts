@@ -5,9 +5,6 @@ import { PerfilService } from './perfil.service';
 import {Location} from '@angular/common';
 
 
-
-
-
 @Component({
   selector: 'app-perfil',
   templateUrl: './perfil.component.html',
@@ -32,10 +29,11 @@ export class PerfilComponent implements OnInit {
 
 	}
 
-
+  
   	ngOnInit() {
 			this.perfil = {};
-			this.perfil.idiomas = [{espanol:false},{ingles:false}];
+      this.perfil.idiomas = [{espanol:false},{ingles:false}];
+      this.perfil.opcionesTelefono = [{whatsapp:false},{llamadas:false}];
 			for (let i = 0; i < 24; i++) {
         this.horarios.push({value: i, viewValue: i +':00'});
       }	
@@ -47,9 +45,8 @@ export class PerfilComponent implements OnInit {
 			
 	
 			this.perfilService.showPerfil(id).then((res) => {
-				console.log(res);
-      	this.perfil = res;
-        console.log(this.perfil);
+				this.perfil = res;
+        this.perfil.images.reverse();
 
     	}, (err) => {
       	console.log(err);

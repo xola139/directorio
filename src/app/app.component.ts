@@ -15,7 +15,7 @@ export class AppComponent {
 
 
  
-  title = 'app';
+  title = 'theapp';
 
 
   ngOnInit() {

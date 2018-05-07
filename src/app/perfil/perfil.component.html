@@ -16,6 +16,11 @@
           </div>
           <div class="form-group">
             <mat-form-field>
+              <textarea matInput placeholder="Cuentanos un poco de ti :" [(ngModel)]="perfil.acerca" name="acerca"></textarea>
+            </mat-form-field>
+          </div>
+          <div class="form-group">
+            <mat-form-field>
               <input matInput placeholder="Tu nacionalidad" [(ngModel)]="perfil.nacionalidad" name="nacionalidad">
             </mat-form-field>
             
@@ -44,7 +49,14 @@
           </div>
           <div class="form-group">
             <mat-form-field>
-              <input matInput type="number"  placeholder="Tu edad es:" [(ngModel)]="perfil.edad" name="edad"  min=0 max=100 step=5>
+              <input matInput type="number" maxlength="2"  placeholder="Tu edad es:" [(ngModel)]="perfil.edad" name="edad" >
+              
+            </mat-form-field>
+            <mat-form-field>
+              <input matInput type="number"  placeholder="Tu peso es:" [(ngModel)]="perfil.peso" name="peso" >
+            </mat-form-field>
+            <mat-form-field>
+                <input matInput type="number"  placeholder="Tu estatura es:" [(ngModel)]="perfil.estatura" name="estatura" >
             </mat-form-field>
           </div>
           <div class="form-group">
@@ -69,12 +81,11 @@
             <button type="submit" data-toggle="modal" data-target="#exampleModalCenter" class="btn btn-success" [disabled]="!perfilForm.form.valid">Update</button>
           </div>
       </div>
-      <div class="col-md-12 col-sm-12 mt-12" *ngFor="let pic of perfil.images;let i = index">
+      <div class="col-md-12 col-sm-12 mt-12" *ngFor="let pic of perfil.images ;let i = index">
         <div class="card-columns">
           <div class="card">
             <img class="card-img-top" src="{{pic.url}}" alt="Card image cap">
             <div class="card-body">
-              <h5 class="card-title">Card title that wraps to a new line</h5>
               <p class="card-text">
                  <mat-radio-group >
                  
