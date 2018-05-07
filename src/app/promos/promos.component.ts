@@ -21,8 +21,8 @@ export class PromosComponent  implements OnInit {
   msgPromo:string;
   msgTitle:string;
   itemPromo:any;
-
-
+  itemDisponible:any;
+  msgUrl:string;
 
   applyFilter(filterValue: string) {
     filterValue = filterValue.trim(); // Remove whitespace
@@ -53,18 +53,44 @@ export class PromosComponent  implements OnInit {
     this.msgPromo = item.promos[item.promos.length -1].descripcion;
     this.msgTitle = item.id;
     this.itemPromo = item;
+    this.itemDisponible = item;
+    this.msgUrl = item.avatar;
   }
  
-  copyItem(item) {
+  copyItem(item,event) {
+    
+    var input;
+    
+    if(item !=null){
+      input = document.createElement('input');
+      var messageCopy = item.fk_images[0] ? 
+                item.id +"  "+item.fk_images[0].telefono +"  "+ item.promos[item.promos.length -1].descripcion:
+                item.id +"  "+ item.promos[item.promos.length -1].descripcion;
+      input.setAttribute('value', messageCopy);
+      document.body.appendChild(input);
+      input.select();
+      var result = document.execCommand('copy');
+      document.body.removeChild(input);
+      return result;
+ 
+    }
+    
+    
+    
+  }
+
+
+
+  /*copyItem(item) {
     if(item ==null)
       return;
 
    /* let  theCopy =  item.fk_images[0] ? 
                 item.id +"  "+item.fk_images[0].telefono +"  "+ item.promos[item.promos.length -1].descripcion:
                 item.id +"  "+ item.promos[item.promos.length -1].descripcion;*/
-     let  theCopy =  item.id; 
-    return theCopy;
-  }
+     //let  theCopy =  item.id; 
+    //return theCopy;
+  //}
 
   openSnackBar() {
     this.snackBar.open("copiado", "Acción", {

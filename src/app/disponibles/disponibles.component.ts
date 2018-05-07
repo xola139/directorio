@@ -18,7 +18,6 @@ export class DisponiblesComponent implements OnInit {
   msgTitle:string;
   msgUrl:string;
   itemDisponible:any;
- 
   constructor(private disponibleService: DisponibleService,public snackBar: MatSnackBar) {
     
   }
@@ -54,18 +53,29 @@ applyFilterDisponible(filterValue: string) {
     this.msgTitle = item.id;
     console.log(item);
     this.msgUrl = item.profile_image_url;
+    this.itemDisponible = item;
+
+    
   }
 
-  copyItem(item) {
-    let  theCopy;
+  copyItem(item,event) {
+    
+    var input;
+    
     if(item !=null){
-      console.log(item.id);
-      theCopy =  item.id;
-      return theCopy;
+      input = document.createElement('input');
+      var messageCopy = item.id + " " + item.disponibles[item.disponibles.length-1].descripcion;
+      input.setAttribute('value', messageCopy);
+      document.body.appendChild(input);
+      input.select();
+      var result = document.execCommand('copy');
+      document.body.removeChild(input);
+      return result;
+ 
     }
     
     
-    return theCopy;
+    
   }
 
   openSnackBar() {

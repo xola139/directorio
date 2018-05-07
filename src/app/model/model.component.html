@@ -1,4 +1,4 @@
-  <div class="container-fluid">
+ <div class="container-fluid">
     
     <div class="row" >
           <div class="col-md-4 col-sm-12 p-0 ">
@@ -40,10 +40,10 @@
                     <span class="badge {{data.ciudad ? 'badge-light': ''}}">{{data.ciudad}} </span>
                   </button>
                 </h5>
-                <a href="https://api.whatsapp.com/send?phone=5215526793012" class="" target="_blank">
+                <a href="https://api.whatsapp.com/send?phone={{data.telefono}}" class="" target="_blank">
                   <img src="http://www.ijctjournal.org/images/whatsapp.png" width="20"  height="20" class="" alt="abrir whatsapp">
                 </a>
-                <a href="https://api.whatsapp.com/send?phone=5215526793012" class="badge badge-success" target="_blank">
+                <a href="https://api.whatsapp.com/send?phone={{data.telefono}}" class="badge badge-success" target="_blank">
                 {{data.telefono}}
                 </a>
               </div>

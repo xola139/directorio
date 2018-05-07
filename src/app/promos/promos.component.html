@@ -4,7 +4,7 @@
             <div class="example-container mat-elevation-z8">
               <div class="example-header">
                 <mat-form-field>
-                  <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+                  <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filtra promo">
                 </mat-form-field>
               </div>
 
@@ -47,6 +47,9 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
+        <div class="chip">
+          <img   src="{{msgUrl}}" alt="Person" width="96" height="96" >
+        </div>
         <h5 class="modal-title" id="exampleModalLabel">{{msgTitle}}</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
