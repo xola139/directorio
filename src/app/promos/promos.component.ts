@@ -57,7 +57,7 @@ export class PromosComponent  implements OnInit {
     this.msgUrl = item.avatar;
   }
  
-  copyItem(item,event) {
+  copyItem(item) {
     
     var input;
     

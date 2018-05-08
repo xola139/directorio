@@ -58,7 +58,7 @@ applyFilterDisponible(filterValue: string) {
     
   }
 
-  copyItem(item,event) {
+  copyItem(item) {
     
     var input;
     
