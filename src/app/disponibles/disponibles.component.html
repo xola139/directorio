@@ -4,19 +4,17 @@
             <div class="example-container mat-elevation-z8">
               <div class="example-header">
                 <mat-form-field>
-                  <input matInput (keyup)="applyFilterDisponible($event.target.value)" placeholder="Filtra disponibles">
+                  <input matInput (keyup)="applyFilterDisponible($event.target.value)" placeholder="Filter">
                 </mat-form-field>
               </div>
-              
+
               <mat-table #table [dataSource]="dsDisponible">
-                <div>
-                  <!-- Name Column -->
-                  
+                <!-- Name Column -->
                 <ng-container matColumnDef="profile_image_url">
                   <mat-header-cell *matHeaderCellDef> Avatar </mat-header-cell>
                   <mat-cell *matCellDef="let element">  
                     <div class="chip">
-                      <img   src="{{element.profile_image_url}}" alt="Person" width="96" height="96" (click)="showModalPromo(element)" data-toggle="modal" data-target="#disponibleModalLong">
+                      <img   src="{{element.profile_image_url}}" alt="Person" width="96" height="96" (click)="showModalPromo(element)" data-toggle="modal" data-target="#exampleModalLong">
                       
                     </div>
                   </mat-cell>
@@ -29,16 +27,13 @@
 
                 <ng-container matColumnDef="ciudad">
                   <mat-header-cell *matHeaderCellDef> ciudad</mat-header-cell>
-                  <mat-cell *matCellDef="let element"> {{element.disponibles[element.disponibles.length -1].ciudad}} </mat-cell>
+                  <mat-cell *matCellDef="let element"> {{element.ciudad}} </mat-cell>
                 </ng-container>
+
+              
                  
-               
-                
                 <mat-header-row *matHeaderRowDef="displayedColumnsDisponible"></mat-header-row>
                 <mat-row *matRowDef="let row; columns: displayedColumnsDisponible;"></mat-row>
-
-                </div>
-                
               </mat-table>
             </div>
 
@@ -49,26 +44,24 @@
 
 
 <!-- Modal -->
-<div class="modal fade" id="disponibleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <div class="chip">
-          <img   src="{{msgUrl}}" alt="Person" width="96" height="96" >
-        </div>
+          <div class="chip">
+              <img   src="{{msgUrl}}" alt="Person" width="96" height="96" >
+              
+            </div>
         <h5 class="modal-title" id="exampleModalLabel">{{msgTitle}}</h5>
-        <button mat-button (click)="openSnackBar()">adelante</button>
-        <button mat-button (click)="openSnackBar()">atras</button>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
         {{msgDisponible}}
-
       </div>
       <div class="modal-footer">
-        <button mat-button ngxClipboard [cbContent]="copyItem(itemDisponible)"   (click)="openSnackBar()">Copiar</button>
+          <button mat-button ngxClipboard [cbContent]="copyItem(itemDisponible)"   (click)="openSnackBar()">Copiar</button>
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
       </div>
     </div>

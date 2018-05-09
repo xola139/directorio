@@ -39,8 +39,12 @@ applyFilterDisponible(filterValue: string) {
    getDisponiblesList() {
     this.disponibleService.getDisponibles().then((res) => {
       this.disponibles = res;
-      
-      const ELEMENT_DATES: ElementDisponible[] = this.disponibles;
+      var items = [];
+      for(var it in res){
+        items.push({id:res[it].id,profile_image_url:res[it].profile_image_url,ciudad:res[it].disponibles[0].ciudad,descripcion:res[it].disponibles[0].descripcion}) ;
+      }
+
+      const ELEMENT_DATES: ElementDisponible[] = items;
 
       this.dsDisponible = new MatTableDataSource(ELEMENT_DATES);      
     }, (err) => {
@@ -49,9 +53,9 @@ applyFilterDisponible(filterValue: string) {
   }
 
    showModalPromo(item){
-    this.msgDisponible = item.disponibles[item.disponibles.length -1].descripcion;
+     console.log(item);
+    this.msgDisponible = item.descripcion;
     this.msgTitle = item.id;
-    console.log(item);
     this.msgUrl = item.profile_image_url;
     this.itemDisponible = item;
 
@@ -64,7 +68,7 @@ applyFilterDisponible(filterValue: string) {
     
     if(item !=null){
       input = document.createElement('input');
-      var messageCopy = item.id + " " + item.disponibles[item.disponibles.length-1].descripcion;
+      var messageCopy = item.id + " " + item.descripcion;
       input.setAttribute('value', messageCopy);
       document.body.appendChild(input);
       input.select();
@@ -91,5 +95,6 @@ export interface ElementDisponible {
   id: string;
   profile_image_url:string;
   ciudad: string;
+  descripcion:string;
   
 }
