@@ -1,10 +1,25 @@
-<div class="container-fluid">
-    <h1>{{perfil.id}}</h1>
+<div class="container">
+    
   <form (ngSubmit)="updatePerfil(perfil._id)" #perfilForm="ngForm">
      
 
   <div class="row">
-    <div class="col-sm-6">
+  <div class="col-md-12 col-md-12 sticky-top bg-light" >
+    <div class="row">
+      <div class="col-6">
+        <h1>{{perfil.id}}</h1>
+      </div>
+      <div class="col-6">
+        <div class="form-group float-right">
+            <button class="btn btn-success" type="button" (click)="backClicked()" >
+              <mat-icon>keyboard_backspace</mat-icon>
+            </button>
+            <button type="submit" data-toggle="modal" data-target="#exampleModalCenter" class="btn btn-success" [disabled]="!perfilForm.form.valid">Update</button>
+        </div>
+      </div>
+    </div>
+  </div>
+    <div class="col-sm-12 col-md-6">
       <div class="form-group">
         <mat-form-field>
           <input matInput placeholder="Tu telefono" [(ngModel)]="perfil.telefono" name="telefono" required>
@@ -12,16 +27,17 @@
         
         <mat-checkbox  [(ngModel)]="perfil.opcionesTelefono[0].llamadas" name="llamadas" >LLamadas</mat-checkbox>
         <mat-checkbox [(ngModel)]="perfil.opcionesTelefono[0].whatsapp" name="Whatsapp" >Whatsapp</mat-checkbox>
+        <mat-checkbox [(ngModel)]="perfil.opcionesTelefono[0].twitter" name="twitter" >Twitter</mat-checkbox>
             
           </div>
           <div class="form-group">
             <mat-form-field>
-              <textarea matInput placeholder="Cuentanos un poco de ti :" [(ngModel)]="perfil.acerca" name="acerca"></textarea>
+              <textarea matInput matAutosizeMinRows=15  maxRows=5 placeholder="Cuentanos un poco de ti :" [(ngModel)]="perfil.descripcion" name="descripcion"></textarea>
             </mat-form-field>
           </div>
           <div class="form-group">
             <mat-form-field>
-              <input matInput placeholder="Tu nacionalidad" [(ngModel)]="perfil.nacionalidad" name="nacionalidad">
+              <input matInput placeholder="Tu nacionalidad"  [(ngModel)]="perfil.nacionalidad" name="nacionalidad">
             </mat-form-field>
             
           </div>
@@ -30,34 +46,52 @@
               <mat-checkbox  [(ngModel)]="perfil.idiomas[0].espanol" name="espanol" >Español</mat-checkbox>
               <mat-checkbox  [(ngModel)]="perfil.idiomas[0].ingles" name="ingles" >Ingles</mat-checkbox>
           </div>
+        </div>  
+        <div class="col-sm-12 col-md-6">
           <div class="form-group">
               <label>Horarios de atención</label><br>
-            <mat-form-field>
-              <mat-select placeholder="Hora inicial" [(ngModel)]="perfil.horarioAtencion[0].hinicio" name="hinicio">
-                <mat-option *ngFor="let hora of horarios" [value]="hora.value">
-                    {{ hora.viewValue }}
-                </mat-option>
-              </mat-select>
-            </mat-form-field>
-            <mat-form-field>
-                <mat-select placeholder="Hora final" [(ngModel)]="perfil.horarioAtencion[0].hfin" name="hfin">
-                  <mat-option *ngFor="let hora of horarios" [value]="hora.value">
-                      {{ hora.viewValue }}
-                  </mat-option>
-                </mat-select>
-              </mat-form-field>
+              <div class="row">
+                <div class="col-6">
+                  <mat-form-field>
+                    <mat-select placeholder="Hora inicial" [(ngModel)]="perfil.horarioAtencion[0].hinicio" name="hinicio">
+                      <mat-option *ngFor="let hora of horarios" [value]="hora.value">
+                          {{ hora.viewValue }}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+                <div class="col-6">
+                  <mat-form-field>
+                    <mat-select placeholder="Hora final" [(ngModel)]="perfil.horarioAtencion[0].hfin" name="hfin">
+                      <mat-option *ngFor="let hora of horarios" [value]="hora.value">
+                          {{ hora.viewValue }}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+              </div>
+            
+            
           </div>
           <div class="form-group">
-            <mat-form-field>
-              <input matInput type="number" maxlength="2"  placeholder="Tu edad es:" [(ngModel)]="perfil.edad" name="edad" >
-              
-            </mat-form-field>
-            <mat-form-field>
-              <input matInput type="number"  placeholder="Tu peso es:" [(ngModel)]="perfil.peso" name="peso" >
-            </mat-form-field>
-            <mat-form-field>
-                <input matInput type="number"  placeholder="Tu estatura es:" [(ngModel)]="perfil.estatura" name="estatura" >
-            </mat-form-field>
+            <div class="row">
+              <div class="col-4">
+                <mat-form-field>
+                  <input matInput type="number" maxlength="2"  placeholder="Tu edad es:" [(ngModel)]="perfil.edad" name="edad" >
+                </mat-form-field>
+              </div>
+              <div class="col-4">
+                  <mat-form-field>
+
+                  <input matInput type="number" maxlength="2"  placeholder="Tu peso es:" [(ngModel)]="perfil.cuerpo[0].peso" name="peso" >
+                </mat-form-field>
+              </div>
+              <div class="col-4">
+                <mat-form-field>
+                  <input matInput type="number" maxlength="2"  placeholder="Tu estatura es:" [(ngModel)]="perfil.cuerpo[0].estatura" name="estatura" > 
+                </mat-form-field>
+              </div>
+            </div>
           </div>
           <div class="form-group">
             
@@ -71,33 +105,31 @@
        
       </div>
      
-      <div class="col-md-6">
-        <div class="form-group">
-              
-              
-            <button class="btn btn-success" type="button" (click)="backClicked()" >
-              <mat-icon>keyboard_backspace</mat-icon>
-            </button>
-            <button type="submit" data-toggle="modal" data-target="#exampleModalCenter" class="btn btn-success" [disabled]="!perfilForm.form.valid">Update</button>
-          </div>
-      </div>
-      <div class="col-md-12 col-sm-12 mt-12" *ngFor="let pic of perfil.images ;let i = index">
-        <div class="card-columns">
-          <div class="card">
-            <img class="card-img-top" src="{{pic.url}}" alt="Card image cap">
-            <div class="card-body">
-              <p class="card-text">
-                 <mat-radio-group >
-                 
-                  <mat-radio-button  (change)="radioChange($event,i)" [checked]="pic.status ==='foto'" value="foto" name="images.status" >Foto</mat-radio-button>
-                  <mat-radio-button  (change)="radioChange($event,i)" [checked]="pic.status ==='satisfecho'" value="satisfecho" name="images.status" >Satisfecho</mat-radio-button>
-                  <mat-radio-button  (change)="radioChange($event,i)" [checked]="pic.status ==='nada'" value="nada" name="images.status" >Nada</mat-radio-button>
-                </mat-radio-group>
-                
-              </p>
+      
+      <h2>Imagenes tomadas de Twitter</h2>
+      <div class="row">
+         <div class="col-sm-2 col-md-3" *ngFor="let pic of perfil.images ;let i = index">
+          
+            <div class="card mt-1">
+              <img class="card-img-top" src="{{pic.url}}" alt="imagen twitter">
+              <div class="card-body">
+                <p class="card-text">
+                   <mat-radio-group >
+                   
+                    <mat-radio-button  (change)="radioChange($event,i)" [checked]="pic.status ==='foto'" value="foto" name="images.status" >Foto</mat-radio-button>
+                    <mat-radio-button  (change)="radioChange($event,i)" [checked]="pic.status ==='satisfecho'" value="satisfecho" name="images.status" >Satisfecho</mat-radio-button>
+                    <mat-radio-button  (change)="radioChange($event,i)" [checked]="pic.status ==='calendario'" value="calendario" name="images.status" >Calendario</mat-radio-button>
+                    <mat-radio-button  (change)="radioChange($event,i)" [checked]="pic.status ==='nada'" value="nada" name="images.status" >No mostrar</mat-radio-button>
+                  </mat-radio-group>
+                  
+                </p>
+              </div>
             </div>
-          </div>
-        </div>
+          
+        
+      </div>
+
+     
       </div>
   
   
@@ -111,13 +143,16 @@
     <div class="modal-dialog modal-dialog-centered" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLongTitle">Guardando Datos</h5>
+          <h5 class="modal-title" id="exampleModalLongTitle">Guardando</h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
         <div class="modal-body">
-          <mat-spinner *ngIf="resourcesLoaded === true" ></mat-spinner>
+           <div class="mx-auto" style="width: 100px;">
+              <mat-spinner *ngIf="resourcesLoaded === true" ></mat-spinner>
+          </div> 
+          
           <div *ngIf="!resourcesLoaded === true" class="alert alert-success" role="alert">
             La informacion se ha guadado con Exito!
           </div>

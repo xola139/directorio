@@ -18,23 +18,27 @@ export class PerfilComponent implements OnInit {
 	  idiomas = [
     {value: 'espanol', viewValue: 'Español'},
     {value: 'ingles', viewValue: 'Ingles'}
+
 	];
 	
 	horarios = [ ];
 
 	constructor(public dialog: MatDialog,private _location: Location,private route: ActivatedRoute, private router: Router, private perfilService: PerfilService) { 
 		
-      
-
 
 	}
 
   
   	ngOnInit() {
 			this.perfil = {};
-      this.perfil.idiomas = [{espanol:false},{ingles:false}];
-      this.perfil.opcionesTelefono = [{whatsapp:false},{llamadas:false}];
-			for (let i = 0; i < 24; i++) {
+      this.perfil.idiomas = [{espanol:false,ingles:false}];
+      this.perfil.opcionesTelefono = [{whatsapp:false,llamadas:false}];
+
+      this.perfil.cuerpo = [{estatura:'',ojos:'',cabello:'',medidas:'',peso: ''}];
+      
+      this.perfil.horarioAtencion=[{hinicio:'',hfin:''}];
+			
+      for (let i = 0; i < 24; i++) {
         this.horarios.push({value: i, viewValue: i +':00'});
       }	
   		this.getPerfil(this.route.snapshot.params['id']);
@@ -45,7 +49,16 @@ export class PerfilComponent implements OnInit {
 			
 	
 			this.perfilService.showPerfil(id).then((res) => {
+        
+
 				this.perfil = res;
+
+        
+        if(this.perfil.cuerpo.length == 0){
+          this.perfil.cuerpo = [{estatura:'',ojos:'',cabello:'',medidas:'',peso: ''}];
+        }
+
+
         this.perfil.images.reverse();
 
     	}, (err) => {

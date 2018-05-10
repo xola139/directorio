@@ -3,6 +3,7 @@
 var ImagesSchema = new mongoose.Schema({
   id: String,
   avatar: String,
+  descripcion:String,
   telefono: String,
   nacionalidad: String,
   disponible: Boolean,
@@ -16,15 +17,15 @@ var ImagesSchema = new mongoose.Schema({
     ojos: String,
     cabello: String,
     medidas: String,
-    peso: String}
-  ],
+    peso: String}],
   horarioAtencion:[{
     hinicio:Number,
     hfin:Number
   }],
   opcionesTelefono:[{
       whatsapp:Boolean,
-      llamadas:Boolean}],
+      llamadas:Boolean,
+      twitter:Boolean}],
   idiomas:[{
       espanol:Boolean,
       ingles:Boolean}],
