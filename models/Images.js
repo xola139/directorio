@@ -4,6 +4,8 @@ var ImagesSchema = new mongoose.Schema({
   id: String,
   avatar: String,
   descripcion:String,
+  descripcionTwitter:Boolean,
+  ciudad:String,
   telefono: String,
   nacionalidad: String,
   disponible: Boolean,
@@ -19,6 +21,7 @@ var ImagesSchema = new mongoose.Schema({
     medidas: String,
     peso: String}],
   horarioAtencion:[{
+    fulltime:Boolean,
     hinicio:Number,
     hfin:Number
   }],

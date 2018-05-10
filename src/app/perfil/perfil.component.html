@@ -24,20 +24,43 @@
         <mat-form-field>
           <input matInput placeholder="Tu telefono" [(ngModel)]="perfil.telefono" name="telefono" required>
         </mat-form-field>
-        
+        Atiendes:
         <mat-checkbox  [(ngModel)]="perfil.opcionesTelefono[0].llamadas" name="llamadas" >LLamadas</mat-checkbox>
         <mat-checkbox [(ngModel)]="perfil.opcionesTelefono[0].whatsapp" name="Whatsapp" >Whatsapp</mat-checkbox>
         <mat-checkbox [(ngModel)]="perfil.opcionesTelefono[0].twitter" name="twitter" >Twitter</mat-checkbox>
-            
+        
+        <mat-form-field>
+          <mat-select placeholder="¿En que ciudad atiendes?" [(ngModel)]="perfil.ciudad">
+            <mat-option *ngFor="let ciudad of cudades" [value]="ciudad.value">
+              {{ ciudad.viewValue }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+
           </div>
+          
+            <div class="row">
+              <div class="col-8">
+                <div class="form-group">
+                  <mat-form-field>
+                    <textarea matInput matAutosizeMinRows=15  maxRows=5 placeholder="Cuentanos un poco de ti :" [(ngModel)]="perfil.descripcion" name="descripcion"></textarea>
+                  </mat-form-field>
+                
+                </div>
+              </div>
+              <div class="col-4">
+                <div class="form-group">
+                <mat-checkbox [(ngModel)]="perfil.descripcionTwitter" name="descripcionTwitter" >Tomar de Twitter</mat-checkbox>
+                </div>
+              </div>
+
+          </div>
+          
+          
+
           <div class="form-group">
             <mat-form-field>
-              <textarea matInput matAutosizeMinRows=15  maxRows=5 placeholder="Cuentanos un poco de ti :" [(ngModel)]="perfil.descripcion" name="descripcion"></textarea>
-            </mat-form-field>
-          </div>
-          <div class="form-group">
-            <mat-form-field>
-              <input matInput placeholder="Tu nacionalidad"  [(ngModel)]="perfil.nacionalidad" name="nacionalidad">
+              <input matInput placeholder="¿De que pais eres?"  [(ngModel)]="perfil.nacionalidad" name="nacionalidad">
             </mat-form-field>
             
           </div>
@@ -51,7 +74,7 @@
           <div class="form-group">
               <label>Horarios de atención</label><br>
               <div class="row">
-                <div class="col-6">
+                <div class="col-5">
                   <mat-form-field>
                     <mat-select placeholder="Hora inicial" [(ngModel)]="perfil.horarioAtencion[0].hinicio" name="hinicio">
                       <mat-option *ngFor="let hora of horarios" [value]="hora.value">
@@ -60,7 +83,7 @@
                     </mat-select>
                   </mat-form-field>
                 </div>
-                <div class="col-6">
+                <div class="col-5">
                   <mat-form-field>
                     <mat-select placeholder="Hora final" [(ngModel)]="perfil.horarioAtencion[0].hfin" name="hfin">
                       <mat-option *ngFor="let hora of horarios" [value]="hora.value">
@@ -69,6 +92,11 @@
                     </mat-select>
                   </mat-form-field>
                 </div>
+                <div class="col-2">
+                  <mat-checkbox [(ngModel)]="perfil.horarioAtencion[0].fulltime" name="fulltime" >Full time</mat-checkbox>
+                </div>
+
+                
               </div>
             
             
@@ -96,7 +124,7 @@
           <div class="form-group">
             
             <mat-form-field>
-                <textarea matInput placeholder="Atienes en :" [(ngModel)]="perfil.atiende" name="atiende"></textarea>
+                <textarea matInput placeholder="Zona de atención :" [(ngModel)]="perfil.atiende" name="atiende"></textarea>
             </mat-form-field>
             
           </div>

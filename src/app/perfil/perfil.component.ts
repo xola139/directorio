@@ -15,13 +15,49 @@ export class PerfilComponent implements OnInit {
 	perfil:any;
   resourcesLoaded: Boolean;
 		
-	  idiomas = [
+  idiomas = [
     {value: 'espanol', viewValue: 'Español'},
     {value: 'ingles', viewValue: 'Ingles'}
 
 	];
 	
 	horarios = [ ];
+
+  cudades = [
+    {value: 'Aguascalientes', viewValue: 'Aguascalientes'},
+    {value: 'Baja-California', viewValue: 'Baja California'},
+    {value: 'Baja-California-Sur', viewValue: 'Baja California Sur'},
+    {value: 'Campeche', viewValue: 'Campeche'},
+    {value: 'Chiapas', viewValue: 'Chiapas'},
+    {value: 'Chihuahua', viewValue: 'Chihuahua'},
+    {value: 'Coahuila-de-Zaragoza', viewValue: 'Coahuila de Zaragoza'},
+    {value: 'Colima', viewValue: 'Colima'},
+    {value: 'Ciudad-de-Mexico', viewValue: 'Ciudad de México'},
+    {value: 'Estado-de-Mexico', viewValue: 'Estado de México'},
+    {value: 'Durango', viewValue: 'Durango'},
+    {value: 'Guanajuato', viewValue: 'Guanajuato'},
+    {value: 'Guerrero', viewValue: 'Guerrero'},
+    {value: 'Jalisco', viewValue: 'Jalisco'},
+    {value: 'Michoacan-de-Ocampo', viewValue: 'Michoacán de Ocampo'},
+    {value: 'Morelos', viewValue: 'Morelos'},
+    {value: 'Nayarit', viewValue: 'Nayarit'},
+    {value: 'Nuevo-Leon', viewValue: 'Nuevo León'},
+    {value: 'Oaxaca', viewValue: 'Oaxaca'},
+    {value: 'Puebla', viewValue: 'Puebla'},
+    {value: 'Queretaro', viewValue: 'Querétaro'},
+    {value: 'Quintana Roo', viewValue: 'Quintana Roo'},
+    {value: 'San-Luis-Potosí', viewValue: 'San Luís Potosí'},
+    {value: 'Sinaloa', viewValue: 'Sinaloa'},
+    {value: 'Sonora', viewValue: 'Sonora'},
+    {value: 'Tabasco', viewValue: 'Tabasco'},
+    {value: 'Tamaulipas', viewValue: 'Tamaulipas'},
+    {value: 'Tlaxcala', viewValue: 'Tlaxcala'},
+    {value: 'Veracruz', viewValue: 'Veracruz'},
+    {value: 'Yucatán', viewValue: 'Yucatán'},
+    {value: 'Zacatecas', viewValue: 'Zacatecas'}
+
+  ];
+
 
 	constructor(public dialog: MatDialog,private _location: Location,private route: ActivatedRoute, private router: Router, private perfilService: PerfilService) { 
 		
