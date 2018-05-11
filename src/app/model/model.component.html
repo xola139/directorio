@@ -1,7 +1,7 @@
- <div class="container-fluid">
+ <div class="container">
     
     <div class="row" >
-          <div class="col-md-4 col-sm-12 p-0 ">
+          <div class="col-sm-12 col-md-12 p-0 ">
               <small>Esta viendo 10  promos de {{promos['length']}}</small>
               <div id="carouselExampleCaptions" class="carousel slide" data-ride="carousel">
                 <div class="carousel-inner">
@@ -32,31 +32,33 @@
           <div id="card_{{data.id}}" class="col-md-4 col-sm-12 mt-2 p-0 border" *ngFor="let data of myData | slice:0:verItems ;let i = index">
            
 
-            <div class="row alert-light mr-0 ml-0 " role="alert">
+            <div class="row alert-light mr-0 ml-0 mb-1" role="alert">
                
-              <div class="col-10 pr-0 pl-1">
+              <div class="col-11 pr-0 pl-1">
                 
-                <h5 class="card-title font-weight-bold  mt-1 mb-0">
-                  <div class="chip" [hidden]="!hideme[i]">
-                    <img   src="{{data.avatar}}" alt="Person" width="96" height="96" >
-                  </div>
-                {{data.id}} 
+                
+                  <div class="chip" >
+                    <img [hidden]="!hideme[i]" src="{{data.avatar}}" alt="Person" width="96" height="96" >
+                    <h5 class="mb-0 pl-1">{{data.id}} <span class="badge badge-success">{{data.disponible ? 'Disponible': ''}}  {{data.ciudad}}</span></h5>
+                    <div class="mb-1 pl-1">
+                        Contactala por:
+                        <a href="https://api.whatsapp.com/send?phone=521{{data.telefono}}" class="" target="_blank">
+                          <img src="assets/if_whats.png" width="20"  height="20" class="profile" alt="atiende whatsapp">
+                        </a>
+                        
+                        <img src="assets/if_twitter.png" width="20"  height="20" class="profile" alt="atiene DM twitter">
+                        <img src="assets/if_phone.png" width="20"  height="20" class="profile" alt="atiende llamadas">
+                        <a href="https://api.whatsapp.com/send?phone=521{{data.telefono}}"  target="_blank">
+                          {{data.telefono}}
+                        </a>
+                      </div>
                   
-                  <button type="button" class="btn {{data.disponible ? 'btn-primary': 'btn-light'}}  p-0">
-                  {{data.disponible ? 'Disponible': ''}} 
-                    <span class="badge {{data.ciudad ? 'badge-light': ''}}">{{data.ciudad}} </span>
-                  </button>
-                </h5>
-                <div>atiende:
-                  <a href="https://api.whatsapp.com/send?phone=521{{data.telefono}}" class="" target="_blank">
-                  <img src="assets/if_whats.png" width="20"  height="20" class="" alt="atiende whatsapp">
-                </a>
-                <img src="assets/if_phone.png" width="20"  height="20" class="" alt="atiende llamadas">
-                <img src="assets/if_twitter.png" width="20"  height="20" class="" alt="atiene DM twitter">
-                <a href="https://api.whatsapp.com/send?phone=521{{data.telefono}}"  target="_blank">
-                  {{data.telefono}}
-                </a>
-                </div>
+                  </div>
+                
+                
+                  
+                
+                
                 
               </div>
               <div class="col pr-0 pl-0">

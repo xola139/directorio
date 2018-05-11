@@ -24,13 +24,13 @@
         <mat-form-field>
           <input matInput placeholder="Tu telefono" [(ngModel)]="perfil.telefono" name="telefono" required>
         </mat-form-field>
-        Atiendes:
+        Medio de contacto:
         <mat-checkbox  [(ngModel)]="perfil.opcionesTelefono[0].llamadas" name="llamadas" >LLamadas</mat-checkbox>
         <mat-checkbox [(ngModel)]="perfil.opcionesTelefono[0].whatsapp" name="Whatsapp" >Whatsapp</mat-checkbox>
         <mat-checkbox [(ngModel)]="perfil.opcionesTelefono[0].twitter" name="twitter" >Twitter</mat-checkbox>
         
         <mat-form-field>
-          <mat-select placeholder="¿En que ciudad atiendes?" [(ngModel)]="perfil.ciudad">
+          <mat-select placeholder="¿En que ciudad atiendes?"  [(value)]="perfil.ciudad" >
             <mat-option *ngFor="let ciudad of cudades" [value]="ciudad.value">
               {{ ciudad.viewValue }}
             </mat-option>

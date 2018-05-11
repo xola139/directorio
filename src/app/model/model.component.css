@@ -56,12 +56,9 @@
 
 
 .chip {
-    display: inline-block;
-    
     height: 50px;
-    font-size: 16px;
-    line-height: 50px;
-    border-radius: 25px;
+    font-size: 12px;
+    border-radius: 20px;
     background-color: #f1f1f1;
   }
   
@@ -71,4 +68,13 @@
     height: 50px;
     width: 50px;
     border-radius: 50%;
+  }
+
+  .profile {
+    
+    float: none !important;
+    height: 20px !important;
+    width: 20px !important;
+    border-radius: 0% !important;
+    
   }
