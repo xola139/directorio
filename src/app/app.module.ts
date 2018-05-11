@@ -64,6 +64,7 @@ import { PerfilService } from './perfil/perfil.service';
 import { DisponibleService } from './disponibles/disponible.service';
 
 import { DisponiblesComponent } from './disponibles/disponibles.component';
+import { ToolsComponent } from './tools/tools.component';
 
 
 
@@ -78,6 +79,7 @@ const appRoutes: Routes = [
   { path: 'promos', component: PromosComponent },
   { path: 'disponibles', component: DisponiblesComponent },
   { path: 'model', component: ModelComponent },
+  { path: 'tools', component: ToolsComponent },
   { path: 'perfil/:id', component: PerfilComponent },
 
   
@@ -95,6 +97,7 @@ const appRoutes: Routes = [
     ModelComponent,
     PerfilComponent,
     DisponiblesComponent,
+    ToolsComponent,
     
     
     
