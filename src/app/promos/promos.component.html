@@ -1,45 +1,27 @@
-  <div class="container">
-      <div class="row" >
-          <div class="col-md-12 col-sm-12 ">
-            <div class="example-container mat-elevation-z8">
-              <div class="example-header">
-                <mat-form-field>
-                  <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filtra promo">
-                </mat-form-field>
-              </div>
+<div class="container">
+  <div class="row">
+    <div class="col-md-12 col-sm-12 ">
 
-              <mat-table #table [dataSource]="dataSource">
-                <!-- Name Column -->
-                <ng-container matColumnDef="avatar">
-                  <mat-header-cell *matHeaderCellDef> Avatar </mat-header-cell>
-                  <mat-cell *matCellDef="let element">  
-                    <div class="chip">
-                      <img (click)="showModalPromo(element)" data-toggle="modal" data-target="#exampleModalLong" src="{{element.avatar}}" alt="Person" width="96" height="96">
-                      
-                    </div>
-                  </mat-cell>
-                </ng-container>
-                <ng-container matColumnDef="id">
-                  <mat-header-cell *matHeaderCellDef> Twitter </mat-header-cell>
-                  <mat-cell *matCellDef="let element"> {{element.id}} </mat-cell>
-                </ng-container>
-                <ng-container matColumnDef="telefono">
-                  <mat-header-cell *matHeaderCellDef> Telefono </mat-header-cell>
-                  <mat-cell *matCellDef="let element"> {{ (element.fk_images[0] ) ? element.fk_images[0].telefono : ''}} </mat-cell>
-                </ng-container>
-                
-               
-               
-                
-                <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-                <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
-              </mat-table>
-            </div>
+      <div class="example-container mat-elevation-z8">
+        <div class="example-header">
+          <mat-form-field>
+            <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filtra promo por nombre,ciudad,telefono">
+          </mat-form-field>
+        </div>
+        <div class="col-md-12 col-sm-12 ">
+          <div class="chip m-1" *ngFor="let p of promos;let i = index">
+            <img src="{{p.avatar}}" alt="promo" width="96" height="96" (click)="showModalPromo(p)" data-toggle="modal" data-target="#exampleModalLong" >
+            <p>
+              {{p.id}}
+            </p>
 
           </div>
-          
+        </div>
       </div>
+
+    </div>
   </div>
+</div>
 
 
 <!-- Modal -->
@@ -48,7 +30,7 @@
     <div class="modal-content">
       <div class="modal-header">
         <div class="chip">
-          <img   src="{{msgUrl}}" alt="Person" width="96" height="96" >
+          <img src="{{msgUrl}}" alt="Person" width="96" height="96">
         </div>
         <h5 class="modal-title" id="exampleModalLabel">{{msgTitle}}</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -59,9 +41,9 @@
         {{msgPromo}}
       </div>
       <div class="modal-footer">
-          
 
-          <button mat-button ngxClipboard [cbContent]="copyItem(itemPromo)"   (click)="openSnackBar()">Copiar</button>
+
+        <button mat-button ngxClipboard [cbContent]="copyItem(itemPromo)" (click)="openSnackBar()">Copiar</button>
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
       </div>
     </div>

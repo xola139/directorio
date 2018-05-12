@@ -1,20 +1,28 @@
 import {Component,OnInit} from '@angular/core';
 import {MatTableDataSource,MatSnackBar} from '@angular/material';
 import { PromosService } from './promos.service';
+import { animate, state, style, transition, trigger } from '@angular/animations';
 
 
 @Component({
   selector: 'app-promos',
   templateUrl: './promos.component.html',
-  styleUrls: ['./promos.component.css']
+  styleUrls: ['./promos.component.css'],
+  animations: [
+    trigger('detailExpand', [
+      state('collapsed', style({ height: '0', minHeight: '0', visibility: 'hidden' })),
+      state('expanded', style({ height: '*', visibility: 'visible' })),
+      transition('expanded <=> collapsed', animate('225ms cubic-bezier(0.4, 0.0, 0.2, 1)')),
+    ]),
+  ]
 })
 
 export class PromosComponent  implements OnInit {
-
-  
-  constructor(private promosService: PromosService,public snackBar: MatSnackBar) {
+constructor(private promosService: PromosService,public snackBar: MatSnackBar) {
   }
 
+  isExpansionDetailRow = (i: number, row: Object) => row.hasOwnProperty('detailRow');
+  expandedElement: any;
   promos: any;
   displayedColumns = ['avatar','id','telefono'];
   dataSource :any;
@@ -28,13 +36,16 @@ export class PromosComponent  implements OnInit {
     filterValue = filterValue.trim(); // Remove whitespace
     filterValue = filterValue.toLowerCase(); // MatTableDataSource defaults to lowercase matches
     this.dataSource.filter = filterValue;
+    this.promos  = this.dataSource.filteredData;
   }
 
 
   
   ngOnInit() {
     this.getPromosList();
-   
+    
+    
+    
   }
 
   getPromosList() {

@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { DisponibleService } from '../disponibles/disponible.service';
 import { ModelService } from '../model/model.service';
 import { MatSnackBar} from '@angular/material';
+import {Inject} from "@angular/core";
+import {DOCUMENT} from "@angular/platform-browser";
+
 
 @Component({
   selector: 'app-tools',
@@ -17,7 +20,12 @@ export class ToolsComponent implements OnInit {
 
    ratingHtml:any;
    urls:any;
-  constructor(private disponibleService: DisponibleService, private modelService:ModelService,public snackBar: MatSnackBar) { }
+   private dom: Document;
+  constructor(@Inject(DOCUMENT) dom: Document,private disponibleService: DisponibleService, private modelService:ModelService,public snackBar: MatSnackBar) {
+
+    this.dom = dom;
+
+   }
 
   ngOnInit() {
   	this.itemSelect = {id:''};
@@ -39,8 +47,7 @@ getDisponiblesList() {
 
 
 getDetails(data,tipo){
-	console.log(data.id);
-	
+	this.selectedImg =[];
 	this.itemSelect = data;
 	this.typeItemSelect = tipo;
 }
@@ -56,31 +63,37 @@ getDetails(data,tipo){
 
     
 selectBadge (e, id) {
-
+  this.ratingHtml = "";
 	if (e.target.checked) {
 		this.selectedImg.push(id);
 	} else {
 	  	this.selectedImg.splice(this.selectedImg.indexOf(id), 1);
 	}
 	
-	this.urls = " ";
+	this.urls = "";
 	for(var i=0;i<this.selectedImg.length;i++){
 		this.urls += this.itemSelect.images[this.selectedImg[i]].url+"\n";
-	}
+  }
+  
+  this.ratingHtml = 	this.itemSelect.id +"\n"+	this.itemSelect.telefono.trim() +"\n"+  this.urls  ;
 	 
 }
 
-copyItem(item) {
-    
-
-	this.ratingHtml = item.id + " " + item.telefono + "\n"+"   "+this.urls  ;
 
 
-    
-    
-    
-  }
-
+  copyElementText(id) {
+   // this.ratingHtml = this.urls  ;
+    var element = null; // Should be <textarea> or <input>
+    try {
+        element = this.dom.getElementById(id);
+        element.select();
+        this.dom.execCommand("copy");
+    }
+    finally {
+       this.dom.getSelection().removeAllRanges;
+    }
+}
+  
 
   openSnackBar() {
     this.snackBar.open("copiado", "Acción", {

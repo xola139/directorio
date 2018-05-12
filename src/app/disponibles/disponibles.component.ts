@@ -27,6 +27,7 @@ applyFilterDisponible(filterValue: string) {
     filterValue = filterValue.trim(); // Remove whitespace
     filterValue = filterValue.toLowerCase(); // MatTableDataSource defaults to lowercase matches
     this.dsDisponible.filter = filterValue;
+    this.disponibles  = this.dsDisponible.filteredData;
   }
 
 
