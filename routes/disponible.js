@@ -5,7 +5,7 @@ var Disponible = require('../models/Disponibles.js');
 
 /* GET ALL DISPONIBLE */
 router.get('/', function(req, res, next) {
-  Disponible.find(function (err,disponible) {
+  Disponible.find({status:true},function (err,disponible) {
     if (err) return next(err);
     res.json(disponible);
   });

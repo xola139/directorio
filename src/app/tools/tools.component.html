@@ -1,73 +1,54 @@
-<p>
-  tools works! yea man!
-</p>
-
-
 <div class="container">
-	<div class="row" >
-        <div class="col-md-12 col-sm-12 ">
-
-         <div class="chip m-1" *ngFor="let d of modelos;let i = index">
-             <img  (click)="getDetails(d,'modelo')"  src="{{d.avatar}}" alt="disponible" width="96" height="96" data-toggle="modal" data-target="#detailModalLong" >
-          </div>
-   		</div>
+  <div class="row">
+    <div class="col-md-12 col-sm-12 ">
+      <div class="chip m-1" *ngFor="let d of modelos;let i = index">
+        <img (click)="getDetails(d,'modelo')" src="{{d.avatar}}" alt="disponible" width="96" height="96" data-toggle="modal" data-target="#detailModalLong">
+      </div>
     </div>
+  </div>
 
-	<div class="row" >
-        <div class="col-md-12 col-sm-12 ">
-
-         <div class="chip m-1" *ngFor="let d of disponibles;let i = index">
-             <img  (click)="getDetails(d,'disponible')"  src="{{d.profile_image_url}}" alt="disponible" width="96" height="96" data-toggle="modal" data-target="#detailModalLong" >
-          </div>
-   		</div>
+  <div class="row">
+    <div class="col-md-12 col-sm-12 ">
+      <div class="chip m-1" *ngFor="let d of disponibles;let i = index">
+        <img (click)="getDetails(d,'disponible')" src="{{d.profile_image_url}}" alt="disponible" width="96" height="96" data-toggle="modal"
+          data-target="#detailModalLong">
+      </div>
     </div>
-</div>    
-
-
-
-
+  </div>
+</div>
 
 <div class="modal fade" id="detailModalLong" tabindex="-1" role="dialog" aria-labelledby="detailModalLong" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header sticky-top" style="background:white">
         <h5 class="modal-title" id="exampleModalLabel">
-        	{{itemSelect.id}}<br>
-          	{{itemSelect.telefono}}
+          {{itemSelect.id}}
+          <br> {{itemSelect.telefono}}
         </h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body p-0">
-        
-      	<textarea   [innerHTML]="ratingHtml" rows="5" cols="100">
+        <div class="row" *ngIf="typeItemSelect == 'modelo'">
+          <div class="col-sm-6 col-md-4" *ngFor="let pic of itemSelect.images ;let i = index">
+            <div class="card">
+              <div class="card-body p-0">
+                <img class="card-img-top" src="{{pic.url}}" alt="imagen twitter" >
+                <input type="checkbox" (change)="selectBadge($event,i)" id="checkbox_{{i}}">check me!
+              </div>
+            </div>
+          </div>
+          <div class="row" *ngIf="typeItemSelect== 'disponible'">
+            Like this images!
+          </div>
 
-		</textarea>
-      	<div class="row" *ngIf="typeItemSelect == 'modelo'">
-
-       		  <div class="col-sm-2 col-md-2" *ngFor="let pic of itemSelect.images ;let i = index">
-          		
-	            <div class="card">
-	              <div class="card-body">
-	              	<img class="card-img-top" src="{{pic.url}}" alt="imagen twitter">
-	              	
-	              	 <input type="checkbox" (change)="selectBadge($event,i)" id="checkbox_{{i}}" >
-  
-	              </div>
-	            </div>
         </div>
-        <div class="row" *ngIf="typeItemSelect== 'disponible'">
-		  Like this images!
-		</div>
-
-      </div>
-      <div class="modal-footer">
-      <button mat-button    (click)="copyItem(itemSelect);openSnackBar()">Copiar</button>
-      	<button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+        <div class="modal-footer">
+          <button mat-button (click)="copyElementText('elem1');openSnackBar()">Copiar</button>
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+        </div>
       </div>
     </div>
+    <textarea id="elem1" [innerHTML]="ratingHtml" style="width: 1px;height: 1px;">Some text</textarea>
   </div>
-</div>
-
-

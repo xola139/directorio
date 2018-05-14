@@ -13,7 +13,7 @@
                       <div class="col">
                           <h5>{{p.id}}</h5>
                           <p class="text-primary small">{{p.promos[0].descripcion}}</p>
-                          <button mat-raised-button color="accent">Accent</button>
+                          <a  href="#/promos" mat-raised-button color="accent">Ver mas promos</a>
                       </div>
                     </div>
                   </div>
@@ -39,17 +39,23 @@
                 
                   <div class="chip" >
                     <img [hidden]="!hideme[i]" src="{{data.avatar}}" alt="Person" width="96" height="96" >
-                    <h5 class="mb-0 pl-1">{{data.id}} <span class="badge badge-success">{{data.disponible ? 'Disponible': ''}}  {{data.ciudad}}</span></h5>
+                    <h5 class="mb-0 pl-1">{{data.id}} <span class="badge badge-success">en  {{data.ciudad}}</span></h5>
                     <div class="mb-1 pl-1">
-                        Contactala por:
-                        <a href="https://api.whatsapp.com/send?phone=521{{data.telefono}}" class="" target="_blank">
+                        <span></span>
+                        
+                        <a  href="https://api.whatsapp.com/send?phone=521{{data.telefono}}" class="" target="_blank">
                           <img src="assets/if_whats.png" width="20"  height="20" class="profile" alt="atiende whatsapp">
                         </a>
                         
                         <img src="assets/if_twitter.png" width="20"  height="20" class="profile" alt="atiene DM twitter">
-                        <img src="assets/if_phone.png" width="20"  height="20" class="profile" alt="atiende llamadas">
+                        <a href="tel:+521{{data.telefono}}"  target="_blank">
+                          <img src="assets/if_phone.png" width="20"  height="20" class="profile" alt="atiende llamadas">
+                        </a>
+                        
+                        
+                        
                         <a href="https://api.whatsapp.com/send?phone=521{{data.telefono}}"  target="_blank">
-                          {{data.telefono}}
+                          <span>{{data.telefono}}</span>
                         </a>
                       </div>
                   

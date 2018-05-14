@@ -1,18 +1,27 @@
 /* Structure */
+.chip {
+  display: inline-block;
+  /* height: 50px; */
+  font-size: 15px;
+  border-radius: 5px;
+  background-color: #ffffff;
+  padding: 2px;
+  }
+  
+  .chip img {
+    float: left;
+    height: 50px;
+    width: 50px;
+    border-radius: 50%;
+    border-color: blueviolet;
+  }
+
+
 .example-container {
   display: flex;
   flex-direction: column;
+  max-height: 500px;
   min-width: 300px;
-}
-
-.example-header {
-  min-height: 64px;
-  padding: 8px 24px 0;
-}
-
-.mat-form-field {
-  font-size: 14px;
-  width: 100%;
 }
 
 .mat-table {
@@ -20,26 +29,18 @@
   max-height: 500px;
 }
 
-
-.mat-tab-label{
-	min-width: 50px;
+.element-row {
+  position: relative;
 }
 
-
-.chip {
-  display: inline-block;
-  
-  height: 50px;
-  font-size: 16px;
-  line-height: 50px;
-  border-radius: 25px;
-  background-color: #f1f1f1;
+.element-row:not(.expanded) {
+  cursor: pointer;
 }
 
-.chip img {
-  float: left;
-  
-  height: 50px;
-  width: 50px;
-  border-radius: 50%;
+.element-row:not(.expanded):hover {
+  background: #f5f5f5;
+}
+
+.element-row.expanded {
+  border-bottom-color: transparent;
 }

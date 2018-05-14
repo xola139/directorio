@@ -70,6 +70,7 @@ import { ToolsComponent } from './tools/tools.component';
 
 
 
+
 const appRoutes: Routes = [
   { path: '', redirectTo: 'model', pathMatch: 'full' },
   { path: 'books', component: BookComponent },
@@ -98,6 +99,7 @@ const appRoutes: Routes = [
     PerfilComponent,
     DisponiblesComponent,
     ToolsComponent,
+    
     
     
     
