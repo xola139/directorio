@@ -1,0 +1,29 @@
+<div>
+
+<div class="chip p-0" style="display:inline !important;">
+  <div class="row" >
+    <div class="col-3">
+        <img src="{{data.item.msgUrl}}" alt="imagen" >  
+    </div >
+    <div class="">
+        <h2 mat-dialog-title>{{data.item.msgTitle}}</h2>
+        <img src="../assets/if_Tear.png" alt="imagen" > 
+        aun no tenemos su telefono! 
+        
+    </div>
+  </div>  
+</div>
+  
+<hr>
+  <mat-dialog-content>
+    {{data.item.msgDescripcion}}
+  </mat-dialog-content>
+  <hr>
+	<mat-dialog-actions>
+	    <button class="mat-raised-button"(click)="closeDialog()">Cerrar</button>
+	    
+	</mat-dialog-actions>
+</div>
+
+
+

@@ -1,24 +1,17 @@
 import {Component,OnInit} from '@angular/core';
-import {MatTableDataSource,MatSnackBar} from '@angular/material';
+import {MatTableDataSource,MatSnackBar,MatDialog} from '@angular/material';
 import { PromosService } from './promos.service';
 import { animate, state, style, transition, trigger } from '@angular/animations';
-
+import { GenericmodalComponent } from '../genericmodal/genericmodal.component';
 
 @Component({
   selector: 'app-promos',
   templateUrl: './promos.component.html',
   styleUrls: ['./promos.component.css'],
-  animations: [
-    trigger('detailExpand', [
-      state('collapsed', style({ height: '0', minHeight: '0', visibility: 'hidden' })),
-      state('expanded', style({ height: '*', visibility: 'visible' })),
-      transition('expanded <=> collapsed', animate('225ms cubic-bezier(0.4, 0.0, 0.2, 1)')),
-    ]),
-  ]
-})
+ })
 
 export class PromosComponent  implements OnInit {
-constructor(private promosService: PromosService,public snackBar: MatSnackBar) {
+constructor(public dialog: MatDialog,private promosService: PromosService,public snackBar: MatSnackBar) {
   }
 
   isExpansionDetailRow = (i: number, row: Object) => row.hasOwnProperty('detailRow');
@@ -59,6 +52,36 @@ constructor(private promosService: PromosService,public snackBar: MatSnackBar) {
       console.log(err);
     });
   }
+
+
+
+  openDialog(item): void {
+
+     console.log(item);
+     //this.msgDisponible = item.disponibles[item.disponibles.length -1].descripcion;
+    //this.msgDisponible = item.descripcion;
+    //this.msgTitle = item.id;
+    //this.msgUrl = item.profile_image_url;
+    
+    var content = {msgTitle:"",msgDescripcion:"",msgUrl:""};
+    content.msgTitle = item.id;
+    content.msgDescripcion = item.promos[item.promos.length -1].descripcion;
+    content.msgUrl = item.avatar;
+    
+    //this.itemPromo = item;
+    //this.itemDisponible = item;
+    
+
+
+    //this.itemDisponible = item;
+
+
+    this.dialog.open(GenericmodalComponent, {
+      data: {item: content} ,width : '300px'
+    });
+  }
+
+
 
   showModalPromo(item){
     this.msgPromo = item.promos[item.promos.length -1].descripcion;

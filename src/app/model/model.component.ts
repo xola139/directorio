@@ -60,8 +60,7 @@ constructor(  private modelService: ModelService) {
       var datos = res;
       
       for (let i = 0; i < Object.keys(datos).length; i++) {
-        res[i].telefono= res[i].telefono.replace(/\s/g, "");
-        console.log(res[i].telefono.replace(/\s/g, ""));
+        res[i].telefono= res[i].telefono != null ?res[i].telefono.replace(/\s/g, ""):"";
         res[i].satisfechos = [];
         res[i].fotos = [];
 

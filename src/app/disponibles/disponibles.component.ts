@@ -1,6 +1,8 @@
 import { Component, OnInit,ViewChild, ElementRef,Inject } from '@angular/core';
 import { DisponibleService } from './disponible.service';
 import {MatTableDataSource,MatSnackBar,MatDialog,MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
+import { GenericmodalComponent } from '../genericmodal/genericmodal.component';
+
 import * as $ from 'jquery';
 
 
@@ -41,26 +43,28 @@ applyFilterDisponible(filterValue: string) {
 
   }
 
-  openDialog(): void {
-    let dialogRef = this.dialog.open(DialogOverviewExampleDialog, {
-      width: '250px',
-      data: { name: this.name, animal: this.animal }
-    });
+  openDialog(item): void {
+    console.log(item);
+    var content = {msgTitle:"",msgDescripcion:"",msgUrl:""};
+    content.msgTitle = item.id;
+    content.msgDescripcion = item.descripcion;
+    content.msgUrl = item.profile_image_url;
 
-    dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
-      this.animal = result;
+
+    this.dialog.open(GenericmodalComponent, {
+      data: {item: content} ,width : '300px'
     });
   }
+
+
+
+
    getDisponiblesList() {
     this.disponibleService.getDisponibles().then((res) => {
       this.disponibles = res;
-      var items = [];
-      for(var it in res){
-        items.push({id:res[it].id,profile_image_url:res[it].profile_image_url,ciudad:res[it].disponibles[0].ciudad,descripcion:res[it].disponibles[0].descripcion}) ;
-      }
 
-      const ELEMENT_DATES: ElementDisponible[] = items;
+      
+      const ELEMENT_DATES: ElementDisponible[] = this.disponibles;
 
       this.dsDisponible = new MatTableDataSource(ELEMENT_DATES);      
     }, (err) => {
@@ -68,16 +72,7 @@ applyFilterDisponible(filterValue: string) {
     });
   }
 
-   showModalPromo(item){
-     console.log(item);
-     //this.msgDisponible = item.disponibles[item.disponibles.length -1].descripcion;
-    this.msgDisponible = item.descripcion;
-    this.msgTitle = item.id;
-    this.msgUrl = item.profile_image_url;
-    this.itemDisponible = item;
-
-    
-  }
+   
 
   copyItem(item) {
     
@@ -118,22 +113,8 @@ export interface ElementDisponible {
   profile_image_url:string;
   ciudad: string;
   descripcion:string;
+  disponibles:string[];
   
 }
 
 
-@Component({
-  selector: 'dialog-overview-example-dialog',
-  templateUrl: './dialog-overview-example-dialog.html',
-})
-export class DialogOverviewExampleDialog {
-
-  constructor(
-    public dialogRef: MatDialogRef<DialogOverviewExampleDialog>,
-    @Inject(MAT_DIALOG_DATA) public data: any) { }
-
-  onNoClick(): void {
-    this.dialogRef.close();
-  }
-
-}

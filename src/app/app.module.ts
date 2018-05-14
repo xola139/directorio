@@ -65,7 +65,7 @@ import { DisponibleService } from './disponibles/disponible.service';
 
 import { DisponiblesComponent } from './disponibles/disponibles.component';
 import { ToolsComponent } from './tools/tools.component';
-
+import { GenericmodalComponent } from './genericmodal/genericmodal.component';
 
 
 
@@ -99,11 +99,11 @@ const appRoutes: Routes = [
     PerfilComponent,
     DisponiblesComponent,
     ToolsComponent,
+    GenericmodalComponent,
     
     
     
-    
-  ],
+  ],entryComponents: [GenericmodalComponent],
   imports: [
     BrowserModule,
     LazyLoadModule,

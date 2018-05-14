@@ -1,42 +1,27 @@
   <div class="container">
       <div class="row" >
           <div class="col-md-12 col-sm-12 p-0">
-            <div class="example-container mat-elevation-z8">
+            <div class="example-container">
               <div class="example-header">
                 <mat-form-field>
-                  <input matInput (keyup)="applyFilterDisponible($event.target.value)" placeholder="Filtra disponibles"  #myInput >
+                  <input matInput (keyup)="applyFilterDisponible($event.target.value)" placeholder="Filtra disponible por nombre,ciudad,telefono"  #myInput >
                 </mat-form-field>
               </div>
               <div class="col-md-12 col-sm-12 ">
                   
-                  <div class="chip m-1 mat-elevation-z8" *ngFor="let d of disponibles;let i = index" (click)="showModalPromo(d)" data-toggle="modal" data-target="#exampleModalLong">
-                    <div class="mx-auto w-50 p-0  text-center">
+                  <div class="chip m-1 mat-elevation-z1" *ngFor="let d of disponibles;let i = index" (click)="openDialog(d)" >
+                    <div class="mx-auto  p-0  text-center">
                         <img src="{{d.profile_image_url}}" alt="promo"   >  
                     </div>
                     <div>
                        <label> {{d.id }}</label>
                     </div>
                   </div>
-                  
-                  
-                </div>
+              </div>
             </div>
 
           </div>
-          <ol>
-            <li>
-              <mat-form-field>
-                <input matInput [(ngModel)]="name" placeholder="What's your name?">
-              </mat-form-field>
-            </li>
-            <li>
-              <button mat-raised-button (click)="openDialog()">Pick one</button>
-            </li>
-            <li *ngIf="animal">
-              You chose: <i>{{animal}}</i>
-            </li>
-          </ol>
-      </div>
+        </div>
      
   </div>
 

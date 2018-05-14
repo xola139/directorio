@@ -15,7 +15,9 @@ router.get('/',
             model:'Images'}
         ).exec(function(err, promos) {
             if (err) { return console.log(err); }
-    
+            
+            
+
             res.json(promos);
         });
 

@@ -7,7 +7,24 @@ var Disponible = require('../models/Disponibles.js');
 router.get('/', function(req, res, next) {
   Disponible.find({status:true},function (err,disponible) {
     if (err) return next(err);
-    res.json(disponible);
+
+ var items = [];
+ 	for(var it=0 ;it<disponible.length;it++){
+      		var ciudad ="";
+      		for(var ci=0;ci<disponible[it].disponibles.length;ci++){
+					if(disponible[it].disponibles[ci].ciudad != "" && ciudad ==""){
+      					ciudad = disponible[it].disponibles[ci].ciudad;
+      					break;
+      				}
+      		}
+
+        items.push({
+          id:disponible[it].id,
+          profile_image_url:disponible[it].profile_image_url,
+          ciudad:ciudad,
+          descripcion:disponible[it].disponibles[disponible[it].disponibles.length -1].descripcion}) ;
+      }
+	res.json(items);
   });
 });
 
