@@ -9,12 +9,14 @@
           </mat-form-field>
         </div>
         <div class="col-md-12 col-sm-12 ">
-          <div class="chip m-1" *ngFor="let p of promos;let i = index">
-            <img src="{{p.avatar}}" alt="promo" width="96" height="96" (click)="showModalPromo(p)" data-toggle="modal" data-target="#exampleModalLong" >
-            <p>
-              {{p.id}}
-            </p>
-
+          <div class="chip m-1 mat-elevation-z8" *ngFor="let p of promos;let i = index" (click)="showModalPromo(p)" data-toggle="modal" data-target="#exampleModalLong">
+            <div class="mx-auto w-50 p-0  text-center">
+              <img src="{{p.avatar}}" alt="promo" width="96" height="96"  >
+          </div>
+          <div>
+             <label> {{p.id }}</label>
+          </div>
+           
           </div>
         </div>
       </div>

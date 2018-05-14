@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,ViewChild, ElementRef,Inject } from '@angular/core';
 import { DisponibleService } from './disponible.service';
-import {MatTableDataSource,MatSnackBar} from '@angular/material';
+import {MatTableDataSource,MatSnackBar,MatDialog,MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
 import * as $ from 'jquery';
 
 
@@ -11,6 +11,7 @@ import * as $ from 'jquery';
   styleUrls: ['./disponibles.component.css']
 })
 export class DisponiblesComponent implements OnInit {
+  @ViewChild("myInput") inputEl: ElementRef;
 	disponibles: any;
 	displayedColumnsDisponible = ['profile_image_url','id','ciudad'];
 	dsDisponible :any;
@@ -18,7 +19,11 @@ export class DisponiblesComponent implements OnInit {
   msgTitle:string;
   msgUrl:string;
   itemDisponible:any;
-  constructor(private disponibleService: DisponibleService,public snackBar: MatSnackBar) {
+  animal: string;
+  name: string;
+
+
+  constructor(public dialog: MatDialog,private disponibleService: DisponibleService,public snackBar: MatSnackBar) {
     
   }
 
@@ -36,7 +41,17 @@ applyFilterDisponible(filterValue: string) {
 
   }
 
+  openDialog(): void {
+    let dialogRef = this.dialog.open(DialogOverviewExampleDialog, {
+      width: '250px',
+      data: { name: this.name, animal: this.animal }
+    });
 
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+      this.animal = result;
+    });
+  }
    getDisponiblesList() {
     this.disponibleService.getDisponibles().then((res) => {
       this.disponibles = res;
@@ -55,6 +70,7 @@ applyFilterDisponible(filterValue: string) {
 
    showModalPromo(item){
      console.log(item);
+     //this.msgDisponible = item.disponibles[item.disponibles.length -1].descripcion;
     this.msgDisponible = item.descripcion;
     this.msgTitle = item.id;
     this.msgUrl = item.profile_image_url;
@@ -89,6 +105,11 @@ applyFilterDisponible(filterValue: string) {
     });
   }
 
+
+  cerrarModal(){
+   this.inputEl.nativeElement.focus()
+  }
+
 }
 
 
@@ -98,4 +119,21 @@ export interface ElementDisponible {
   ciudad: string;
   descripcion:string;
   
+}
+
+
+@Component({
+  selector: 'dialog-overview-example-dialog',
+  templateUrl: './dialog-overview-example-dialog.html',
+})
+export class DialogOverviewExampleDialog {
+
+  constructor(
+    public dialogRef: MatDialogRef<DialogOverviewExampleDialog>,
+    @Inject(MAT_DIALOG_DATA) public data: any) { }
+
+  onNoClick(): void {
+    this.dialogRef.close();
+  }
+
 }

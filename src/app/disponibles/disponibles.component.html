@@ -1,17 +1,17 @@
   <div class="container">
       <div class="row" >
-          <div class="col-md-12 col-sm-12 ">
+          <div class="col-md-12 col-sm-12 p-0">
             <div class="example-container mat-elevation-z8">
               <div class="example-header">
                 <mat-form-field>
-                  <input matInput (keyup)="applyFilterDisponible($event.target.value)" placeholder="Filtra disponibles">
+                  <input matInput (keyup)="applyFilterDisponible($event.target.value)" placeholder="Filtra disponibles"  #myInput >
                 </mat-form-field>
               </div>
               <div class="col-md-12 col-sm-12 ">
                   
-                  <div class="chip m-1" *ngFor="let d of disponibles;let i = index">
-                    <div>
-                        <img src="{{d.profile_image_url}}" alt="promo"  (click)="showModalPromo(d)" data-toggle="modal" data-target="#exampleModalLong" >  
+                  <div class="chip m-1 mat-elevation-z8" *ngFor="let d of disponibles;let i = index" (click)="showModalPromo(d)" data-toggle="modal" data-target="#exampleModalLong">
+                    <div class="mx-auto w-50 p-0  text-center">
+                        <img src="{{d.profile_image_url}}" alt="promo"   >  
                     </div>
                     <div>
                        <label> {{d.id }}</label>
@@ -23,10 +23,24 @@
             </div>
 
           </div>
-          
+          <ol>
+            <li>
+              <mat-form-field>
+                <input matInput [(ngModel)]="name" placeholder="What's your name?">
+              </mat-form-field>
+            </li>
+            <li>
+              <button mat-raised-button (click)="openDialog()">Pick one</button>
+            </li>
+            <li *ngIf="animal">
+              You chose: <i>{{animal}}</i>
+            </li>
+          </ol>
       </div>
+     
   </div>
 
+ 
 
 <!-- Modal -->
 <div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -47,7 +61,7 @@
       </div>
       <div class="modal-footer">
           <button mat-button ngxClipboard [cbContent]="copyItem(itemDisponible)"   (click)="openSnackBar()">Copiar</button>
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+        <button type="button" (click)="cerrarModal()"  class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
       </div>
     </div>
   </div>
