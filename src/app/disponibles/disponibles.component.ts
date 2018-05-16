@@ -2,7 +2,7 @@ import { Component, OnInit,ViewChild, ElementRef,Inject } from '@angular/core';
 import { DisponibleService } from './disponible.service';
 import {MatTableDataSource,MatSnackBar,MatDialog,MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
 import { GenericmodalComponent } from '../genericmodal/genericmodal.component';
-
+import { GlobalVariables } from '../global';
 import * as $ from 'jquery';
 
 
@@ -24,6 +24,7 @@ export class DisponiblesComponent implements OnInit {
   animal: string;
   name: string;
 
+  isMobile:Boolean;
 
   constructor(public dialog: MatDialog,private disponibleService: DisponibleService,public snackBar: MatSnackBar) {
     
@@ -39,16 +40,19 @@ applyFilterDisponible(filterValue: string) {
 
 
   ngOnInit() {
-  	 this.getDisponiblesList(); 
+    this.isMobile = GlobalVariables.IS_MOBILE;
+  	this.getDisponiblesList(); 
 
   }
 
   openDialog(item): void {
     console.log(item);
-    var content = {msgTitle:"",msgDescripcion:"",msgUrl:""};
+    var content = {msgTitle:"",msgDescripcion:"",msgUrl:"",msgFecha:"",msgTelefono:""};
     content.msgTitle = item.id;
     content.msgDescripcion = item.descripcion;
     content.msgUrl = item.profile_image_url;
+    content.msgFecha = item.created_at;
+    content.msgTelefono = item.telefono;
 
 
     this.dialog.open(GenericmodalComponent, {

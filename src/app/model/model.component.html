@@ -29,33 +29,37 @@
             </div>
             
           </div>
-          <div id="card_{{data.id}}" class="col-md-4 col-sm-12 mt-2 p-0 border" *ngFor="let data of myData | slice:0:verItems ;let i = index">
+          <div id="card_{{data.id}}" class="col-md-4 col-sm-12 mt-2 p-0 " *ngFor="let data of myData | slice:0:verItems ;let i = index">
            
 
             <div class="row alert-light mr-0 ml-0 mb-1" role="alert">
                
-              <div class="col-11 pr-0 pl-1">
+              <div class="col-10 pr-0 pl-1">
                 
                 
                   <div class="chip" >
-                    <img [hidden]="!hideme[i]" src="{{data.avatar}}" alt="Person" width="96" height="96" >
-                    <h5 class="mb-0 pl-1">{{data.id}} <span class="badge badge-success">en  {{data.ciudad}}</span></h5>
+                    <img [hidden]="!hideme[i]" src="{{data.avatar}}" alt="{{data.id}} " width="96" height="96"  class="mr-1 mat-elevation-z2">
+                    <h5 class="mb-0 pl-1">{{data.id}} 
+                      <span class="badge badge-success" style="font-size: 10px;">en  {{data.ciudad}}</span>
+                    </h5>
                     <div class="mb-1 pl-1">
                         <span></span>
                         
-                        <a  href="https://api.whatsapp.com/send?phone=521{{data.telefono}}" class="" target="_blank">
-                          <img src="assets/if_whats.png" width="20"  height="20" class="profile" alt="atiende whatsapp">
+                        <a  href="{{isMobile ? 'https://api.whatsapp.com/send?phone=521'+data.telefono :'#'}}" class="" target="{{isMobile ? '_blank':'_self'}}">
+                          <img src="assets/if_whats.png" width="20"  height="20" class="profile mat-elevation-z1" matTooltip="Atiende WhatsApp papa!  manda mensaje ya!" alt="Atiende WhatsApp papa! manda mensaje ya!">
+                        </a>
+                        <a  href="http://www.twitter.com/{{data.id}}" class="" target=" _blank">
+                          <img src="assets/if_twitter.png" width="20"  height="20" class="profile mat-elevation-z1" matTooltip="Valida infor por su Twitter ya!" alt="Atiene DM twitter">
+                        </a>
+                        <a href="{{isMobile ? 'tel:+521'+data.telefono :''}}"  target="{{isMobile ? '_blank':'_self'}}">
+                          <img src="assets/if_phone.png" width="20"  height="20" class="profile mat-elevation-z1" matTooltip="Atiende llamadas papaaa! marcale ya!" alt="Atiende llamadas papaaa!">
                         </a>
                         
-                        <img src="assets/if_twitter.png" width="20"  height="20" class="profile" alt="atiene DM twitter">
-                        <a href="tel:+521{{data.telefono}}"  target="_blank">
-                          <img src="assets/if_phone.png" width="20"  height="20" class="profile" alt="atiende llamadas">
-                        </a>
                         
                         
-                        
-                        <a href="https://api.whatsapp.com/send?phone=521{{data.telefono}}"  target="_blank">
-                          <span>{{data.telefono}}</span>
+                        <a href="{{isMobile ? 'https://api.whatsapp.com/send?phone=521'+data.telefono :'#'}}"  target="{{isMobile ? '_blank':'_self'}}">
+                          <span class="h6">{{data.telefono}}</span>
+                          
                         </a>
                       </div>
                   
@@ -145,7 +149,8 @@
       </div>
       
       <div class="mx-auto mt-5" style="width: 100px;">
-          <button type="button" class="btn btn-outline-primary" (click)="getVerMas()">VER MAS</button>
+          <button type="button" mat-raised-button color="accent" (click)="getVerMas()">VER MAS</button>
+          
       </div> 
      
 

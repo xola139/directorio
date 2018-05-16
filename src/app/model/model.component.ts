@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import  {Http} from '@angular/http';
 import { Observable } from "rxjs/Observable";
 import { ModelService } from './model.service';
+import { GlobalVariables } from '../global';
 import * as $ from 'jquery';
 
 
@@ -21,7 +22,7 @@ export class ModelComponent implements OnInit {
   pictures:any;
   tipoFoto:any;
   hideme=[];
-  
+  isMobile :Boolean;
 
 
  folders = [
@@ -50,8 +51,11 @@ constructor(  private modelService: ModelService) {
  }
   
   ngOnInit() {
+    this.isMobile = GlobalVariables.IS_MOBILE;
     this.getModelos();
     this.getPromos();
+
+     
   }
 
   getModelos() {

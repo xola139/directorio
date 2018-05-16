@@ -13,3 +13,14 @@
     border-radius: 50%;
     border-color: blueviolet;
   }
+
+  .emoji{
+    height: 20px !important;
+    width: 20px !important;
+  }
+
+
+  .my-panel .mat-dialog-container {
+    
+    padding: 1px !important;
+}
