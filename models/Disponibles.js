@@ -9,5 +9,5 @@ var disponibleSchema = new mongoose.Schema({
 });
 
 
-module.exports = mongoose.model('disponibles', disponibleSchema);
+module.exports = mongoose.model('disponibles', disponibleSchema,'disponibles');
 

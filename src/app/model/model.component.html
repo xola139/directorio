@@ -8,7 +8,7 @@
                   <div class="carousel-item {{i == 1 ? 'active':''}} max-img-promo" *ngFor="let p of promos | slice:0:10;let i = index">
                      <div class="row">
                       <div class="col">
-                        <img class="d-block w-100 img-fluid" data-src="{{p.avatar}}" alt="First slide [800x400]" src="{{p.avatar}}" data-holder-rendered="true" style=" max-width: 100%;max-height: 100%;">
+                        <img class="d-block w-100 rounded  img-fluid" data-src="{{p.avatar}}" alt="First slide [800x400]" src="{{p.avatar}}" data-holder-rendered="true" style=" max-width: 100%;max-height: 100%;">
                       </div>
                       <div class="col">
                           <h5>{{p.id}}</h5>
@@ -54,21 +54,13 @@
                         <a href="{{isMobile ? 'tel:+521'+data.telefono :''}}"  target="{{isMobile ? '_blank':'_self'}}">
                           <img src="assets/if_phone.png" width="20"  height="20" class="profile mat-elevation-z1" matTooltip="Atiende llamadas papaaa! marcale ya!" alt="Atiende llamadas papaaa!">
                         </a>
-                        
-                        
-                        
                         <a href="{{isMobile ? 'https://api.whatsapp.com/send?phone=521'+data.telefono :'#'}}"  target="{{isMobile ? '_blank':'_self'}}">
                           <span class="h6">{{data.telefono}}</span>
-                          
+                          --{{isMobile}}
                         </a>
                       </div>
                   
                   </div>
-                
-                
-                  
-                
-                
                 
               </div>
               <div class="col pr-0 pl-0">
@@ -80,7 +72,7 @@
           
           <div class="col pl-1 pr-1 ">
                   <div class="collapse multi-collapse{{i}} show index-content" id="multiCollapse1">
-                    <div class="card card-body p-1" >
+                    <div class="card card-body cars-custom p-1" >
                             <img class="card-img-top" src="{{data.avatar}}" alt="Card image cap">
                             <div class="card-body p-1">
                               

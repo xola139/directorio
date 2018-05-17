@@ -2,6 +2,7 @@
 
 var ImagesSchema = new mongoose.Schema({
   id: String,
+  status:Boolean,
   avatar: String,
   descripcion:String,
   descripcionTwitter:Boolean,

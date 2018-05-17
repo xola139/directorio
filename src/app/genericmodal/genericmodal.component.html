@@ -9,8 +9,11 @@
         <h2 mat-dialog-title class="m-0">{{data.item.msgTitle}}</h2>
         <img class="emoji" *ngIf="data.item.msgTelefono != null" src="../assets/if_Big_Smile.png" alt="con telefono" >   
         <img class="emoji" *ngIf="data.item.msgTelefono == null" src="../assets/if_Big_Frown.png" alt="con telefono" >
-        {{data.item.msgTelefono != null ? data.item.msgTelefono:'Aun no tenemos su telefono!'}}
+        {{data.item.msgTelefono != null ? data.item.msgTelefono:'Aun no tenemos su telefono! Pero revisa la mension y valida &#8681;'}}
+        
+        
           
+
     </div>
   </div>  
 </div>

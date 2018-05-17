@@ -20,6 +20,7 @@ export class ToolsComponent implements OnInit {
 
    ratingHtml:any;
    urls:any;
+   newModel={id:"",telefono:"",status:false};
    private dom: Document;
   constructor(@Inject(DOCUMENT) dom: Document,private disponibleService: DisponibleService, private modelService:ModelService,public snackBar: MatSnackBar) {
 
@@ -61,6 +62,14 @@ getDetails(data,tipo){
     });
   }
 
+ saveModel() {
+    this.modelService.saveModel(this.newModel).then((result) => {
+      let id = result['_id'];
+      alert("guardado!!"+id);
+    }, (err) => {
+      console.log(err);
+    });
+  }
     
 selectBadge (e, id) {
   this.ratingHtml = "";

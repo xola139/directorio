@@ -1,4 +1,28 @@
 <div class="container">
+  <h1>Nuevo Telefono:</h1>
+  <div class="row">
+    <div class="col-md-6">
+      <form (ngSubmit)="saveModel()" #bookForm="ngForm">
+        <div class="form-group">
+          <label for="name">ID:</label>
+          <input type="text" class="form-control" [(ngModel)]="newModel['id']" name="id" required>
+          <input type="hidden" value="false" class="form-control" [(ngModel)]="newModel['status']" name="status" >
+        </div>
+        <div class="form-group">
+          <label for="name">Telefono:</label>
+          <input type="text" class="form-control" [(ngModel)]="newModel['telefono']" name="telefono" required>
+        </div>
+       
+        <div class="form-group">
+          <button type="submit" class="btn btn-success" [disabled]="!bookForm.form.valid">Guardar</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+
+<div class="container">
   <div class="row">
     <div class="col-md-12 col-sm-12 ">
       <div class="chip m-1" *ngFor="let d of modelos;let i = index">

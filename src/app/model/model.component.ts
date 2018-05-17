@@ -125,4 +125,7 @@ constructor(  private modelService: ModelService) {
     window.open('twitter://user?screen_name=xola139', '_system', 'location=no');
   
    }
+
+
+
 }

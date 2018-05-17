@@ -28,6 +28,19 @@ export class ModelService   {
   getPromos(){
     return this.promosService.getAllPromos();
   }
+
+  saveModel(data) {
+    return new Promise((resolve, reject) => {
+        this.http.post(this.baseApiUrl +'/images', data)
+          .map(res => res.json())
+          .subscribe(res => {
+            resolve(res);
+          }, (err) => {
+            reject(err);
+          });
+    });
+  }
+
 }
 
 

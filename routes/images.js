@@ -6,13 +6,20 @@ var Images = require('../models/Images.js');
 /* GET ALL IMAGES */
 //db.tweets.find( {_id : { "$lt" : <50th _id> } } ).limit(50).sort({"_id":-1});
 router.get('/', function(req, res, next) {
-  Images.find(function (err, images) {
+  Images.find({status:true},function (err, images) {
     if (err) return next(err);
     res.json(images);
   });
 });
 
-
+/* SAVE BOOK */
+router.post('/', function(req, res, next) {
+  
+  Images.create(req.body, function (err, post) {
+    if (err) return next(err);
+    res.json(post);
+  });
+});
 
 /* GET SINGLE IMAGE BY ID */
 router.get('/:id', function(req, res, next) {

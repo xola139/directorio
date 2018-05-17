@@ -8,22 +8,19 @@
                 </mat-form-field>
               </div>
               <div class="col-md-12 col-sm-12 ">
-                  
                   <div class="chip m-1 mat-elevation-z1" *ngFor="let d of disponibles;let i = index" (click)="openDialog(d)" >
                     <div class="mx-auto  p-0  text-center">
-                        <img src="{{d.profile_image_url}}" alt="promo"   >  
+                        <img src="{{d.profile_image_url}}" alt="ultra mamasita! {{d.id }}"   >  
                     </div>
                     <div>
-                       <label> {{d.id }}</label>
+                       <label>{{d.id }}</label>
                     </div>
                   </div>
               </div>
             </div>
-
           </div>
-        </div>
-     
-  </div>
+      </div>
+</div>
 
  
 

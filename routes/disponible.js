@@ -8,7 +8,7 @@ var Disponible = require('../models/Disponibles.js');
 /* GET ALL PROMOSS */
 router.get('/',
 	function(req, res, next) {
-        Disponible.find().populate({
+        Disponible.find({status:true}).populate({
             path:'fk_images',
             model:'Images'}
         ).exec(function(err, disponible) {
@@ -28,16 +28,17 @@ router.get('/',
       	if(disponible[it].fk_images[0]!=null)
       		telefono = disponible[it].fk_images[0].telefono;
 
-        items.push({
-          id:disponible[it].id,
-          profile_image_url:disponible[it].profile_image_url,
-          ciudad:ciudad,
-          telefono: telefono,
-          descripcion:disponible[it].disponibles[disponible[it].disponibles.length -1].descripcion,
-          created_at:disponible[it].disponibles[disponible[it].disponibles.length -1].created_at}
-          );
-                }
-		res.json(items);
+            items.push({
+              id:disponible[it].id,
+              profile_image_url:disponible[it].profile_image_url,
+              ciudad:ciudad,
+              telefono: telefono,
+              descripcion:disponible[it].disponibles[disponible[it].disponibles.length -1].descripcion,
+              created_at:disponible[it].disponibles[disponible[it].disponibles.length -1].created_at}
+              );
+      }
+      
+		res.json(disponible);
     });
 
 });
