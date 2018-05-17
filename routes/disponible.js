@@ -38,7 +38,7 @@ router.get('/',
               );
       }
       
-		res.json(disponible);
+		res.json(items);
     });
 
 });

@@ -22,13 +22,7 @@ export class AppComponent {
     this.localStorage.getItem('usuario').subscribe((data) => {
     this.usuario = localStorage.getItem('usuario');
 
-     if(navigator.userAgent.indexOf("Mobile") > 0){
-         GlobalVariables.IS_MOBILE = true; 
-        return true;
-      }else{
-        GlobalVariables.IS_MOBILE = false;
-        return false;
-      }
+     
     });
   }
   

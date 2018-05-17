@@ -51,7 +51,17 @@ constructor(  private modelService: ModelService) {
  }
   
   ngOnInit() {
-    this.isMobile = GlobalVariables.IS_MOBILE;
+
+    if(navigator.userAgent.indexOf("Mobile") > 0){
+         this.isMobile = true; 
+        
+      }else{
+        this.isMobile= false;
+        
+    }
+
+
+   
     this.getModelos();
     this.getPromos();
 
