@@ -65,6 +65,8 @@ getDetails(data,tipo){
  saveModel() {
     this.modelService.saveModel(this.newModel).then((result) => {
       let id = result['_id'];
+      this.newModel.id = "";
+      this.newModel.telefono = "";
       alert("guardado!!"+id);
     }, (err) => {
       console.log(err);
@@ -101,8 +103,15 @@ selectBadge (e, id) {
     finally {
        this.dom.getSelection().removeAllRanges;
     }
+
+
+
 }
   
+  pegar(){
+    
+    
+  }
 
   openSnackBar() {
     this.snackBar.open("copiado", "Acción", {

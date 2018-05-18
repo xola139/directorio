@@ -53,10 +53,8 @@ constructor(  private modelService: ModelService) {
 
     if(navigator.userAgent.indexOf("Mobile") > 0){
          this.isMobile = true; 
-        
       }else{
         this.isMobile= false;
-        
     }
 
 
@@ -76,6 +74,7 @@ constructor(  private modelService: ModelService) {
         res[i].telefono= res[i].telefono != null ?res[i].telefono.replace(/\s/g, ""):"";
         res[i].satisfechos = [];
         res[i].fotos = [];
+        
 
         for (let x = 0; x < res[i].images.length; x++) {
           if(res[i].images[x].status == 'foto')

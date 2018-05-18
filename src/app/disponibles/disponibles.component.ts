@@ -40,7 +40,6 @@ applyFilterDisponible(filterValue: string) {
 
   ngOnInit() {
     this.getDisponiblesList(); 
-
   }
 
   openDialog(item): void {
@@ -51,6 +50,7 @@ applyFilterDisponible(filterValue: string) {
     content.msgUrl = item.profile_image_url;
     content.msgFecha = item.created_at;
     content.msgTelefono = item.telefono;
+
 
 
     this.dialog.open(GenericmodalComponent, {
@@ -106,6 +106,9 @@ applyFilterDisponible(filterValue: string) {
   cerrarModal(){
    this.inputEl.nativeElement.focus()
   }
+
+
+
 
 }
 

@@ -32,7 +32,7 @@ export class PerfilComponent implements OnInit {
     {value: 'Chihuahua', viewValue: 'Chihuahua'},
     {value: 'Coahuila-de-Zaragoza', viewValue: 'Coahuila de Zaragoza'},
     {value: 'Colima', viewValue: 'Colima'},
-    {value: 'Ciudad-de-Mexico', viewValue: 'Ciudad de México'},
+    {value: 'CDMX', viewValue: 'CDMX'},
     {value: 'Estado-de-Mexico', viewValue: 'Estado de México'},
     {value: 'Durango', viewValue: 'Durango'},
     {value: 'Guanajuato', viewValue: 'Guanajuato'},

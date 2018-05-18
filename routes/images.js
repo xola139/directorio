@@ -25,12 +25,13 @@ router.put('/guardar', function(req, res) {
           else{
             Images.create(req.body, function (err, post) {
               if (err) console.log(err);
-                Disponibles.find({id:req.body.id},function(err,disponible){
+                Disponibles.findOne({id:req.body.id},function(err,disponible){
                 if(err) console.log(err);
-                var updateDisponible = disponible;
-                updateDisponible.fk_images =(post._id);
-                delete updateDisponible._id;
                 
+                var updateDisponible = disponible;
+                updateDisponible.fk_images = post._id;
+                delete updateDisponible._id;
+
                 Disponibles.findByIdAndUpdate(disponible._id, updateDisponible, function (err, dispo) {
                   if (err) console.log(err);
                   console.log("Guardo referencia!!" + dispo);

@@ -45,18 +45,17 @@
                     <div class="mb-1 pl-1">
                         <span></span>
                         
-                        <a  href="{{isMobile ? 'https://api.whatsapp.com/send?phone=521'+data.telefono :'#'}}" class="" target="{{isMobile ? '_blank':'_self'}}">
+                        <a *ngIf="data.opcionesTelefono[0].whatsapp"  href="{{isMobile ? 'https://api.whatsapp.com/send?phone=521'+data.telefono :'javascript:;'}}" class="" target="{{isMobile ? '_blank':'_self'}}">
                           <img src="assets/if_whats.png" width="20"  height="20" class="profile mat-elevation-z1" matTooltip="Atiende WhatsApp papa!  manda mensaje ya!" alt="Atiende WhatsApp papa! manda mensaje ya!">
                         </a>
-                        <a  href="http://www.twitter.com/{{data.id}}" class="" target=" _blank">
+                        <a *ngIf="data.opcionesTelefono[0].twitter" href="http://www.twitter.com/{{data.id}}" class="" target=" _blank">
                           <img src="assets/if_twitter.png" width="20"  height="20" class="profile mat-elevation-z1" matTooltip="Valida infor por su Twitter ya!" alt="Atiene DM twitter">
                         </a>
-                        <a href="{{isMobile ? 'tel:+521'+data.telefono :''}}"  target="{{isMobile ? '_blank':'_self'}}">
+                        <a *ngIf="data.opcionesTelefono[0].llamadas" href="{{isMobile ? 'tel:+521'+data.telefono :'javascript:;'}}"  target="{{isMobile ? '_blank':'_self'}}">
                           <img src="assets/if_phone.png" width="20"  height="20" class="profile mat-elevation-z1" matTooltip="Atiende llamadas papaaa! marcale ya!" alt="Atiende llamadas papaaa!">
                         </a>
-                        <a href="{{isMobile ? 'https://api.whatsapp.com/send?phone=521'+data.telefono :'#'}}"  target="{{isMobile ? '_blank':'_self'}}">
+                        <a href="{{isMobile ? 'https://api.whatsapp.com/send?phone=521'+data.telefono :'javascript:;'}}"  target="{{isMobile ? '_blank':'_self'}}">
                           <span class="h6">{{data.telefono}}</span>
-                          
                         </a>
                       </div>
                   
@@ -97,12 +96,12 @@
                                 </p>
                                 <ul class="list-group">
                                   <li class="list-group-item p-1">Nacionalidad:{{data.nacionalidad}}</li>
-                                  <li class="list-group-item p-1">Idiomas:</li>
-                                  <li class="list-group-item p-1">Horarios: </li>
+                                  <li class="list-group-item p-1">Idiomas:{{data.idiomas[0].ingles != 'undefined' ? data.idiomas[0].ingles:''}} - {{data.idiomas[0].espanol}}</li>
+                                  <li class="list-group-item p-1">Horarios: {{data.horarioAtencion[0].hinicio}} -{{data.horarioAtencion[0].hfin}}</li>
                                   <li class="list-group-item p-1">Medidas:</li>
-                                  <li class="list-group-item p-1">Edad:</li>
-                                  <li class="list-group-item p-1">Peso:</li>
-                                  <li class="list-group-item p-1">Estatura:</li>
+                                  <li class="list-group-item p-1">Edad:{{data.edad}}</li>
+                                  <li class="list-group-item p-1">Peso:{{data.cuerpo[0].peso}}</li>
+                                  <li class="list-group-item p-1">Estatura:{{data.cuerpo[0].estatura}}</li>
                                   <li class="list-group-item p-1">Atiende en:</li>
                                 </ul>
                                 <button mat-button (click)="getPictures(data,'foto')" data-toggle="modal" data-target="#exampleModalLong"><mat-icon>collections</mat-icon>Galeria!</button>

@@ -10,9 +10,10 @@
         </div>
         <div class="form-group">
           <label for="name">Telefono:</label>
-          <input type="text" class="form-control" [(ngModel)]="newModel['telefono']" name="telefono" required>
+          <input type="number" autocomplete="off" id="txtTelefono" class="form-control" [(ngModel)]="newModel['telefono']" name="telefono" required>
+
         </div>
-       
+       <button type="button" class="btn btn-success" >P</button>
         <div class="form-group">
           <button type="submit" class="btn btn-success" [disabled]="!bookForm.form.valid">Guardar</button>
         </div>
