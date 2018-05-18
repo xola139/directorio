@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 var mongoose = require('mongoose');
 var Images = require('../models/Images.js');
+var Disponibles = require('../models/Disponibles.js');
 
 /* GET ALL IMAGES */
 //db.tweets.find( {_id : { "$lt" : <50th _id> } } ).limit(50).sort({"_id":-1});
@@ -12,12 +13,37 @@ router.get('/', function(req, res, next) {
   });
 });
 
+
 /* SAVE BOOK */
-router.post('/', function(req, res, next) {
+router.put('/guardar', function(req, res) {
   
-  Images.create(req.body, function (err, post) {
-    if (err) return next(err);
-    res.json(post);
+  Images.find({id:req.body.id},function(err,images){
+      if(err)console.log(err);
+      else{
+          if(images.length > 0)
+            res.json(images);
+          else{
+            Images.create(req.body, function (err, post) {
+              if (err) console.log(err);
+                Disponibles.find({id:req.body.id},function(err,disponible){
+                if(err) console.log(err);
+                var updateDisponible = disponible;
+                updateDisponible.fk_images =(post._id);
+                delete updateDisponible._id;
+                
+                Disponibles.findByIdAndUpdate(disponible._id, updateDisponible, function (err, dispo) {
+                  if (err) console.log(err);
+                  console.log("Guardo referencia!!" + dispo);
+                });
+
+              });
+
+              res.json(post);
+            });
+          }
+          
+      }
+    
   });
 });
 

@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { AsyncLocalStorage } from 'angular-async-local-storage';
-import { GlobalVariables } from './global';
 
 @Component({
   selector: 'app-root',

@@ -2,7 +2,6 @@ import { Component, OnInit,ViewChild, ElementRef,Inject } from '@angular/core';
 import { DisponibleService } from './disponible.service';
 import {MatTableDataSource,MatSnackBar,MatDialog,MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
 import { GenericmodalComponent } from '../genericmodal/genericmodal.component';
-import { GlobalVariables } from '../global';
 import * as $ from 'jquery';
 
 
@@ -40,8 +39,7 @@ applyFilterDisponible(filterValue: string) {
 
 
   ngOnInit() {
-    this.isMobile = GlobalVariables.IS_MOBILE;
-  	this.getDisponiblesList(); 
+    this.getDisponiblesList(); 
 
   }
 

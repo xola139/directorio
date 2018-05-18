@@ -31,7 +31,7 @@ export class ModelService   {
 
   saveModel(data) {
     return new Promise((resolve, reject) => {
-        this.http.post(this.baseApiUrl +'/images', data)
+        this.http.put(this.baseApiUrl +'/images/guardar', data)
           .map(res => res.json())
           .subscribe(res => {
             resolve(res);

@@ -5,8 +5,7 @@ var config={
         }
         ,conectDB:{
                 link:''
-
-        }
+		}
 	
 };
 

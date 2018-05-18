@@ -100,6 +100,9 @@ app.all('*', function(req, res, next) {
    next();
 });
 
+app.put('/guardando', function (req, res) {
+  console.log('PUT request to homepage');
+});
 
 /*Service REST all */
 //app.use('/promos', require('connect-ensure-login').ensureLoggedIn(),promos);
