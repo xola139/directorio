@@ -68,7 +68,7 @@ export class PerfilComponent implements OnInit {
   	ngOnInit() {
 			this.perfil = {};
       this.perfil.idiomas = [{espanol:false,ingles:false}];
-      this.perfil.opcionesTelefono = [{whatsapp:false,llamadas:false}];
+      this.perfil.opcionesTelefono = {whatsapp:false,llamadas:false};
 
       this.perfil.cuerpo = [{estatura:'',ojos:'',cabello:'',medidas:'',peso: ''}];
       
@@ -85,14 +85,25 @@ export class PerfilComponent implements OnInit {
 			
 	
 			this.perfilService.showPerfil(id).then((res) => {
-        
+      this.perfil = res;
+      
+      if(this.perfil.opcionesTelefono == undefined){
+          this.perfil.opcionesTelefono = {whatsapp:false,llamadas:false};        
+      }
 
-				this.perfil = res;
+      if(this.perfil.idiomas == undefined){
+          this.perfil.idiomas = {espanol:false,ingles:false};        
+      }
 
-        
-        if(this.perfil.cuerpo.length == 0){
-          this.perfil.cuerpo = [{estatura:'',ojos:'',cabello:'',medidas:'',peso: ''}];
-        }
+      if(this.perfil.horarioAtencion == undefined){
+          this.perfil.horarioAtencion = {hinicio:0,hfin:0,fulltime:false};        
+      }
+
+      
+
+      if(this.perfil.cuerpo == undefined){
+          this.perfil.cuerpo = {estatura:'',ojos:'',cabello:'',medidas:'',peso: ''};
+      }
 
 
         this.perfil.images.reverse();
@@ -104,6 +115,7 @@ export class PerfilComponent implements OnInit {
 
   	updatePerfil(id) {
       this.resourcesLoaded = true;
+      this.perfil.status = true;
 	    this.perfilService.updatePerfil(id, this.perfil).then((result) => {
         console.log(this.perfil);
       	let id = result['_id'];

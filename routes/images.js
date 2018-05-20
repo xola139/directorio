@@ -52,16 +52,17 @@ router.put('/guardar', function(req, res) {
 router.get('/:id', function(req, res, next) {
 
   console.log("evento con get en images");
-  Images.findById(req.params.id, function (err, post) {
+  Images.findOne({id:req.params.id}, function (err, post) {
+//  Images.findById(req.params.id, function (err, post) {
     if (err) return next(err);
 
-    if(post.opcionesTelefono.length == 0){
+    if(post.opcionesTelefono == null){
       post.opcionesTelefono.push({"llamadas": false,"whatsapp": false});
     }
-     if(post.idiomas.length == 0){
+     if(post.idiomas == null){
       post.idiomas.push({"espanol": false,"ingles": false});
     } 
-    if(post.horarioAtencion.length == 0){
+    if(post.horarioAtencion == null){
       post.horarioAtencion.push({"hinicio": 0,"hfin": 0});
     } 
 

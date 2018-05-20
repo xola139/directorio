@@ -2,6 +2,7 @@
     
   <form (ngSubmit)="updatePerfil(perfil._id)" #perfilForm="ngForm">
      
+      <input type="hidden" name="status"  [(ngModel)]="perfil.status">
 
   <div class="row">
   <div class="col-md-12 col-md-12 sticky-top bg-light" >
@@ -25,9 +26,9 @@
           <input matInput placeholder="Tu telefono" [(ngModel)]="perfil.telefono" name="telefono" required>
         </mat-form-field>
         Medio de contacto:
-        <mat-checkbox  [(ngModel)]="perfil.opcionesTelefono[0].llamadas" name="llamadas" >LLamadas</mat-checkbox>
-        <mat-checkbox [(ngModel)]="perfil.opcionesTelefono[0].whatsapp" name="Whatsapp" >Whatsapp</mat-checkbox>
-        <mat-checkbox [(ngModel)]="perfil.opcionesTelefono[0].twitter" name="twitter" >Twitter</mat-checkbox>
+        <mat-checkbox  [(ngModel)]="perfil.opcionesTelefono.llamadas" name="llamadas" >LLamadas</mat-checkbox>
+        <mat-checkbox [(ngModel)]="perfil.opcionesTelefono.whatsapp" name="Whatsapp" >Whatsapp</mat-checkbox>
+        <mat-checkbox [(ngModel)]="perfil.opcionesTelefono.twitter" name="twitter" >Twitter</mat-checkbox>
         
         <mat-form-field>
           <mat-select placeholder="¿En que ciudad atiendes?"  [(value)]="perfil.ciudad" >
@@ -66,8 +67,8 @@
           </div>
           <div class="form-group">
               <label>Idiomas</label><br>
-              <mat-checkbox  [(ngModel)]="perfil.idiomas[0].espanol" name="espanol" >Español</mat-checkbox>
-              <mat-checkbox  [(ngModel)]="perfil.idiomas[0].ingles" name="ingles" >Ingles</mat-checkbox>
+              <mat-checkbox  [(ngModel)]="perfil.idiomas.espanol" name="espanol" >Español</mat-checkbox>
+              <mat-checkbox  [(ngModel)]="perfil.idiomas.ingles" name="ingles" >Ingles</mat-checkbox>
           </div>
         </div>  
         <div class="col-sm-12 col-md-6">
@@ -76,7 +77,7 @@
               <div class="row">
                 <div class="col-5">
                   <mat-form-field>
-                    <mat-select placeholder="Hora inicial" [(ngModel)]="perfil.horarioAtencion[0].hinicio" name="hinicio">
+                    <mat-select placeholder="Hora inicial" [(ngModel)]="perfil.horarioAtencion.hinicio" name="hinicio">
                       <mat-option *ngFor="let hora of horarios" [value]="hora.value">
                           {{ hora.viewValue }}
                       </mat-option>
@@ -85,7 +86,7 @@
                 </div>
                 <div class="col-5">
                   <mat-form-field>
-                    <mat-select placeholder="Hora final" [(ngModel)]="perfil.horarioAtencion[0].hfin" name="hfin">
+                    <mat-select placeholder="Hora final" [(ngModel)]="perfil.horarioAtencion.hfin" name="hfin">
                       <mat-option *ngFor="let hora of horarios" [value]="hora.value">
                           {{ hora.viewValue }}
                       </mat-option>
@@ -93,7 +94,7 @@
                   </mat-form-field>
                 </div>
                 <div class="col-2">
-                  <mat-checkbox [(ngModel)]="perfil.horarioAtencion[0].fulltime" name="fulltime" >Full time</mat-checkbox>
+                  <mat-checkbox [(ngModel)]="perfil.horarioAtencion.fulltime" name="fulltime" >Full time</mat-checkbox>
                 </div>
 
                 
@@ -111,12 +112,12 @@
               <div class="col-4">
                   <mat-form-field>
 
-                  <input matInput type="number" maxlength="2"  placeholder="Tu peso es:" [(ngModel)]="perfil.cuerpo[0].peso" name="peso" >
+                  <input matInput type="number" maxlength="2"  placeholder="Tu peso es:" [(ngModel)]="perfil.cuerpo.peso" name="peso" >
                 </mat-form-field>
               </div>
               <div class="col-4">
                 <mat-form-field>
-                  <input matInput type="number" maxlength="2"  placeholder="Tu estatura es:" [(ngModel)]="perfil.cuerpo[0].estatura" name="estatura" > 
+                  <input matInput type="number" maxlength="2"  placeholder="Tu estatura es:" [(ngModel)]="perfil.cuerpo.estatura" name="estatura" > 
                 </mat-form-field>
               </div>
             </div>

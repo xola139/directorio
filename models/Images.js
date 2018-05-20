@@ -15,24 +15,24 @@ var ImagesSchema = new mongoose.Schema({
   viajes: String,
   edad: Number,
   atiende:String,
-  cuerpo:[
+  cuerpo:
     {estatura: String,
     ojos: String,
     cabello: String,
     medidas: String,
-    peso: String}],
-  horarioAtencion:[{
+    peso: String},
+  horarioAtencion:{
     fulltime:Boolean,
     hinicio:Number,
     hfin:Number
-  }],
-  opcionesTelefono:[{
+  },
+  opcionesTelefono:{
       whatsapp:Boolean,
       llamadas:Boolean,
-      twitter:Boolean}],
-  idiomas:[{
+      twitter:Boolean},
+  idiomas:{
       espanol:Boolean,
-      ingles:Boolean}],
+      ingles:Boolean},
   images: [{
 	  	url: String,
 	  	fecha: String,
