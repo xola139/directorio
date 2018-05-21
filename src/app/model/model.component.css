@@ -53,14 +53,25 @@
 @media (min-width: 992px) { 
     
 }
+.custom-background{
+  background-color: #ff4081 !important;
+  /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#ff7fa7+0,ff4081+99 */
 
+  background: -moz-linear-gradient(top, #ff4081 0%, #ff4081 99%); /* FF3.6-15 */
+  background: -webkit-linear-gradient(top, #ff4081 0%,#ff4081 99%); /* Chrome10-25,Safari5.1-6 */
+  background: linear-gradient(to bottom, #ff4081 0%,#ff4081 99%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ff4081', endColorstr='#ff4081',GradientType=0 ); /* IE6-9 */
+}
 
 .chip {
     height: 50px;
     font-size: 12px;
-    color:black;
-    border-radius: 20px;
-    background-color: #f1f1f1;
+    color:#fff;
+}
+  
+  .chip a{
+    color:#fff !important;
+    text-decoration: none;
   }
   
   .chip img {

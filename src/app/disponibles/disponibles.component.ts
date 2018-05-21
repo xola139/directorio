@@ -1,5 +1,6 @@
 import { Component, OnInit,ViewChild, ElementRef,Inject } from '@angular/core';
 import { DisponibleService } from './disponible.service';
+import { ModelService } from '../model/model.service';
 import {MatTableDataSource,MatSnackBar,MatDialog,MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
 import { GenericmodalComponent } from '../genericmodal/genericmodal.component';
 import * as $ from 'jquery';
@@ -25,7 +26,9 @@ export class DisponiblesComponent implements OnInit {
 
   isMobile:Boolean;
 
-  constructor(public dialog: MatDialog,private disponibleService: DisponibleService,public snackBar: MatSnackBar) {
+  constructor(private modelService: ModelService,public dialog: MatDialog,
+    private disponibleService: DisponibleService,
+    public snackBar: MatSnackBar) {
     
   }
 
@@ -62,16 +65,25 @@ applyFilterDisponible(filterValue: string) {
 
 
    getDisponiblesList() {
+    this.modelService.showModelos().then((res) => {
+    var datos = res;
+    
     this.disponibleService.getDisponibles().then((res) => {
       this.disponibles = res;
-
-      
       const ELEMENT_DATES: ElementDisponible[] = this.disponibles;
 
       this.dsDisponible = new MatTableDataSource(ELEMENT_DATES);      
     }, (err) => {
       console.log(err);
+    });  
+      
+
+    }, (err) => {
+      console.log(err);
     });
+
+
+    
   }
 
    
