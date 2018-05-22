@@ -1,8 +1,21 @@
 import { Component, OnInit } from '@angular/core';
-import {MatDialog,MatTableDataSource,MatRadioChange} from '@angular/material';
+import { MatDialog,MatTableDataSource,MatRadioChange} from '@angular/material';
 import { ActivatedRoute, Router } from '@angular/router';
 import { PerfilService } from './perfil.service';
-import {Location} from '@angular/common';
+import { Location} from '@angular/common';
+import { ErrorStateMatcher} from '@angular/material/core';
+import {FormControl, FormGroupDirective, NgForm, Validators} from '@angular/forms';
+
+
+/** Error when invalid control is dirty, touched, or submitted. */
+export class MyErrorStateMatcher implements ErrorStateMatcher {
+  
+  isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
+    const isSubmitted = form && form.submitted;
+    return !!(control && control.invalid && (control.dirty || control.touched || isSubmitted));
+  }
+
+}
 
 
 @Component({
@@ -10,7 +23,13 @@ import {Location} from '@angular/common';
   templateUrl: './perfil.component.html',
   styleUrls: ['./perfil.component.css']
 })
-export class PerfilComponent implements OnInit {
+export class PerfilComponent implements OnInit  {
+
+  emailFormControl = new FormControl('', [
+    Validators.required,
+    Validators.email,
+  ]);
+  matcher = new MyErrorStateMatcher();
 
 	perfil:any;
   resourcesLoaded: Boolean;

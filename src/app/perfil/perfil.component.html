@@ -1,8 +1,17 @@
 <div class="container">
     
   <form (ngSubmit)="updatePerfil(perfil._id)" #perfilForm="ngForm">
-     
-      <input type="hidden" name="status"  [(ngModel)]="perfil.status">
+  
+    <mat-form-field class="example-full-width">
+      <input matInput placeholder="Email" [formControl]="emailFormControl" [errorStateMatcher]="matcher">
+      <mat-hint>Errors appear instantly!</mat-hint>
+      <mat-error *ngIf="emailFormControl.hasError('email') && !emailFormControl.hasError('required')">
+        Please enter a valid email address
+      </mat-error>
+      
+    </mat-form-field>
+    
+  <input type="hidden" name="status"  [(ngModel)]="perfil.status">
 
   <div class="row">
   <div class="col-md-12 col-md-12 sticky-top bg-light" >
@@ -106,7 +115,7 @@
             <div class="row">
               <div class="col-4">
                 <mat-form-field>
-                  <input matInput type="number" maxlength="2"  placeholder="Tu edad es:" [(ngModel)]="perfil.edad" name="edad" >
+                  <input matInput type="number" maxlength="2"  placeholder="Tu edad es:" [(ngModel)]="perfil.edad" name="edad" errorState="true" >
                 </mat-form-field>
               </div>
               <div class="col-4">
