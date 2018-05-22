@@ -33,7 +33,7 @@
           <div id="card_{{data.id}}" class="col-md-4 col-sm-12 mt-2 p-0 " *ngFor="let data of myData | slice:0:verItems ;let i = index">
            
 
-            <div class="row alert-light mr-0 ml-0 mb-1 " role="alert">
+            <div class="row alert-light mr-0 ml-0" role="alert">
                
               <div class="col-10 pr-0 pl-1 ">
                 
@@ -88,7 +88,7 @@
                         
                         <mat-tab-group class="demo-tab-group">
                             <mat-tab label="Tab 1">
-                                <ng-template  mat-tab-label style="padding:1 px !important; " >
+                                <ng-template  mat-tab-label  class="custom-background" style="padding:1 px !important; " >
                                   <mat-icon>people</mat-icon>
                                   <br>Acerca  
                                 </ng-template>
@@ -112,7 +112,7 @@
                               
                             
                             <mat-tab label="Tab 2">
-                              <ng-template  mat-tab-label >
+                              <ng-template  class="custom-background" mat-tab-label >
                                 <mat-icon>today</mat-icon>
                                 <br>Fechas  
                               </ng-template>
