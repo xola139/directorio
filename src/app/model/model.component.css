@@ -53,6 +53,12 @@
 @media (min-width: 992px) { 
     
 }
+
+.custom-color-icon{
+  color: #ff4081 !important;
+}
+
+
 .custom-background{
   background-color: #ff4081 !important;
   /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#ff7fa7+0,ff4081+99 */

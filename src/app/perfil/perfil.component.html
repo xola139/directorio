@@ -1,17 +1,8 @@
 <div class="container">
     
-  <form (ngSubmit)="updatePerfil(perfil._id)" #perfilForm="ngForm">
-  
-    <mat-form-field class="example-full-width">
-      <input matInput placeholder="Email" [formControl]="emailFormControl" [errorStateMatcher]="matcher">
-      <mat-hint>Errors appear instantly!</mat-hint>
-      <mat-error *ngIf="emailFormControl.hasError('email') && !emailFormControl.hasError('required')">
-        Please enter a valid email address
-      </mat-error>
-      
-    </mat-form-field>
-    
-  <input type="hidden" name="status"  [(ngModel)]="perfil.status">
+  <form (ngSubmit)="updatePerfil(perfil._id)"  [formGroup]="form">
+
+  <input type="hidden" name="status"  [(ngModel)]="perfil.status" formControlName="status"  >
 
   <div class="row">
   <div class="col-md-12 col-md-12 sticky-top bg-light" >
@@ -24,69 +15,67 @@
             <button class="btn btn-success" type="button" (click)="backClicked()" >
               <mat-icon>keyboard_backspace</mat-icon>
             </button>
-            <button type="submit" data-toggle="modal" data-target="#exampleModalCenter" class="btn btn-success" [disabled]="!perfilForm.form.valid">Update</button>
+            <button type="submit" data-toggle="modal" data-target="#exampleModalCenter" class="btn btn-success" [disabled]="form.valid" >Actualizar</button>
+
+        
         </div>
       </div>
     </div>
   </div>
-    <div class="col-sm-12 col-md-6">
+
+  <div class="col-sm-12 col-md-6">
       <div class="form-group">
         <mat-form-field>
-          <input matInput placeholder="Tu telefono" [(ngModel)]="perfil.telefono" name="telefono" required>
+          <input matInput color="yellow" placeholder="Tu telefono" [(ngModel)]="perfil.telefono" formControlName="telefono" name="telefono" required>
         </mat-form-field>
         Medio de contacto:
-        <mat-checkbox  [(ngModel)]="perfil.opcionesTelefono.llamadas" name="llamadas" >LLamadas</mat-checkbox>
-        <mat-checkbox [(ngModel)]="perfil.opcionesTelefono.whatsapp" name="Whatsapp" >Whatsapp</mat-checkbox>
-        <mat-checkbox [(ngModel)]="perfil.opcionesTelefono.twitter" name="twitter" >Twitter</mat-checkbox>
-        
+        <mat-checkbox  [(ngModel)]="perfil.opcionesTelefono.llamadas" name="llamadas" formControlName="llamadas">LLamadas</mat-checkbox>
+        <mat-checkbox [(ngModel)]="perfil.opcionesTelefono.whatsapp" name="Whatsapp" formControlName="whatsapp">Whatsapp</mat-checkbox>
+        <mat-checkbox [(ngModel)]="perfil.opcionesTelefono.twitter" name="twitter" formControlName="twitter">Twitter</mat-checkbox>
         <mat-form-field>
-          <mat-select placeholder="¿En que ciudad atiendes?"  [(value)]="perfil.ciudad" >
+          <mat-select placeholder="¿En que ciudad atiendes?"  [(value)]="perfil.ciudad" formControlName="ciudad" name="ciudad" >
             <mat-option *ngFor="let ciudad of cudades" [value]="ciudad.value">
               {{ ciudad.viewValue }}
             </mat-option>
           </mat-select>
         </mat-form-field>
-
-          </div>
-          
-            <div class="row">
+       
+      </div>
+      <div class="row">
               <div class="col-8">
                 <div class="form-group">
                   <mat-form-field>
-                    <textarea matInput matAutosizeMinRows=15  maxRows=5 placeholder="Cuentanos un poco de ti :" [(ngModel)]="perfil.descripcion" name="descripcion"></textarea>
+                    {{perfil.descripcionTwitter}}                  
+                    <textarea matInput [disabled]="perfil.descripcionTwitter" matAutosizeMinRows=15  maxRows=5 placeholder="Cuentanos un poco de ti :" [(ngModel)]="perfil.descripcion" name="descripcion" formControlName="descripcion"></textarea>
                   </mat-form-field>
                 
                 </div>
               </div>
               <div class="col-4">
                 <div class="form-group">
-                <mat-checkbox [(ngModel)]="perfil.descripcionTwitter" name="descripcionTwitter" >Tomar de Twitter</mat-checkbox>
+                <mat-checkbox [(ngModel)]="perfil.descripcionTwitter" name="descripcionTwitter" formControlName="descripcionTwitter">Tomar de Twitter</mat-checkbox>
                 </div>
               </div>
-
-          </div>
-          
-          
-
-          <div class="form-group">
-            <mat-form-field>
-              <input matInput placeholder="¿De que pais eres?"  [(ngModel)]="perfil.nacionalidad" name="nacionalidad">
-            </mat-form-field>
-            
-          </div>
-          <div class="form-group">
-              <label>Idiomas</label><br>
-              <mat-checkbox  [(ngModel)]="perfil.idiomas.espanol" name="espanol" >Español</mat-checkbox>
-              <mat-checkbox  [(ngModel)]="perfil.idiomas.ingles" name="ingles" >Ingles</mat-checkbox>
-          </div>
-        </div>  
-        <div class="col-sm-12 col-md-6">
-          <div class="form-group">
-              <label>Horarios de atención</label><br>
-              <div class="row">
+      </div>
+      <div class="form-group">
+        <mat-form-field>
+          <input matInput placeholder="¿De que pais eres?"  [(ngModel)]="perfil.nacionalidad" name="nacionalidad" formControlName="nacionalidad">
+        </mat-form-field>
+      </div>
+      <div class="form-group">
+        <label>Idiomas</label><br>
+        <mat-checkbox  [(ngModel)]="perfil.idiomas.espanol" name="espanol" formControlName="espanol">Español</mat-checkbox>
+        <mat-checkbox  [(ngModel)]="perfil.idiomas.ingles" name="ingles" formControlName="ingles">Ingles</mat-checkbox>
+      </div>
+     
+  </div>
+  <div class="col-sm-12 col-md-6">
+    <div class="form-group">
+        <label>Horarios de atención</label><br>
+          <div class="row">
                 <div class="col-5">
                   <mat-form-field>
-                    <mat-select placeholder="Hora inicial" [(ngModel)]="perfil.horarioAtencion.hinicio" name="hinicio">
+                    <mat-select placeholder="Hora inicial" [disabled]="perfil.horarioAtencion.fulltime" [(ngModel)]="perfil.horarioAtencion.hinicio ? disabled:enabled" name="hinicio" formControlName="hinicio">
                       <mat-option *ngFor="let hora of horarios" [value]="hora.value">
                           {{ hora.viewValue }}
                       </mat-option>
@@ -95,7 +84,7 @@
                 </div>
                 <div class="col-5">
                   <mat-form-field>
-                    <mat-select placeholder="Hora final" [(ngModel)]="perfil.horarioAtencion.hfin" name="hfin">
+                    <mat-select placeholder="Hora final" [disabled]="perfil.horarioAtencion.fulltime" [(ngModel)]="perfil.horarioAtencion.hfin ? disabled:enabled" name="hfin" formControlName="hfin">
                       <mat-option *ngFor="let hora of horarios" [value]="hora.value">
                           {{ hora.viewValue }}
                       </mat-option>
@@ -103,48 +92,50 @@
                   </mat-form-field>
                 </div>
                 <div class="col-2">
-                  <mat-checkbox [(ngModel)]="perfil.horarioAtencion.fulltime" name="fulltime" >Full time</mat-checkbox>
+                  <mat-checkbox [(ngModel)]="perfil.horarioAtencion.fulltime"  (click)="isFullTime()" name="fulltime" formControlName="fulltime">Full time</mat-checkbox>
                 </div>
-
-                
-              </div>
-            
-            
           </div>
-          <div class="form-group">
-            <div class="row">
-              <div class="col-4">
-                <mat-form-field>
-                  <input matInput type="number" maxlength="2"  placeholder="Tu edad es:" [(ngModel)]="perfil.edad" name="edad" errorState="true" >
-                </mat-form-field>
-              </div>
-              <div class="col-4">
-                  <mat-form-field>
-
-                  <input matInput type="number" maxlength="2"  placeholder="Tu peso es:" [(ngModel)]="perfil.cuerpo.peso" name="peso" >
-                </mat-form-field>
-              </div>
-              <div class="col-4">
-                <mat-form-field>
-                  <input matInput type="number" maxlength="2"  placeholder="Tu estatura es:" [(ngModel)]="perfil.cuerpo.estatura" name="estatura" > 
-                </mat-form-field>
-              </div>
-            </div>
-          </div>
-          <div class="form-group">
-            
+    </div>
+    <div class="form-group">
+      <div class="row">
+        <div class="col-4">
             <mat-form-field>
-                <textarea matInput placeholder="Zona de atención :" [(ngModel)]="perfil.atiende" name="atiende"></textarea>
+                <input matInput type="number" maxlength="2"  placeholder="Tu edad es:" [(ngModel)]="perfil.edad" name="edad"  formControlName="edad">
             </mat-form-field>
-            
-          </div>
-          
-          
-       
+            <mat-error *ngIf="!form.valid &&  !form.hasError('required', ['age'])">
+              Debes ser mayor a <strong>18</strong>
+            </mat-error>
+        </div>
+        <div class="col-4">
+            <mat-form-field>
+              <input matInput type="number" maxlength="2"  placeholder="Tu peso es:" [(ngModel)]="perfil.cuerpo.peso" name="peso" formControlName="peso">
+            </mat-form-field>
+        </div>
+        <div class="col-4">
+            <mat-form-field>
+              <input matInput type="number" maxlength="2"  placeholder="Tu estatura es:" [(ngModel)]="perfil.cuerpo.estatura" name="estatura" formControlName="estatura"> 
+            </mat-form-field>
+        </div>
       </div>
-     
+    </div>
+    <div class="form-group">
+      <div class="row">
+        <div class="col-4">
+            <mat-form-field>
+              <input matInput placeholder="Medidas de tu cuerpo:" [(ngModel)]="perfil.cuerpo.medidas" name="medidas" formControlName="medidas" />
+            </mat-form-field> 
+        </div>
+        <div class="">
+            <mat-form-field>
+              <textarea matInput placeholder="Zona de atención :" [(ngModel)]="perfil.atiende" name="atiende" formControlName="atiende"></textarea>
+            </mat-form-field>
+        </div>
+      </div>  
       
-      <h2>Imagenes tomadas de Twitter</h2>
+    </div>
+
+  </div>
+  <h4>Imagenes tomadas de Twitter</h4>
       <div class="row">
          <div class="col-sm-2 col-md-3" *ngFor="let pic of perfil.images ;let i = index">
           
@@ -169,14 +160,14 @@
 
      
       </div>
-  
+
+
   
     </div>
    </form>
   </div>
   
-  
-  <!-- Modal -->
+<!-- Modal -->
   <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenter" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
       <div class="modal-content">

@@ -4,18 +4,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { PerfilService } from './perfil.service';
 import { Location} from '@angular/common';
 import { ErrorStateMatcher} from '@angular/material/core';
-import {FormControl, FormGroupDirective, NgForm, Validators} from '@angular/forms';
+import { FormBuilder,FormControl, FormGroupDirective, NgForm, Validators} from '@angular/forms';
 
-
-/** Error when invalid control is dirty, touched, or submitted. */
-export class MyErrorStateMatcher implements ErrorStateMatcher {
-  
-  isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
-    const isSubmitted = form && form.submitted;
-    return !!(control && control.invalid && (control.dirty || control.touched || isSubmitted));
-  }
-
-}
 
 
 @Component({
@@ -25,11 +15,8 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
 })
 export class PerfilComponent implements OnInit  {
 
-  emailFormControl = new FormControl('', [
-    Validators.required,
-    Validators.email,
-  ]);
-  matcher = new MyErrorStateMatcher();
+  emailFormControl = new FormControl('', [Validators.required,Validators.email,]);
+  edadFormControl = new FormControl('', [Validators.required,Validators.email,]);
 
 	perfil:any;
   resourcesLoaded: Boolean;
@@ -77,10 +64,39 @@ export class PerfilComponent implements OnInit  {
 
   ];
 
-
-	constructor(public dialog: MatDialog,private _location: Location,private route: ActivatedRoute, private router: Router, private perfilService: PerfilService) { 
+  form;
+  constructor(private fb: FormBuilder,public dialog: MatDialog,private _location: Location,private route: ActivatedRoute, private router: Router, private perfilService: PerfilService) { 
 		
+      let regexPatterns = {
+           // this can be improved
+           hours: "[0-2]?[0-9]?",
+           minutes: "[0-5]?[0-9]?",
+           age:"^(1[89]|[23][0-9]|50)$"
+        };
 
+    this.form = fb.group({
+      email: ['', [Validators.required, Validators.email]],
+      age: ['', [Validators.required,Validators.pattern(regexPatterns.age)]],
+      telefono:['',[]],
+      status:['',[]],
+      llamadas:['',[]],
+      whatsapp:['',[]],
+      twitter:['',[]],
+      ciudad:['',[]],
+      descripcion:['',[]],
+      descripcionTwitter:['',[]],
+      nacionalidad:['',[]],
+      espanol:['',[]],
+      ingles:['',[]],
+      fulltime:['',[]],
+      hfin:['',[]],
+      hinicio:['',[]],
+      estatura:['',[]],
+      peso:['',[]],
+      medidas:['',[]],
+      edad:['', [Validators.required,Validators.pattern(regexPatterns.age)]],
+      atiende:['',[]],
+    });
 	}
 
   
@@ -99,6 +115,8 @@ export class PerfilComponent implements OnInit  {
   		this.getPerfil(this.route.snapshot.params['id']);
 		
   	}
+
+
 
   	getPerfil(id) {
 			

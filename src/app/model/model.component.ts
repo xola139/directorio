@@ -74,11 +74,13 @@ constructor(  private modelService: ModelService) {
         res[i].telefono= res[i].telefono != null ?res[i].telefono.replace(/\s/g, ""):"";
         res[i].satisfechos = [];
         res[i].fotos = [];
-        
+        res[i].calendario;
 
         for (let x = 0; x < res[i].images.length; x++) {
           if(res[i].images[x].status == 'foto')
             res[i].fotos.push( res[i].images[x]);
+          else if(res[i].images[x].status == 'calendario')
+            res[i].calendario = res[i].images[x];
           else
             res[i].satisfechos.push( res[i].images[x]);
         }
@@ -105,9 +107,17 @@ constructor(  private modelService: ModelService) {
  }
 
   getPictures(data,tipoFoto){
+    console.log(">>>>>>>>>>>")
+    this.pictures.id = data.id;
     this.tipoFoto = tipoFoto;
     data.fotos.reverse();
-    this.pictures = data;
+    data.satisfechos.reverse();
+    if(tipoFoto =="foto")
+      this.pictures = data.fotos;
+    else
+    this.pictures = data.satisfechos;
+    
+    
   }
 
   toggleCard(id){
