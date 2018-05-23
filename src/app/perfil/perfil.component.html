@@ -75,7 +75,7 @@
           <div class="row">
                 <div class="col-5">
                   <mat-form-field>
-                    <mat-select placeholder="Hora inicial" [disabled]="perfil.horarioAtencion.fulltime" [(ngModel)]="perfil.horarioAtencion.hinicio ? disabled:enabled" name="hinicio" formControlName="hinicio">
+                    <mat-select placeholder="Hora inicial" [disabled]="perfil.horarioAtencion.fulltime" [(ngModel)]="perfil.horarioAtencion.hinicio" name="hinicio" formControlName="hinicio">
                       <mat-option *ngFor="let hora of horarios" [value]="hora.value">
                           {{ hora.viewValue }}
                       </mat-option>
@@ -84,7 +84,7 @@
                 </div>
                 <div class="col-5">
                   <mat-form-field>
-                    <mat-select placeholder="Hora final" [disabled]="perfil.horarioAtencion.fulltime" [(ngModel)]="perfil.horarioAtencion.hfin ? disabled:enabled" name="hfin" formControlName="hfin">
+                    <mat-select placeholder="Hora final" [disabled]="perfil.horarioAtencion.fulltime" [(ngModel)]="perfil.horarioAtencion.hfin" name="hfin" formControlName="hfin">
                       <mat-option *ngFor="let hora of horarios" [value]="hora.value">
                           {{ hora.viewValue }}
                       </mat-option>
@@ -92,7 +92,7 @@
                   </mat-form-field>
                 </div>
                 <div class="col-2">
-                  <mat-checkbox [(ngModel)]="perfil.horarioAtencion.fulltime"  (click)="isFullTime()" name="fulltime" formControlName="fulltime">Full time</mat-checkbox>
+                  <mat-checkbox [(ngModel)]="perfil.horarioAtencion.fulltime"   name="fulltime" formControlName="fulltime">Full time</mat-checkbox>
                 </div>
           </div>
     </div>

@@ -70,7 +70,7 @@
               </div>
             </div>
           
-          <div class="col pl-1 pr-1 ">
+          <div class="col pl-1 pr-1" style="top: -2px">
                   <div class="collapse multi-collapse{{i}} show index-content" id="multiCollapse1">
                     <div class="card card-body cars-custom p-1" >
                             <img class="card-img-top" src="{{data.avatar}}" alt="El avatar">
@@ -81,57 +81,57 @@
                     </div>
                   </div>
                   
-                </div>
-                <div class="col pl-1 pr-1">
-                  <div class="collapse multi-collapse{{i}} index-content" id="multiCollapse2">
-                    <div class="card card-body cars-custom p-1">
+          </div>
+          <div class="col pl-1 pr-1" style="top: -2px">
+            <div class="collapse multi-collapse{{i}} index-content" id="multiCollapse2">
+              <div class="card card-body cars-custom p-1">
+                  
+                  <mat-tab-group class="demo-tab-group">
+                      <mat-tab label="Tab 1" active>
+                          <ng-template  mat-tab-label   style="padding:1 px !important; " >
+                            <mat-icon class="custom-color-icon">people</mat-icon>
+                            <br><label class="custom-color-icon">Acerca  </label>
+                          </ng-template>
+                          <p>
+                            {{data.descripcion}}
+                          </p>
+                          <ul class="list-group">
+                            <li class="list-group-item p-1">Nacionalidad:{{data.nacionalidad}}</li>
+                            <li class="list-group-item p-1">Idiomas:{{data.idiomas.ingles != 'undefined' ? data.idiomas.ingles ? 'Ingles' :'' :''}} - {{data.idiomas.espanol ? 'Español':''}}</li>
+                            <li class="list-group-item p-1">Horarios: {{data.horarioAtencion.hinicio}} - {{data.horarioAtencion.hfin}}</li>
+                            <li class="list-group-item p-1">Medidas:{{data.cuerpo.medidas}}</li>
+                            <li class="list-group-item p-1">Edad:{{data.edad}}</li>
+                            <li class="list-group-item p-1">Peso:{{data.cuerpo.peso}}</li>
+                            <li class="list-group-item p-1">Estatura:{{data.cuerpo.estatura}}</li>
+                            <li class="list-group-item p-1">Atiende en:{{data.atiende}}</li>
+                          </ul>
+                          <button mat-button (click)="getPictures(data,'foto')" data-toggle="modal" data-target="#exampleModalLong"><mat-icon>collections</mat-icon>Galeria!</button>
+                          <button mat-button (click)="getPictures(data,'satisfechos')" data-toggle="modal" data-target="#exampleModalLong"><mat-icon>collections</mat-icon>Satisfecho!</button>
+                          
+                      </mat-tab>
                         
-                        <mat-tab-group class="demo-tab-group">
-                            <mat-tab label="Tab 1">
-                                <ng-template  mat-tab-label   style="padding:1 px !important; " >
-                                  <mat-icon class="custom-color-icon">people</mat-icon>
-                                  <br><label class="custom-color-icon">Acerca  </label>
-                                </ng-template>
-                                <p>
-                                  {{data.descripcion}}
-                                </p>
-                                <ul class="list-group">
-                                  <li class="list-group-item p-1">Nacionalidad:{{data.nacionalidad}}</li>
-                                  <li class="list-group-item p-1">Idiomas:{{data.idiomas.ingles != 'undefined' ? data.idiomas.ingles ? 'Ingles' :'' :''}} - {{data.idiomas.espanol ? 'Español':''}}</li>
-                                  <li class="list-group-item p-1">Horarios: {{data.horarioAtencion.hinicio}} - {{data.horarioAtencion.hfin}}</li>
-                                  <li class="list-group-item p-1">Medidas:{{data.cuerpo.medidas}}</li>
-                                  <li class="list-group-item p-1">Edad:{{data.edad}}</li>
-                                  <li class="list-group-item p-1">Peso:{{data.cuerpo.peso}}</li>
-                                  <li class="list-group-item p-1">Estatura:{{data.cuerpo.estatura}}</li>
-                                  <li class="list-group-item p-1">Atiende en:{{data.atiende}}</li>
-                                </ul>
-                                <button mat-button (click)="getPictures(data,'foto')" data-toggle="modal" data-target="#exampleModalLong"><mat-icon>collections</mat-icon>Galeria!</button>
-                                <button mat-button (click)="getPictures(data,'satisfechos')" data-toggle="modal" data-target="#exampleModalLong"><mat-icon>collections</mat-icon>Satisfecho!</button>
-                                
-                            </mat-tab>
-                              
-                            
-                            <mat-tab label="Tab 2">
-                              <ng-template  class="custom-background" mat-tab-label >
-                                <mat-icon class="custom-color-icon">today</mat-icon>
-                                <br><label class="custom-color-icon">Fechas  </label>
-                              </ng-template>
-                              <mat-list>
-                                <mat-list-item *ngFor="let folder of folders">
-                                  <mat-icon mat-list-icon>date_range</mat-icon>
-                                  <h4 mat-line>{{folder.name}}</h4>
-                                  <p mat-line> {{folder.updated | date}} </p>
-                                </mat-list-item>
-                                <mat-divider></mat-divider>
-                                
-                              </mat-list>
-                              
-                            </mat-tab>
-                                                     
-                          </mat-tab-group>
-                    </div>
-                  </div>
-                </div>
+                      
+                      <mat-tab label="Tab 2">
+                        <ng-template  class="custom-background" mat-tab-label >
+                          <mat-icon class="custom-color-icon">today</mat-icon>
+                          <br><label class="custom-color-icon">Fechas  </label>
+                        </ng-template>
+                        <mat-list>
+                          <mat-list-item *ngFor="let folder of folders">
+                            <mat-icon mat-list-icon>date_range</mat-icon>
+                            <h4 mat-line>{{folder.name}}</h4>
+                            <p mat-line> {{folder.updated | date}} </p>
+                          </mat-list-item>
+                          <mat-divider></mat-divider>
+                          
+                        </mat-list>
+                        
+                      </mat-tab>
+                                               
+                    </mat-tab-group>
+              </div>
+            </div>
+          </div>
 
 
 

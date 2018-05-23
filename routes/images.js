@@ -13,6 +13,27 @@ router.get('/', function(req, res, next) {
   });
 });
 
+router.get('/getMostrarEnDispoibles', function(req, res, next) {
+  Images.find({status:true},function (err, images) {
+    if (err) return next(err);
+    var items = [];
+    console.log("Entrando----->");
+    for(var i=0;i<images.length;i++){
+       console.log("Iteraciono----->");
+       var item = {};
+       item.ciudad = images[i].ciudad;
+       item.created_at = new Date();
+       item.descripcion = images[i].descripcion;
+       item.id = images[i].id;
+       item.profile_image_url = images[i].avatar;
+       item.telefono = images[i].telefono;
+       items.images = images[i].images;
+       items.push(item);
+       
+    }
+    res.json(items);
+  });
+});
 
 
 /* SAVE BOOK */

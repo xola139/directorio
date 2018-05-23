@@ -24,3 +24,17 @@
     
     padding: 1px !important;
 }
+
+
+
+.custom-img-vip{
+  height: 100px!important;
+  width: 100%!important;
+  display: block !important;
+}
+
+.custom-bagde-vip{
+  position: absolute !important;
+  padding: 0  !important;
+
+}

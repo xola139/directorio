@@ -2,46 +2,76 @@ var express = require('express');
 var router = express.Router();
 var mongoose = require('mongoose');
 var Disponible = require('../models/Disponibles.js');
+var Images = require('../models/Images.js');
 
 
 
-/* GET ALL PROMOSS */
+/* GET ALL DISPONIBLE */
 router.get('/',
-	function(req, res, next) {
-        Disponible.find({status:true}).populate({
-            path:'fk_images',
-            model:'Images'}
-        ).exec(function(err, disponible) {
-            if (err) { return console.log(err); }
-            
+    function(req, res, next) {
+        var items = [];
+        Images.find({
+            status: true
+        }, function(err, images) {
+            if (err) return next(err);
 
- 		var items = [];
- 		for(var it=0 ;it<disponible.length;it++){
-      		var ciudad ="";
-      		for(var ci=0;ci<disponible[it].disponibles.length;ci++){
-					if(disponible[it].disponibles[ci].ciudad != "" && ciudad ==""){
-      					ciudad = disponible[it].disponibles[ci].ciudad;
-      					break;
-      				}
-      		}
-      	var telefono = null;
-      	if(disponible[it].fk_images[0]!=null)
-      		telefono = disponible[it].fk_images[0].telefono;
+            for (var i = 0; i < images.length; i++) {
+                var item = {};
+                item.ciudad = images[i].ciudad;
+                item.created_at = new Date();
+                item.descripcion = images[i].descripcion;
+                item.id = images[i].id;
+                item.profile_image_url = images[i].avatar;
+                item.telefono = images[i].telefono;
+                item.images = images[i].images;
+                item.vip = true;
+                items.push(item);
 
-            items.push({
-              id:disponible[it].id,
-              profile_image_url:disponible[it].profile_image_url,
-              ciudad:ciudad,
-              telefono: telefono,
-              descripcion:disponible[it].disponibles[disponible[it].disponibles.length -1].descripcion,
-              created_at:disponible[it].disponibles[disponible[it].disponibles.length -1].created_at}
-              );
-      }
-      
-		res.json(items);
+            }
+ 
+            Disponible.find({
+                status: true
+            }).populate({
+                path: 'fk_images',
+                model: 'Images'
+            }).exec(function(err, disponible) {
+                if (err) {
+                    return console.log(err);
+                }
+
+                for (var it = 0; it < disponible.length; it++) {
+                    var ciudad = "";
+                    for (var ci = 0; ci < disponible[it].disponibles.length; ci++) {
+                        if (disponible[it].disponibles[ci].ciudad != "" && ciudad == "") {
+                            ciudad = disponible[it].disponibles[ci].ciudad;
+                            break;
+                        }
+                    }
+                    var telefono = null;
+                    if (disponible[it].fk_images[0] != null)
+                        telefono = disponible[it].fk_images[0].telefono;
+
+                    items.push({
+                        id: disponible[it].id,
+                        profile_image_url: disponible[it].profile_image_url,
+                        ciudad: ciudad,
+                        telefono: telefono,
+                        descripcion: disponible[it].disponibles[disponible[it].disponibles.length - 1].descripcion,
+                        created_at: disponible[it].disponibles[disponible[it].disponibles.length - 1].created_at
+                    });
+                }
+
+                res.json(items);
+            });
+
+
+
+        });
+
+
+
+
     });
-
-});
 
 
 /* GET ALL DISPONIBLE */
@@ -50,14 +80,14 @@ router.get('/',
     if (err) return next(err);
 
  var items = [];
- 	for(var it=0 ;it<disponible.length;it++){
-      		var ciudad ="";
-      		for(var ci=0;ci<disponible[it].disponibles.length;ci++){
-					if(disponible[it].disponibles[ci].ciudad != "" && ciudad ==""){
-      					ciudad = disponible[it].disponibles[ci].ciudad;
-      					break;
-      				}
-      		}
+  for(var it=0 ;it<disponible.length;it++){
+          var ciudad ="";
+          for(var ci=0;ci<disponible[it].disponibles.length;ci++){
+          if(disponible[it].disponibles[ci].ciudad != "" && ciudad ==""){
+                ciudad = disponible[it].disponibles[ci].ciudad;
+                break;
+              }
+          }
 
         items.push({
           id:disponible[it].id,
@@ -67,17 +97,17 @@ router.get('/',
           created_at:disponible[it].disponibles[disponible[it].disponibles.length -1].created_at}
           );
                 }
-	res.json(disponible);
+  res.json(disponible);
   });
 });
 */
 
 /*router.get('/', function(req, res, next) {
-	
-	Disponible.find().distinct('id', function(error, disponible) {
-    	if (error) return next(err);
-    	res.json(disponible);
-	});
+  
+  Disponible.find().distinct('id', function(error, disponible) {
+      if (error) return next(err);
+      res.json(disponible);
+  });
 });*/
 
 module.exports = router;

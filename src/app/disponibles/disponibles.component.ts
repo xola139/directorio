@@ -65,23 +65,21 @@ applyFilterDisponible(filterValue: string) {
 
 
    getDisponiblesList() {
-    this.modelService.showModelos().then((res) => {
-    var datos = res;
+
+
     
     this.disponibleService.getDisponibles().then((res) => {
+
       this.disponibles = res;
       const ELEMENT_DATES: ElementDisponible[] = this.disponibles;
-
       this.dsDisponible = new MatTableDataSource(ELEMENT_DATES);      
-    }, (err) => {
-      console.log(err);
-    });  
+      
+      }, (err) => {
+        console.log(err);
+      });  
       
 
-    }, (err) => {
-      console.log(err);
-    });
-
+   
 
     
   }

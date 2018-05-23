@@ -25,6 +25,20 @@ export class ModelService   {
   }
 
 
+   showMostrarEnDispoibles() {
+    return new Promise((resolve, reject) => {
+        this.http.get(this.baseApiUrl + '/images/getMostrarEnDispoibles/')
+          .map(res => res.json())
+          .subscribe(res => {
+            resolve(res)
+        }, (err) => {
+          reject(err);
+        });
+    });
+  }
+
+
+
   getPromos(){
     return this.promosService.getAllPromos();
   }

@@ -10,7 +10,7 @@
         <img class="emoji" *ngIf="data.item.msgTelefono != null" src="../assets/if_Big_Smile.png" alt="con telefono" >   
         <img class="emoji" *ngIf="data.item.msgTelefono == null" src="../assets/if_Big_Frown.png" alt="con telefono" >
 
-        {{data.item.msgTelefono != null ? data.item.msgTelefono:'Aun no tenemos su telefono! \n Pero revisa la mension y valida &#8681;'}}
+        {{data.item.msgTelefono != null ? data.item.msgTelefono:'Aun no tenemos su telefono!... Pero revisa la mensión y valida es posible que contenga el telefono &#8681;'}}
         <a *ngIf="data.item.msgTelefono != null"  href="{{isMobile ? 'https://api.whatsapp.com/send?phone=521'+ data.item.msgTelefono :'javascript:;'}}" class="" target="{{isMobile ? '_blank':'_self'}}">
             <img src="assets/if_whats.png" style="width:15px !important;height:15px !important" class="profile mat-elevation-z1" matTooltip="Atiende WhatsApp papa!  manda mensaje ya!" alt="Atiende WhatsApp papa! manda mensaje ya!">
         </a>
