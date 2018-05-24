@@ -1,6 +1,8 @@
 import { Component  } from '@angular/core';
 import { AsyncLocalStorage } from 'angular-async-local-storage';
-
+import {Router, NavigationEnd} from "@angular/router";
+import {GoogleAnalyticsEventsService} from "./google-analytics-events.service";
+declare var ga: Function;
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -9,19 +11,15 @@ import { AsyncLocalStorage } from 'angular-async-local-storage';
 export class AppComponent {
   usuario: string;
   otheruser: any;
-
+  public isCollapsed = true;
   
 
-  constructor(protected localStorage: AsyncLocalStorage) {
-   
- }
+ constructor(protected localStorage: AsyncLocalStorage,public router: Router,
+   public googleAnalyticsEventsService: GoogleAnalyticsEventsService) {
 
+}
 
-
-
-
- 
-  title = 'theapp';
+title = 'theapp';
 
 
   ngOnInit() {
