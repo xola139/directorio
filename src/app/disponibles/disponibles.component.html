@@ -9,7 +9,6 @@
               </div>
               <div class="col-md-12 col-sm-12 p-1 mx-auto">
                   <div class="chip m-1 mat-elevation-z1" *ngFor="let d of disponibles;let i = index" (click)="openDialog(d)" >
-                      
                       <div *ngIf="d.vip" class="card" style="width: 6.5rem;">
                       <div class="alert alert-success custom-bagde-vip" role="alert" >{{d.ciudad}}</div>
                         <img class="custom-img-vip" [src]="d.profile_image_url" onError="this.src='assets/broken.png'" alt="ultra mamasita! {{d.id}}" /> 
@@ -34,7 +33,7 @@
                              
                           </div>   
                           <div class="col-md-12 ">
-                            <p class="card-text">12313123{{d.telefono}}</p>
+                            <p class="card-text">{{d.telefono}}</p>
                           </div>
                       </div>
                      

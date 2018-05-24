@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component  } from '@angular/core';
 import { AsyncLocalStorage } from 'angular-async-local-storage';
 
 @Component({
@@ -10,7 +10,14 @@ export class AppComponent {
   usuario: string;
   otheruser: any;
 
-  constructor(protected localStorage: AsyncLocalStorage) {}
+  
+
+  constructor(protected localStorage: AsyncLocalStorage) {
+   
+ }
+
+
+
 
 
  
