@@ -13,6 +13,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { NgHttpLoaderModule } from 'ng-http-loader/ng-http-loader.module'
 
 
+import {GoogleAnalyticsEventsService} from "./google-analytics-events.service";
+
 import { MatFormFieldModule, MatAutocompleteModule,
   MatButtonModule,
   MatButtonToggleModule,
@@ -154,7 +156,7 @@ const appRoutes: Routes = [
     RouterModule.forRoot(appRoutes)
   ],
   providers: [
-    BookService,ModelService,PromosService,PerfilService,DisponibleService,
+    BookService,ModelService,PromosService,PerfilService,DisponibleService,GoogleAnalyticsEventsService,
     {provide: LocationStrategy, useClass: HashLocationStrategy}
   ],
   bootstrap: [AppComponent]

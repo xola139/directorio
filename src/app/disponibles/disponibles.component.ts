@@ -1,11 +1,13 @@
 import { Component, OnInit,ViewChild, ElementRef,Inject } from '@angular/core';
 import { DisponibleService } from './disponible.service';
 import { ModelService } from '../model/model.service';
-import {MatTableDataSource,MatSnackBar,MatDialog,MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
+import { MatTableDataSource,MatSnackBar,MatDialog,MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
 import { GenericmodalComponent } from '../genericmodal/genericmodal.component';
 import * as $ from 'jquery';
+import {Router, NavigationEnd} from "@angular/router";
+import {GoogleAnalyticsEventsService} from "../google-analytics-events.service";
 
-
+declare var ga: Function;
 
 @Component({
   selector: 'app-disponibles',
@@ -26,12 +28,19 @@ export class DisponiblesComponent implements OnInit {
 
   isMobile:Boolean;
 
+
+
   constructor(private modelService: ModelService,public dialog: MatDialog,
     private disponibleService: DisponibleService,
-    public snackBar: MatSnackBar) {
-    
+    public snackBar: MatSnackBar,public router: Router, public googleAnalyticsEventsService: GoogleAnalyticsEventsService) {
+  
+      this.router.events.subscribe(event => {
+        if (event instanceof NavigationEnd) {
+          ga('set', 'page', event.urlAfterRedirects);
+          ga('send', 'pageview');
+        }
+      });
   }
-
 
 applyFilterDisponible(filterValue: string) {
     filterValue = filterValue.trim(); // Remove whitespace
@@ -53,12 +62,12 @@ applyFilterDisponible(filterValue: string) {
     content.msgUrl = item.profile_image_url;
     content.msgFecha = item.created_at;
     content.msgTelefono = item.telefono;
-
-
-
+    
     this.dialog.open(GenericmodalComponent, {
       data: {item: content} ,width : '300px'
     });
+
+    this.eventAnalytics();
   }
 
 
@@ -85,7 +94,10 @@ applyFilterDisponible(filterValue: string) {
   }
 
    
-
+  eventAnalytics() {
+    console.log(">>>>")
+    this.googleAnalyticsEventsService.emitEvent("disponibleCategory", "click", "modelo", 1);
+  }
   copyItem(item) {
     
     var input;

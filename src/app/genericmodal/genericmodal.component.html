@@ -7,12 +7,11 @@
     </div >
     <div class="">
         <h2 mat-dialog-title class="m-0">{{data.item.msgTitle}}</h2>
-        <img class="emoji" *ngIf="data.item.msgTelefono != null" src="../assets/if_Big_Smile.png" alt="con telefono" >   
-        <img class="emoji" *ngIf="data.item.msgTelefono == null" src="../assets/if_Big_Frown.png" alt="con telefono" >
 
-        {{data.item.msgTelefono != null ? data.item.msgTelefono:'Aun no tenemos su telefono!... Pero revisa la mensión y valida es posible que contenga el telefono &#8681;'}}
+        <label class="texto-label">{{data.item.msgTelefono != null ? data.item.msgTelefono:'Aun no tenemos su telefono!... Pero revisa la mensión y valida es posible que contenga el telefono &#8681;'}}</label>
+        
         <a *ngIf="data.item.msgTelefono != null"  href="{{isMobile ? 'https://api.whatsapp.com/send?phone=521'+ data.item.msgTelefono :'javascript:;'}}" class="" target="{{isMobile ? '_blank':'_self'}}">
-            <img src="assets/if_whats.png" style="width:15px !important;height:15px !important" class="profile mat-elevation-z1" matTooltip="Atiende WhatsApp papa!  manda mensaje ya!" alt="Atiende WhatsApp papa! manda mensaje ya!">
+            <img src="assets/if_whats.png" style="width:25px !important;height:25px !important" class="profile mat-elevation-z1" matTooltip="Atiende WhatsApp papa!  manda mensaje ya!" alt="Atiende WhatsApp papa! manda mensaje ya!">
         </a>
         
           
