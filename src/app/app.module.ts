@@ -11,7 +11,7 @@ import { ClipboardModule } from 'ngx-clipboard';
 import { LazyLoadModule } from '@greg-md/ng-lazy-load';
 import { HttpClientModule } from '@angular/common/http';
 import { NgHttpLoaderModule } from 'ng-http-loader/ng-http-loader.module'
-
+import { LottieAnimationViewModule } from 'ng-lottie';
 
 import {GoogleAnalyticsEventsService} from "./google-analytics-events.service";
 
@@ -153,6 +153,7 @@ const appRoutes: Routes = [
     MatTabsModule,
     MatToolbarModule,
     MatTooltipModule,
+    LottieAnimationViewModule.forRoot(),
     RouterModule.forRoot(appRoutes)
   ],
   providers: [

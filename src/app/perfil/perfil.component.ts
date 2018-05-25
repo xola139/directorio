@@ -15,6 +15,10 @@ import { FormBuilder,FormControl, FormGroupDirective, NgForm, Validators} from '
 })
 export class PerfilComponent implements OnInit  {
 
+    public lottieConfig: Object;
+    private anim: any;
+    private animationSpeed: number = 1;
+
   emailFormControl = new FormControl('', [Validators.required,Validators.email,]);
   edadFormControl = new FormControl('', [Validators.required,Validators.email,]);
 
@@ -65,8 +69,14 @@ export class PerfilComponent implements OnInit  {
   ];
 
   form;
-  constructor(private fb: FormBuilder,public dialog: MatDialog,private _location: Location,private route: ActivatedRoute, private router: Router, private perfilService: PerfilService) { 
-		
+  constructor(private fb: FormBuilder,public dialog: MatDialog,private _location: Location,private route: ActivatedRoute, private router: Router, private perfilService: PerfilService) 
+  { 
+	     this.lottieConfig = {
+            path: 'assets/loading_animation.json',
+            autoplay: true,
+            loop: true
+        };
+
       let regexPatterns = {
            // this can be improved
            hours: "[0-2]?[0-9]?",
@@ -98,6 +108,28 @@ export class PerfilComponent implements OnInit  {
       atiende:['',[]],
     });
 	}
+
+  
+  handleAnimation(anim: any) {
+        this.anim = anim;
+    }
+
+    stop() {
+        this.anim.stop();
+    }
+
+    play() {
+        this.anim.play();
+    }
+
+    pause() {
+        this.anim.pause();
+    }
+
+    setSpeed(speed: number) {
+        this.animationSpeed = speed;
+        this.anim.setSpeed(speed);
+    }
 
   
   	ngOnInit() {

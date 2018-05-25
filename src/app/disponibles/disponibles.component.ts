@@ -36,8 +36,8 @@ export class DisponiblesComponent implements OnInit {
   
       this.router.events.subscribe(event => {
         if (event instanceof NavigationEnd) {
-          ga('set', 'page', event.urlAfterRedirects);
-          ga('send', 'pageview');
+          //ga('set', 'page', event.urlAfterRedirects);
+          //ga('send', 'pageview');
         }
       });
   }
