@@ -3,6 +3,17 @@ var router = express.Router();
 var mongoose = require('mongoose');
 var Images = require('../models/Images.js');
 var Disponibles = require('../models/Disponibles.js');
+var config  = require('../config');
+
+var Twit = require('twit');
+
+var Bot = new Twit({
+        consumer_key: config.twitter.key,
+        consumer_secret: config.twitter.secret,
+        access_token: config.twitter.TWITTER_ACCESS_TOKEN,
+        access_token_secret: config.twitter.TWITTER_ACCESS_TOKEN_SECRET
+});
+
 
 /* GET ALL IMAGES */
 //db.tweets.find( {_id : { "$lt" : <50th _id> } } ).limit(50).sort({"_id":-1});
@@ -34,6 +45,45 @@ router.get('/getMostrarEnDispoibles', function(req, res, next) {
     res.json(items);
   });
 });
+
+router.put('/registrar', function(req, res) {
+    var options = { screen_name: req.body.id,count:100};
+      
+    Bot.get('statuses/user_timeline', options , function(err, data) {
+        var newMedia = {};
+        var arrImage = [];
+
+        newMedia.id = data[0].user.screen_name;
+        newMedia.id_str = data[0].id;
+        newMedia.description= data[0].text,
+        newMedia.profile_image_url= data[0].user.profile_image_url;
+        newMedia.profile_image_url_https= data[0].user.profile_image_url_https.replace("_normal.jpg","_400x400.jpg");
+
+
+        for(var i=0;i<data.length;i++){
+            if(data[i].entities.media){
+                var _m = data[i].entities.media;
+                for(var x=0;x<_m.length;x++){
+                    delete _m[x].indices;
+                    delete _m[x].sizes;
+                    _m[x].status = "foto";
+                    arrImage.push(_m[x]);
+                }    
+            }
+        }
+        
+        newMedia.images = arrImage;
+        Images.create(newMedia, function (err, post) {
+            if (err)  console.log(err);
+                console.log("save register Images "+post.id);
+                res.json(post);
+        });
+
+    })
+
+});
+
+
 
 
 /* SAVE BOOK */

@@ -55,6 +55,18 @@ export class ModelService   {
     });
   }
 
+  registerNewModel(data) {
+    return new Promise((resolve, reject) => {
+        this.http.put(this.baseApiUrl +'/images/registrar', data)
+          .map(res => res.json())
+          .subscribe(res => {
+            resolve(res);
+          }, (err) => {
+            reject(err);
+          });
+    });
+  }
+
 }
 
 

@@ -115,8 +115,8 @@ constructor(  private modelService: ModelService) {
     if(tipoFoto =="foto")
       this.pictures = data.fotos;
     else
-    this.pictures = data.satisfechos;
-    
+      this.pictures = data.satisfechos;
+    console.log(">>>>>>>>>>>"+this.pictures.id)
     
   }
 

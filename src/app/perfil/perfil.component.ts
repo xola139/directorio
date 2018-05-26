@@ -93,7 +93,7 @@ export class PerfilComponent implements OnInit  {
       whatsapp:['',[]],
       twitter:['',[]],
       ciudad:['',[]],
-      descripcion:['',[]],
+      description:['',[]],
       descripcionTwitter:['',[]],
       nacionalidad:['',[]],
       espanol:['',[]],

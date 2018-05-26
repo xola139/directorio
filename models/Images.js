@@ -1,11 +1,14 @@
  var mongoose = require('mongoose');
 
 var ImagesSchema = new mongoose.Schema({
-  id: String,
-  status:Boolean,
-  avatar: String,
-  descripcion:String,
+  
+ id: String,
+  id_str:String,
+  description:String,
   descripcionTwitter:Boolean,
+  profile_image_url:String,
+  profile_image_url_https: String,
+  status:Boolean,
   ciudad:String,
   telefono: String,
   nacionalidad: String,
@@ -26,6 +29,16 @@ var ImagesSchema = new mongoose.Schema({
     hinicio:Number,
     hfin:Number
   },
+  diasAtencion:{
+    fulltime:Boolean,
+    lunes:Boolean,
+    martes:Boolean,
+    miercoles:Boolean,
+    jueves:Boolean,
+    viernes:Boolean,
+    sabado:Boolean,
+    domingo:Boolean,
+  },
   opcionesTelefono:{
       whatsapp:Boolean,
       llamadas:Boolean,
@@ -33,11 +46,8 @@ var ImagesSchema = new mongoose.Schema({
   idiomas:{
       espanol:Boolean,
       ingles:Boolean},
-  images: [{
-	  	url: String,
-	  	fecha: String,
-	  	status: String
-	}]
+  images: Array
+  
 });
 
 

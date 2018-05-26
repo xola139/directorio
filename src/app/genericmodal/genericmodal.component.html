@@ -6,16 +6,17 @@
         <img src="{{data.item.msgUrl}}" alt="imagen" >  
     </div >
     <div class="">
-        <h2 mat-dialog-title class="m-0">{{data.item.msgTitle}}</h2>
-
-        <label class="texto-label">{{data.item.msgTelefono != null ? data.item.msgTelefono:'Aun no tenemos su telefono!... Pero revisa la mensión y valida es posible que contenga el telefono &#8681;'}}</label>
-        
-        <a *ngIf="data.item.msgTelefono != null"  href="{{isMobile ? 'https://api.whatsapp.com/send?phone=521'+ data.item.msgTelefono :'javascript:;'}}" class="" target="{{isMobile ? '_blank':'_self'}}">
-            <img src="assets/if_whats.png" style="width:25px !important;height:25px !important" class="profile mat-elevation-z1" matTooltip="Atiende WhatsApp papa!  manda mensaje ya!" alt="Atiende WhatsApp papa! manda mensaje ya!">
-        </a>
-        
-          
-
+        <div class="col-md-12">
+            <h2 mat-dialog-title class="m-0">{{data.item.msgTitle}}</h2>  
+        </div>
+        <div class="col-md-12">
+            <label class="texto-label">{{data.item.msgTelefono != null ? data.item.msgTelefono:'Aun no tenemos su telefono!... Pero revisa la mensión y valida es posible que contenga el telefono &#8681;'}}</label>
+        </div>
+        <div class="col-md-12">
+            <a *ngIf="data.item.msgTelefono != null"  href="{{isMobile ? 'https://api.whatsapp.com/send?phone=521'+ data.item.msgTelefono :'javascript:;'}}"  mat-raised-button color="accent" target="{{isMobile ? '_blank':'_self'}}">
+              Envia WhatsApp!    
+            </a>
+        </div>
     </div>
   </div>  
 </div>

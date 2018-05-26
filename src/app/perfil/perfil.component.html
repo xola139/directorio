@@ -46,7 +46,7 @@
                 <div class="form-group">
                   <mat-form-field>
                     {{perfil.descripcionTwitter}}                  
-                    <textarea matInput [disabled]="perfil.descripcionTwitter" matAutosizeMinRows=15  maxRows=5 placeholder="Cuentanos un poco de ti :" [(ngModel)]="perfil.descripcion" name="descripcion" formControlName="descripcion"></textarea>
+                    <textarea matInput [disabled]="perfil.descripcionTwitter" matAutosizeMinRows=15  maxRows=5 placeholder="Cuentanos un poco de ti :" [(ngModel)]="perfil.description" name="description" formControlName="description"></textarea>
                   </mat-form-field>
                 
                 </div>
@@ -140,7 +140,7 @@
          <div   class="col-sm-2 col-md-3" *ngFor="let pic of perfil.images ;let i = index">
           
             <div class="card mt-1">
-              <img class="card-img-top" src="{{pic.url}}" alt="imagen twitter">
+              <img class="card-img-top" src="{{pic.media_url_https}}" alt="imagen twitter">
               <div class="card-body">
                 <p class="card-text">
                    <mat-radio-group >

@@ -16,6 +16,10 @@ declare var ga: Function;
 })
 export class DisponiblesComponent implements OnInit {
   @ViewChild("myInput") inputEl: ElementRef;
+  @ViewChild('fileInput') fileInput:ElementRef;
+  @ViewChild('loginButton') loginButton:ElementRef;
+  
+
 	disponibles: any;
 	displayedColumnsDisponible = ['profile_image_url','id','ciudad'];
 	dsDisponible :any;
@@ -25,7 +29,7 @@ export class DisponiblesComponent implements OnInit {
   itemDisponible:any;
   animal: string;
   name: string;
-
+  showAlert :string;
   isMobile:Boolean;
 
 
@@ -51,7 +55,15 @@ applyFilterDisponible(filterValue: string) {
 
 
   ngOnInit() {
+    this.showAlert = 'show'
     this.getDisponiblesList(); 
+
+    setTimeout(()=>{
+      this.loginButton.nativeElement.click();
+     },5000);
+    
+    
+
   }
 
   openDialog(item): void {
@@ -74,23 +86,15 @@ applyFilterDisponible(filterValue: string) {
 
 
    getDisponiblesList() {
-
-
-    
     this.disponibleService.getDisponibles().then((res) => {
 
-      this.disponibles = res;
-      const ELEMENT_DATES: ElementDisponible[] = this.disponibles;
-      this.dsDisponible = new MatTableDataSource(ELEMENT_DATES);      
+    this.disponibles = res;
+    const ELEMENT_DATES: ElementDisponible[] = this.disponibles;
+    this.dsDisponible = new MatTableDataSource(ELEMENT_DATES);      
       
-      }, (err) => {
+    }, (err) => {
         console.log(err);
       });  
-      
-
-   
-
-    
   }
 
    

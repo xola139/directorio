@@ -72,6 +72,17 @@ getDetails(data,tipo){
       console.log(err);
     });
   }
+
+  registerModelVip(){
+    this.modelService.registerNewModel(this.newModel).then((result) => {
+      let id = result['_id'];
+      this.newModel.id = "";
+      alert("Registrado!!"+id);
+    }, (err) => {
+      console.log(err);
+    });
+
+  }
     
 selectBadge (e, id) {
   this.ratingHtml = "";
@@ -108,10 +119,7 @@ selectBadge (e, id) {
 
 }
   
-  pegar(){
-    
-    
-  }
+  
 
   openSnackBar() {
     this.snackBar.open("copiado", "Acción", {
