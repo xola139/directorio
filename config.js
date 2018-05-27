@@ -1,6 +1,6 @@
 var config={
 	  twitter:{
-              	key:'',
+                key:'',
                 secret:'',
         
                TWITTER_ACCESS_TOKEN: '',

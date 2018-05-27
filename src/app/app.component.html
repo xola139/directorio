@@ -1,23 +1,21 @@
-<main>
-      <div class="container">
+<div class="container">
+
           <nav class="navbar navbar-expand-lg navbar-light bg-light">
               <a class="navbar-brand" href="#"><mat-icon mat-list-icon>favorite</mat-icon></a>
-              <button  #collapseButton  class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+              <button  class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
               </button>
               <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                 <div class="navbar-nav">
                   <a class="nav-item nav-link active" routerLink="/promos">Promos<span class="sr-only">(current)</span></a>
-                  <a class="nav-item nav-link" routerLink="/disponibles">Disponibles</a>
+                  <a class="nav-item nav-link" (click)="toggleCollapsable()" routerLink="/disponibles">Disponibles</a>
                   <a class="nav-item nav-link" routerLink="/model">Modelos</a>
-                  <a class="nav-item nav-link" routerLink="/tools">Tools</a>
+                  <a class="nav-item nav-link" routerLink= "/tools">Tools</a>
                   <a  href="/login" class="btn btn-info"><span class="fa fa-twitter"></span> Twitter</a>
                   {{usuario}}
                 </div>
               </div>
             </nav>
-      </div>
-  </main>
-  <spinner></spinner>
-     <router-outlet></router-outlet>
+</div>
+<router-outlet></router-outlet>
 

@@ -56,8 +56,15 @@ router.put('/registrar', function(req, res) {
         newMedia.id = data[0].user.screen_name;
         newMedia.id_str = data[0].id;
         newMedia.description= data[0].text,
-        newMedia.profile_image_url= data[0].user.profile_image_url;
-        newMedia.profile_image_url_https= data[0].user.profile_image_url_https.replace("_normal.jpg","_400x400.jpg");
+        newMedia.profile_image_url = data[0].user.profile_image_url;
+        newMedia.profile_image_url_https = data[0].user.profile_image_url_https.replace("_normal.jpg","_400x400.jpg");
+        newMedia.diasAtencion = {lunes:false,martes:false,miercoles:false,jueves:false,viernes:false,sabado:false,domingo:false,fulltime:false};
+        newMedia.opcionesTelefono = {whatsapp:false,llamadas:false,twitter:false};        
+        newMedia.idiomas = {espanol:false,ingles:false};        
+        newMedia.horarioAtencion = {hinicio:0,hfin:0,fulltime:false};        
+        newMedia.cuerpo = {estatura:'',ojos:'',cabello:'',medidas:'',peso: ''};
+      
+
 
 
         for(var i=0;i<data.length;i++){
@@ -127,18 +134,6 @@ router.get('/:id', function(req, res, next) {
   Images.findOne({id:req.params.id}, function (err, post) {
 //  Images.findById(req.params.id, function (err, post) {
     if (err) return next(err);
-
-    if(post.opcionesTelefono == null){
-      post.opcionesTelefono.push({"llamadas": false,"whatsapp": false});
-    }
-     if(post.idiomas == null){
-      post.idiomas.push({"espanol": false,"ingles": false});
-    } 
-    if(post.horarioAtencion == null){
-      post.horarioAtencion.push({"hinicio": 0,"hfin": 0});
-    } 
-
-
     res.json(post);
   });
 });

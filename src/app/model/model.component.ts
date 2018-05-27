@@ -24,20 +24,6 @@ export class ModelComponent implements OnInit {
   isMobile :Boolean;
 
 
- folders = [
-    {
-      name: 'Photos',
-      updated: new Date('1/1/16'),
-    },
-    {
-      name: 'Recipes',
-      updated: new Date('1/17/16'),
-    },
-    {
-      name: 'Work',
-      updated: new Date('1/28/16'),
-    }
-  ];
 
 
 
@@ -79,8 +65,6 @@ constructor(  private modelService: ModelService) {
         for (let x = 0; x < res[i].images.length; x++) {
           if(res[i].images[x].status == 'foto')
             res[i].fotos.push( res[i].images[x]);
-          else if(res[i].images[x].status == 'calendario')
-            res[i].calendario = res[i].images[x];
           else
             res[i].satisfechos.push( res[i].images[x]);
         }

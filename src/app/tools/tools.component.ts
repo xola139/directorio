@@ -17,11 +17,12 @@ export class ToolsComponent implements OnInit {
   itemSelect:any;
   typeItemSelect:any;
   selectedImg = [];
-
-   ratingHtml:any;
-   urls:any;
-   newModel={id:"",telefono:"",status:false};
-   private dom: Document;
+  ratingHtml:any;
+  urls:any;
+  newModel={id:"",telefono:"",status:false,diasAtencion:[]};
+  urlPerfil:string;
+  private dom: Document;
+  
   constructor(@Inject(DOCUMENT) dom: Document,private disponibleService: DisponibleService, private modelService:ModelService,public snackBar: MatSnackBar) {
 
     this.dom = dom;
@@ -67,6 +68,8 @@ getDetails(data,tipo){
       let id = result['_id'];
       this.newModel.id = "";
       this.newModel.telefono = "";
+      
+      
       alert("guardado!!"+id);
     }, (err) => {
       console.log(err);
@@ -75,9 +78,11 @@ getDetails(data,tipo){
 
   registerModelVip(){
     this.modelService.registerNewModel(this.newModel).then((result) => {
-      let id = result['_id'];
+      let id = result['id'];
       this.newModel.id = "";
       alert("Registrado!!"+id);
+      console.log(result);
+      this.urlPerfil ="#/perfil/"+id;
     }, (err) => {
       console.log(err);
     });

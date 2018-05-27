@@ -87,7 +87,7 @@
               <div class="card card-body cars-custom p-1">
                   
                   <mat-tab-group class="demo-tab-group">
-                      <mat-tab label="Tab 1" active>
+                      <mat-tab label="Tab 1" aria-selected="true">
                           <ng-template  mat-tab-label   style="padding:1 px !important; " >
                             <mat-icon class="custom-color-icon">people</mat-icon>
                             <br><label class="custom-color-icon">Acerca  </label>
@@ -96,14 +96,14 @@
                             {{data.descripcion}}
                           </p>
                           <ul class="list-group">
-                            <li class="list-group-item p-1">Nacionalidad:{{data.nacionalidad}}</li>
-                            <li class="list-group-item p-1">Idiomas:{{data.idiomas.ingles != 'undefined' ? data.idiomas.ingles ? 'Ingles' :'' :''}} - {{data.idiomas.espanol ? 'Español':''}}</li>
+                            <li class="list-group-item p-1">Nacionalidad: {{data.nacionalidad}}</li>
+                            <li class="list-group-item p-1">Idiomas: {{data.idiomas.ingles != 'undefined' ? data.idiomas.ingles ? 'Ingles' :'' :''}} - {{data.idiomas.espanol ? 'Español':''}}</li>
                             <li class="list-group-item p-1">Horarios: {{data.horarioAtencion.hinicio}} - {{data.horarioAtencion.hfin}}</li>
-                            <li class="list-group-item p-1">Medidas:{{data.cuerpo.medidas}}</li>
-                            <li class="list-group-item p-1">Edad:{{data.edad}}</li>
-                            <li class="list-group-item p-1">Peso:{{data.cuerpo.peso}}</li>
-                            <li class="list-group-item p-1">Estatura:{{data.cuerpo.estatura}}</li>
-                            <li class="list-group-item p-1">Atiende en:{{data.atiende}}</li>
+                            <li class="list-group-item p-1">Medidas: {{data.cuerpo.medidas}}</li>
+                            <li class="list-group-item p-1">Edad: {{data.edad}}</li>
+                            <li class="list-group-item p-1">Peso: {{data.cuerpo.peso}}</li>
+                            <li class="list-group-item p-1">Estatura: {{data.cuerpo.estatura}}</li>
+                            <li class="list-group-item p-1">Atiende en: {{data.atiende}}</li>
                           </ul>
                           <button mat-button (click)="getPictures(data,'foto')" data-toggle="modal" data-target="#exampleModalLong"><mat-icon>collections</mat-icon>Galeria!</button>
                           <button mat-button (click)="getPictures(data,'satisfechos')" data-toggle="modal" data-target="#exampleModalLong"><mat-icon>collections</mat-icon>Satisfecho!</button>
@@ -116,15 +116,12 @@
                           <mat-icon class="custom-color-icon">today</mat-icon>
                           <br><label class="custom-color-icon">Fechas  </label>
                         </ng-template>
-                        <mat-list>
-                          <mat-list-item *ngFor="let folder of folders">
-                            <mat-icon mat-list-icon>date_range</mat-icon>
-                            <h4 mat-line>{{folder.name}}</h4>
-                            <p mat-line> {{folder.updated | date}} </p>
-                          </mat-list-item>
-                          <mat-divider></mat-divider>
+                          <span *ngIf="!data.calendario">No hay calendario :(</span>
+                          <img *ngIf="data.calendario"  src="{{data.calendario}}"  alt="Calendario de gira">
+                        
+                        <mat-divider></mat-divider>
                           
-                        </mat-list>
+                        
                         
                       </mat-tab>
                                                
