@@ -68,12 +68,20 @@ applyFilterDisponible(filterValue: string) {
 
   openDialog(item): void {
     console.log(item);
-    var content = {msgTitle:"",msgDescripcion:"",msgUrl:"",msgFecha:"",msgTelefono:""};
+    var content = {msgItem:null,msgTitle:"",msgDescripcion:"",msgUrl:"",msgFecha:"",msgTelefono:""};
     content.msgTitle = item.id;
     content.msgDescripcion = item.descripcion;
     content.msgUrl = item.profile_image_url;
     content.msgFecha = item.created_at;
     content.msgTelefono = item.telefono;
+
+    if(item.opcionesTelefono == undefined)
+      item.opcionesTelefono = {whatsapp:false,llamadas:true};
+
+
+
+
+    content.msgItem = item;
     
     this.dialog.open(GenericmodalComponent, {
       data: {item: content} ,width : '300px'
@@ -99,9 +107,9 @@ applyFilterDisponible(filterValue: string) {
 
    
   eventAnalytics() {
-    console.log(">>>>")
     this.googleAnalyticsEventsService.emitEvent("disponibleCategory", "click", "modelo", 1);
   }
+  
   copyItem(item) {
     
     var input;

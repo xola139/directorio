@@ -92,7 +92,7 @@ constructor(  private modelService: ModelService) {
 
   getPictures(data,tipoFoto){
     console.log(">>>>>>>>>>>")
-    this.pictures.id = data.id;
+    
     this.tipoFoto = tipoFoto;
     data.fotos.reverse();
     data.satisfechos.reverse();
@@ -100,6 +100,8 @@ constructor(  private modelService: ModelService) {
       this.pictures = data.fotos;
     else
       this.pictures = data.satisfechos;
+
+    this.pictures.id = data.id;
     console.log(">>>>>>>>>>>"+this.pictures.id)
     
   }

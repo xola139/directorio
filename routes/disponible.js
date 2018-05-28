@@ -19,13 +19,17 @@ router.get('/',
                 var item = {};
                 item.ciudad = images[i].ciudad;
                 item.created_at = new Date();
-                item.descripcion = images[i].descripcion;
+                item.descripcion = images[i].description;
                 item.id = images[i].id;
-                item.profile_image_url = images[i].avatar;
+                item.profile_image_url = images[i].profile_image_url_https;
                 item.telefono = images[i].telefono;
+                item.opcionesTelefono = images[i].opcionesTelefono;
                 item.images = images[i].images;
                 item.vip = true;
+                item.from = 'disponible';
                 items.push(item);
+
+
 
             }
  

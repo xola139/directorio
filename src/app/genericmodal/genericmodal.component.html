@@ -2,19 +2,26 @@
 
 <div class="chip p-0" style="display:inline !important;">
   <div class="row" >
-    <div class="col-3">
+    <div class="col-sm-3 col-md-3">
         <img src="{{data.item.msgUrl}}" alt="imagen" >  
+        <h2 mat-dialog-title class="m-0">{{data.item.msgTitle}}</h2>  
+        {{data.item.msgItem.telefono}}
     </div >
-    <div class="">
-        <div class="col-md-12">
-            <h2 mat-dialog-title class="m-0">{{data.item.msgTitle}}</h2>  
+    <div class="col-sm-9 col-md-9">
+
+        <div class="col-sm-12 col-md-12">
+            <label class="texto-label">{{data.item.msgItem.telefono != null ? '':'Aun no tenemos su telefono!... Revisa la mensión &#8681;'}}</label>
         </div>
-        <div class="col-md-12">
-            <label class="texto-label">{{data.item.msgTelefono != null ? data.item.msgTelefono:'Aun no tenemos su telefono!... Pero revisa la mensión y valida es posible que contenga el telefono &#8681;'}}</label>
+
+        <div class=" col-sm-12 col-md-12">
+            <a (click)="eventAnalytics(data.item.msgItem.from,'whatsapp')" *ngIf="data.item.msgItem.opcionesTelefono.whatsapp && data.item.msgItem.telefono !=null"  href="{{isMobile ? 'https://api.whatsapp.com/send?phone=521'+data.item.msgItem.telefono :'javascript:;'}}" target="{{isMobile ? '_blank':'_self'}}" mat-raised-button color="accent">
+              Envia WhatsApp!
+            </a>
         </div>
-        <div class="col-md-12">
-            <a *ngIf="data.item.msgTelefono != null"  href="{{isMobile ? 'https://api.whatsapp.com/send?phone=521'+ data.item.msgTelefono :'javascript:;'}}"  mat-raised-button color="accent" target="{{isMobile ? '_blank':'_self'}}">
-              Envia WhatsApp!    
+        <hr *ngIf="data.item.msgItem.opcionesTelefono.whatsapp && data.item.msgItem.telefono !=null">
+        <div class="col-sm-12 col-md-12">
+            <a (click)="eventAnalytics(data.item.msgItem.from,'llamada')" *ngIf="data.item.msgItem.opcionesTelefono.llamadas && data.item.msgItem.telefono !=null" href="{{isMobile ? 'tel:'+data.item.msgItem.telefono : 'javascript:;'}}"  target="{{isMobile ? '_blank':'_self'}}" mat-raised-button color="accent">
+              Llama ahora!
             </a>
         </div>
     </div>

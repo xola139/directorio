@@ -1,4 +1,4 @@
-import { Component  } from '@angular/core';
+import { Component,ElementRef,ViewChild  } from '@angular/core';
 import { AsyncLocalStorage } from 'angular-async-local-storage';
 import {Router, NavigationEnd} from "@angular/router";
 import {GoogleAnalyticsEventsService} from "./google-analytics-events.service";
@@ -8,9 +8,10 @@ declare var ga: Function;
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  styleUrls: ['./app.component.css','./model/model.component.css']
 })
 export class AppComponent {
+  @ViewChild('navbarButton') navbarButton:ElementRef;
   usuario: string;
   otheruser: any;
   public isCollapsed = true;
@@ -31,8 +32,9 @@ title = 'theapp';
   }
 
   toggleCollapsable(){
-    console.log("llegandooooo"+$('.collapse'));
-    $('#navbarNavAltMarkup').collapse();
+     if(navigator.userAgent.indexOf("Mobile") > 0){
+        this.navbarButton.nativeElement.click();
+      }
   }
   
 }

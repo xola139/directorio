@@ -63,10 +63,15 @@ constructor(public dialog: MatDialog,private promosService: PromosService,public
     //this.msgTitle = item.id;
     //this.msgUrl = item.profile_image_url;
     
-    var content = {msgTitle:"",msgDescripcion:"",msgUrl:""};
+    var content = {msgItem:null,msgTitle:"",msgDescripcion:"",msgUrl:""};
     content.msgTitle = item.id;
     content.msgDescripcion = item.promos[item.promos.length -1].descripcion;
     content.msgUrl = item.avatar;
+
+    item.opcionesTelefono = {whatsapp: false,llamadas: true,twitter: true};
+    
+
+    content.msgItem = item;
     
     //this.itemPromo = item;
     //this.itemDisponible = item;

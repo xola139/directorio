@@ -45,16 +45,16 @@
                     </h5>
                     <div class="mb-1 pl-1">
                         
-                        <a href="{{isMobile ? 'https://api.whatsapp.com/send?phone=521'+data.telefono :'javascript:;'}}"  target="{{isMobile ? '_blank':'_self'}}">
+                        <a href="{{isMobile ? 'https://api.whatsapp.com/send?phone=521'+data.telefono :'#'}}"  target="{{isMobile ? '_blank':'_self'}}">
                           <span class="h6">{{data.telefono}}</span>
                         </a>
-                        <a *ngIf="data.opcionesTelefono.whatsapp"  href="{{isMobile ? 'https://api.whatsapp.com/send?phone=521'+data.telefono :'javascript:;'}}" class="" target="{{isMobile ? '_blank':'_self'}}">
+                        <a *ngIf="data.opcionesTelefono.whatsapp"  href="{{isMobile ? 'https://api.whatsapp.com/send?phone=521'+data.telefono :'#'}}" class="" target="{{isMobile ? '_blank':'_self'}}">
                           <img src="assets/whats.png"  class="profile" matTooltip="Atiende WhatsApp papa!  manda mensaje ya!" alt="Atiende WhatsApp papa! manda mensaje ya!">
                         </a>
                         <a *ngIf="data.opcionesTelefono.twitter" href="http://www.twitter.com/{{data.id}}" class="" target=" _blank">
                           <img src="assets/twitter.png" class="profile" matTooltip="Valida infor por su Twitter ya!" alt="Atiene DM twitter">
                         </a>
-                        <a *ngIf="data.opcionesTelefono.llamadas" href="{{isMobile ? 'tel:'+data.telefono : 'javascript:;'}}"  target="{{isMobile ? '_blank':'_self'}}">
+                        <a *ngIf="data.opcionesTelefono.llamadas" href="{{isMobile ? 'tel:'+data.telefono : '#'}}"  target="{{isMobile ? '_blank':'_self'}}">
                           <img src="assets/phone.png" class="profile" matTooltip="Atiende llamadas papaaa! marcale ya!" alt="Atiende llamadas papaaa!">
                         </a>
                         
@@ -139,7 +139,6 @@
       
       <div class="mx-auto mt-5" style="width: 100px;">
           <button type="button" mat-raised-button color="accent" (click)="getVerMas()">VER MAS</button>
-          
       </div> 
      
 
@@ -149,14 +148,17 @@
 <div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLong" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLong">{{pictures.id}}</h5>
+      <div class="modal-header sticky-top custom-color custom-background mr-0" >
+        <h5 class="modal-title " id="exampleModalLong">{{pictures.id}}</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
         
+        <div *ngIf="pictures.length == 0">
+        No existe informacion :(
+        </div>
           <img  *ngFor="let im of pictures;let indexim = index" class="d-block w-100 img-fluid mb-2"  data-src="{{im.media_url_https}}" alt="Galeria" src="{{im.media_url_https}}" >
         
       </div>

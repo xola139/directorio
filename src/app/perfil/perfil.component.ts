@@ -195,9 +195,7 @@ export class PerfilComponent implements OnInit  {
     //console.log(this.filter);
   }
 
-	backClicked(){
-		this._location.back();
-  }
+	
 
   _keyPress(event: any) {
     const pattern = /[0-9\+\-\ ]/;

@@ -77,6 +77,11 @@
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ff4081', endColorstr='#ff4081',GradientType=0 ); /* IE6-9 */
 }
 
+.custom-color{
+    color:#fff !important;
+}
+
+
 .chip {
     height: 50px;
     font-size: 12px;

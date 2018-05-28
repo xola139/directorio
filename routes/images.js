@@ -55,7 +55,7 @@ router.put('/registrar', function(req, res) {
 
         newMedia.id = data[0].user.screen_name;
         newMedia.id_str = data[0].id;
-        newMedia.description= data[0].text,
+        newMedia.description= data[0].user.description,
         newMedia.profile_image_url = data[0].user.profile_image_url;
         newMedia.profile_image_url_https = data[0].user.profile_image_url_https.replace("_normal.jpg","_400x400.jpg");
         newMedia.diasAtencion = {lunes:false,martes:false,miercoles:false,jueves:false,viernes:false,sabado:false,domingo:false,fulltime:false};
@@ -79,12 +79,33 @@ router.put('/registrar', function(req, res) {
             }
         }
         
-        newMedia.images = arrImage;
-        Images.create(newMedia, function (err, post) {
-            if (err)  console.log(err);
-                console.log("save register Images "+post.id);
-                res.json(post);
-        });
+            //removemos el item temporal
+            Images.remove({
+                id: newMedia.id
+            }, function(err, _) {
+                if (err) console.log(err)
+                    
+
+
+                newMedia.images = arrImage;
+                Images.create(newMedia, function (err, post) {
+                    if (err)  console.log(err);
+                        console.log("save register Images "+ post.id);
+                        res.json(post);
+                });
+
+                var query = {'id':newMedia.id};
+                var _status = {status:false};
+                Disponibles.findOneAndUpdate(query, _status, {upsert:true}, function(err, doc){
+                    if (err) console.log(err);
+                    console.log("succesfully update status Disponibles " + newMedia.id);
+                });
+
+            });
+
+
+
+        
 
     })
 
