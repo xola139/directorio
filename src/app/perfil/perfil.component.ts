@@ -172,6 +172,7 @@ export class PerfilComponent implements OnInit  {
   	updatePerfil(id) {
       this.resourcesLoaded = true;
       this.perfil.status = true;
+      this.perfil.perfil.descripcionTwitter = true ;//TODO:quitar cuando se trare de elejir entre twiiter y mesninado
 	    this.perfilService.updatePerfil(id, this.perfil).then((result) => {
         console.log(this.perfil);
       	let id = result['_id'];
