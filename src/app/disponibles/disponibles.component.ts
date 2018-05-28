@@ -75,8 +75,10 @@ applyFilterDisponible(filterValue: string) {
     content.msgFecha = item.created_at;
     content.msgTelefono = item.telefono;
 
+
+    //con esto validamos que prbiene del source Disponibles y le indicamos que miestre boton whatsapp
     if(item.opcionesTelefono == undefined)
-      item.opcionesTelefono = {whatsapp:false,llamadas:true};
+      item.opcionesTelefono = {whatsapp:true,llamadas:false};
 
 
 

@@ -51,11 +51,9 @@ import { MatFormFieldModule, MatAutocompleteModule,
 
 
 import { AppComponent } from './app.component';
-import { BookComponent } from './book/book.component';
-import { BookService } from './book.service';
-import { BookDetailComponent } from './book-detail/book-detail.component';
-import { BookCreateComponent } from './book-create/book-create.component';
-import { BookEditComponent } from './book-edit/book-edit.component';
+
+
+
 import { PromosComponent } from './promos/promos.component';
 import { ModelComponent } from './model/model.component';
 import { PerfilComponent } from './perfil/perfil.component';
@@ -75,10 +73,6 @@ import { GenericmodalComponent } from './genericmodal/genericmodal.component';
 
 const appRoutes: Routes = [
   { path: '', redirectTo: 'model', pathMatch: 'full' },
-  { path: 'books', component: BookComponent },
-  { path: 'book-details/:id', component: BookDetailComponent },
-  { path: 'book-create', component: BookCreateComponent },
-  { path: 'book-edit/:id', component: BookEditComponent },
   { path: 'promos', component: PromosComponent },
   { path: 'disponibles', component: DisponiblesComponent },
   { path: 'model', component: ModelComponent },
@@ -92,10 +86,6 @@ const appRoutes: Routes = [
 @NgModule({
   declarations: [
     AppComponent,
-    BookComponent,
-    BookDetailComponent,
-    BookCreateComponent,
-    BookEditComponent,
     PromosComponent,
     ModelComponent,
     PerfilComponent,
@@ -157,7 +147,7 @@ const appRoutes: Routes = [
     RouterModule.forRoot(appRoutes)
   ],
   providers: [
-    BookService,ModelService,PromosService,PerfilService,DisponibleService,GoogleAnalyticsEventsService,
+    ModelService,PromosService,PerfilService,DisponibleService,GoogleAnalyticsEventsService,
     {provide: LocationStrategy, useClass: HashLocationStrategy}
   ],
   bootstrap: [AppComponent]

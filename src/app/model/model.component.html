@@ -48,13 +48,13 @@
                         <a href="{{isMobile ? 'https://api.whatsapp.com/send?phone=521'+data.telefono :'#'}}"  target="{{isMobile ? '_blank':'_self'}}">
                           <span class="h6">{{data.telefono}}</span>
                         </a>
-                        <a *ngIf="data.opcionesTelefono.whatsapp"  href="{{isMobile ? 'https://api.whatsapp.com/send?phone=521'+data.telefono :'#'}}" class="" target="{{isMobile ? '_blank':'_self'}}">
+                        <a *ngIf="data.opcionesTelefono.whatsapp"  href="{{isMobile ? 'https://api.whatsapp.com/send?phone=521'+data.telefono :'#'}}" class="pl-2" target="{{isMobile ? '_blank':'_self'}}">
                           <img src="assets/whats.png"  class="profile" matTooltip="Atiende WhatsApp papa!  manda mensaje ya!" alt="Atiende WhatsApp papa! manda mensaje ya!">
                         </a>
-                        <a *ngIf="data.opcionesTelefono.twitter" href="http://www.twitter.com/{{data.id}}" class="" target=" _blank">
+                        <a *ngIf="data.opcionesTelefono.twitter" href="http://www.twitter.com/{{data.id}}" class="pl-2" target=" _blank">
                           <img src="assets/twitter.png" class="profile" matTooltip="Valida infor por su Twitter ya!" alt="Atiene DM twitter">
                         </a>
-                        <a *ngIf="data.opcionesTelefono.llamadas" href="{{isMobile ? 'tel:'+data.telefono : '#'}}"  target="{{isMobile ? '_blank':'_self'}}">
+                        <a *ngIf="data.opcionesTelefono.llamadas" href="{{isMobile ? 'tel:'+data.telefono : '#'}}"  class="pl-2" target="{{isMobile ? '_blank':'_self'}}">
                           <img src="assets/phone.png" class="profile" matTooltip="Atiende llamadas papaaa! marcale ya!" alt="Atiende llamadas papaaa!">
                         </a>
                         

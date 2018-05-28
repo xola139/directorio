@@ -1,6 +1,6 @@
-<div class="container custom-background mat-elevation-z8">
+<div class="container custom-background mat-elevation-z8 sticky-top">
 
-  <nav class="navbar navbar-expand-lg custom-background" >
+  <nav class="navbar navbar-expand-lg custom-background " >
     <a class="navbar-brand custom-color" href="#"><mat-icon mat-list-icon>favorite</mat-icon></a>
     <button #navbarButton  class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
       
@@ -11,7 +11,7 @@
         <a class="nav-item nav-link custom-color" (click)="toggleCollapsable()" routerLink="/model">Modelos</a>
         <a class="nav-item nav-link custom-color" (click)="toggleCollapsable()" routerLink="/disponibles">Disponibles</a>
         <a class="nav-item nav-link custom-color" (click)="toggleCollapsable()" routerLink="/promos">Promos<span class="sr-only">(current)</span></a>
-        <a class="nav-item nav-link custom-color" (click)="toggleCollapsable()" routerLink= "/tools">Tools</a>
+        
         
         <!--<a  href="/login" class="btn btn-info"><span class="fa fa-twitter"></span> Twitter</a>-->
         {{usuario}}
