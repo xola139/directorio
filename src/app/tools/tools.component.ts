@@ -52,6 +52,8 @@ getDetails(data,tipo){
 	this.selectedImg =[];
 	this.itemSelect = data;
 	this.typeItemSelect = tipo;
+
+  console.log(this.itemSelect);
 }
 
 
