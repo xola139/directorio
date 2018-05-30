@@ -50,7 +50,8 @@
   <div class="row">
     <div class="col-md-12 col-sm-12 ">
       <div class="chip m-1" *ngFor="let d of modelos;let i = index">
-        <img (click)="getDetails(d,'modelo')" src="{{d.avatar}}" alt="disponible" width="96" height="96" data-toggle="modal" data-target="#detailModalLong">
+      
+        <img (click)="getDetails(d,'modelo')" src="{{d.profile_image_url}}" alt="disponible" width="96" height="96" data-toggle="modal" data-target="#detailModalLong">
       </div>
     </div>
   </div>
@@ -73,6 +74,7 @@
           {{itemSelect.id}}
           <br> {{itemSelect.telefono}}
         </h5>
+        <button mat-button (click)="copyElementText('elem1');openSnackBar()">Copiar</button>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -82,7 +84,7 @@
           <div class="col-sm-6 col-md-4" *ngFor="let pic of itemSelect.images ;let i = index">
             <div class="card">
               <div class="card-body p-0">
-                <img class="card-img-top" src="{{pic.url}}" alt="imagen twitter" >
+                <img class="card-img-top" src="{{pic.media_url_https}}" alt="imagen twitter" >
                 <input type="checkbox" (change)="selectBadge($event,i)" id="checkbox_{{i}}">check me!
               </div>
             </div>
@@ -93,7 +95,7 @@
 
         </div>
         <div class="modal-footer">
-          <button mat-button (click)="copyElementText('elem1');openSnackBar()">Copiar</button>
+          
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
         </div>
       </div>

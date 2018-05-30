@@ -154,7 +154,8 @@ export class PerfilComponent implements OnInit  {
         this.horarios.push({value: i, viewValue: i +':00'});
       }	
   		this.getPerfil(this.route.snapshot.params['id']);
-		
+		  
+       window.scrollTo(0, 0);
   	}
 
 

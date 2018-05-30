@@ -101,10 +101,10 @@ selectBadge (e, id) {
 	
 	this.urls = "";
 	for(var i=0;i<this.selectedImg.length;i++){
-		this.urls += this.itemSelect.images[this.selectedImg[i]].url+"\n";
+		this.urls += this.itemSelect.images[this.selectedImg[i]].expanded_url+"\n";
   }
   
-  this.ratingHtml = 	this.itemSelect.id +"\n"+	this.itemSelect.telefono.trim() +"\n"+  this.urls  ;
+  this.ratingHtml = 	"@"+this.itemSelect.id +"\n"+	"📲"+this.itemSelect.telefono.trim() +"\n"+  this.urls  ;
 	 
 }
 

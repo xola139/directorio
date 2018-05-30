@@ -76,7 +76,6 @@
                             <img class="card-img-top" src="{{data.profile_image_url_https}}" alt="El avatar">
                             <div class="card-body p-1">
                               
-                              <a mat-button color="primary"  style="border-style: none" class="nav-link" routerLink="/perfil/{{data.id}}">Perfil</a>
                             </div>
                     </div>
                   </div>
@@ -159,7 +158,9 @@
         <div *ngIf="pictures.length == 0">
         No existe informacion :(
         </div>
-          <img  *ngFor="let im of pictures;let indexim = index" class="d-block w-100 img-fluid mb-2"  data-src="{{im.media_url_https}}" alt="Galeria" src="{{im.media_url_https}}" >
+            <img [container]="container" *ngFor="let im of pictures;let indexim = index" class="d-block w-100 img-fluid mb-2"  data-src="{{im.media_url_https}}" alt="Galeria" src="{{im.media_url_https}}" lazy-load="{{im.url}}"   src="https://www.stseguros.com.mx/images/loader.gif">
+
+             
         
       </div>
       <div class="modal-footer">
