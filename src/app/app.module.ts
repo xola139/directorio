@@ -66,6 +66,7 @@ import { DisponibleService } from './disponibles/disponible.service';
 import { DisponiblesComponent } from './disponibles/disponibles.component';
 import { ToolsComponent } from './tools/tools.component';
 import { GenericmodalComponent } from './genericmodal/genericmodal.component';
+import { RedirectComponent } from './redirect/redirect.component';
 
 
 
@@ -92,6 +93,7 @@ const appRoutes: Routes = [
     DisponiblesComponent,
     ToolsComponent,
     GenericmodalComponent,
+    RedirectComponent,
     
     
     
