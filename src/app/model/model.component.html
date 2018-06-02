@@ -30,6 +30,7 @@
             
           </div>
         
+        
           <div id="card_{{data.id}}" class="col-md-4 col-sm-12 mt-2 p-0 " *ngFor="let data of myData | slice:0:verItems ;let i = index">
            
 
@@ -92,7 +93,7 @@
                             <br><label class="custom-color-icon">Acerca  </label>
                           </ng-template>
                           <p>
-                            {{data.descripcion}}
+                            {{data.description}}
                           </p>
                           <ul class="list-group">
                             <li class="list-group-item p-1">Nacionalidad: {{data.nacionalidad}}</li>
@@ -104,7 +105,9 @@
                             <li class="list-group-item p-1">Estatura: {{data.cuerpo.estatura}}</li>
                             <li class="list-group-item p-1">Atiende en: {{data.atiende}}</li>
                           </ul>
-                          <button mat-button (click)="getPictures(data,'foto')" data-toggle="modal" data-target="#exampleModalLong"><mat-icon>collections</mat-icon>Galeria!</button>
+
+                          <button mat-button (click)="getPictures(data,'foto')" data-toggle="modal" data-target="#exampleModalLong"><mat-icon>collections</mat-icon>Galeria({{data.images.length}})</button>
+
                           <button mat-button (click)="getPictures(data,'satisfechos')" data-toggle="modal" data-target="#exampleModalLong"><mat-icon>collections</mat-icon>Satisfecho!</button>
                           
                       </mat-tab>

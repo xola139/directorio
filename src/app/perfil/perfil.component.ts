@@ -31,6 +31,8 @@ export class PerfilComponent implements OnInit  {
 
 	];
 	
+  angie_mitzuzd
+
 	horarios = [ ];
 
   cudades = [
@@ -47,11 +49,11 @@ export class PerfilComponent implements OnInit  {
     {value: 'Durango', viewValue: 'Durango'},
     {value: 'Guanajuato', viewValue: 'Guanajuato'},
     {value: 'Guerrero', viewValue: 'Guerrero'},
-    {value: 'Jalisco', viewValue: 'Jalisco'},
+    {value: 'Guadalaja', viewValue: 'Guadalajara'},
     {value: 'Michoacan-de-Ocampo', viewValue: 'Michoacán de Ocampo'},
+    {value: 'Monterrey', viewValue: 'Monterrey'},
     {value: 'Morelos', viewValue: 'Morelos'},
     {value: 'Nayarit', viewValue: 'Nayarit'},
-    {value: 'Nuevo-Leon', viewValue: 'Nuevo León'},
     {value: 'Oaxaca', viewValue: 'Oaxaca'},
     {value: 'Puebla', viewValue: 'Puebla'},
     {value: 'Queretaro', viewValue: 'Querétaro'},
@@ -69,7 +71,11 @@ export class PerfilComponent implements OnInit  {
   ];
 
   form;
-  constructor(private fb: FormBuilder,public dialog: MatDialog,private _location: Location,private route: ActivatedRoute, private router: Router, private perfilService: PerfilService) 
+  constructor(private fb: FormBuilder,public dialog: MatDialog,
+              private _location: Location,
+              private route: ActivatedRoute, 
+              private router: Router, 
+              private perfilService: PerfilService) 
   { 
 	     this.lottieConfig = {
             path: 'assets/loading_animation.json',

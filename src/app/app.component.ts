@@ -8,7 +8,7 @@ declare var ga: Function;
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css','./model/model.component.css']
+  styleUrls: ['./app.component.css']
 })
 export class AppComponent {
   @ViewChild('navbarButton') navbarButton:ElementRef;

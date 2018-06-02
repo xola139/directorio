@@ -12,9 +12,9 @@ export class ModelService   {
   
   constructor(private http: Http,private promosService: PromosService) { }
 
-   showModelos() {
+   showModelos(id) {
     return new Promise((resolve, reject) => {
-        this.http.get(this.baseApiUrl + '/images/')
+        this.http.get(this.baseApiUrl + '/images/by/'+ id)
           .map(res => res.json())
           .subscribe(res => {
             resolve(res)
@@ -23,6 +23,9 @@ export class ModelService   {
         });
     });
   }
+
+
+
 
 
    showMostrarEnDispoibles() {

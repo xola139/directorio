@@ -17,10 +17,31 @@ var Bot = new Twit({
 
 /* GET ALL IMAGES */
 //db.tweets.find( {_id : { "$lt" : <50th _id> } } ).limit(50).sort({"_id":-1});
-router.get('/', function(req, res, next) {
+router.get('/by/:id', function(req, res, next) {
+
+  
+  var items = [];
+  var firts = [];
+  var resul ;
+  
   Images.find({status:true},function (err, images) {
     if (err) return next(err);
-    res.json(images);
+
+    for(var i=0;i<images.length;i++){
+      if(req.params.id == images[i].id){
+        firts.push(images[i]);
+      }else{
+        items.push(images[i]);
+      }
+
+    }
+
+    if(firts.length >= 0 ){
+        resul = firts.concat(items);
+    }else
+      resul = items;
+    
+    res.json(resul);
   });
 });
 

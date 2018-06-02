@@ -73,10 +73,10 @@ import { RedirectComponent } from './redirect/redirect.component';
 
 
 const appRoutes: Routes = [
-  { path: '', redirectTo: 'model', pathMatch: 'full' },
+  { path: '', redirectTo: 'model/o-o', pathMatch: 'full' },
   { path: 'promos', component: PromosComponent },
   { path: 'disponibles', component: DisponiblesComponent },
-  { path: 'model', component: ModelComponent },
+  { path: 'model/:id', component: ModelComponent },
   { path: 'tools', component: ToolsComponent },
   { path: 'perfil/:id', component: PerfilComponent },
 

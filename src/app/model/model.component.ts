@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import  {Http} from '@angular/http';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Http } from '@angular/http';
 import { Observable } from "rxjs/Observable";
 import { ModelService } from './model.service';
 import * as $ from 'jquery';
@@ -9,7 +10,7 @@ import * as $ from 'jquery';
 @Component({
   selector: 'app-model',
   templateUrl: './model.component.html',
-  styleUrls: ['./model.component.css']
+  styleUrls: ['./model.component.css','../app.component.css']
 })
 export class ModelComponent implements OnInit {
   myData :any;
@@ -22,12 +23,10 @@ export class ModelComponent implements OnInit {
   tipoFoto:any;
   hideme=[];
   isMobile :Boolean;
+  firstItem:any;
 
 
-
-
-
-constructor(  private modelService: ModelService) {
+constructor(  private modelService: ModelService,private router: Router,private route: ActivatedRoute ) {
   this.disponibles = [];
   this.promos = [];
   this.verItems = 5;
@@ -37,42 +36,45 @@ constructor(  private modelService: ModelService) {
   
   ngOnInit() {
 
+    
+
     if(navigator.userAgent.indexOf("Mobile") > 0){
          this.isMobile = true; 
       }else{
         this.isMobile= false;
     }
-
-
-   
+    
     this.getModelos();
     this.getPromos();
-
-     
   }
 
+
   getModelos() {
-    this.modelService.showModelos().then((res) => {
+    var _id = this.route.snapshot.params['id'];
+
+    this.modelService.showModelos(_id).then((res) => {
     
       var datos = res;
-      
       for (let i = 0; i < Object.keys(datos).length; i++) {
-        res[i].telefono= res[i].telefono != null ?res[i].telefono.replace(/\s/g, ""):"";
-        res[i].satisfechos = [];
-        res[i].fotos = [];
-        res[i].calendario;
+        if(res[i].id == _id)
+            this.firstItem = res[i];
+         else{
+          res[i].telefono= res[i].telefono != null ?res[i].telefono.replace(/\s/g, ""):"";
+          res[i].satisfechos = [];
+          res[i].fotos = [];
+          res[i].calendario;
 
-        for (let x = 0; x < res[i].images.length; x++) {
-          if(res[i].images[x].status == 'foto')
-            res[i].fotos.push( res[i].images[x]);
-          else
-            res[i].satisfechos.push( res[i].images[x]);
+          for (let x = 0; x < res[i].images.length; x++) {
+            if(res[i].images[x].status == 'foto')
+              res[i].fotos.push( res[i].images[x]);
+            else
+              res[i].satisfechos.push( res[i].images[x]);
+          }
         }
 
-        
-        
-      }
 
+      }
+      //res.unshift(this.firstItem);
       this.myData  = res;
       console.log(this.myData);
 
@@ -91,8 +93,6 @@ constructor(  private modelService: ModelService) {
  }
 
   getPictures(data,tipoFoto){
-    console.log(">>>>>>>>>>>")
-    
     this.tipoFoto = tipoFoto;
     data.fotos.reverse();
     data.satisfechos.reverse();
@@ -103,7 +103,6 @@ constructor(  private modelService: ModelService) {
 
     this.pictures.id = data.id;
     console.log(">>>>>>>>>>>"+this.pictures.id)
-    
   }
 
   toggleCard(id){
@@ -116,8 +115,6 @@ constructor(  private modelService: ModelService) {
     if(this.verItems < this.myData.length){
       this.verItems +=3;
     }
-
-    
   }
 
   gotoCard(id){

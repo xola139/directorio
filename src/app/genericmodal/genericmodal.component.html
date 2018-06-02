@@ -32,13 +32,17 @@
   <mat-dialog-content>
                 
     {{data.item.msgDescripcion}}
+
+    
   </mat-dialog-content>
     
+    vip": true,
   
   <hr>
   <p class="small">ultima actualización:{{data.item.msgFecha}}</p>
 	<mat-dialog-actions>
 	    <button type="button" mat-raised-button color="accent" (click)="closeDialog()" >Cerrar</button>
+      <a *ngIf="data.item.msgItem.vip" mat-raised-button color="accent" href="#/model/{{data.item.msgTitle}}" >Ver Perfil</a>
   </mat-dialog-actions>
 </div>
 

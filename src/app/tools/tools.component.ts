@@ -58,7 +58,7 @@ getDetails(data,tipo){
 
 
  getModelos() {
-    this.modelService.showModelos().then((res) => {
+    this.modelService.showModelos("0-0").then((res) => {
       this.modelos = res;
     }, (err) => {
       console.log(err);
@@ -101,10 +101,15 @@ selectBadge (e, id) {
 	
 	this.urls = "";
 	for(var i=0;i<this.selectedImg.length;i++){
-		this.urls += this.itemSelect.images[this.selectedImg[i]].expanded_url+"\n";
+		this.urls += this.itemSelect.images[this.selectedImg[i]].display_url+"\n";
   }
   
-  this.ratingHtml = 	"@"+this.itemSelect.id +"\n"+	"📲"+this.itemSelect.telefono.trim() +"\n"+  this.urls  ;
+  this.ratingHtml = "Agenda cita con ..";
+  this.ratingHtml += "@"+this.itemSelect.id +"\n"+	"📲"+this.itemSelect.telefono.trim()+"\n"; 
+  this.ratingHtml += "Disponible en  \n";
+  this.ratingHtml += "#escortenmx  \n"
+  this.ratingHtml +=   this.urls  ;
+
 	 
 }
 
