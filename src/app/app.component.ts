@@ -1,5 +1,5 @@
 import { Component,ElementRef,ViewChild  } from '@angular/core';
-import { AsyncLocalStorage } from 'angular-async-local-storage';
+//import { AsyncLocalStorage } from 'angular-async-local-storage';
 import {Router, NavigationEnd} from "@angular/router";
 import {GoogleAnalyticsEventsService} from "./google-analytics-events.service";
 import * as $ from 'jquery';
@@ -16,8 +16,8 @@ export class AppComponent {
   otheruser: any;
   public isCollapsed = true;
   
-
- constructor(protected localStorage: AsyncLocalStorage,public router: Router,
+//protected localStorage: AsyncLocalStorage
+ constructor(public router: Router,
    public googleAnalyticsEventsService: GoogleAnalyticsEventsService) {
 
 }
@@ -26,9 +26,9 @@ title = 'theapp';
 
 
   ngOnInit() {
-    this.localStorage.getItem('usuario').subscribe((data) => {
+    /*this.localStorage.getItem('usuario').subscribe((data) => {
     this.usuario = localStorage.getItem('usuario');
-    });
+    });*/
   }
 
   toggleCollapsable(){

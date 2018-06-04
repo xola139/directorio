@@ -8,5 +8,14 @@ if (environment.production) {
   enableProdMode();
 }
 
+
+
 platformBrowserDynamic().bootstrapModule(AppModule)
-  .catch(err => console.log(err));
+  .then(() => {
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker
+        .register('/service-worker.js')
+        .then(registration => console.log('SW registration successful with scope: ', registration.scope));
+    }
+  })
+  .catch(err => console.error(err));

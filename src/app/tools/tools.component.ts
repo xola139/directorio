@@ -91,6 +91,16 @@ getDetails(data,tipo){
 
   }
     
+fnPaste(){
+  console.log(">>>>>>>>>>>>>>>>>");
+    var hidden = document.createElement("textarea");
+             document.body.appendChild(hidden);
+             console.log(">>>>>>>>>>>>>>>>>");
+             hidden.focus();
+             document.execCommand('paste', null, '');
+             console.log(hidden.value);
+}
+    
 selectBadge (e, id) {
   this.ratingHtml = "";
 	if (e.target.checked) {
@@ -101,7 +111,7 @@ selectBadge (e, id) {
 	
 	this.urls = "";
 	for(var i=0;i<this.selectedImg.length;i++){
-		this.urls += this.itemSelect.images[this.selectedImg[i]].display_url+"\n";
+		this.urls += this.itemSelect.images[this.selectedImg[i]].expanded_url+"\n";
   }
   
   this.ratingHtml = "Agenda cita con ..";

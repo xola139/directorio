@@ -86,8 +86,8 @@
             <div class="collapse multi-collapse{{i}} index-content" id="multiCollapse2">
               <div class="card card-body cars-custom p-1">
                   
-                  <mat-tab-group class="demo-tab-group">
-                      <mat-tab label="Tab 1" aria-selected="true">
+                  <mat-tab-group >
+                      <mat-tab label="Tab 1" >
                           <ng-template  mat-tab-label   style="padding:1 px !important; " >
                             <mat-icon class="custom-color-icon">people</mat-icon>
                             <br><label class="custom-color-icon">Acerca  </label>
@@ -106,9 +106,9 @@
                             <li class="list-group-item p-1">Atiende en: {{data.atiende}}</li>
                           </ul>
 
-                          <button mat-button (click)="getPictures(data,'foto')" data-toggle="modal" data-target="#exampleModalLong"><mat-icon>collections</mat-icon>Galeria({{data.images.length}})</button>
+                          <button mat-button (click)="getPictures(data,'foto')" data-toggle="modal" data-target="#exampleModalLong"><mat-icon>collections</mat-icon>Galeria({{data.fotos.length}})</button>
 
-                          <button mat-button (click)="getPictures(data,'satisfechos')" data-toggle="modal" data-target="#exampleModalLong"><mat-icon>collections</mat-icon>Satisfecho!</button>
+                          <button mat-button (click)="getPictures(data,'satisfechos')" data-toggle="modal" data-target="#exampleModalLong"><mat-icon>collections</mat-icon>Satisfecho({{data.satisfechos.length}})</button>
                           
                       </mat-tab>
                         
@@ -140,7 +140,7 @@
       </div>
       
       <div class="mx-auto mt-5" style="width: 100px;">
-          <button type="button" mat-raised-button color="accent" (click)="getVerMas()">VER MAS</button>
+          <button   type="button" mat-raised-button color="accent" (click)="getVerMas()">VER MAS</button>
       </div> 
      
 
@@ -156,12 +156,13 @@
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <div class="modal-body">
+      <div class="modal-body" #container>
         
         <div *ngIf="pictures.length == 0">
         No existe informacion :(
         </div>
-            <img [container]="container" *ngFor="let im of pictures;let indexim = index" class="d-block w-100 img-fluid mb-2"  data-src="{{im.media_url_https}}" alt="Galeria" src="{{im.media_url_https}}" lazy-load="{{im.url}}"   src="https://www.stseguros.com.mx/images/loader.gif">
+
+            <img *ngFor="let im of pictures;let indexim = index" class="d-block w-100 img-fluid mb-2"   alt="Galeria" bg-src="{{im.media_url_https}}" lazy-load="assets/lg.ajax-spinner-gif.gif" threshold="200" />
 
              
         

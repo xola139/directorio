@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component,ViewChild, OnInit,ElementRef } from '@angular/core';
 import { MatDialog,MatTableDataSource,MatRadioChange} from '@angular/material';
 import { ActivatedRoute, Router } from '@angular/router';
 import { PerfilService } from './perfil.service';
@@ -14,10 +14,12 @@ import { FormBuilder,FormControl, FormGroupDirective, NgForm, Validators} from '
   styleUrls: ['./perfil.component.css']
 })
 export class PerfilComponent implements OnInit  {
+  @ViewChild('closeButton') closeButton:ElementRef;
 
-    public lottieConfig: Object;
-    private anim: any;
-    private animationSpeed: number = 1;
+  public lottieConfig: Object;
+  private anim: any;
+  private animationSpeed: number = 1;
+
 
   emailFormControl = new FormControl('', [Validators.required,Validators.email,]);
   edadFormControl = new FormControl('', [Validators.required,Validators.email,]);
@@ -214,7 +216,11 @@ export class PerfilComponent implements OnInit  {
       // invalid character, prevent input
       event.preventDefault();
     }
-}
+  }
+
+  closeModal() {
+    this.closeButton.nativeElement.click();
+  }
 
   
 }

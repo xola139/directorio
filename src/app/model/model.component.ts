@@ -23,7 +23,7 @@ export class ModelComponent implements OnInit {
   tipoFoto:any;
   hideme=[];
   isMobile :Boolean;
-  firstItem:any;
+  
 
 
 constructor(  private modelService: ModelService,private router: Router,private route: ActivatedRoute ) {
@@ -35,9 +35,6 @@ constructor(  private modelService: ModelService,private router: Router,private 
  }
   
   ngOnInit() {
-
-    
-
     if(navigator.userAgent.indexOf("Mobile") > 0){
          this.isMobile = true; 
       }else{
@@ -46,6 +43,10 @@ constructor(  private modelService: ModelService,private router: Router,private 
     
     this.getModelos();
     this.getPromos();
+
+    
+
+     
   }
 
 
@@ -55,10 +56,10 @@ constructor(  private modelService: ModelService,private router: Router,private 
     this.modelService.showModelos(_id).then((res) => {
     
       var datos = res;
+      var firstItem = [];
+      var nextItem = [];
       for (let i = 0; i < Object.keys(datos).length; i++) {
-        if(res[i].id == _id)
-            this.firstItem = res[i];
-         else{
+         
           res[i].telefono= res[i].telefono != null ?res[i].telefono.replace(/\s/g, ""):"";
           res[i].satisfechos = [];
           res[i].fotos = [];
@@ -70,12 +71,15 @@ constructor(  private modelService: ModelService,private router: Router,private 
             else
               res[i].satisfechos.push( res[i].images[x]);
           }
-        }
-
+        
+        if(res[i].id == _id)
+            firstItem.push(res[i]);
+        else
+          nextItem.push(res[i]);
 
       }
       //res.unshift(this.firstItem);
-      this.myData  = res;
+      this.myData  = firstItem.concat(nextItem);
       console.log(this.myData);
 
 
@@ -94,21 +98,18 @@ constructor(  private modelService: ModelService,private router: Router,private 
 
   getPictures(data,tipoFoto){
     this.tipoFoto = tipoFoto;
-    data.fotos.reverse();
-    data.satisfechos.reverse();
+    data.fotos;
+    data.satisfechos;
     if(tipoFoto =="foto")
       this.pictures = data.fotos;
     else
       this.pictures = data.satisfechos;
 
     this.pictures.id = data.id;
-    console.log(">>>>>>>>>>>"+this.pictures.id)
+    
   }
 
-  toggleCard(id){
-    $('.multi-collapse0').collapse('toggle');
-    console.log(id);
-  }
+
 
   getVerMas(){
 
@@ -119,7 +120,11 @@ constructor(  private modelService: ModelService,private router: Router,private 
 
   gotoCard(id){
       var top = $('#card_' + id).position().top;
-      $(window).scrollTop( top );
+      //$(window).scrollTop( top - 60 );
+       $('html, body').animate({scrollTop:(top - 50)}, 'slow');
+      
+      
+      
   }
 
    shared(){

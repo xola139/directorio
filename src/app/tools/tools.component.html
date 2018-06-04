@@ -1,5 +1,7 @@
+<a href="#/modelo">Testeando ando!</a>
+
 <div class="container">
-  <h1>Nuevo usaurio:</h1>
+  <h6>Nuevo usaurio:</h6>
   <div class="row">
     <div class="col-md-6">
       <form (ngSubmit)="registerModelVip()" >
@@ -21,7 +23,7 @@
 <hr>
 
 <div class="container">
-  <h1>Nuevo usuario desde disponibles:</h1>
+  <h6>Nuevo usuario desde disponibles:</h6>
   <div class="row">
     <div class="col-md-6">
       <form (ngSubmit)="saveModel()" #bookForm="ngForm">
@@ -37,7 +39,7 @@
         </div>
        
         <div class="form-group">
-          <button type="button" class="btn btn-success" >P</button>
+          <button type="button" class="btn btn-success" (click)="fnPaste()">P</button>
           <button type="submit" class="btn btn-success" [disabled]="!bookForm.form.valid">Guardar</button>
         </div>
       </form>
@@ -52,6 +54,7 @@
       <div class="chip m-1" *ngFor="let d of modelos;let i = index">
       
         <img (click)="getDetails(d,'modelo')" src="{{d.profile_image_url}}" alt="disponible" width="96" height="96" data-toggle="modal" data-target="#detailModalLong">
+        <br>{{d.id}}
       </div>
     </div>
   </div>
@@ -61,6 +64,7 @@
       <div class="chip m-1" *ngFor="let d of disponibles;let i = index">
         <img (click)="getDetails(d,'disponible')" src="{{d.profile_image_url}}" alt="disponible" width="96" height="96" data-toggle="modal"
           data-target="#detailModalLong">
+          <br>{{d.id}}
       </div>
     </div>
   </div>

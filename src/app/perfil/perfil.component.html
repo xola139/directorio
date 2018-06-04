@@ -213,11 +213,12 @@
                <mat-spinner *ngIf="resourcesLoaded === true" ></mat-spinner>
             </div>
             <div *ngIf="!resourcesLoaded === true" class="alert alert-success" role="alert">
-               La informacion se ha guadado con Exito!
+               La información se guardo con Exito!
+               <a href="/#/model/{{perfil.id}}"  (click)="closeModal()">Ver perfil</a>
             </div>
          </div>
          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+            <button #closeButton type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
          </div>
       </div>
    </div>
