@@ -4,7 +4,7 @@ import { Http } from '@angular/http';
 import { Observable } from "rxjs/Observable";
 import { ModelService } from './model.service';
 import * as $ from 'jquery';
-
+import { LoaderService } from '../loader.service';
 
 
 @Component({
@@ -26,7 +26,7 @@ export class ModelComponent implements OnInit {
   
 
 
-constructor(  private modelService: ModelService,private router: Router,private route: ActivatedRoute ) {
+constructor( private loaderService: LoaderService, private modelService: ModelService,private router: Router,private route: ActivatedRoute ) {
   this.disponibles = [];
   this.promos = [];
   this.verItems = 5;
@@ -35,6 +35,10 @@ constructor(  private modelService: ModelService,private router: Router,private 
  }
   
   ngOnInit() {
+
+     //http call starts
+        this.loaderService.display(true);
+
     if(navigator.userAgent.indexOf("Mobile") > 0){
          this.isMobile = true; 
       }else{
@@ -80,7 +84,8 @@ constructor(  private modelService: ModelService,private router: Router,private 
       }
       //res.unshift(this.firstItem);
       this.myData  = firstItem.concat(nextItem);
-      console.log(this.myData);
+          //http call ends
+      this.loaderService.display(false);
 
 
     }, (err) => {

@@ -20,5 +20,11 @@
     </div>
   </nav>
 </div>
-<router-outlet></router-outlet>
+<router-outlet>
+  
+<span *ngIf="showLoader" class="loading">
+   <mat-spinner ></mat-spinner>
+</span>
+
+</router-outlet>
 

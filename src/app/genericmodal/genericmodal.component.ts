@@ -5,7 +5,9 @@ import {GoogleAnalyticsEventsService} from "../google-analytics-events.service";
 @Component({
   selector: 'app-genericmodal',
   templateUrl: './genericmodal.component.html',
-  styleUrls: ['./genericmodal.component.css','../disponibles/disponibles.component.css','../app.component.css']
+  styleUrls: ['./genericmodal.component.css',
+  '../disponibles/disponibles.component.css',
+  '../app.component.css']
 })
 export class GenericmodalComponent  {
   isMobile:Boolean;

@@ -1,34 +1,41 @@
 <div>
 
-<h2 mat-dialog-title class="m-0">{{data.item.msgTitle}}</h2>  
-<div class="chip p-0" style="display:inline !important;">
-  <div class="row" >
-    <div class="col-sm-3 col-md-3">
-        
-        <img src="{{data.item.msgUrl}}" alt="imagen" >  
-        
-        {{data.item.msgItem.telefono}}
-    </div >
-    <div class="col-sm-9 col-md-9">
 
-        <div class="col-sm-12 col-md-12">
-            <label class="texto-label">{{data.item.msgItem.telefono != null ? '':'Aun no tenemos su telefono!... Revisa la mensión &#8681;'}}</label>
-        </div>
 
-        <div class=" col-sm-12 col-md-12">
-            <a (click)="eventAnalytics(data.item.msgItem.from,'whatsapp')" *ngIf="data.item.msgItem.opcionesTelefono.whatsapp && data.item.msgItem.telefono !=null"  href="{{isMobile ? 'https://api.whatsapp.com/send?phone=521'+data.item.msgItem.telefono :'javascript:;'}}" target="{{isMobile ? '_blank':'_self'}}" mat-raised-button color="accent">
-              Envia WhatsApp!
-            </a>
-        </div>
-        <hr *ngIf="data.item.msgItem.opcionesTelefono.whatsapp && data.item.msgItem.telefono !=null">
-        <div class="col-sm-12 col-md-12">
-            <a (click)="eventAnalytics(data.item.msgItem.from,'llamada')" *ngIf="data.item.msgItem.opcionesTelefono.llamadas && data.item.msgItem.telefono !=null" href="{{isMobile ? 'tel:'+data.item.msgItem.telefono : 'javascript:;'}}"  target="{{isMobile ? '_blank':'_self'}}" mat-raised-button color="accent">
-              Llama ahora!
-            </a>
-        </div>
+<div class="row" >
+  <div class="col-sm-3 col-md-3">
+    <img src="{{data.item.msgUrl}}" class="custom-img-avatar" alt="imagen" >  
+  </div >
+  <div class="col-sm-9 col-md-9">
+    <h2 mat-dialog-title class="m-0">{{data.item.msgTitle}}</h2>  
+    <p class="card-text mb-0">{{data.item.msgItem.telefono}}</p>
+    <div *ngIf="data.item.msgItem.telefono == null"  class="col-sm-12 col-md-12">
+      <label class="texto-label">Aun no tenemos su telefono!... Revisa la mensión &#8681;</label>
     </div>
-  </div>  
+    
+      <div *ngIf="data.item.msgItem.opcionesTelefono.whatsapp && data.item.msgItem.telefono !=null" class="d-inline">
+          <a (click)="eventAnalytics(data.item.msgItem.from,'whatsapp')"   href="{{isMobile ? 'https://api.whatsapp.com/send?phone=521'+data.item.msgItem.telefono :'javascript:;'}}" target="{{isMobile ? '_blank':'_self'}}" >
+            
+             <img src="assets/whatsapp.png" alt="Atiende WhatsApp" class="custon-radio-0">
+
+          </a>
+      </div>
+      
+      <div *ngIf="data.item.msgItem.opcionesTelefono.llamadas && data.item.msgItem.telefono !=null" class="d-inline">
+          <a (click)="eventAnalytics(data.item.msgItem.from,'llamada')"  href="{{isMobile ? 'tel:'+data.item.msgItem.telefono : 'javascript:;'}}"  target="{{isMobile ? '_blank':'_self'}}" >
+            <img src="assets/phonev2.png" alt="Atiende WhatsApp"  class="custon-radio-0">
+
+          </a>
+    
+      
+    </div> 
+  </div> 
+  
 </div>
+<hr>l
+
+
+
   
   <mat-dialog-content>
                 

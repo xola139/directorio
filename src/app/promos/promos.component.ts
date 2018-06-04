@@ -1,4 +1,4 @@
-import {Component,OnInit} from '@angular/core';
+import {Component,OnInit,ViewChild, ElementRef} from '@angular/core';
 import {MatTableDataSource,MatSnackBar,MatDialog} from '@angular/material';
 import { PromosService } from './promos.service';
 import { animate, state, style, transition, trigger } from '@angular/animations';
@@ -11,7 +11,10 @@ import { GenericmodalComponent } from '../genericmodal/genericmodal.component';
  })
 
 export class PromosComponent  implements OnInit {
-constructor(public dialog: MatDialog,private promosService: PromosService,public snackBar: MatSnackBar) {
+
+  @ViewChild('mensajeButton') mensajeButton:ElementRef;
+
+  constructor(public dialog: MatDialog,private promosService: PromosService,public snackBar: MatSnackBar) {
   }
 
   isExpansionDetailRow = (i: number, row: Object) => row.hasOwnProperty('detailRow');
@@ -38,7 +41,9 @@ constructor(public dialog: MatDialog,private promosService: PromosService,public
     this.getPromosList();
     
     
-    
+     setTimeout(()=>{
+      this.mensajeButton.nativeElement.click();
+     },5000);
   }
 
   getPromosList() {

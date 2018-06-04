@@ -1,3 +1,4 @@
+
 .custom-color-icon{
   color: #9C27B0 !important;
 }
@@ -26,7 +27,12 @@
 
 
 /*-------------------*/
+
 /*
+.custom-img-avatar{
+  height: 50px !important;
+    width: 50px !important;
+}
 
 .custom-color-icon{
   color: #1e5799 !important;
@@ -50,9 +56,15 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#1e5799', end
     border-style: solid;
     border-color: #1e5799;
     border-width: thin;
-}*/
+}
 
+.custon-radio-0{
+  border-radius: 1% !important;
+  width: 30px  !important;
+  height: 30px  !important;
+}
 
+*/
 
 /***************************************/
 .mytitle{

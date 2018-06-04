@@ -6,6 +6,7 @@ import { GenericmodalComponent } from '../genericmodal/genericmodal.component';
 import * as $ from 'jquery';
 import {Router, NavigationEnd} from "@angular/router";
 import {GoogleAnalyticsEventsService} from "../google-analytics-events.service";
+import { LoaderService } from '../loader.service';
 
 declare var ga: Function;
 
@@ -34,7 +35,7 @@ export class DisponiblesComponent implements OnInit {
 
 
 
-  constructor(private modelService: ModelService,public dialog: MatDialog,
+  constructor(private loaderService: LoaderService,private modelService: ModelService,public dialog: MatDialog,
     private disponibleService: DisponibleService,
     public snackBar: MatSnackBar,public router: Router, public googleAnalyticsEventsService: GoogleAnalyticsEventsService) {
   
@@ -55,6 +56,10 @@ applyFilterDisponible(filterValue: string) {
 
 
   ngOnInit() {
+     //http call starts
+        this.loaderService.display(true);
+        
+    
     this.showAlert = 'show'
     this.getDisponiblesList(); 
 
@@ -101,6 +106,9 @@ applyFilterDisponible(filterValue: string) {
     this.disponibles = res;
     const ELEMENT_DATES: ElementDisponible[] = this.disponibles;
     this.dsDisponible = new MatTableDataSource(ELEMENT_DATES);      
+
+    //http call ends
+    this.loaderService.display(false);
       
     }, (err) => {
         console.log(err);

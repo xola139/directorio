@@ -12,7 +12,7 @@ import { LazyLoadModule } from '@greg-md/ng-lazy-load';
 import { HttpClientModule } from '@angular/common/http';
 import { NgHttpLoaderModule } from 'ng-http-loader/ng-http-loader.module'
 import { LottieAnimationViewModule } from 'ng-lottie';
-
+import { LoaderService } from './loader.service';
 import {GoogleAnalyticsEventsService} from "./google-analytics-events.service";
 
 import { MatFormFieldModule, MatAutocompleteModule,
@@ -150,7 +150,7 @@ const appRoutes: Routes = [
     RouterModule.forRoot(appRoutes)
   ],
   providers: [
-    ModelService,PromosService,PerfilService,DisponibleService,GoogleAnalyticsEventsService,
+    ModelService,PromosService,PerfilService,DisponibleService,GoogleAnalyticsEventsService,LoaderService,
     {provide: LocationStrategy, useClass: HashLocationStrategy}
   ],
   bootstrap: [AppComponent]
