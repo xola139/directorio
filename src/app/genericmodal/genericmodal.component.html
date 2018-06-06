@@ -32,17 +32,9 @@
   </div> 
   
 </div>
-<hr>l
-
-
-
-  
+<hr>
   <mat-dialog-content>
-                
-
       {{!data.item.msgItem.vip ? data.item.msgDescripcion:''}}
-    
-
       <nav *ngIf="data.item.msgItem.vip">
         <div class="nav nav-tabs" id="nav-tab" role="tablist">
           <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">
@@ -61,8 +53,8 @@
         <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
           <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
           <div class="carousel-inner">
-            <div class="carousel-item {{i == 1 ? 'active':''}} " *ngFor="let pic of data.item.msgItem.images | slice:0:5;let i = index">
-              <img class="d-block w-100 img-fluid" src="{{pic.media_url_https}}" alt="imagen modelo {{data.item.msgTitle}}">
+            <div class="carousel-item {{i == 1 ? 'active':''}} " *ngFor="let pic of data.item.msgItem.images | slice:0:10;let i = index">
+              <img class="d-block w-100 img-fluid" style="max-height: 250px;" src="{{pic.media_url_https}}" alt="imagen modelo {{data.item.msgTitle}}">
             </div>
             
           </div>

@@ -4,7 +4,7 @@ import { ModelService } from '../model/model.service';
 import { MatSnackBar} from '@angular/material';
 import {Inject} from "@angular/core";
 import {DOCUMENT} from "@angular/platform-browser";
-
+import { PromosService } from '../promos/promos.service';
 
 @Component({
   selector: 'app-tools',
@@ -17,13 +17,19 @@ export class ToolsComponent implements OnInit {
   itemSelect:any;
   typeItemSelect:any;
   selectedImg = [];
+  lstPromo= [];
   ratingHtml:any;
   urls:any;
   newModel={id:"",telefono:"",status:false,diasAtencion:[]};
   urlPerfil:string;
+  lstPromos:any;
   private dom: Document;
   
-  constructor(@Inject(DOCUMENT) dom: Document,private disponibleService: DisponibleService, private modelService:ModelService,public snackBar: MatSnackBar) {
+  constructor(@Inject(DOCUMENT) dom: Document,
+          private disponibleService: DisponibleService, 
+          private modelService:ModelService,
+          public snackBar: MatSnackBar,
+          private promosService: PromosService,) {
 
     this.dom = dom;
 
@@ -32,8 +38,9 @@ export class ToolsComponent implements OnInit {
   ngOnInit() {
   	this.itemSelect = {id:''};
   	this.typeItemSelect = '';
-	this.getModelos();
+	  this.getModelos();
   	this.getDisponiblesList();
+    this.getPromosList();
   }
 
 
@@ -123,6 +130,19 @@ selectBadge (e, id) {
 	 
 }
 
+  selectPromos(e, id){
+    
+    id = "@"+id +"\n";
+    if (e.target.checked) {
+      console.log(id);
+      this.lstPromo.push(id);
+    } else {
+        this.lstPromo.splice(this.lstPromo.indexOf(id), 1);
+    }
+
+    console.log(this.lstPromo);
+  }
+
 
 
   copyElementText(id) {
@@ -139,8 +159,21 @@ selectBadge (e, id) {
 
 
 
-}
+  }
+
+  openTwitter(id) {
+      window.open('twitter://user?screen_name='+id, '_system', 'location=no');
+
+  }
   
+  
+   getPromosList() {
+      this.promosService.getAllPromos().then((res) => {
+      this.lstPromos = res;
+    }, (err) => {
+      console.log(err);
+    });
+  }
   
 
   openSnackBar() {

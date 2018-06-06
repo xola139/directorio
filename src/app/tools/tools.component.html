@@ -1,74 +1,104 @@
 <a href="#/modelo">Testeando ando!</a>
 
 <div class="container">
-  <h6>Nuevo usaurio:</h6>
-  <div class="row">
-    <div class="col-md-6">
-      <form (ngSubmit)="registerModelVip()" >
-        <div class="form-group">
-          <label for="name">ID:</label>
-          <input type="text" class="form-control" [(ngModel)]="newModel['id']" name="id" required>
+    <ul class="nav nav-tabs" id="myTab" role="tablist">
+      <li class="nav-item">
+        <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Home</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Profile</a>
+      </li>
+
+    </ul>
+    <div class="tab-content" id="myTabContent">
+      <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+        <div class="container">
+          <h6>Nuevo usaurio:</h6>
+          <div class="row">
+            <div class="col-md-6">
+              <form (ngSubmit)="registerModelVip()" >
+                <div class="form-group">
+                  <label for="name">ID:</label>
+                  <input type="text" class="form-control" [(ngModel)]="newModel['id']" name="id" required>
+                  
+                </div>
+                <a [href]="urlPerfil">{{urlPerfil}}</a>
+               
+                <div class="form-group">
+                  
+                  <button type="submit" class="btn btn-success">Registrar</button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+        <hr>
+
+        <div class="container">
+          <h6>Nuevo usuario desde disponibles:</h6>
+          <div class="row">
+            <div class="col-md-6">
+              <form (ngSubmit)="saveModel()" #bookForm="ngForm">
+                <div class="form-group">
+                  <label for="name">ID:</label>
+                  <input type="text" class="form-control" [(ngModel)]="newModel['id']" name="id" required>
+                  <input type="hidden" value="false" class="form-control" [(ngModel)]="newModel['status']" name="status" >
+                </div>
+                <div class="form-group">
+                  <label for="name">Telefono:</label>
+                  <input type="number" autocomplete="off"  id="txtTelefono" class="form-control" [(ngModel)]="newModel['telefono']" name="telefono" required>
+
+                </div>
+               
+                <div class="form-group">
+                  <button type="button" class="btn btn-success" (click)="fnPaste()">P</button>
+                  <button type="submit" class="btn btn-success" [disabled]="!bookForm.form.valid">Guardar</button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+
+
+        <div class="container">
+          <div class="row">
+            <div class="col-md-12 col-sm-12 ">
+              <div class="chip m-1" *ngFor="let d of modelos;let i = index">
+              
+                <img (click)="getDetails(d,'modelo')" src="{{d.profile_image_url}}" alt="disponible" width="96" height="96" data-toggle="modal" data-target="#detailModalLong">
+                <br>{{d.id}}
+              </div>
+            </div>
+          </div>
+        <hr>Disponibles
+          <div class="row">
+            <div class="col-md-12 col-sm-12 ">
+              <div class="chip m-1" *ngFor="let d of disponibles;let i = index">
+                <img (click)="getDetails(d,'disponible')" src="{{d.profile_image_url}}" alt="disponible" width="96" height="96" data-toggle="modal"
+                  data-target="#detailModalLong">
+                  <br>{{d.id}}
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+
+      </div><!--Fin tab 1-->
+      <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+        
+        <textarea  value ="{{lstPromo}}" name="lstPromo" rows="6"></textarea>
           
+        <div  *ngFor="let p of lstPromos;let xx = index">
+        <input type="checkbox" (change)="selectPromos($event,p.id)" > @{{p.id}} ++ {{p.promos[0].descripcion}}
         </div>
-        <a [href]="urlPerfil">{{urlPerfil}}</a>
-       
-        <div class="form-group">
-          
-          <button type="submit" class="btn btn-success">Registrar</button>
-        </div>
-      </form>
-    </div>
-  </div>
-</div>
-<hr>
-
-<div class="container">
-  <h6>Nuevo usuario desde disponibles:</h6>
-  <div class="row">
-    <div class="col-md-6">
-      <form (ngSubmit)="saveModel()" #bookForm="ngForm">
-        <div class="form-group">
-          <label for="name">ID:</label>
-          <input type="text" class="form-control" [(ngModel)]="newModel['id']" name="id" required>
-          <input type="hidden" value="false" class="form-control" [(ngModel)]="newModel['status']" name="status" >
-        </div>
-        <div class="form-group">
-          <label for="name">Telefono:</label>
-          <input type="number" autocomplete="off"  id="txtTelefono" class="form-control" [(ngModel)]="newModel['telefono']" name="telefono" required>
-
-        </div>
-       
-        <div class="form-group">
-          <button type="button" class="btn btn-success" (click)="fnPaste()">P</button>
-          <button type="submit" class="btn btn-success" [disabled]="!bookForm.form.valid">Guardar</button>
-        </div>
-      </form>
-    </div>
-  </div>
-</div>
-
-
-<div class="container">
-  <div class="row">
-    <div class="col-md-12 col-sm-12 ">
-      <div class="chip m-1" *ngFor="let d of modelos;let i = index">
-      
-        <img (click)="getDetails(d,'modelo')" src="{{d.profile_image_url}}" alt="disponible" width="96" height="96" data-toggle="modal" data-target="#detailModalLong">
-        <br>{{d.id}}
       </div>
+     
     </div>
-  </div>
-<hr>Disponibles
-  <div class="row">
-    <div class="col-md-12 col-sm-12 ">
-      <div class="chip m-1" *ngFor="let d of disponibles;let i = index">
-        <img (click)="getDetails(d,'disponible')" src="{{d.profile_image_url}}" alt="disponible" width="96" height="96" data-toggle="modal"
-          data-target="#detailModalLong">
-          <br>{{d.id}}
-      </div>
-    </div>
-  </div>
 </div>
+
+
+
 
 <div class="modal fade" id="detailModalLong" tabindex="-1" role="dialog" aria-labelledby="detailModalLong" aria-hidden="true">
   <div class="modal-dialog" role="document">
@@ -79,6 +109,9 @@
           <br> {{itemSelect.telefono}}
         </h5>
         <button mat-button (click)="copyElementText('elem1');openSnackBar()">Copiar</button>
+        
+        <a mat-button  href="https://mobile.twitter.com/{{itemSelect.id}}" target="_blank" >Tuister</a>
+        
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
