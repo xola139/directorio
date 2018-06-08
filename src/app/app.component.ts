@@ -36,6 +36,9 @@ title = 'theapp';
     this.loaderService.status.subscribe((val: boolean) => {
             this.showLoader = val;
         });
+
+    //http call starts
+    this.loaderService.display(true);
   }
 
   toggleCollapsable(){

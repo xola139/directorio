@@ -14,9 +14,7 @@ import { LoaderService } from '../loader.service';
 })
 export class ModelComponent implements OnInit {
   myData :any;
-
   verItems :number;
-
   disponibles :any;
   promos :any;
   pictures:any;
@@ -26,7 +24,10 @@ export class ModelComponent implements OnInit {
   
 
 
-constructor( private loaderService: LoaderService, private modelService: ModelService,private router: Router,private route: ActivatedRoute ) {
+constructor( private loaderService: LoaderService, 
+             private modelService: ModelService,
+             private router: Router,
+             private route: ActivatedRoute ) {
   this.disponibles = [];
   this.promos = [];
   this.verItems = 5;
@@ -36,8 +37,8 @@ constructor( private loaderService: LoaderService, private modelService: ModelSe
   
   ngOnInit() {
 
-     //http call starts
-        this.loaderService.display(true);
+    //http call starts
+    this.loaderService.display(true);
 
     if(navigator.userAgent.indexOf("Mobile") > 0){
          this.isMobile = true; 
@@ -72,7 +73,7 @@ constructor( private loaderService: LoaderService, private modelService: ModelSe
           for (let x = 0; x < res[i].images.length; x++) {
             if(res[i].images[x].status == 'foto')
               res[i].fotos.push( res[i].images[x]);
-            else
+            else if(res[i].images[x].status == 'satisfecho')
               res[i].satisfechos.push( res[i].images[x]);
           }
         
