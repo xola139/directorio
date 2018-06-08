@@ -6,7 +6,7 @@
         <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Home</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Profile</a>
+        <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Promos</a>
       </li>
 
     </ul>
@@ -41,7 +41,7 @@
               <form (ngSubmit)="saveModel()" #bookForm="ngForm">
                 <div class="form-group">
                   <label for="name">ID:</label>
-                  <input type="text" class="form-control" [(ngModel)]="newModel['id']" name="id" required>
+                  <input type="text" class="form-control" [(ngModel)]="newModel['id']" name="id" required id="txtid">
                   <input type="hidden" value="false" class="form-control" [(ngModel)]="newModel['status']" name="status" >
                 </div>
                 <div class="form-group">
@@ -74,7 +74,7 @@
           <div class="row">
             <div class="col-md-12 col-sm-12 ">
               <div class="chip m-1" *ngFor="let d of disponibles;let i = index">
-                <img (click)="getDetails(d,'disponible')" src="{{d.profile_image_url}}" alt="disponible" width="96" height="96" data-toggle="modal"
+                <img (click)="getDetailDisponible(d,'disponible')" src="{{d.profile_image_url}}" alt="disponible" width="96" height="96" data-toggle="modal"
                   data-target="#detailModalLong">
                   <br>{{d.id}}
               </div>
@@ -99,43 +99,63 @@
 
 
 
-
-<div class="modal fade" id="detailModalLong" tabindex="-1" role="dialog" aria-labelledby="detailModalLong" aria-hidden="true">
+<!-- Modal -->
+<div class="modal fade" id="detailModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
-      <div class="modal-header sticky-top" style="background:white">
+      <div class="modal-header">
         <h5 class="modal-title" id="exampleModalLabel">
           {{itemSelect.id}}
           <br> {{itemSelect.telefono}}
         </h5>
-        <button mat-button (click)="copyElementText('elem1');openSnackBar()">Copiar</button>
-        
-        <a mat-button  href="https://mobile.twitter.com/{{itemSelect.id}}" target="_blank" >Tuister</a>
-        
+
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <div class="modal-body p-0">
-        <div class="row" *ngIf="typeItemSelect == 'modelo'">
-          <div class="col-sm-6 col-md-4" *ngFor="let pic of itemSelect.images ;let i = index">
-            <div class="card">
-              <div class="card-body p-0">
-                <img class="card-img-top" src="{{pic.media_url_https}}" alt="imagen twitter" >
-                <input type="checkbox" (change)="selectBadge($event,i)" id="checkbox_{{i}}">check me!
-              </div>
-            </div>
-          </div>
-          <div class="row" *ngIf="typeItemSelect== 'disponible'">
-            Like this images!
-          </div>
+      <div class="modal-body">
+             <div class="row" *ngIf="typeItemSelect == 'modelo'">
+                <div class="col-sm-6 col-md-4" *ngFor="let pic of itemSelect.images ;let i = index">
+                  <div class="card">
+                    <div class="card-body p-0">
+                      <img class="card-img-top" src="{{pic.media_url_https}}" alt="imagen twitter" >
+                       
+                        <input type="checkbox" (change)="selectBadge($event,i)" id="checkbox_{{i}}">
+                        <textarea id="elem{{i}}" [innerHTML]="ratingHtml" style="width: 1px;height: 1px;">Aux for copy clipboard</textarea>
 
-        </div>
-        <div class="modal-footer">
-          
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-        </div>
+                        <button mat-button (click)="copyElementText('elem'+i);openSnackBar()">
+                          <mat-icon >content_copy</mat-icon>
+                        </button>
+                      
+                      
+                        <a mat-button  href="https://mobile.twitter.com/{{itemSelect.id}}" target="_blank" >
+                          <mat-icon >redo</mat-icon>
+                        </a> 
+                        
+                        <a mat-button  href="#/perfil/{{itemSelect.id}}" target="_blank" >
+                          <mat-icon >account_box</mat-icon>
+                        </a> 
+
+                        <button mat-button  data-dismiss="modal" aria-label="Close">
+                          <mat-icon >close</mat-icon>
+                        </button>
+
+                    </div>
+                  </div>
+              </div>
+              <div class="row" *ngIf="typeItemSelect== 'disponible'">
+                Like this images!
+              </div>
+
+      </div>
+      <div class="modal-footer">
+       <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
       </div>
     </div>
-    <textarea id="elem1" [innerHTML]="ratingHtml" style="width: 1px;height: 1px;">Some text</textarea>
   </div>
+
+  
+</div>
+

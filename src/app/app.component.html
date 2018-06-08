@@ -12,8 +12,6 @@
         <a class="nav-item nav-link custom-color" (click)="toggleCollapsable()" routerLink="/model/o-o">Modelos</a>
         <a class="nav-item nav-link custom-color" (click)="toggleCollapsable()" routerLink="/disponibles">Disponibles</a>
         <a class="nav-item nav-link custom-color" (click)="toggleCollapsable()" routerLink="/promos">Promos<span class="sr-only">(current)</span></a>
-        
-        
         <!--<a  href="/login" class="btn btn-info"><span class="fa fa-twitter"></span> Twitter</a>-->
         {{usuario}}
       </div>
@@ -22,9 +20,13 @@
 </div>
 <router-outlet>
   
-<span *ngIf="showLoader" class="loading">
-   <mat-spinner ></mat-spinner>
-</span>
+    <div class="mx-auto mt-5" style="width: 100px;">
+      <span *ngIf="showLoader" class="loading">
+         <mat-spinner ></mat-spinner>
+      </span>
+    </div> 
+     
+
 
 </router-outlet>
 

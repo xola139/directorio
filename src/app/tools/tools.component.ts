@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { DisponibleService } from '../disponibles/disponible.service';
 import { ModelService } from '../model/model.service';
 import { MatSnackBar} from '@angular/material';
-import {Inject} from "@angular/core";
-import {DOCUMENT} from "@angular/platform-browser";
+import { Inject } from "@angular/core";
+import { DOCUMENT } from "@angular/platform-browser";
 import { PromosService } from '../promos/promos.service';
 
 @Component({
@@ -12,6 +12,9 @@ import { PromosService } from '../promos/promos.service';
   styleUrls: ['./tools.component.css','../promos/promos.component.css']
 })
 export class ToolsComponent implements OnInit {
+  
+  private dom: Document;
+
   disponibles:any;
   modelos:any;
   itemSelect:any;
@@ -20,10 +23,10 @@ export class ToolsComponent implements OnInit {
   lstPromo= [];
   ratingHtml:any;
   urls:any;
-  newModel={id:"",telefono:"",status:false,diasAtencion:[]};
+  newModel = {id:"",telefono:"",status:false,diasAtencion:[]};
   urlPerfil:string;
   lstPromos:any;
-  private dom: Document;
+  
   
   constructor(@Inject(DOCUMENT) dom: Document,
           private disponibleService: DisponibleService, 
@@ -44,7 +47,7 @@ export class ToolsComponent implements OnInit {
   }
 
 
-getDisponiblesList() {
+  getDisponiblesList() {
     this.disponibleService.getDisponibles().then((res) => {
     	console.log(res);
       this.disponibles = res;
@@ -57,12 +60,17 @@ getDisponiblesList() {
 
 getDetails(data,tipo){
 	this.selectedImg =[];
+  data.images.reverse();
 	this.itemSelect = data;
 	this.typeItemSelect = tipo;
 
   console.log(this.itemSelect);
 }
 
+
+getDetailDisponible(data,tipo){
+
+}
 
  getModelos() {
     this.modelService.showModelos("0-0").then((res) => {
@@ -77,8 +85,6 @@ getDetails(data,tipo){
       let id = result['_id'];
       this.newModel.id = "";
       this.newModel.telefono = "";
-      
-      
       alert("guardado!!"+id);
     }, (err) => {
       console.log(err);
@@ -95,17 +101,25 @@ getDetails(data,tipo){
     }, (err) => {
       console.log(err);
     });
-
   }
+
+
+fnPasteNewUser(){
+  var hidden = document.createElement("textarea");
+  document.body.appendChild(hidden);
+  console.log(">>>>>>>>>>>>>>>>>");
+  hidden.focus();
+  document.execCommand('paste', null, '');
+  console.log(hidden.value);
+}
     
 fnPaste(){
-  console.log(">>>>>>>>>>>>>>>>>");
-    var hidden = document.createElement("textarea");
-             document.body.appendChild(hidden);
-             console.log(">>>>>>>>>>>>>>>>>");
-             hidden.focus();
-             document.execCommand('paste', null, '');
-             console.log(hidden.value);
+
+  var element = null; // Should be <textarea> or <input>
+
+  element = this.dom.getElementById("txtid");
+  element.select();
+  this.dom.execCommand("paste");
 }
     
 selectBadge (e, id) {
