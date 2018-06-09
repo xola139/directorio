@@ -25,5 +25,19 @@ export class DisponibleService {
   }
 
 
+ getNoVip(id) {
+    return new Promise((resolve, reject) => {
+      this.http.get(this.baseApiUrl + '/disponible/noVip/'+id)
+          .map(res => res.json())
+          .subscribe(res => {
+            resolve(res);
+          }, (err) => {
+            reject(err);
+          });
+      });
+  }
+
+
+
 
 }

@@ -20,10 +20,8 @@
 </div>
 <router-outlet>
   
-    <div class="mx-auto mt-5" style="width: 100px;">
-      <span *ngIf="showLoader" class="loading">
-         <mat-spinner ></mat-spinner>
-      </span>
+    <div *ngIf="showLoader" class="mx-auto mt-5" style="width: 100px;">
+      <mat-spinner ></mat-spinner>
     </div> 
      
 

@@ -5,6 +5,7 @@ import { MatSnackBar} from '@angular/material';
 import { Inject } from "@angular/core";
 import { DOCUMENT } from "@angular/platform-browser";
 import { PromosService } from '../promos/promos.service';
+import { LoaderService } from '../loader.service';
 
 @Component({
   selector: 'app-tools',
@@ -26,9 +27,12 @@ export class ToolsComponent implements OnInit {
   newModel = {id:"",telefono:"",status:false,diasAtencion:[]};
   urlPerfil:string;
   lstPromos:any;
+  idnovip:string;
+  lstNoVip:any;
   
   
-  constructor(@Inject(DOCUMENT) dom: Document,
+  constructor(private loaderService: LoaderService, 
+          @Inject(DOCUMENT) dom: Document,
           private disponibleService: DisponibleService, 
           private modelService:ModelService,
           public snackBar: MatSnackBar,
@@ -51,11 +55,24 @@ export class ToolsComponent implements OnInit {
     this.disponibleService.getDisponibles().then((res) => {
     	console.log(res);
       this.disponibles = res;
-       
+       this.loaderService.display(false);
     }, (err) => {
       console.log(err);
     });
   }
+
+
+  getNoVip() {
+    this.disponibleService.getNoVip(this.idnovip).then((res) => {
+      console.log(res);
+      this.lstNoVip = res;
+      this.loaderService.display(false); 
+    }, (err) => {
+      console.log(err);
+    });
+  }
+
+
 
 
 getDetails(data,tipo){
@@ -75,6 +92,7 @@ getDetailDisponible(data,tipo){
  getModelos() {
     this.modelService.showModelos("0-0").then((res) => {
       this.modelos = res;
+      this.loaderService.display(false);
     }, (err) => {
       console.log(err);
     });
@@ -124,16 +142,11 @@ fnPaste(){
     
 selectBadge (e, id) {
   this.ratingHtml = "";
-	if (e.target.checked) {
-		this.selectedImg.push(id);
-	} else {
-	  	this.selectedImg.splice(this.selectedImg.indexOf(id), 1);
-	}
 	
 	this.urls = "";
-	for(var i=0;i<this.selectedImg.length;i++){
-		this.urls += this.itemSelect.images[this.selectedImg[i]].expanded_url+"\n";
-  }
+	
+	this.urls += this.itemSelect.images[id].expanded_url+"\n";
+  
   
   this.ratingHtml = "Agenda cita con ..";
   this.ratingHtml += "@"+this.itemSelect.id +"\n"+	"📲"+this.itemSelect.telefono.trim()+"\n"; 

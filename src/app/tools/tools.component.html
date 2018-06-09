@@ -8,6 +8,9 @@
       <li class="nav-item">
         <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Promos</a>
       </li>
+      <li class="nav-item">
+        <a class="nav-link" id="novip-tab" data-toggle="tab" href="#novip" role="tab" aria-controls="novip" aria-selected="false">NoVip</a>
+      </li>
 
     </ul>
     <div class="tab-content" id="myTabContent">
@@ -93,6 +96,38 @@
         <input type="checkbox" (change)="selectPromos($event,p.id)" > @{{p.id}} ++ {{p.promos[0].descripcion}}
         </div>
       </div>
+
+      <div class="tab-pane fade" id="novip" role="tabpanel" aria-labelledby="novip-tab">
+        
+          <form  >
+            <div class="form-group">
+              <label for="name">ID:</label>
+              <input type="text" class="form-control" [(ngModel)]="idnovip" name="idnovip" >
+              
+            </div>
+            
+           
+            <div class="form-group">
+              
+               <button mat-button (click)="getNoVip()">
+                  Mostrar
+                </button>
+            </div>
+
+            {{lstNoVip.text}}
+            {{lstNoVip.created_at}}
+            <div class="row">
+              <div  class="col-sm-4 ol-md-4"  *ngFor="let d of lstNoVip.images;let i = index">
+                <img src="{{d.media_url_https}}" width="96" height="96">
+                 
+                  <a mat-button  href="https://mobile.twitter.com/intent/tweet?text=Es hora de agendar  {{lstNoVip.id}}&url={{d.expanded_url}}&related=" target="_blank" >
+                      <mat-icon >redo</mat-icon>
+                  </a> 
+              </div>
+            </div>
+            
+          </form>
+      </div>
      
     </div>
 </div>
@@ -120,10 +155,10 @@
                     <div class="card-body p-0">
                       <img class="card-img-top" src="{{pic.media_url_https}}" alt="imagen twitter" >
                        
-                        <input type="checkbox" (change)="selectBadge($event,i)" id="checkbox_{{i}}">
+                        
                         <textarea id="elem{{i}}" [innerHTML]="ratingHtml" style="width: 1px;height: 1px;">Aux for copy clipboard</textarea>
 
-                        <button mat-button (click)="copyElementText('elem'+i);openSnackBar()">
+                        <button mat-button (click)="selectBadge($event,i);copyElementText('elem'+i);openSnackBar()">
                           <mat-icon >content_copy</mat-icon>
                         </button>
                       

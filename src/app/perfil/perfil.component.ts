@@ -5,7 +5,7 @@ import { PerfilService } from './perfil.service';
 import { Location} from '@angular/common';
 import { ErrorStateMatcher} from '@angular/material/core';
 import { FormBuilder,FormControl, FormGroupDirective, NgForm, Validators} from '@angular/forms';
-
+import { LoaderService } from '../loader.service';
 
 
 @Component({
@@ -73,7 +73,8 @@ export class PerfilComponent implements OnInit  {
   ];
 
   form;
-  constructor(private fb: FormBuilder,public dialog: MatDialog,
+  constructor(private loaderService: LoaderService,
+              private fb: FormBuilder,public dialog: MatDialog,
               private _location: Location,
               private route: ActivatedRoute, 
               private router: Router, 
@@ -172,7 +173,7 @@ export class PerfilComponent implements OnInit  {
 		  this.perfilService.showPerfil(id).then((res) => {
       this.perfil = res;
       this.perfil.images.reverse();
-
+      this.loaderService.display(false);
     	}, (err) => {
       	console.log(err);
     	});

@@ -3,7 +3,17 @@ var router = express.Router();
 var mongoose = require('mongoose');
 var Disponible = require('../models/Disponibles.js');
 var Images = require('../models/Images.js');
+var config  = require('../config');
 
+
+var Twit = require('twit');
+
+var Bot = new Twit({
+        consumer_key: config.twitter.key,
+        consumer_secret: config.twitter.secret,
+        access_token: config.twitter.TWITTER_ACCESS_TOKEN,
+        access_token_secret: config.twitter.TWITTER_ACCESS_TOKEN_SECRET
+});
 
 
 /* GET ALL DISPONIBLE */
@@ -76,6 +86,51 @@ router.get('/',
 
 
     });
+
+/*Servira para traer la modelo cuando no este registrada en disponibles
+La idea es generar un post en twitter apartir de la vista  en timeline del usuario admin*/
+router.get('/noVip/:id', function(req, res) {
+    var options = { screen_name: req.params.id ,count:50};
+      
+    Bot.get('statuses/user_timeline', options , function(err, data) {
+        var newMedia = {};
+        var arrImage = [];
+
+
+        newMedia.id = data[0].user.screen_name;
+        newMedia.text = data[0].text +" \n"+ data[1].text;;
+        newMedia.created_at = data[0].created_at;
+        
+        for(var i=0;i<data.length;i++){
+            if(data[i].entities.media){
+                var _m = data[i].entities.media;
+                for(var x=0;x<_m.length;x++){
+                    delete _m[x].indices;
+                    delete _m[x].sizes;
+                    delete _m[x].id;
+                    delete _m[x].id_str;
+                    delete _m[x].media_url;
+                    //delete _m[x].media_url_https;
+                    delete _m[x].url;
+                    //delete _m[x].display_url;
+                    delete _m[x].type;
+                    delete _m[x].source_status_id;
+                    delete _m[x].source_status_id_str;
+                    delete _m[x].source_user_id;
+                    delete _m[x].source_user_id_str;
+                    delete _m[x].status;
+
+                    arrImage.push(_m[x]);
+                }    
+            }
+        }
+        newMedia.images = arrImage;
+          
+        res.json(newMedia);
+    })
+
+});
+
 
 
 /* GET ALL DISPONIBLE */
