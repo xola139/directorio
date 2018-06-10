@@ -16,6 +16,11 @@ var Bot = new Twit({
 });
 
 
+
+
+
+
+
 /* GET ALL DISPONIBLE */
 router.get('/',
     function(req, res, next) {
@@ -87,6 +92,19 @@ router.get('/',
 
     });
 
+
+router.get('/all', function(req, res, next) {
+  
+      Disponible.find(function (err, disponibles) {
+        if (err) return next(err);
+        res.json(disponibles);
+      });
+});
+
+
+
+
+
 /*Servira para traer la modelo cuando no este registrada en disponibles
 La idea es generar un post en twitter apartir de la vista  en timeline del usuario admin*/
 router.get('/noVip/:id', function(req, res) {
@@ -98,7 +116,7 @@ router.get('/noVip/:id', function(req, res) {
 
 
         newMedia.id = data[0].user.screen_name;
-        newMedia.text = data[0].text +" \n"+ data[1].text;;
+        newMedia.text = data[0].text +" \n"+ data[1].text;
         newMedia.created_at = data[0].created_at;
         
         for(var i=0;i<data.length;i++){
@@ -131,6 +149,35 @@ router.get('/noVip/:id', function(req, res) {
 
 });
 
+
+
+
+router.put('/agregarDisponibles', function(req, res) {
+
+    var options = { screen_name: req.body.id ,count:2};
+
+
+console.log(req.body.id+"<<<<>>>>>>");
+      
+    Bot.get('statuses/user_timeline', options , function(err, data) {
+        
+
+        var newDisponible = {};
+
+        newDisponible.id = req.body.id;
+        newDisponible.profile_image_url = data[0].user.profile_image_url.replace("_normal.jpg","_400x400.jpg");
+        newDisponible.status = true;
+        newDisponible.disponibles = [{descripcion: data[0].text,created_at: data[0].created_at}];
+        Disponible.create(newDisponible, function (err, post) {
+            if (err) return next(err);
+            console.log("Save in register Disponibles ");
+
+            res.json(post);
+        });
+    });
+    
+    
+});
 
 
 /* GET ALL DISPONIBLE */

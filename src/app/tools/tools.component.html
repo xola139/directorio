@@ -16,7 +16,7 @@
     <div class="tab-content" id="myTabContent">
       <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
         <div class="container">
-          <h6>Nuevo usaurio:</h6>
+          <h6>Nuevo usaurio Vip:</h6>
           <div class="row">
             <div class="col-md-6">
               <form (ngSubmit)="registerModelVip()" >
@@ -38,13 +38,14 @@
         <hr>
 
         <div class="container">
-          <h6>Nuevo usuario desde disponibles:</h6>
+          <h6>Nuevo usuario en disponibles:</h6>
+
           <div class="row">
             <div class="col-md-6">
               <form (ngSubmit)="saveModel()" #bookForm="ngForm">
                 <div class="form-group">
                   <label for="name">ID:</label>
-                  <input type="text" class="form-control" [(ngModel)]="newModel['id']" name="id" required id="txtid">
+                  <input type="text" class="form-control" [(ngModel)]="newModel['id']" name="id" required id="txtid" (keyup)="applyFilterDisponible($event.target.value)" >
                   <input type="hidden" value="false" class="form-control" [(ngModel)]="newModel['status']" name="status" >
                 </div>
                 <div class="form-group">
@@ -55,7 +56,8 @@
                
                 <div class="form-group">
                   <button type="button" class="btn btn-success" (click)="fnPaste()">P</button>
-                  <button type="submit" class="btn btn-success" [disabled]="!bookForm.form.valid">Guardar</button>
+                  <button type="submit" class="btn btn-success" [disabled]="!bookForm.form.valid">Guardar fon</button>
+                  <button type="button" class="btn btn-success"  (click)="saveNewDisponible()">Add Disponible</button>
                 </div>
               </form>
             </div>
@@ -77,7 +79,7 @@
           <div class="row">
             <div class="col-md-12 col-sm-12 ">
               <div class="chip m-1" *ngFor="let d of disponibles;let i = index">
-                <img (click)="getDetailDisponible(d,'disponible')" src="{{d.profile_image_url}}" alt="disponible" width="96" height="96" data-toggle="modal"
+                <img (click)="getDetailDisponible(d)" src="{{d.profile_image_url}}" alt="disponible" width="96" height="96" data-toggle="modal"
                   data-target="#detailModalLong">
                   <br>{{d.id}}
               </div>
@@ -116,13 +118,15 @@
 
             {{lstNoVip.text}}
             {{lstNoVip.created_at}}
-            <div class="row">
-              <div  class="col-sm-4 ol-md-4"  *ngFor="let d of lstNoVip.images;let i = index">
-                <img src="{{d.media_url_https}}" width="96" height="96">
-                 
-                  <a mat-button  href="https://mobile.twitter.com/intent/tweet?text=Es hora de agendar  {{lstNoVip.id}}&url={{d.expanded_url}}&related=" target="_blank" >
-                      <mat-icon >redo</mat-icon>
-                  </a> 
+            <div class="container-fluid">
+              <div class="row">
+                <div  class="col-sm-6 col-md-3"  *ngFor="let d of lstNoVip.images;let i = index">
+                  <img src="{{d.media_url_https}}" width="96" height="96">
+                   <br>
+                    <a mat-button  href="https://mobile.twitter.com/intent/tweet?text=Es hora de agendar  @{{lstNoVip.id}}&url={{d.expanded_url}}&related=" target="_blank" >
+                        <mat-icon >redo</mat-icon>
+                    </a> 
+                </div>
               </div>
             </div>
             
@@ -149,7 +153,10 @@
         </button>
       </div>
       <div class="modal-body">
-             <div class="row" *ngIf="typeItemSelect == 'modelo'">
+
+      <p>{{itemSelect.descripcion}}</p>
+
+             <div class="row" >
                 <div class="col-sm-6 col-md-4" *ngFor="let pic of itemSelect.images ;let i = index">
                   <div class="card">
                     <div class="card-body p-0">

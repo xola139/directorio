@@ -103,6 +103,10 @@ applyFilterDisponible(filterValue: string) {
 
 
 
+  fnAddDisponible(){
+    
+  }
+
 
    getDisponiblesList() {
     this.disponibleService.getDisponibles().then((res) => {

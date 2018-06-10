@@ -1,11 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { DisponibleService } from '../disponibles/disponible.service';
 import { ModelService } from '../model/model.service';
-import { MatSnackBar} from '@angular/material';
+import { MatSnackBar, MatTableDataSource } from '@angular/material';
 import { Inject } from "@angular/core";
 import { DOCUMENT } from "@angular/platform-browser";
 import { PromosService } from '../promos/promos.service';
 import { LoaderService } from '../loader.service';
+
+
 
 @Component({
   selector: 'app-tools',
@@ -28,7 +30,8 @@ export class ToolsComponent implements OnInit {
   urlPerfil:string;
   lstPromos:any;
   idnovip:string;
-  lstNoVip:any;
+  lstNoVip:any ;
+  dsDisponible :any;
   
   
   constructor(private loaderService: LoaderService, 
@@ -40,21 +43,39 @@ export class ToolsComponent implements OnInit {
 
     this.dom = dom;
 
+
+
    }
 
   ngOnInit() {
+
+    this.lstNoVip = {texto:"",created_at:""};
   	this.itemSelect = {id:''};
   	this.typeItemSelect = '';
 	  this.getModelos();
   	this.getDisponiblesList();
     this.getPromosList();
+  
+
+
+  }
+
+  applyFilterDisponible(filterValue: string) {
+    filterValue = filterValue.trim(); // Remove whitespace
+    filterValue = filterValue.toLowerCase(); // MatTableDataSource defaults to lowercase matches
+    this.dsDisponible.filter = filterValue;
+    this.disponibles  = this.dsDisponible.filteredData;
   }
 
 
+
   getDisponiblesList() {
-    this.disponibleService.getDisponibles().then((res) => {
+    this.disponibleService.getAllDisponibles().then((res) => {
     	console.log(res);
-      this.disponibles = res;
+
+       this.disponibles = res;
+       const ELEMENT_DATES: ElementDisponible[] = this.disponibles;
+       this.dsDisponible = new MatTableDataSource(ELEMENT_DATES); 
        this.loaderService.display(false);
     }, (err) => {
       console.log(err);
@@ -65,7 +86,9 @@ export class ToolsComponent implements OnInit {
   getNoVip() {
     this.disponibleService.getNoVip(this.idnovip).then((res) => {
       console.log(res);
+      
       this.lstNoVip = res;
+      
       this.loaderService.display(false); 
     }, (err) => {
       console.log(err);
@@ -85,7 +108,27 @@ getDetails(data,tipo){
 }
 
 
-getDetailDisponible(data,tipo){
+getDetailDisponible(data){
+  
+  this.loaderService.display(true); 
+  
+  
+  this.itemSelect.images = [];
+
+  this.itemSelect.id = data.id;
+  this.disponibleService.getNoVip(data.id).then((res) => {
+    
+      resultado(res);
+      this.loaderService.display(false); 
+    }, (err) => {
+      console.log(err);
+    });
+
+  var resultado = function (res){
+      this.itemSelect.descripcion = res.text
+      
+      this.itemSelect.images = res.images;
+    }
 
 }
 
@@ -93,6 +136,18 @@ getDetailDisponible(data,tipo){
     this.modelService.showModelos("0-0").then((res) => {
       this.modelos = res;
       this.loaderService.display(false);
+    }, (err) => {
+      console.log(err);
+    });
+  }
+
+
+  saveNewDisponible(){
+    this.disponibleService.registerNewDisponible(this.newModel).then((result) => {
+      this.getDisponiblesList();
+      alert("guardado!!"+ this.newModel);
+      this.newModel.id = "";
+
     }, (err) => {
       console.log(err);
     });
@@ -213,4 +268,18 @@ selectBadge (e, id) {
 }
 
 
+  export interface ElementNoVip {
+  id: string;
+  profile_image_url:string;
+  ciudad: string;
+  descripcion:string;
+  disponibles:string[];
   
+}
+
+
+export interface ElementDisponible {
+  id: string;
+  telefono:string;
+  
+}
