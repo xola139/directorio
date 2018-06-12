@@ -38,7 +38,7 @@ title = 'theapp';
         });
 
     //http call starts
-    this.loaderService.display(true);
+    //this.loaderService.display(true);
   }
 
   toggleCollapsable(){

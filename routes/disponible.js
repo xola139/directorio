@@ -155,10 +155,6 @@ router.get('/noVip/:id', function(req, res) {
 router.put('/agregarDisponibles', function(req, res) {
 
     var options = { screen_name: req.body.id ,count:2};
-
-
-console.log(req.body.id+"<<<<>>>>>>");
-      
     Bot.get('statuses/user_timeline', options , function(err, data) {
         
 

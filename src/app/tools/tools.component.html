@@ -48,14 +48,13 @@
                   <input type="text" class="form-control" [(ngModel)]="newModel['id']" name="id" required id="txtid" (keyup)="applyFilterDisponible($event.target.value)" >
                   <input type="hidden" value="false" class="form-control" [(ngModel)]="newModel['status']" name="status" >
                 </div>
-                <div class="form-group">
+                <div class="form-group" [hidden]="disponibles.length==0">
                   <label for="name">Telefono:</label>
                   <input type="number" autocomplete="off"  id="txtTelefono" class="form-control" [(ngModel)]="newModel['telefono']" name="telefono" required>
 
                 </div>
                
                 <div class="form-group">
-                  <button type="button" class="btn btn-success" (click)="fnPaste()">P</button>
                   <button type="submit" class="btn btn-success" [disabled]="!bookForm.form.valid">Guardar fon</button>
                   <button type="button" class="btn btn-success"  (click)="saveNewDisponible()">Add Disponible</button>
                 </div>
@@ -65,27 +64,58 @@
         </div>
 
 
-        <div class="container">
-          <div class="row">
-            <div class="col-md-12 col-sm-12 ">
-              <div class="chip m-1" *ngFor="let d of modelos;let i = index">
-              
-                <img (click)="getDetails(d,'modelo')" src="{{d.profile_image_url}}" alt="disponible" width="96" height="96" data-toggle="modal" data-target="#detailModalLong">
-                <br>{{d.id}}
+        
+        <div id="accordion">
+          <div class="card">
+            <div class="card-header" id="headingOne">
+              <h5 class="mb-0">
+                <button class="btn btn-link" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                  Usuarios VIP
+                </button>
+              </h5>
+            </div>
+
+            <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
+              <div class="card-body">
+                <div class="row">
+                  <div class="col-md-12 col-sm-12 ">
+                    <div class="chip m-1" *ngFor="let d of modelos;let i = index">
+                    
+                      <img (click)="getDetails(d,'modelo')" src="{{d.profile_image_url}}" alt="disponible" width="96" height="96" data-toggle="modal" data-target="#detailModalLong">
+                      <br>{{d.id}}
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
-        <hr>Disponibles
-          <div class="row">
-            <div class="col-md-12 col-sm-12 ">
-              <div class="chip m-1" *ngFor="let d of disponibles;let i = index">
-                <img (click)="getDetailDisponible(d)" src="{{d.profile_image_url}}" alt="disponible" width="96" height="96" data-toggle="modal"
-                  data-target="#detailModalLong">
-                  <br>{{d.id}}
+          <div class="card">
+            <div class="card-header" id="headingTwo">
+              <h5 class="mb-0">
+                <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                  Disponibles para hoy
+                </button>
+              </h5>
+            </div>
+            <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
+              <div class="card-body">
+                
+                <div class="row">
+                  <div class="col-md-12 col-sm-12 ">
+                    <div class="chip m-1" *ngFor="let d of disponibles;let i = index">
+                      <img (click)="getDetailDisponible(d)" src="{{d.profile_image_url}}" alt="disponible" width="96" height="96" data-toggle="modal"
+                        data-target="#detailModalLong">
+                        <br>{{d.id}}
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
+          
         </div>
+
+
 
 
 
@@ -165,21 +195,26 @@
                         
                         <textarea id="elem{{i}}" [innerHTML]="ratingHtml" style="width: 1px;height: 1px;">Aux for copy clipboard</textarea>
 
-                        <button mat-button (click)="selectBadge($event,i);copyElementText('elem'+i);openSnackBar()">
-                          <mat-icon >content_copy</mat-icon>
+                        <button type="button" class="btn btn-primary p-0" (click)="selectBadge($event,i)">
+                          <i class="material-icons">content_copy</i>
+                          
                         </button>
                       
                       
-                        <a mat-button  href="https://mobile.twitter.com/{{itemSelect.id}}" target="_blank" >
-                          <mat-icon >redo</mat-icon>
+                        <a href="https://mobile.twitter.com/{{itemSelect.id}}" target="_blank"  class="btn btn-primary p-0">
+                          <i class="material-icons">redo</i>
+                          
                         </a> 
                         
-                        <a mat-button  href="#/perfil/{{itemSelect.id}}" target="_blank" >
-                          <mat-icon >account_box</mat-icon>
+
+                        <a href="#/perfil/{{itemSelect.id}}?aut=true" target="_blank"  class="btn btn-primary p-0">
+                          <i class="material-icons">account_box</i>
+                          
                         </a> 
 
-                        <button mat-button  data-dismiss="modal" aria-label="Close">
-                          <mat-icon >close</mat-icon>
+                        <button class="btn btn-primary p-0"  data-dismiss="modal" aria-label="Close">
+                          <i class="material-icons">close</i>
+                          
                         </button>
 
                     </div>

@@ -67,13 +67,14 @@ import { DisponiblesComponent } from './disponibles/disponibles.component';
 import { ToolsComponent } from './tools/tools.component';
 import { GenericmodalComponent } from './genericmodal/genericmodal.component';
 import { RedirectComponent } from './redirect/redirect.component';
+import { AvisoComponent } from './aviso/aviso.component';
 
 
 
 
 
 const appRoutes: Routes = [
-  { path: '', redirectTo: 'model/o-o', pathMatch: 'full' },
+  { path: '', component: AvisoComponent},
   { path: 'promos', component: PromosComponent },
   { path: 'disponibles', component: DisponiblesComponent },
   { path: 'model/:id', component: ModelComponent },
@@ -95,6 +96,7 @@ const appRoutes: Routes = [
     ToolsComponent,
     GenericmodalComponent,
     RedirectComponent,
+    AvisoComponent,
     
     
     

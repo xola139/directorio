@@ -51,7 +51,7 @@ export class PromosComponent  implements OnInit {
     
      setTimeout(()=>{
       this.mensajeButton.nativeElement.click();
-     },5000);
+     },10000);
   }
 
   getPromosList() {

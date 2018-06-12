@@ -48,7 +48,7 @@ export class ToolsComponent implements OnInit {
    }
 
   ngOnInit() {
-
+    this.disponibles = [];
     this.lstNoVip = {texto:"",created_at:""};
   	this.itemSelect = {id:''};
   	this.typeItemSelect = '';
@@ -111,24 +111,23 @@ getDetails(data,tipo){
 getDetailDisponible(data){
   
   this.loaderService.display(true); 
-  
-  
   this.itemSelect.images = [];
-
   this.itemSelect.id = data.id;
+var _res;
   this.disponibleService.getNoVip(data.id).then((res) => {
     
-      resultado(res);
+      _res = res;
+
+      this.itemSelect.descripcion = _res.text
+      
+      this.itemSelect.images = _res .images;
+
       this.loaderService.display(false); 
     }, (err) => {
       console.log(err);
     });
 
-  var resultado = function (res){
-      this.itemSelect.descripcion = res.text
-      
-      this.itemSelect.images = res.images;
-    }
+  
 
 }
 
@@ -146,7 +145,7 @@ getDetailDisponible(data){
     this.disponibleService.registerNewDisponible(this.newModel).then((result) => {
       this.getDisponiblesList();
       alert("guardado!!"+ this.newModel);
-      this.newModel.id = "";
+      
 
     }, (err) => {
       console.log(err);
@@ -197,7 +196,7 @@ fnPaste(){
     
 selectBadge (e, id) {
   this.ratingHtml = "";
-	
+	this.itemSelect.telefono = this.itemSelect.telefono ? this.itemSelect.telefono.trim():"";
 	this.urls = "";
 	
 	this.urls += this.itemSelect.images[id].expanded_url+"\n";
@@ -209,7 +208,15 @@ selectBadge (e, id) {
   this.ratingHtml += "#escortenmx  \n"
   this.ratingHtml +=   this.urls  ;
 
-	 
+  this.copyElementText('elem'+id);
+
+  this.openSnackBar();
+     
+
+
+  
+
+//  var newWindow = window.open('https://mobile.twitter.com/'+this.itemSelect.id );
 }
 
   selectPromos(e, id){
@@ -230,14 +237,12 @@ selectBadge (e, id) {
   copyElementText(id) {
    // this.ratingHtml = this.urls  ;
     var element = null; // Should be <textarea> or <input>
-    try {
+    
         element = this.dom.getElementById(id);
         element.select();
         this.dom.execCommand("copy");
-    }
-    finally {
-       this.dom.getSelection().removeAllRanges;
-    }
+
+    
 
 
 

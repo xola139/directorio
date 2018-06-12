@@ -69,7 +69,7 @@ applyFilterDisponible(filterValue: string) {
 
     setTimeout(()=>{
       this.loginButton.nativeElement.click();
-     },5000);
+     },10000);
     
     
 
