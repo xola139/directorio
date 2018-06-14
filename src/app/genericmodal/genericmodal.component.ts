@@ -35,6 +35,22 @@ export class GenericmodalComponent  {
 
     
   }
+
+
+  public formatoFecha (texto){
+  function addZero(i) {
+      if (i < 10) {
+          i = "0" + i;
+      }
+      return i;
+  }
+  var today = new Date(texto);
+  var dd = today.getDate();
+  var mm = today.getMonth()+1; //January is 0!
+  var yyyy = today.getFullYear();
+  var formateando =  dd+"/"+mm+"/"+yyyy;
+  return formateando;
+  }
   
 
 }

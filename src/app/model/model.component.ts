@@ -30,7 +30,7 @@ constructor( private loaderService: LoaderService,
              private route: ActivatedRoute ) {
   this.disponibles = [];
   this.promos = [];
-  this.verItems = 5;
+  this.verItems = 10;
   this.pictures = [];
   
  }

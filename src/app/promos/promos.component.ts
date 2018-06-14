@@ -49,9 +49,9 @@ export class PromosComponent  implements OnInit {
     this.getPromosList();
     
     
-     setTimeout(()=>{
+    setTimeout(()=>{
       this.mensajeButton.nativeElement.click();
-     },10000);
+    },10000);
   }
 
   getPromosList() {
@@ -70,12 +70,15 @@ export class PromosComponent  implements OnInit {
 
 
   openDialog(item): void {
-    var content = {msgItem:null,msgTitle:"",msgDescripcion:"",msgUrl:""};
+    var content = {msgItem:null,msgTitle:"",msgDescripcion:"",msgUrl:"",msgFecha:""};
     content.msgTitle = item.id;
     content.msgDescripcion = item.promos[item.promos.length -1].descripcion;
+    content.msgFecha = item.promos[item.promos.length -1].created_at;
     content.msgUrl = item.avatar;
 
     item.opcionesTelefono = {whatsapp: false,llamadas: true,twitter: true};
+    
+    
     
 
     content.msgItem = item;

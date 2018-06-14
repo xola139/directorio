@@ -32,7 +32,7 @@ export class ToolsComponent implements OnInit {
   idnovip:string;
   lstNoVip:any ;
   dsDisponible :any;
-  
+  autPost:Boolean;
   
   constructor(private loaderService: LoaderService, 
           @Inject(DOCUMENT) dom: Document,

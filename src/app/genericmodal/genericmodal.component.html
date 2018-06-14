@@ -20,26 +20,25 @@
   <div class="col-9 col-md-9 p-0 m-0">
     <h2 mat-dialog-title class="m-0">{{data.item.msgTitle}}</h2>  
     <p class="card-text mb-0">{{data.item.msgItem.telefono}}</p>
-    <div *ngIf="data.item.msgItem.telefono == null"  class="col-sm-12 col-md-12">
-      <label class="texto-label">Aun no tenemos su telefono!... Revisa la mensión &#8681;</label>
-    </div>
     
+      <div  class="d-inline">
+          <a (click)="eventAnalytics(data.item.msgItem.from,'twitter')"   href="https://twitter.com/{{data.item.msgTitle}}" target="_blank" >
+            <img src="assets/twitterv2.png" alt="visita su twitter" class="custon-radio-0">
+          </a>
+      </div>
+
       <div *ngIf="data.item.msgItem.opcionesTelefono.whatsapp && data.item.msgItem.telefono !=null" class="d-inline">
           <a (click)="eventAnalytics(data.item.msgItem.from,'whatsapp')"   href="{{isMobile ? 'https://api.whatsapp.com/send?phone=521'+data.item.msgItem.telefono :'javascript:;'}}" target="{{isMobile ? '_blank':'_self'}}" >
-            
-             <img src="assets/whatsapp.png" alt="Atiende WhatsApp" class="custon-radio-0">
-
+            <img src="assets/whatsapp.png" alt="Atiende WhatsApp" class="custon-radio-0">
           </a>
       </div>
       
       <div *ngIf="data.item.msgItem.opcionesTelefono.llamadas && data.item.msgItem.telefono !=null" class="d-inline">
           <a (click)="eventAnalytics(data.item.msgItem.from,'llamada')"  href="{{isMobile ? 'tel:'+data.item.msgItem.telefono : 'javascript:;'}}"  target="{{isMobile ? '_blank':'_self'}}" >
-            <img src="assets/phonev2.png" alt="Atiende WhatsApp"  class="custon-radio-0">
+            <img src="assets/phonev2.png" alt="Atiende Llamadas"  class="custon-radio-0">
 
           </a>
-    
-      
-    </div> 
+      </div> 
   </div> 
   
 </div>
@@ -64,7 +63,7 @@
         <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
           <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
           <div class="carousel-inner">
-            <div class="carousel-item {{i == 1 ? 'active':''}} " *ngFor="let pic of data.item.msgItem.images | slice:0:10;let i = index">
+            <div class="carousel-item {{i == 1 ? 'active':''}} " *ngFor="let pic of data.item.msgItem.images | slice:0:20;let i = index">
               <img class="d-block w-100 img-fluid" style="max-height: 250px;" src="{{pic.media_url_https}}" alt="imagen modelo {{data.item.msgTitle}}">
             </div>
             
@@ -89,16 +88,9 @@
 
     
   </mat-dialog-content>
-    
-
-  
-  
-  
-	<mat-dialog-actions>
+  <mat-dialog-actions>
       <p class="small">Actualización:{{data.item.msgFecha}}</p>
-	    
-      
-  </mat-dialog-actions>
+	</mat-dialog-actions>
 
 
 
