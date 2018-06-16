@@ -1,15 +1,14 @@
 var config={
-    twitter:{
+     conectDB:{
+               link:''
+       },
+       twitter:{
                 key:'',
                 secret:'',
         
                TWITTER_ACCESS_TOKEN: '',
                TWITTER_ACCESS_TOKEN_SECRET: ''
        }
-        ,conectDB:{
-                link:''
-    }
-  
 };
 
 module.exports= config;

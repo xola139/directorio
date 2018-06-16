@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { DisponibleService } from '../disponibles/disponible.service';
 import { ModelService } from '../model/model.service';
-import { MatSnackBar, MatTableDataSource } from '@angular/material';
+import { MatSnackBar, MatTableDataSource,MatCheckboxChange } from '@angular/material';
 import { Inject } from "@angular/core";
 import { DOCUMENT } from "@angular/platform-browser";
 import { PromosService } from '../promos/promos.service';
 import { LoaderService } from '../loader.service';
+
 
 
 
@@ -50,13 +51,14 @@ export class ToolsComponent implements OnInit {
   ngOnInit() {
     this.disponibles = [];
     this.lstNoVip = {texto:"",created_at:""};
-  	this.itemSelect = {id:''};
+  	this.itemSelect = {id:'',autPost:false};
   	this.typeItemSelect = '';
 	  this.getModelos();
   	this.getDisponiblesList();
     this.getPromosList();
   
 
+    
 
   }
 
@@ -67,7 +69,20 @@ export class ToolsComponent implements OnInit {
     this.disponibles  = this.dsDisponible.filteredData;
   }
 
+  autPostChange(event:MatCheckboxChange,indice) {
+    var dataAutPost = {_id:this.itemSelect._id,autPost:event.checked};
 
+     this.modelService.updateAutPost(dataAutPost).then((res) => {
+       console.log(res);
+     }, (err) => {
+       console.log(err);
+     });
+
+    
+
+    console.log(this.itemSelect);
+    console.log(event.checked);
+  }
 
   getDisponiblesList() {
     this.disponibleService.getAllDisponibles().then((res) => {
@@ -103,8 +118,6 @@ getDetails(data,tipo){
   data.images.reverse();
 	this.itemSelect = data;
 	this.typeItemSelect = tipo;
-
-  console.log(this.itemSelect);
 }
 
 

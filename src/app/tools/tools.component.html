@@ -188,15 +188,10 @@
       <div class="modal-body">
         <div class="row" >
           <div class="col-sm-3 col-md-3" >
-            <mat-checkbox [(ngModel)]="autPost" name="autPost" >Atoriza post</mat-checkbox>
+            <mat-checkbox [(ngModel)]="itemSelect.autPost" (change)="autPostChange($event,i)"  name="autPost" >Autoriza post</mat-checkbox>
              
           </div>
-          <div class="col-sm-3 col-md-3" >
           
-           <button type="button" class="btn btn-primary p-0" (click)="selectBadge($event,'idtuiste')">
-                  Update avatar
-            </button>
-        </div>
 
         </div>
         

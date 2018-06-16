@@ -77,8 +77,8 @@ router.put('/registrar', function(req, res) {
         newMedia.id = data[0].user.screen_name;
         newMedia.id_str = data[0].id;
         newMedia.description= data[0].user.description,
-        newMedia.profile_image_url = data[0].user.profile_image_url;
-        newMedia.profile_image_url_https = data[0].user.profile_image_url_https.replace("_normal.jpg","_400x400.jpg");
+        newMedia.profile_image_url = data[0].user.profile_image_url.replace("_normal","");;
+        newMedia.profile_image_url_https = data[0].user.profile_image_url_https.replace("_normal","");
         newMedia.diasAtencion = {lunes:false,martes:false,miercoles:false,jueves:false,viernes:false,sabado:false,domingo:false,fulltime:false};
         newMedia.opcionesTelefono = {whatsapp:false,llamadas:false,twitter:false};        
         newMedia.idiomas = {espanol:false,ingles:false};        
@@ -132,6 +132,18 @@ router.put('/registrar', function(req, res) {
 
 });
 
+
+/* UPDATE Autoriza post */
+router.put('/autPost', function(req, res, next) {
+
+  var _id = req.body._id;
+  delete req.body._id;
+
+  Images.findByIdAndUpdate({_id:_id}, req.body, function (err, image) {
+      if (err) console.log(err);
+      console.log("Update aut Post!!");
+    })
+});
 
 
 
