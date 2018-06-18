@@ -65,6 +65,7 @@ export class PerfilComponent implements OnInit  {
     {value: 'Sinaloa', viewValue: 'Sinaloa'},
     {value: 'Sonora', viewValue: 'Sonora'},
     {value: 'Tabasco', viewValue: 'Tabasco'},
+    {value: 'Toluca', viewValue: 'Toluca'},
     {value: 'Tamaulipas', viewValue: 'Tamaulipas'},
     {value: 'Tlaxcala', viewValue: 'Tlaxcala'},
     {value: 'Veracruz', viewValue: 'Veracruz'},

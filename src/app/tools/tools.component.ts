@@ -69,7 +69,7 @@ export class ToolsComponent implements OnInit {
     this.disponibles  = this.dsDisponible.filteredData;
   }
 
-  autPostChange(event:MatCheckboxChange,indice) {
+  autPostChange(event:MatCheckboxChange) {
     var dataAutPost = {_id:this.itemSelect._id,autPost:event.checked};
 
      this.modelService.updateAutPost(dataAutPost).then((res) => {
@@ -77,12 +77,18 @@ export class ToolsComponent implements OnInit {
      }, (err) => {
        console.log(err);
      });
-
-    
-
-    console.log(this.itemSelect);
-    console.log(event.checked);
   }
+
+  enableUserChange(event:MatCheckboxChange) {
+    var dataEnableUser= {_id:this.itemSelect._id,status:event.checked};
+
+     this.modelService.enableUser(dataEnableUser).then((res) => {
+       console.log(res);
+     }, (err) => {
+       console.log(err);
+     });
+  }
+
 
   getDisponiblesList() {
     this.disponibleService.getAllDisponibles().then((res) => {
@@ -114,6 +120,8 @@ export class ToolsComponent implements OnInit {
 
 
 getDetails(data,tipo){
+
+  console.log(data);
 	this.selectedImg =[];
   data.images.reverse();
 	this.itemSelect = data;

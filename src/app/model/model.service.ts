@@ -83,6 +83,18 @@ export class ModelService   {
     });
   }
 
+  enableUser(data) {
+    return new Promise((resolve, reject) => {
+        this.http.put(this.baseApiUrl +'/images/enableUser', data)
+          .map(res => res.json())
+          .subscribe(res => {
+            resolve(res);
+          }, (err) => {
+            reject(err);
+          });
+    });
+  }
+
 
 }
 

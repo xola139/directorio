@@ -146,6 +146,19 @@ router.put('/autPost', function(req, res, next) {
 });
 
 
+/* UPDATE User */
+router.put('/enableUser', function(req, res, next) {
+
+  var _id = req.body._id;
+  delete req.body._id;
+
+  Images.findByIdAndUpdate({_id:_id}, req.body, function (err, image) {
+      if (err) console.log(err);
+      console.log("Update enable User!!");
+    })
+});
+
+
 
 /* SAVE BOOK */
 router.put('/guardar', function(req, res) {

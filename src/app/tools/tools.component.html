@@ -12,6 +12,7 @@
         <a class="nav-link" id="novip-tab" data-toggle="tab" href="#novip" role="tab" aria-controls="novip" aria-selected="false">NoVip</a>
       </li>
 
+
     </ul>
     <div class="tab-content" id="myTabContent">
       <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
@@ -188,9 +189,13 @@
       <div class="modal-body">
         <div class="row" >
           <div class="col-sm-3 col-md-3" >
-            <mat-checkbox [(ngModel)]="itemSelect.autPost" (change)="autPostChange($event,i)"  name="autPost" >Autoriza post</mat-checkbox>
+            <mat-checkbox [(ngModel)]="itemSelect.autPost" (change)="autPostChange($event)"  name="autPost" >Autoriza post</mat-checkbox>
              
           </div>
+          <div class="col-sm-3 col-md-3" >
+            <mat-checkbox [(ngModel)]="itemSelect.status" (change)="enableUserChange($event)" name="status" >Habilita usuario</mat-checkbox>
+          </div>
+
           
 
         </div>
