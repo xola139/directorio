@@ -60,6 +60,7 @@ import { PerfilComponent } from './perfil/perfil.component';
 
 import { ModelService } from './model/model.service';
 import { PromosService } from './promos/promos.service';
+import { ToolService } from './tools/tools.service';
 import { PerfilService } from './perfil/perfil.service';
 import { DisponibleService } from './disponibles/disponible.service';
 
@@ -152,7 +153,7 @@ const appRoutes: Routes = [
     RouterModule.forRoot(appRoutes)
   ],
   providers: [
-    ModelService,PromosService,PerfilService,DisponibleService,GoogleAnalyticsEventsService,LoaderService,
+    ModelService,PromosService,ToolService,PerfilService,DisponibleService,GoogleAnalyticsEventsService,LoaderService,
     {provide: LocationStrategy, useClass: HashLocationStrategy}
   ],
   bootstrap: [AppComponent]

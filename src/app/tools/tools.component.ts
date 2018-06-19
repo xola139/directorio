@@ -6,7 +6,7 @@ import { Inject } from "@angular/core";
 import { DOCUMENT } from "@angular/platform-browser";
 import { PromosService } from '../promos/promos.service';
 import { LoaderService } from '../loader.service';
-
+import { ToolService } from './tools.service';
 
 
 
@@ -34,13 +34,15 @@ export class ToolsComponent implements OnInit {
   lstNoVip:any ;
   dsDisponible :any;
   autPost:Boolean;
+  message:string;
   
   constructor(private loaderService: LoaderService, 
           @Inject(DOCUMENT) dom: Document,
           private disponibleService: DisponibleService, 
           private modelService:ModelService,
           public snackBar: MatSnackBar,
-          private promosService: PromosService,) {
+          private promosService: PromosService,
+          private toolService: ToolService,) {
 
     this.dom = dom;
 
@@ -153,13 +155,16 @@ var _res;
 }
 
  getModelos() {
-    this.modelService.showModelos("0-0").then((res) => {
+    this.modelService.getAllModelos().then((res) => {
       this.modelos = res;
       this.loaderService.display(false);
     }, (err) => {
       console.log(err);
     });
   }
+
+
+
 
 
   saveNewDisponible(){
@@ -172,6 +177,21 @@ var _res;
       console.log(err);
     });
   }
+
+   saveMessage(){
+    this.toolService.saveMessage(this.message).then((result) => {
+      
+      alert("Mensaje  guardado!!"+ result);
+      this.message = "";
+      
+
+    }, (err) => {
+      console.log(err);
+    });
+  }
+
+
+
 
  saveModel() {
     this.modelService.saveModel(this.newModel).then((result) => {

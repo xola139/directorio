@@ -24,6 +24,18 @@ export class ModelService   {
     });
   }
 
+  getAllModelos() {
+    return new Promise((resolve, reject) => {
+        this.http.get(this.baseApiUrl + '/images')
+          .map(res => res.json())
+          .subscribe(res => {
+            resolve(res)
+        }, (err) => {
+          reject(err);
+        });
+    });
+  }
+
 
 
 

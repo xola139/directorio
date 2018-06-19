@@ -63,6 +63,7 @@ var promos = require('./routes/promos');
 var images = require('./routes/images');
 var alertas = require('./routes/alertas');
 var login = require('./routes/login');
+var messages = require('./routes/messages');
 
 
 var app = express();
@@ -112,6 +113,7 @@ app.use('/disponible', disponible);
 app.use('/images', images);
 app.use('/alertas', alertas);
 app.use('/login', login);
+app.use('/messages', messages);
 
 
 

@@ -1,6 +1,7 @@
-<a href="#/modelo">Testeando ando!</a>
+
 
 <div class="container">
+<a href="#/modelo">Testeando ando!</a>
     <ul class="nav nav-tabs" id="myTab" role="tablist">
       <li class="nav-item">
         <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Home</a>
@@ -17,6 +18,15 @@
     <div class="tab-content" id="myTabContent">
       <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
         <div class="container">
+          <div class="col-12">
+            <textarea   name="message"  [(ngModel)]="message"  rows="3"></textarea>
+            
+          </div>
+          <div class="col-12">
+            <button type="button" class="btn btn-success"  (click)="saveMessage()">Add Mensaje</button>
+          </div>
+          <hr>
+
           <h6>Nuevo usaurio Vip:</h6>
           <div class="row">
             <div class="col-md-6">
@@ -189,11 +199,11 @@
       <div class="modal-body">
         <div class="row" >
           <div class="col-sm-3 col-md-3" >
-            <mat-checkbox [(ngModel)]="itemSelect.autPost" (change)="autPostChange($event)"  name="autPost" >Autoriza post</mat-checkbox>
+            <mat-checkbox [(ngModel)]="itemSelect.autPost" (change)="autPostChange($event)"  name="autPost" >Autoriza post twit</mat-checkbox>
              
           </div>
           <div class="col-sm-3 col-md-3" >
-            <mat-checkbox [(ngModel)]="itemSelect.status" (change)="enableUserChange($event)" name="status" >Habilita usuario</mat-checkbox>
+            <mat-checkbox [(ngModel)]="itemSelect.status" (change)="enableUserChange($event)" name="status" >Habilita usuario en web</mat-checkbox>
           </div>
 
           
