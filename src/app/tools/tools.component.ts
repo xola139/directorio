@@ -34,7 +34,7 @@ export class ToolsComponent implements OnInit {
   lstNoVip:any ;
   dsDisponible :any;
   autPost:Boolean;
-  message:string;
+  themessage:{message:""};
   
   constructor(private loaderService: LoaderService, 
           @Inject(DOCUMENT) dom: Document,
@@ -179,10 +179,11 @@ var _res;
   }
 
    saveMessage(){
-    this.toolService.saveMessage(this.message).then((result) => {
+     
+    this.toolService.saveMessage(this.themessage).then((result) => {
       
       alert("Mensaje  guardado!!"+ result);
-      this.message = "";
+      this.themessage.message = "";
       
 
     }, (err) => {

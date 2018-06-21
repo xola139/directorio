@@ -8,6 +8,7 @@ var config  = require('../config');
 
 /* UPDATE Autoriza post */
 router.put('/register', function(req, res, next) {
+	console.log(req.body.message)
   var newMessage = {message: req.body.message,status: true,auxuse: true};
   
   Messages.create(newMessage, function (err, post) {

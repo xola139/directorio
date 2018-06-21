@@ -18,13 +18,15 @@
     <div class="tab-content" id="myTabContent">
       <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
         <div class="container">
+         <form (ngSubmit)="saveMessage()" >
           <div class="col-12">
-            <textarea   name="message"  [(ngModel)]="message"  rows="3"></textarea>
+            <textarea   name="message"  [(ngModel)]="themessage['message']"  rows="3"></textarea>
             
           </div>
           <div class="col-12">
-            <button type="button" class="btn btn-success"  (click)="saveMessage()">Add Mensaje</button>
+            <button type="submit"  class="btn btn-success"  >Add Mensaje</button>
           </div>
+          </form>
           <hr>
 
           <h6>Nuevo usaurio Vip:</h6>
@@ -92,7 +94,7 @@
                   <div class="col-md-12 col-sm-12 ">
                     <div class="chip m-1" *ngFor="let d of modelos;let i = index">
                     
-                      <img (click)="getDetails(d,'modelo')" src="{{d.profile_image_url}}" alt="disponible" width="96" height="96" data-toggle="modal" data-target="#detailModalLong">
+                      <img (click)="getDetails(d,'modelo')" src="{{d.profile_image_url_https}}" alt="disponible" width="96" height="96" data-toggle="modal" data-target="#detailModalLong">
                       <br>{{d.id}}
                     </div>
                   </div>

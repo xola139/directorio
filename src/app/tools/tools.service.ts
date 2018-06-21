@@ -11,6 +11,7 @@ export class ToolService {
 
 
     saveMessage(data) {
+      console.log(data)
     return new Promise((resolve, reject) => {
         this.http.put(this.baseApiUrl +'/messages/register', data)
           .map(res => res.json())
