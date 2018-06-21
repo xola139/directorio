@@ -163,10 +163,6 @@ var _res;
     });
   }
 
-
-
-
-
   saveNewDisponible(){
     this.disponibleService.registerNewDisponible(this.newModel).then((result) => {
       this.getDisponiblesList();
@@ -179,9 +175,9 @@ var _res;
   }
 
    saveMessage(){
-    this.toolService.saveMessage(this.message).then((result) => {
-      
-      alert("Mensaje  guardado!!"+ result);
+     var m = {message:this.message}
+    this.toolService.saveMessage(m).then((result) => {
+      alert("Mensaje  guardado!!");
       this.message = "";
       
 

@@ -17,7 +17,7 @@ var Bot = new Twit({
 
 /* GET ALL DEFAULT */
 router.get('/', function(req, res, next) {
-    Images.find( function(err, images) {
+    Images.find( {}, null, {sort: {status: 1}},function(err, images) {
         if (err) return next(err);
         res.json(images);
     });
