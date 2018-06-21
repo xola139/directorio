@@ -64,6 +64,7 @@
                   
                   </div>
                 
+
               </div>
               <div class="col pr-0 pl-0 mr-1 custom-background border-bottom">
                 <mat-icon class="float-right pointer mr-1 mt-1" style="color:white;" [hidden]="!hideme[i]" (click)="gotoCard(data.id);hideme[i] = !hideme[i];" data-toggle="collapse" [attr.data-target]="'.multi-collapse'+i">keyboard_arrow_down</mat-icon>
@@ -140,7 +141,7 @@
           
       </div>
       
-      <div class="mx-auto mt-5" style="width: 100px;">
+      <div class="mx-auto mt-5 mb-2" style="width: 100px;">
           <button   type="button" mat-raised-button color="accent" (click)="getVerMas()">VER MAS</button>
       </div> 
      
@@ -158,12 +159,21 @@
         </button>
       </div>
       <div class="modal-body" #container>
-        
+          
+         
+
+        <div *ngFor="let im of pictures;let indexim = index">
+          
+            <mat-icon class="float-right" data-dismiss="modal">close</mat-icon>
+          
+          <img  class="d-block w-100 img-fluid mb-2"   alt="Galeria" src="{{im.media_url_https}}"/>
+
+        </div>
         <div *ngIf="pictures.length == 0">
         No existe informacion :(
         </div>
 
-            <img *ngFor="let im of pictures;let indexim = index" class="d-block w-100 img-fluid mb-2"   alt="Galeria" bg-src="{{im.media_url_https}}" lazy-load="assets/lg.ajax-spinner-gif.gif" threshold="200" />
+            
 
              
         

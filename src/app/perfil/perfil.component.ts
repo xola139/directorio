@@ -1,11 +1,11 @@
 import { Component,ViewChild, OnInit,ElementRef } from '@angular/core';
-import { MatDialog,MatTableDataSource,MatRadioChange} from '@angular/material';
+import { MatDialog,MatTableDataSource,MatRadioChange,MatCheckboxChange } from '@angular/material';
 import { ActivatedRoute, Router } from '@angular/router';
 import { PerfilService } from './perfil.service';
 import { Location} from '@angular/common';
 import { ErrorStateMatcher} from '@angular/material/core';
 import { FormBuilder,FormControl, FormGroupDirective, NgForm, Validators} from '@angular/forms';
-
+import { LoaderService } from '../loader.service';
 
 
 @Component({
@@ -26,6 +26,7 @@ export class PerfilComponent implements OnInit  {
 
 	perfil:any;
   resourcesLoaded: Boolean;
+  viewAdmin: Boolean;
 		
   idiomas = [
     {value: 'espanol', viewValue: 'Español'},
@@ -64,6 +65,7 @@ export class PerfilComponent implements OnInit  {
     {value: 'Sinaloa', viewValue: 'Sinaloa'},
     {value: 'Sonora', viewValue: 'Sonora'},
     {value: 'Tabasco', viewValue: 'Tabasco'},
+    {value: 'Toluca', viewValue: 'Toluca'},
     {value: 'Tamaulipas', viewValue: 'Tamaulipas'},
     {value: 'Tlaxcala', viewValue: 'Tlaxcala'},
     {value: 'Veracruz', viewValue: 'Veracruz'},
@@ -73,7 +75,8 @@ export class PerfilComponent implements OnInit  {
   ];
 
   form;
-  constructor(private fb: FormBuilder,public dialog: MatDialog,
+  constructor(private loaderService: LoaderService,
+              private fb: FormBuilder,public dialog: MatDialog,
               private _location: Location,
               private route: ActivatedRoute, 
               private router: Router, 
@@ -122,6 +125,7 @@ export class PerfilComponent implements OnInit  {
       medidas:['',[]],
       edad:['', [Validators.required,Validators.pattern(regexPatterns.age)]],
       atiende:['',[]],
+      autorizaImagen:['',[]],
     });
 	}
 
@@ -152,16 +156,23 @@ export class PerfilComponent implements OnInit  {
 			this.perfil = {};
       this.perfil.idiomas = [{espanol:false,ingles:false}];
       this.perfil.opcionesTelefono = {whatsapp:false,llamadas:false,twitter:false};
-
       this.perfil.cuerpo = [{estatura:'',ojos:'',cabello:'',medidas:'',peso: ''}];
-      
       this.perfil.horarioAtencion=[{hinicio:'',hfin:''}];
       this.perfil.diasAtencion=[{lunes:'',martes:'',miercoles:'',jueves:'',viernes:'',sabado:'',domingo:'',fulltime:''}];
 			
       for (let i = 0; i < 24; i++) {
         this.horarios.push({value: i, viewValue: i +':00'});
       }	
-  		this.getPerfil(this.route.snapshot.params['id']);
+  		
+      this.getPerfil(this.route.snapshot.params['id']);
+
+      
+      if(this.route.snapshot.queryParams.aut)
+        this.viewAdmin = true;
+      else
+        this.viewAdmin = false;
+
+
 		  
        window.scrollTo(0, 0);
   	}
@@ -171,41 +182,46 @@ export class PerfilComponent implements OnInit  {
   	getPerfil(id) {
 		  this.perfilService.showPerfil(id).then((res) => {
       this.perfil = res;
-      this.perfil.images.reverse();
+      //aux
+      for(var xx=0;xx<this.perfil.images.length;xx++){
+        if( this.perfil.images[xx].autorizaImagen == undefined)
+            this.perfil.images[xx].autorizaImagen = false;
+      }
 
+      this.perfil.images.reverse();
+      this.loaderService.display(false);
     	}, (err) => {
       	console.log(err);
     	});
   	}
 
+    evaluando() {
+      return true;
+    }
   	updatePerfil(id) {
-      console.log("----->"+id);
       this.resourcesLoaded = true;
       this.perfil.status = true;
       this.perfil.perfil ={descripcionTwitter:true} ;//TODO:quitar cuando se trare de elejir entre twiiter y mesninado
 	    this.perfilService.updatePerfil(id, this.perfil).then((result) => {
-        console.log(this.perfil);
-      	let id = result['_id'];
-      	this.resourcesLoaded = false;
+      let id = result['_id'];
+      this.resourcesLoaded = false;
     	}, (err) => {
       	console.log(err);
     });
   }
 
   radioChange(event: MatRadioChange,indice,urlCalendar) {
-
     if(event.value === 'calendario'){
       this.perfil.calendario =  urlCalendar;
     }
-    //console.log(event);
-    //console.log(event.value);
-    //console.log(event.source);
-    //console.log(indice+"  $$$#$#$#$#")
+    
     this.perfil.images[indice].status =event.value;
-    //this.filter[l'property'] = this.selected;
-    //console.log(this.filter);
   }
 
+
+  autAdminChange(event:MatCheckboxChange,indice) {
+     this.perfil.images[indice].autorizaImagen = event.checked;
+  }
 	
 
   _keyPress(event: any) {

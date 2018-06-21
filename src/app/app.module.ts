@@ -60,6 +60,7 @@ import { PerfilComponent } from './perfil/perfil.component';
 
 import { ModelService } from './model/model.service';
 import { PromosService } from './promos/promos.service';
+import { ToolService } from './tools/tools.service';
 import { PerfilService } from './perfil/perfil.service';
 import { DisponibleService } from './disponibles/disponible.service';
 
@@ -67,13 +68,14 @@ import { DisponiblesComponent } from './disponibles/disponibles.component';
 import { ToolsComponent } from './tools/tools.component';
 import { GenericmodalComponent } from './genericmodal/genericmodal.component';
 import { RedirectComponent } from './redirect/redirect.component';
+import { AvisoComponent } from './aviso/aviso.component';
 
 
 
 
 
 const appRoutes: Routes = [
-  { path: '', redirectTo: 'model/o-o', pathMatch: 'full' },
+  { path: '', component: AvisoComponent},
   { path: 'promos', component: PromosComponent },
   { path: 'disponibles', component: DisponiblesComponent },
   { path: 'model/:id', component: ModelComponent },
@@ -95,6 +97,7 @@ const appRoutes: Routes = [
     ToolsComponent,
     GenericmodalComponent,
     RedirectComponent,
+    AvisoComponent,
     
     
     
@@ -150,7 +153,7 @@ const appRoutes: Routes = [
     RouterModule.forRoot(appRoutes)
   ],
   providers: [
-    ModelService,PromosService,PerfilService,DisponibleService,GoogleAnalyticsEventsService,LoaderService,
+    ModelService,PromosService,ToolService,PerfilService,DisponibleService,GoogleAnalyticsEventsService,LoaderService,
     {provide: LocationStrategy, useClass: HashLocationStrategy}
   ],
   bootstrap: [AppComponent]

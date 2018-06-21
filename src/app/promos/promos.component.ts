@@ -3,6 +3,7 @@ import {MatTableDataSource,MatSnackBar,MatDialog} from '@angular/material';
 import { PromosService } from './promos.service';
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import { GenericmodalComponent } from '../genericmodal/genericmodal.component';
+import { LoaderService } from '../loader.service';
 
 @Component({
   selector: 'app-promos',
@@ -14,7 +15,11 @@ export class PromosComponent  implements OnInit {
 
   @ViewChild('mensajeButton') mensajeButton:ElementRef;
 
-  constructor(public dialog: MatDialog,private promosService: PromosService,public snackBar: MatSnackBar) {
+  constructor(public dialog: MatDialog,
+              private promosService: PromosService,
+              public snackBar: MatSnackBar,
+              private loaderService: LoaderService,) {
+
   }
 
   isExpansionDetailRow = (i: number, row: Object) => row.hasOwnProperty('detailRow');
@@ -38,12 +43,15 @@ export class PromosComponent  implements OnInit {
 
   
   ngOnInit() {
+
+    //http call starts
+    this.loaderService.display(true);
     this.getPromosList();
     
     
-     setTimeout(()=>{
+    setTimeout(()=>{
       this.mensajeButton.nativeElement.click();
-     },5000);
+    },10000);
   }
 
   getPromosList() {
@@ -53,6 +61,7 @@ export class PromosComponent  implements OnInit {
       const ELEMENT_DATES: Element[] = this.promos;
 
       this.dataSource = new MatTableDataSource(ELEMENT_DATES);      
+      this.loaderService.display(false);
     }, (err) => {
       console.log(err);
     });
@@ -61,31 +70,18 @@ export class PromosComponent  implements OnInit {
 
 
   openDialog(item): void {
-
-     console.log(item);
-     //this.msgDisponible = item.disponibles[item.disponibles.length -1].descripcion;
-    //this.msgDisponible = item.descripcion;
-    //this.msgTitle = item.id;
-    //this.msgUrl = item.profile_image_url;
-    
-    var content = {msgItem:null,msgTitle:"",msgDescripcion:"",msgUrl:""};
+    var content = {msgItem:null,msgTitle:"",msgDescripcion:"",msgUrl:"",msgFecha:""};
     content.msgTitle = item.id;
     content.msgDescripcion = item.promos[item.promos.length -1].descripcion;
+    content.msgFecha = item.promos[item.promos.length -1].created_at;
     content.msgUrl = item.avatar;
 
     item.opcionesTelefono = {whatsapp: false,llamadas: true,twitter: true};
     
+    
+    
 
     content.msgItem = item;
-    
-    //this.itemPromo = item;
-    //this.itemDisponible = item;
-    
-
-
-    //this.itemDisponible = item;
-
-
     this.dialog.open(GenericmodalComponent, {
       data: {item: content} ,width : '300px'
     });
@@ -122,19 +118,6 @@ export class PromosComponent  implements OnInit {
     
     
   }
-
-
-
-  /*copyItem(item) {
-    if(item ==null)
-      return;
-
-   /* let  theCopy =  item.fk_images[0] ? 
-                item.id +"  "+item.fk_images[0].telefono +"  "+ item.promos[item.promos.length -1].descripcion:
-                item.id +"  "+ item.promos[item.promos.length -1].descripcion;*/
-     //let  theCopy =  item.id; 
-    //return theCopy;
-  //}
 
   openSnackBar() {
     this.snackBar.open("copiado", "Acción", {

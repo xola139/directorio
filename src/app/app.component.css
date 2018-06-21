@@ -1,7 +1,19 @@
 
+
+
+
 .custom-color-icon{
   color: #9C27B0 !important;
 }
+
+
+/*.custom-background{
+  background-color: #aaCc00 !important;
+  background: -moz-linear-gradient(top, #aaCc00 0%, #aaCc00 99%); 
+  background: -webkit-linear-gradient(top, #aaCc00 0%,#aaCc00 99%);
+  background: linear-gradient(to bottom, #aaCc00 0%,#aaCc00 99%); 
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#aaCc00', endColorstr='#aaCc00',GradientType=0 );
+}*/
 
 
 .custom-background{
@@ -33,50 +45,20 @@
   height: 30px  !important;
 }
 
-
-
-
-/*-------------------*/
-
-/*
-.custom-img-avatar{
-  height: 50px !important;
-    width: 50px !important;
-}
-
-.custom-color-icon{
-  color: #1e5799 !important;
-}
-
-
-.custom-background{
-
-background: #1e5799; 
-background: -moz-linear-gradient(top, #1e5799 0%, #2989d8 50%, #207cca 51%, #7db9e8 100%); 
-background: -webkit-linear-gradient(top, #1e5799 0%,#2989d8 50%,#207cca 51%,#7db9e8 100%); 
-background: linear-gradient(to bottom, #1e5799 0%,#2989d8 50%,#207cca 51%,#7db9e8 100%); 
-filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#1e5799', endColorstr='#7db9e8',GradientType=0 ); 
-}
-
-.custom-color{
-    color:#000 !important;
-}
-
-.cars-custom{
-    border-style: solid;
-    border-color: #1e5799;
-    border-width: thin;
-}
-
 .custon-radio-0{
   border-radius: 1% !important;
   width: 30px  !important;
   height: 30px  !important;
 }
 
-*/
+.custom-img-avatar{
+  height: 50px !important;
+    width: 50px !important;
+}
 
-/***************************************/
+
+
+
 .mytitle{
  font-family:Mr Dafoe, sans-serif;
  font-size:2em;

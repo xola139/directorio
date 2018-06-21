@@ -1,5 +1,5 @@
   <div class="container">
-    <h3>Disponibles</h3>
+    <h3>Disponibles para hoy</h3>
       <div class="row" >
           <div class="col-md-12 col-sm-12 alert alert-warning alert-dismissible fade show"  role="alert">
               <strong>Aviso!</strong> Aquí se muestra información actualizada al día de hoy relacionada con la cuenta Twitter de cada escort independiente!!
@@ -20,7 +20,7 @@
                       <div class="alert alert-success custom-bagde-vip" role="alert" >{{d.ciudad}}</div>
                         <img class="custom-img-vip" [src]="d.profile_image_url" onError="this.src='assets/broken.png'" alt="ultra mamasita! {{d.id}}" /> 
                         <div class="card-body p-0 mx-auto">
-                          <h6 class="card-title m-0 p-0">{{d.id }} </h6>
+                          <p class="card-title m-0 p-0 font-weight-bold" >{{d.id }} </p>
                           <p class="card-text">{{d.telefono}}</p>
                           
                         </div>
@@ -31,7 +31,7 @@
                           
                           </div >
                           <div class="col-md-12 ">
-                              <p class="card-text">{{d.id}}</p>
+                              <p class="card-text font-weight-bold">{{d.id}}</p>
                              
                           </div>   
                           <div class="col-md-12 ">

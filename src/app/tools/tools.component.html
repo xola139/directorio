@@ -1,108 +1,267 @@
+
+
+<div class="container">
 <a href="#/modelo">Testeando ando!</a>
+    <ul class="nav nav-tabs" id="myTab" role="tablist">
+      <li class="nav-item">
+        <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Home</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Promos</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" id="novip-tab" data-toggle="tab" href="#novip" role="tab" aria-controls="novip" aria-selected="false">NoVip</a>
+      </li>
 
-<div class="container">
-  <h6>Nuevo usaurio:</h6>
-  <div class="row">
-    <div class="col-md-6">
-      <form (ngSubmit)="registerModelVip()" >
-        <div class="form-group">
-          <label for="name">ID:</label>
-          <input type="text" class="form-control" [(ngModel)]="newModel['id']" name="id" required>
+
+    </ul>
+    <div class="tab-content" id="myTabContent">
+      <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+        <div class="container">
+          <div class="col-12">
+            <textarea   name="message"  [(ngModel)]="message"  rows="3"></textarea>
+            
+          </div>
+          <div class="col-12">
+            <button type="button" class="btn btn-success"  (click)="saveMessage()">Add Mensaje</button>
+          </div>
+          <hr>
+
+          <h6>Nuevo usaurio Vip:</h6>
+          <div class="row">
+            <div class="col-md-6">
+              <form (ngSubmit)="registerModelVip()" >
+                <div class="form-group">
+                  <label for="name">ID:</label>
+                  <input type="text" class="form-control" [(ngModel)]="newModel['id']" name="id" required>
+                  
+                </div>
+                <a [href]="urlPerfil">{{urlPerfil}}</a>
+               
+                <div class="form-group">
+                  
+                  <button type="submit" class="btn btn-success">Registrar</button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+        <hr>
+
+        <div class="container">
+          <h6>Nuevo usuario en disponibles:</h6>
+
+          <div class="row">
+            <div class="col-md-6">
+              <form (ngSubmit)="saveModel()" #bookForm="ngForm">
+                <div class="form-group">
+                  <label for="name">ID:</label>
+                  <input type="text" class="form-control" [(ngModel)]="newModel['id']" name="id" required id="txtid" (keyup)="applyFilterDisponible($event.target.value)" >
+                  <input type="hidden" value="false" class="form-control" [(ngModel)]="newModel['status']" name="status" >
+                </div>
+                <div class="form-group" [hidden]="disponibles.length==0">
+                  <label for="name">Telefono:</label>
+                  <input type="number" autocomplete="off"  id="txtTelefono" class="form-control" [(ngModel)]="newModel['telefono']" name="telefono" required>
+
+                </div>
+               
+                <div class="form-group">
+                  <button type="submit" class="btn btn-success" [disabled]="!bookForm.form.valid">Guardar fon</button>
+                  <button type="button" class="btn btn-success"  (click)="saveNewDisponible()">Add Disponible</button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+
+
+        
+        <div id="accordion">
+          <div class="card">
+            <div class="card-header" id="headingOne">
+              <h5 class="mb-0">
+                <button class="btn btn-link" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                  Usuarios VIP
+                </button>
+              </h5>
+            </div>
+
+            <div id="collapseOne" class="collapse " aria-labelledby="headingOne" data-parent="#accordion">
+              <div class="card-body">
+                <div class="row">
+                  <div class="col-md-12 col-sm-12 ">
+                    <div class="chip m-1" *ngFor="let d of modelos;let i = index">
+                    
+                      <img (click)="getDetails(d,'modelo')" src="{{d.profile_image_url}}" alt="disponible" width="96" height="96" data-toggle="modal" data-target="#detailModalLong">
+                      <br>{{d.id}}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-header" id="headingTwo">
+              <h5 class="mb-0">
+                <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                  Disponibles para hoy
+                </button>
+              </h5>
+            </div>
+            <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
+              <div class="card-body">
+                
+                <div class="row">
+                  <div class="col-md-12 col-sm-12 ">
+                    <div class="chip m-1" *ngFor="let d of disponibles;let i = index">
+                      <img (click)="getDetailDisponible(d)" src="{{d.profile_image_url}}" alt="disponible" width="96" height="96" data-toggle="modal"
+                        data-target="#detailModalLong">
+                        <br>{{d.id}}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
           
         </div>
-        <a [href]="urlPerfil">{{urlPerfil}}</a>
-       
-        <div class="form-group">
+
+
+
+
+
+      </div><!--Fin tab 1-->
+      <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+        
+        <textarea  value ="{{lstPromo}}" name="lstPromo" rows="6"></textarea>
           
-          <button type="submit" class="btn btn-success">Registrar</button>
+        <div  *ngFor="let p of lstPromos;let xx = index">
+        <input type="checkbox" (change)="selectPromos($event,p.id)" > @{{p.id}} ++ {{p.promos[0].descripcion}}
         </div>
-      </form>
-    </div>
-  </div>
-</div>
-<hr>
-
-<div class="container">
-  <h6>Nuevo usuario desde disponibles:</h6>
-  <div class="row">
-    <div class="col-md-6">
-      <form (ngSubmit)="saveModel()" #bookForm="ngForm">
-        <div class="form-group">
-          <label for="name">ID:</label>
-          <input type="text" class="form-control" [(ngModel)]="newModel['id']" name="id" required>
-          <input type="hidden" value="false" class="form-control" [(ngModel)]="newModel['status']" name="status" >
-        </div>
-        <div class="form-group">
-          <label for="name">Telefono:</label>
-          <input type="number" autocomplete="off"  id="txtTelefono" class="form-control" [(ngModel)]="newModel['telefono']" name="telefono" required>
-
-        </div>
-       
-        <div class="form-group">
-          <button type="button" class="btn btn-success" (click)="fnPaste()">P</button>
-          <button type="submit" class="btn btn-success" [disabled]="!bookForm.form.valid">Guardar</button>
-        </div>
-      </form>
-    </div>
-  </div>
-</div>
-
-
-<div class="container">
-  <div class="row">
-    <div class="col-md-12 col-sm-12 ">
-      <div class="chip m-1" *ngFor="let d of modelos;let i = index">
-      
-        <img (click)="getDetails(d,'modelo')" src="{{d.profile_image_url}}" alt="disponible" width="96" height="96" data-toggle="modal" data-target="#detailModalLong">
-        <br>{{d.id}}
       </div>
-    </div>
-  </div>
-<hr>Disponibles
-  <div class="row">
-    <div class="col-md-12 col-sm-12 ">
-      <div class="chip m-1" *ngFor="let d of disponibles;let i = index">
-        <img (click)="getDetails(d,'disponible')" src="{{d.profile_image_url}}" alt="disponible" width="96" height="96" data-toggle="modal"
-          data-target="#detailModalLong">
-          <br>{{d.id}}
+
+      <div class="tab-pane fade" id="novip" role="tabpanel" aria-labelledby="novip-tab">
+        
+          <form  >
+            <div class="form-group">
+              <label for="name">ID:</label>
+              <input type="text" class="form-control" [(ngModel)]="idnovip" name="idnovip" >
+              
+            </div>
+            
+           
+            <div class="form-group">
+              
+               <button mat-button (click)="getNoVip()">
+                  Mostrar
+                </button>
+            </div>
+
+            {{lstNoVip.text}}
+            {{lstNoVip.created_at}}
+            <div class="container-fluid">
+              <div class="row">
+                <div  class="col-sm-6 col-md-3"  *ngFor="let d of lstNoVip.images;let i = index">
+                  <img src="{{d.media_url_https}}" width="96" height="96">
+                   <br>
+                    <a mat-button  href="https://mobile.twitter.com/intent/tweet?text=Es hora de agendar  @{{lstNoVip.id}}&url={{d.expanded_url}}&related=" target="_blank" >
+                        <mat-icon >redo</mat-icon>
+                    </a> 
+                </div>
+              </div>
+            </div>
+            
+          </form>
       </div>
+     
     </div>
-  </div>
 </div>
 
-<div class="modal fade" id="detailModalLong" tabindex="-1" role="dialog" aria-labelledby="detailModalLong" aria-hidden="true">
+
+
+<!-- Modal -->
+<div class="modal fade" id="detailModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
-      <div class="modal-header sticky-top" style="background:white">
+      <div class="modal-header">
         <h5 class="modal-title" id="exampleModalLabel">
           {{itemSelect.id}}
           <br> {{itemSelect.telefono}}
         </h5>
-        <button mat-button (click)="copyElementText('elem1');openSnackBar()">Copiar</button>
+        <br>
+        
+
+        
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <div class="modal-body p-0">
-        <div class="row" *ngIf="typeItemSelect == 'modelo'">
-          <div class="col-sm-6 col-md-4" *ngFor="let pic of itemSelect.images ;let i = index">
-            <div class="card">
-              <div class="card-body p-0">
-                <img class="card-img-top" src="{{pic.media_url_https}}" alt="imagen twitter" >
-                <input type="checkbox" (change)="selectBadge($event,i)" id="checkbox_{{i}}">check me!
-              </div>
-            </div>
+      <div class="modal-body">
+        <div class="row" >
+          <div class="col-sm-3 col-md-3" >
+            <mat-checkbox [(ngModel)]="itemSelect.autPost" (change)="autPostChange($event)"  name="autPost" >Autoriza post twit</mat-checkbox>
+             
           </div>
-          <div class="row" *ngIf="typeItemSelect== 'disponible'">
-            Like this images!
+          <div class="col-sm-3 col-md-3" >
+            <mat-checkbox [(ngModel)]="itemSelect.status" (change)="enableUserChange($event)" name="status" >Habilita usuario en web</mat-checkbox>
           </div>
 
-        </div>
-        <div class="modal-footer">
           
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+
         </div>
+        
+
+      
+        
+      <p>{{itemSelect.descripcion}}</p>
+
+             <div class="row" >
+                <div class="col-sm-6 col-md-4" *ngFor="let pic of itemSelect.images ;let i = index">
+                  <div class="card">
+                    <div class="card-body p-0">
+                      <img class="card-img-top" src="{{pic.media_url_https}}" alt="imagen twitter" >
+                       
+                        
+                        <textarea id="elem{{i}}" [innerHTML]="ratingHtml" style="width: 1px;height: 1px;">Aux for copy clipboard</textarea>
+
+                        <button type="button" class="btn btn-primary p-0" (click)="selectBadge($event,i)">
+                          <i class="material-icons">content_copy</i>
+                          
+                        </button>
+                      
+                      
+                        <a href="https://mobile.twitter.com/{{itemSelect.id}}" target="_blank"  class="btn btn-primary p-0">
+                          <i class="material-icons">redo</i>
+                          
+                        </a> 
+                        
+
+                        <a href="#/perfil/{{itemSelect.id}}?aut=true" target="_blank"  class="btn btn-primary p-0">
+                          <i class="material-icons">account_box</i>
+                          
+                        </a> 
+
+                        <button class="btn btn-primary p-0"  data-dismiss="modal" aria-label="Close">
+                          <i class="material-icons">close</i>
+                          
+                        </button>
+
+                    </div>
+                  </div>
+              </div>
+              <div class="row" *ngIf="typeItemSelect== 'disponible'">
+                Like this images!
+              </div>
+
+      </div>
+      <div class="modal-footer">
+       <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
       </div>
     </div>
-    <textarea id="elem1" [innerHTML]="ratingHtml" style="width: 1px;height: 1px;">Some text</textarea>
   </div>
+
+  
+</div>
+

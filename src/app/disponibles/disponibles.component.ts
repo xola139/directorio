@@ -35,9 +35,13 @@ export class DisponiblesComponent implements OnInit {
 
 
 
-  constructor(private loaderService: LoaderService,private modelService: ModelService,public dialog: MatDialog,
-    private disponibleService: DisponibleService,
-    public snackBar: MatSnackBar,public router: Router, public googleAnalyticsEventsService: GoogleAnalyticsEventsService) {
+  constructor(private loaderService: LoaderService,
+              private modelService: ModelService,
+              public dialog: MatDialog,
+              private disponibleService: DisponibleService,
+              public snackBar: MatSnackBar,
+              public router: Router, 
+              public googleAnalyticsEventsService: GoogleAnalyticsEventsService) {
   
       this.router.events.subscribe(event => {
         if (event instanceof NavigationEnd) {
@@ -56,8 +60,8 @@ applyFilterDisponible(filterValue: string) {
 
 
   ngOnInit() {
-     //http call starts
-        this.loaderService.display(true);
+    //http call starts
+    this.loaderService.display(true);
         
     
     this.showAlert = 'show'
@@ -65,7 +69,7 @@ applyFilterDisponible(filterValue: string) {
 
     setTimeout(()=>{
       this.loginButton.nativeElement.click();
-     },5000);
+     },10000);
     
     
 
@@ -98,6 +102,10 @@ applyFilterDisponible(filterValue: string) {
   }
 
 
+
+  fnAddDisponible(){
+    
+  }
 
 
    getDisponiblesList() {

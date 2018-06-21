@@ -18,10 +18,12 @@
             </div>
          </div>
       </div>
+      <br>
       <div class="col-sm-12 col-md-6">
-         <div class="form-group">
+         <div class="form-group mt-1">
+             <label>Por favor registra tu telefono:</label>
             <mat-form-field>
-               <input matInput color="yellow" placeholder="Tu telefono" [(ngModel)]="perfil.telefono" formControlName="telefono" name="telefono" required>
+               <input type="number" matInput color="yellow" placeholder="Tu telefono" [(ngModel)]="perfil.telefono" formControlName="telefono" name="telefono" required>
             </mat-form-field>
              ¿Como te contactan?
             <mat-checkbox [(ngModel)]="perfil.opcionesTelefono.llamadas" name="llamadas" formControlName="llamadas">LLamadas</mat-checkbox>
@@ -158,6 +160,9 @@
             </div>
          </div>
       </div>
+      <button type="submit" data-toggle="modal" data-target="#exampleModalCenter" class="btn btn-success btn-sm" >
+         <mat-icon>save</mat-icon>Guardar información
+      </button>
       <h4>Imagenes tomadas de Twitter</h4>
       <div class="col-md-12 col-sm-12 alert alert-warning alert-dismissible fade show"  role="alert">
               
@@ -183,11 +188,26 @@
                         <mat-radio-button  (change)="radioChange($event,i,pic.media_url_https)" [checked]="pic.status ==='calendario'" value="calendario" name="images.status" >Calendario</mat-radio-button>
                         <mat-radio-button  (change)="radioChange($event,i,pic.media_url_https)" [checked]="pic.status ==='nada'" value="nada" name="images.status" >No mostrar</mat-radio-button>
                      </mat-radio-group>
+
+                     <mat-checkbox *ngIf="viewAdmin" [(ngModel)]="perfil.images[i].autorizaImagen" [ngModelOptions]="{standalone: true}" (change)="autAdminChange($event,i)" name="images.autorizaImagen" >aut Admin</mat-checkbox>
+
                   </p>
+                  
+                     
+                  
+
                </div>
             </div>
-         </div>
       </div>
+
+
+
+
+      </div>
+
+      <button type="submit" data-toggle="modal" data-target="#exampleModalCenter" class="btn btn-success btn-sm" >
+         <mat-icon>save</mat-icon>Guardar información
+      </button>
    </div>
    </form>
 </div>

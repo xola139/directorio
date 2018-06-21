@@ -9,6 +9,7 @@ var ImagesSchema = new mongoose.Schema({
   profile_image_url:String,
   profile_image_url_https: String,
   status:Boolean,
+  autPost:Boolean,
   ciudad:String,
   telefono: String,
   nacionalidad: String,

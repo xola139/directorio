@@ -24,6 +24,18 @@ export class ModelService   {
     });
   }
 
+  getAllModelos() {
+    return new Promise((resolve, reject) => {
+        this.http.get(this.baseApiUrl + '/images')
+          .map(res => res.json())
+          .subscribe(res => {
+            resolve(res)
+        }, (err) => {
+          reject(err);
+        });
+    });
+  }
+
 
 
 
@@ -69,6 +81,32 @@ export class ModelService   {
           });
     });
   }
+
+
+  updateAutPost(data) {
+    return new Promise((resolve, reject) => {
+        this.http.put(this.baseApiUrl +'/images/autPost', data)
+          .map(res => res.json())
+          .subscribe(res => {
+            resolve(res);
+          }, (err) => {
+            reject(err);
+          });
+    });
+  }
+
+  enableUser(data) {
+    return new Promise((resolve, reject) => {
+        this.http.put(this.baseApiUrl +'/images/enableUser', data)
+          .map(res => res.json())
+          .subscribe(res => {
+            resolve(res);
+          }, (err) => {
+            reject(err);
+          });
+    });
+  }
+
 
 }
 
