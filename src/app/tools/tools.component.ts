@@ -34,7 +34,7 @@ export class ToolsComponent implements OnInit {
   lstNoVip:any ;
   dsDisponible :any;
   autPost:Boolean;
-  themessage:{message:""};
+  message:string;
   
   constructor(private loaderService: LoaderService, 
           @Inject(DOCUMENT) dom: Document,
@@ -163,10 +163,6 @@ var _res;
     });
   }
 
-
-
-
-
   saveNewDisponible(){
     this.disponibleService.registerNewDisponible(this.newModel).then((result) => {
       this.getDisponiblesList();
@@ -179,13 +175,12 @@ var _res;
   }
 
    saveMessage(){
-     
-    this.toolService.saveMessage(this.themessage).then((result) => {
-      
-      alert("Mensaje  guardado!!"+ result);
-      this.themessage.message = "";
-      
 
+    var m = { message:this.message };
+    
+    this.toolService.saveMessage(m).then((result) => {
+      alert("Mensaje  guardado!!");
+      this.message = "";
     }, (err) => {
       console.log(err);
     });

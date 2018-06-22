@@ -111,9 +111,13 @@ router.get('/noVip/:id', function(req, res) {
     var options = { screen_name: req.params.id ,count:50};
       
     Bot.get('statuses/user_timeline', options , function(err, data) {
-        var newMedia = {};
+        if(err){
+            res.json(err);
+        }else{
+            var newMedia = {};
         var arrImage = [];
 
+        console.log(data[0]);
 
         newMedia.id = data[0].user.screen_name;
         newMedia.text = data[0].text +" \n"+ data[1].text;
@@ -145,6 +149,10 @@ router.get('/noVip/:id', function(req, res) {
         newMedia.images = arrImage;
           
         res.json(newMedia);
+
+        }
+
+        
     })
 
 });

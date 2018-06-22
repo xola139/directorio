@@ -20,7 +20,7 @@
         <div class="container">
          <form (ngSubmit)="saveMessage()" >
           <div class="col-12">
-            <textarea   name="message"  [(ngModel)]="themessage['message']"  rows="3"></textarea>
+            <textarea   name="message"  [(ngModel)]="message"  rows="3"></textarea>
             
           </div>
           <div class="col-12">
@@ -226,26 +226,22 @@
                         
                         <textarea id="elem{{i}}" [innerHTML]="ratingHtml" style="width: 1px;height: 1px;">Aux for copy clipboard</textarea>
 
-                        <button type="button" class="btn btn-primary p-0" (click)="selectBadge($event,i)">
+                        <button type="button"  (click)="selectBadge($event,i)">
                           <i class="material-icons">content_copy</i>
-                          
                         </button>
                       
                       
                         <a href="https://mobile.twitter.com/{{itemSelect.id}}" target="_blank"  class="btn btn-primary p-0">
                           <i class="material-icons">redo</i>
-                          
                         </a> 
                         
 
                         <a href="#/perfil/{{itemSelect.id}}?aut=true" target="_blank"  class="btn btn-primary p-0">
                           <i class="material-icons">account_box</i>
-                          
                         </a> 
 
                         <button class="btn btn-primary p-0"  data-dismiss="modal" aria-label="Close">
                           <i class="material-icons">close</i>
-                          
                         </button>
 
                     </div>

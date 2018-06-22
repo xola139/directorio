@@ -7,7 +7,8 @@
       <div class="col-md-12 col-md-12 sticky-top bg-light" >
          <div class="row">
             <div class="col-6">
-               <h1>{{perfil.id}}</h1>
+               {{perfil.id}}
+
             </div>
             <div class="col-6">
                <div class="form-group float-right">
@@ -19,6 +20,7 @@
          </div>
       </div>
       <br>
+      <hr>
       <div class="col-sm-12 col-md-6">
          <div class="form-group mt-1">
              <label>Por favor registra tu telefono:</label>
@@ -34,7 +36,7 @@
                <mat-option *ngFor="let ciudad of cudades" [value]="ciudad.value">
                {{ ciudad.viewValue }}
                </mat-option>
-               </mat-select>
+               </mat-select>l
             </mat-form-field>
          </div>
          <div class="form-group">
@@ -169,7 +171,6 @@
               Elige la opcion que mas te convenga:<br>
               <strong>Foto:</strong> Se mostrara en galeria.<br><hr>
                <strong>Satisfecho:</strong>La imagen muestra lo satisfecho que ha quedado tu cliente.<br><hr>
-               <strong>Calendario:</strong>Tu imagen es ralacionada con tus fecha de gira a otra ciudad.<br><hr>
                <strong>No mostrar:</strong>No se volvera mostrar la imagen 
               <button #loginButton type="button" class="close" data-dismiss="alert" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
@@ -177,27 +178,31 @@
           </div>
       
       <div class="row">
-         <div   class="col-sm-2 col-md-3" *ngFor="let pic of perfil.images ;let i = index">
+         <div   class="col-sm-2 col-md-3 mb-2 mat-elevation-z2" *ngFor="let pic of perfil.images ;let i = index">
             <div class="card mt-1">
                <img class="card-img-top"  src="{{pic.media_url_https}}" alt="imagen twitter">
-               <div class="card-body">
-                  <p class="card-text">
+               <div class="card-body p-0">
+                  <p class="card-text ">
                      <mat-radio-group >
                         <mat-radio-button  (change)="radioChange($event,i,pic.media_url_https)" [checked]="pic.status ==='foto'" value="foto" name="images.status" >Foto</mat-radio-button>
                         <mat-radio-button  (change)="radioChange($event,i,pic.media_url_https)" [checked]="pic.status ==='satisfecho'" value="satisfecho" name="images.status" >Satisfecho</mat-radio-button>
-                        <mat-radio-button  (change)="radioChange($event,i,pic.media_url_https)" [checked]="pic.status ==='calendario'" value="calendario" name="images.status" >Calendario</mat-radio-button>
                         <mat-radio-button  (change)="radioChange($event,i,pic.media_url_https)" [checked]="pic.status ==='nada'" value="nada" name="images.status" >No mostrar</mat-radio-button>
                      </mat-radio-group>
 
                      <mat-checkbox *ngIf="viewAdmin" [(ngModel)]="perfil.images[i].autorizaImagen" [ngModelOptions]="{standalone: true}" (change)="autAdminChange($event,i)" name="images.autorizaImagen" >aut Admin</mat-checkbox>
 
                   </p>
-                  
-                     
-                  
-
                </div>
-            </div>
+         </div>
+      </div>
+
+      <div>
+         <div   class="col-12" >
+            <button type="submit" data-toggle="modal" data-target="#exampleModalCenter" class="btn btn-success btn-sm" >
+               <mat-icon>save</mat-icon>Guardar información
+            </button>
+         </div>
+
       </div>
 
 
@@ -205,9 +210,7 @@
 
       </div>
 
-      <button type="submit" data-toggle="modal" data-target="#exampleModalCenter" class="btn btn-success btn-sm" >
-         <mat-icon>save</mat-icon>Guardar información
-      </button>
+      
    </div>
    </form>
 </div>

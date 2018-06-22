@@ -34,6 +34,16 @@
     border-width: thin;
 }
 
+.custom-img-avatar{
+  height: 50px !important;
+    width: 50px !important;
+}
+
+.custon-radio-0{
+  border-radius: 1% !important;
+  width: 30px  !important;
+  height: 30px  !important;
+}
 
 .custon-radio-0{
   border-radius: 1% !important;
