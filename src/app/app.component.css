@@ -7,22 +7,22 @@
 }
 
 
-/*.custom-background{
+.custom-background{
   background-color: #aaCc00 !important;
   background: -moz-linear-gradient(top, #aaCc00 0%, #aaCc00 99%); 
   background: -webkit-linear-gradient(top, #aaCc00 0%,#aaCc00 99%);
   background: linear-gradient(to bottom, #aaCc00 0%,#aaCc00 99%); 
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#aaCc00', endColorstr='#aaCc00',GradientType=0 );
-}*/
+}
 
-
+/*
 .custom-background{
   background-color: #9C27B0 !important;
   background: -moz-linear-gradient(top, #9C27B0 0%, #9C27B0 99%); 
   background: -webkit-linear-gradient(top, #9C27B0 0%,#9C27B0 99%);
   background: linear-gradient(to bottom, #9C27B0 0%,#9C27B0 99%); 
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#9C27B0', endColorstr='#9C27B0',GradientType=0 );
-}
+}*/
 
 .custom-color{
     color:#fff !important;

@@ -93,7 +93,7 @@
                 <div class="row">
                   <div class="col-md-12 col-sm-12 ">
                     <div class="chip m-1" *ngFor="let d of modelos;let i = index">
-                    
+                      
                       <img (click)="getDetails(d,'modelo')" src="{{d.profile_image_url_https}}" alt="disponible" width="96" height="96" data-toggle="modal" data-target="#detailModalLong">
                       <br>{{d.id}}
                     </div>

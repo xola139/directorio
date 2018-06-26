@@ -1,11 +1,14 @@
 import { Component,ViewChild, OnInit,ElementRef } from '@angular/core';
-import { MatDialog,MatTableDataSource,MatRadioChange,MatCheckboxChange } from '@angular/material';
+import { MatSnackBar,MatDialog,MatTableDataSource,MatRadioChange,MatCheckboxChange } from '@angular/material';
 import { ActivatedRoute, Router } from '@angular/router';
 import { PerfilService } from './perfil.service';
+import { ModelService } from '../model/model.service';
 import { Location} from '@angular/common';
 import { ErrorStateMatcher} from '@angular/material/core';
 import { FormBuilder,FormControl, FormGroupDirective, NgForm, Validators} from '@angular/forms';
 import { LoaderService } from '../loader.service';
+
+
 
 
 @Component({
@@ -16,9 +19,11 @@ import { LoaderService } from '../loader.service';
 export class PerfilComponent implements OnInit  {
   @ViewChild('closeButton') closeButton:ElementRef;
 
+
   public lottieConfig: Object;
   private anim: any;
   private animationSpeed: number = 1;
+  hidebutton: any[] = [];
 
 
   emailFormControl = new FormControl('', [Validators.required,Validators.email,]);
@@ -40,20 +45,21 @@ export class PerfilComponent implements OnInit  {
 
   cudades = [
     {value: 'Aguascalientes', viewValue: 'Aguascalientes'},
-    {value: 'Baja-California', viewValue: 'Baja California'},
-    {value: 'Baja-California-Sur', viewValue: 'Baja California Sur'},
+    {value: 'Baja California', viewValue: 'Baja California'},
+    {value: 'Baja California Sur', viewValue: 'Baja California Sur'},
     {value: 'Campeche', viewValue: 'Campeche'},
     {value: 'Chiapas', viewValue: 'Chiapas'},
     {value: 'Chihuahua', viewValue: 'Chihuahua'},
-    {value: 'Coahuila-de-Zaragoza', viewValue: 'Coahuila de Zaragoza'},
+    {value: 'Coahuila de Zaragoza', viewValue: 'Coahuila de Zaragoza'},
     {value: 'Colima', viewValue: 'Colima'},
     {value: 'CDMX', viewValue: 'CDMX'},
-    {value: 'Estado-de-Mexico', viewValue: 'Estado de México'},
+    {value: 'Estado de Mexico', viewValue: 'Estado de México'},
     {value: 'Durango', viewValue: 'Durango'},
     {value: 'Guanajuato', viewValue: 'Guanajuato'},
     {value: 'Guerrero', viewValue: 'Guerrero'},
     {value: 'Guadalaja', viewValue: 'Guadalajara'},
-    {value: 'Michoacan-de-Ocampo', viewValue: 'Michoacán de Ocampo'},
+    {value: 'León', viewValue: 'León'},
+    {value: 'Michoacan de Ocampo', viewValue: 'Michoacán de Ocampo'},
     {value: 'Monterrey', viewValue: 'Monterrey'},
     {value: 'Morelos', viewValue: 'Morelos'},
     {value: 'Nayarit', viewValue: 'Nayarit'},
@@ -61,7 +67,7 @@ export class PerfilComponent implements OnInit  {
     {value: 'Puebla', viewValue: 'Puebla'},
     {value: 'Queretaro', viewValue: 'Querétaro'},
     {value: 'Quintana Roo', viewValue: 'Quintana Roo'},
-    {value: 'San-Luis-Potosí', viewValue: 'San Luís Potosí'},
+    {value: 'San Luis Potosí', viewValue: 'San Luís Potosí'},
     {value: 'Sinaloa', viewValue: 'Sinaloa'},
     {value: 'Sonora', viewValue: 'Sonora'},
     {value: 'Tabasco', viewValue: 'Tabasco'},
@@ -80,7 +86,9 @@ export class PerfilComponent implements OnInit  {
               private _location: Location,
               private route: ActivatedRoute, 
               private router: Router, 
-              private perfilService: PerfilService) 
+              private perfilService: PerfilService,
+              private modelService: ModelService,
+              public snackBar: MatSnackBar) 
   { 
 	     this.lottieConfig = {
             path: 'assets/loading_animation.json',
@@ -99,6 +107,7 @@ export class PerfilComponent implements OnInit  {
       email: ['', [Validators.required, Validators.email]],
       age: ['', [Validators.required,Validators.pattern(regexPatterns.age)]],
       telefono:['',[]],
+      accountbackup:['',[]],
       status:['',[]],
       llamadas:['',[]],
       whatsapp:['',[]],
@@ -112,6 +121,7 @@ export class PerfilComponent implements OnInit  {
       fulltime:['',[]],
       hfin:['',[]],
       hinicio:['',[]],
+      
       lunes:['',[]],
       martes:['',[]],
       miercoles:['',[]],
@@ -121,6 +131,8 @@ export class PerfilComponent implements OnInit  {
       domingo:['',[]],
       fulltimeSemana:['',[]],
       estatura:['',[]],
+      tarjeta:['',[]],
+      efectivo:['',[]],
       peso:['',[]],
       medidas:['',[]],
       edad:['', [Validators.required,Validators.pattern(regexPatterns.age)]],
@@ -158,7 +170,8 @@ export class PerfilComponent implements OnInit  {
       this.perfil.opcionesTelefono = {whatsapp:false,llamadas:false,twitter:false};
       this.perfil.cuerpo = [{estatura:'',ojos:'',cabello:'',medidas:'',peso: ''}];
       this.perfil.horarioAtencion=[{hinicio:'',hfin:''}];
-      this.perfil.diasAtencion=[{lunes:'',martes:'',miercoles:'',jueves:'',viernes:'',sabado:'',domingo:'',fulltime:''}];
+      this.perfil.diasAtencion={lunes:'',martes:'',miercoles:'',jueves:'',viernes:'',sabado:'',domingo:'',fulltime:''};
+      this.perfil.pago = {tarjeta:false,efectivo:false};
 			
       for (let i = 0; i < 24; i++) {
         this.horarios.push({value: i, viewValue: i +':00'});
@@ -177,18 +190,39 @@ export class PerfilComponent implements OnInit  {
        window.scrollTo(0, 0);
   	}
 
+    borrarPostTwitter(x,p){
+      console.log("Intentnando borrar twiester");
+
+      this.hidebutton[x] = true;
+      this.openSnackBar();
+      
+      this.modelService.deletePostTwitter(p.id).then((res) => {
+        console.log(res);
+
+        
+      });
+
+      
+    }
 
 
   	getPerfil(id) {
 		  this.perfilService.showPerfil(id).then((res) => {
       this.perfil = res;
-      //aux
+      var auxImages =[];
       for(var xx=0;xx<this.perfil.images.length;xx++){
         if( this.perfil.images[xx].autorizaImagen == undefined)
             this.perfil.images[xx].autorizaImagen = false;
+          if(this.perfil.images[xx].status != 'nada' )
+            auxImages.push(this.perfil.images[xx]);
       }
 
-      this.perfil.images.reverse();
+      this.perfil.images = auxImages;
+      this.perfil.images.sort;
+
+      if(this.perfil.pago == undefined)
+        this.perfil.pago = {tarjeta:false,efectivo:false};
+
       this.loaderService.display(false);
     	}, (err) => {
       	console.log(err);
@@ -236,6 +270,12 @@ export class PerfilComponent implements OnInit  {
 
   closeModal() {
     this.closeButton.nativeElement.click();
+  }
+
+   openSnackBar() {
+    this.snackBar.open("Mensaje borrado", "Acción", {
+      duration: 2000,
+    });
   }
 
   

@@ -97,37 +97,41 @@
                           <p>
                             {{data.description}}
                           </p>
-                          <ul class="list-group">
-                            <li class="list-group-item p-1">Nacionalidad: {{data.nacionalidad}}</li>
-                            <li class="list-group-item p-1">Idiomas: {{data.idiomas.ingles != 'undefined' ? data.idiomas.ingles ? 'Ingles' :'' :''}} - {{data.idiomas.espanol ? 'Español':''}}</li>
-                            <li class="list-group-item p-1">Horarios: {{data.horarioAtencion.hinicio}} - {{data.horarioAtencion.hfin}}</li>
-                            <li class="list-group-item p-1">Medidas: {{data.cuerpo.medidas}}</li>
-                            <li class="list-group-item p-1">Edad: {{data.edad}}</li>
-                            <li class="list-group-item p-1">Peso: {{data.cuerpo.peso}}</li>
-                            <li class="list-group-item p-1">Estatura: {{data.cuerpo.estatura}}</li>
-                            <li class="list-group-item p-1">Atiende en: {{data.atiende}}</li>
-                          </ul>
-
-                          <button mat-button (click)="getPictures(data,'foto')" data-toggle="modal" data-target="#exampleModalLong"><mat-icon>collections</mat-icon>Galeria({{data.fotos.length}})</button>
-
-                          <button mat-button (click)="getPictures(data,'satisfechos')" data-toggle="modal" data-target="#exampleModalLong"><mat-icon>collections</mat-icon>Satisfecho({{data.satisfechos.length}})</button>
                           
+                            <ul class="list-group">
+                              <li class="list-group-item p-1"><b>Nacionalidad:</b> {{data.nacionalidad}}</li>
+                              <li class="list-group-item p-1"><b>Idiomas:</b> {{data.idiomas.ingles != 'undefined' ? data.idiomas.ingles ? 'Ingles' :'' :''}} - {{data.idiomas.espanol ? 'Español':''}}</li>
+                              <li class="list-group-item p-1"><b>Atención:</b> {{data.diasAtencion.fulltime == true ? 'Toda la semana':''}}{{ data.diasAtencion.lunes ? 'Lunes-' :''}}{{ data.diasAtencion.martes ? 'Martes-' :''}}{{ data.diasAtencion.miercoles ? 'Miercoles-':''}}{{ data.diasAtencion.jueves ? 'Jueves-' :''}}{{ data.diasAtencion.viernes ? 'Viernes-' :''}}{{ data.diasAtencion.sabado ? 'Sabado-':''}}{{ data.diasAtencion.domingo ? 'Domingo-':''}} </li>
+                              <li class="list-group-item p-1"><b>Horario:</b> {{data.horarioAtencion.hinicio}} - {{data.horarioAtencion.hfin}}</li>
+                              <li class="list-group-item p-1"><b>Medidas:</b> {{data.cuerpo.medidas}}</li>
+                              <li class="list-group-item p-1"><b>Edad:</b> {{data.edad}}</li>
+                              <li class="list-group-item p-1"><b>Peso:</b> {{data.cuerpo.peso}}</li>
+                              <li class="list-group-item p-1"><b>Estatura:</b> {{data.cuerpo.estatura}}</li>
+                              <li class="list-group-item p-1"><b>Atiende en:</b> {{data.atiende}}</li>
+                            </ul>
+                          
+                          
+
+                          <!--
+                          <button mat-button (click)="getPictures(data,'satisfechos')" data-toggle="modal" data-target="#exampleModalLong"><mat-icon>collections</mat-icon>Satisfecho({{data.satisfechos.length}})</button>
+                          -->
                       </mat-tab>
                         
                       
                       <mat-tab label="Tab 2">
                         <ng-template  class="custom-background" mat-tab-label >
-                          <mat-icon class="custom-color-icon">today</mat-icon>
-                          <br><label class="custom-color-icon">Fechas  </label>
+                          <mat-icon class="custom-color-icon">image</mat-icon>
+                          <br><label class="custom-color-icon">Galeria({{data.fotos.length}})  </label>
                         </ng-template>
-                          <span *ngIf="!data.calendario">No hay calendario :(</span>
-                          <img *ngIf="data.calendario"  src="{{data.calendario}}"  alt="Calendario de gira">
-                        
-                        <mat-divider></mat-divider>
-                          
-                        
+                          <div style="height:500px;">
+                            <div class="row">
+                              <img *ngFor="let pic of data.images;let i = index"  src="{{pic.media_url_https}}"  alt="foto" (click)="getPictures(data,'foto')" data-toggle="modal" data-target="#exampleModalLong" class="col-2 img-thumbnail p-0 m-1" >
+                            </div>
+                            
+                          </div>
                         
                       </mat-tab>
+                     
                                                
                     </mat-tab-group>
               </div>

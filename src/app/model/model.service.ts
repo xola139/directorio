@@ -12,6 +12,20 @@ export class ModelService   {
   
   constructor(private http: Http,private promosService: PromosService) { }
 
+
+  deletePostTwitter(id) {
+    return new Promise((resolve, reject) => {
+        this.http.delete(this.baseApiUrl + '/images/deletePostTwitter/'+ id)
+          .map(res => res.json())
+          .subscribe(res => {
+            resolve(res)
+        }, (err) => {
+          reject(err);
+        });
+    });
+  }
+
+
    showModelos(id) {
     return new Promise((resolve, reject) => {
         this.http.get(this.baseApiUrl + '/images/by/'+ id)

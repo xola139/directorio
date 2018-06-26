@@ -134,10 +134,14 @@ getDetails(data,tipo){
 getDetailDisponible(data){
   
   this.loaderService.display(true); 
-  this.itemSelect.images = [];
-  this.itemSelect.id = data.id;
-var _res;
-  this.disponibleService.getNoVip(data.id).then((res) => {
+  this.itemSelect.data
+  //this.itemSelect.id = data.id;
+
+//console.log(data);
+
+//var _res;
+  
+  /*this.disponibleService.getNoVip(data.id).then((res) => {
     
       _res = res;
 
@@ -148,7 +152,7 @@ var _res;
       this.loaderService.display(false); 
     }, (err) => {
       console.log(err);
-    });
+    });*/
 
   
 
@@ -156,7 +160,10 @@ var _res;
 
  getModelos() {
     this.modelService.getAllModelos().then((res) => {
+
+      //res.images.sort;
       this.modelos = res;
+
       this.loaderService.display(false);
     }, (err) => {
       console.log(err);

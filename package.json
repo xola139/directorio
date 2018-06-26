@@ -55,6 +55,7 @@
     "rxjs": "^5.5.6",
     "serve-favicon": "^2.4.5",
     "twit": "^2.2.10",
+    "underscore": "^1.9.1",
     "zone.js": "^0.8.20"
   },
   "devDependencies": {

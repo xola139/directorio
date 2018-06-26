@@ -4,7 +4,7 @@ var mongoose = require('mongoose');
 var Images = require('../models/Images.js');
 var Disponibles = require('../models/Disponibles.js');
 var config = require('../config');
-
+var _ = require('underscore');
 var Twit = require('twit');
 
 var Bot = new Twit({
@@ -15,12 +15,29 @@ var Bot = new Twit({
 });
 
 
+
 /* GET ALL DEFAULT */
 router.get('/', function(req, res, next) {
-    Images.find( {}, null, {sort: {status: 1}},function(err, images) {
+    Images.find( {}, null, {sort: {autPost: -1}},function(err, images) {
         if (err) return next(err);
+
+        for (var i = 0; i < images.length; i++) {
+            images.images = _.sortBy(images.images, function(o) { return o.id; })
+        }
+
         res.json(images);
     });
+});
+
+/* DELETE POST  TWITTER */
+router.delete('/deletePostTwitter/:id', function(req, res, next) {
+  console.log(req.params.id);
+    Bot.post('statuses/destroy/:id', { id: req.params.id }, function(err, data, response) {
+        if(err)console.log(err);
+
+        res.json(response);
+    });
+
 });
 
 
@@ -100,6 +117,10 @@ router.put('/registrar', function(req, res) {
             sabado: false,
             domingo: false,
             fulltime: false
+        };
+        newMedia.pago = {
+            tarjeta:false,
+            efectivo:false
         };
         newMedia.opcionesTelefono = {
             whatsapp: false,

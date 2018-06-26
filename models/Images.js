@@ -4,6 +4,7 @@ var ImagesSchema = new mongoose.Schema({
   
  id: String,
   id_str:String,
+  accountbackup:String,
   description:String,
   descripcionTwitter:Boolean,
   profile_image_url:String,
@@ -42,6 +43,10 @@ var ImagesSchema = new mongoose.Schema({
     sabado:Boolean,
     domingo:Boolean,
   },
+  pago:{
+    tarjeta:Boolean,
+    efectivo:Boolean
+  },
   opcionesTelefono:{
       whatsapp:Boolean,
       llamadas:Boolean,
@@ -49,7 +54,8 @@ var ImagesSchema = new mongoose.Schema({
   idiomas:{
       espanol:Boolean,
       ingles:Boolean},
-  images: Array
+  images: Array,
+  posttwitter: Array
   
 });
 
