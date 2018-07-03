@@ -124,8 +124,8 @@
                           <br><label class="custom-color-icon">Galeria({{data.fotos.length}})  </label>
                         </ng-template>
                           <div style="height:500px;">
-                            <div class="row">
-                              <img *ngFor="let pic of data.images;let i = index"  src="{{pic.media_url_https}}"  alt="foto" (click)="getPictures(data,'foto')" data-toggle="modal" data-target="#exampleModalLong" class="col-2 img-thumbnail p-0 m-1"  style="height:80px">
+                            <div class="row" lazy-load-images>
+                              <img *ngFor="let pic of data.images;let i = index"  [attr.data-src]="pic.media_url_https"  alt="foto" (click)="getPictures(data,'foto')" data-toggle="modal" data-target="#exampleModalLong" class="col-2 img-thumbnail p-0 m-1"  style="height:80px">
                             </div>
                             
                           </div>

@@ -8,12 +8,12 @@ import { BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { AsyncLocalStorageModule } from 'angular-async-local-storage';
 import { ClipboardModule } from 'ngx-clipboard';
 // 1. Import lazy loading module;
-import { LazyLoadModule } from '@greg-md/ng-lazy-load';
 import { HttpClientModule } from '@angular/common/http';
 import { NgHttpLoaderModule } from 'ng-http-loader/ng-http-loader.module'
 import { LottieAnimationViewModule } from 'ng-lottie';
 import { LoaderService } from './loader.service';
-import {GoogleAnalyticsEventsService} from "./google-analytics-events.service";
+import { GoogleAnalyticsEventsService} from "./google-analytics-events.service";
+import { LazyLoadImagesModule } from 'ngx-lazy-load-images'; 
 
 import { MatFormFieldModule, MatAutocompleteModule,
   MatButtonModule,
@@ -104,7 +104,6 @@ const appRoutes: Routes = [
   ],entryComponents: [GenericmodalComponent],
   imports: [
     BrowserModule,
-    LazyLoadModule,
     AsyncLocalStorageModule,
     FormsModule,
     HttpModule,
@@ -149,6 +148,7 @@ const appRoutes: Routes = [
     MatTabsModule,
     MatToolbarModule,
     MatTooltipModule,
+    LazyLoadImagesModule,
     LottieAnimationViewModule.forRoot(),
     RouterModule.forRoot(appRoutes)
   ],
