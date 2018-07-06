@@ -74,6 +74,7 @@ import { AvisoComponent } from './aviso/aviso.component';
 
 
 
+
 const appRoutes: Routes = [
   { path: '', component: AvisoComponent},
   { path: 'promos', component: PromosComponent },
@@ -81,7 +82,7 @@ const appRoutes: Routes = [
   { path: 'model/:id', component: ModelComponent },
   { path: 'tools', component: ToolsComponent },
   { path: 'perfil/:id', component: PerfilComponent },
-  { path: 'modelo', component: RedirectComponent },
+  { path: 'whatsapp/:id', component: RedirectComponent },
 
   
 

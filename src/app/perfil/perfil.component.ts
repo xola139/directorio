@@ -39,7 +39,7 @@ export class PerfilComponent implements OnInit  {
 
 	];
 	
-  angie_mitzuzd
+  
 
 	horarios = [ ];
 
@@ -76,6 +76,7 @@ export class PerfilComponent implements OnInit  {
     {value: 'Toluca', viewValue: 'Toluca'},
     {value: 'Tamaulipas', viewValue: 'Tamaulipas'},
     {value: 'Tlaxcala', viewValue: 'Tlaxcala'},
+    {value: 'Xalapa', viewValue: 'Xalapa'},
     {value: 'Veracruz', viewValue: 'Veracruz'},
     {value: 'Yucatán', viewValue: 'Yucatán'},
     {value: 'Zacatecas', viewValue: 'Zacatecas'}

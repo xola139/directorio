@@ -49,8 +49,11 @@ var ImagesSchema = new mongoose.Schema({
   },
   opcionesTelefono:{
       whatsapp:Boolean,
+      whatsappdirecto:Boolean,
       llamadas:Boolean,
-      twitter:Boolean},
+      twitter:Boolean
+
+      },
   idiomas:{
       espanol:Boolean,
       ingles:Boolean},
