@@ -13,8 +13,8 @@
   background: -webkit-linear-gradient(top, #aaCc00 0%,#aaCc00 99%);
   background: linear-gradient(to bottom, #aaCc00 0%,#aaCc00 99%); 
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#aaCc00', endColorstr='#aaCc00',GradientType=0 );
-}
-*/
+}*/
+
 
 .custom-background{
   background-color: #9C27B0 !important;
@@ -56,17 +56,10 @@
     width: 50px !important;
 }
 
-
-
-
 .mytitle{
- font-family:Mr Dafoe, sans-serif;
+ font-family:Londrina Shadow, sans-serif;
  font-size:2em;
  text-align:center;
- text-shadow: 0 -3px 0 #333,
-    0 6px 8px rgba(0,0,0,.4),
-    0 9px 10px rgba(0,0,0,.15),
-    0 30px 10px rgba(0,0,0,.18),
-    0 15px 10px rgba(0,0,0,.21);
-
+ color: #000;
+ text-shadow: 0 0 1px #FFF, 0 0 15px #FFF, 0 0 20px #FFF, 0 0 205px #FFF, 0 0 30px #FFF;
 }

@@ -3,18 +3,24 @@
     <div class="row" >
     	<div class="col-sm-12 col-md-12 mt-5">
     		<p>
-			  Se esta redireccionando al Whatsapp de {{nombre}}
+        Enlazando llamada con {{nombre}}
+			   recuendale que viste mensión en Twitter de @escortenmx, enlazando al telefono de: <b>{{nombre}}</b>
 			  
-			</p>
-			{{theurl}}
+			 </p>
+			
     	</div>
+      <hr>
+      <!--<div class="col-sm-6 col-md-6 float-right mt-2" >
+          <a  id="btnWhats" class="btn btn-success btn-sm" #redirectButton href="https://api.whatsapp.com/send?phone=521{{this.createmsg.telefono}}&text=Hola%20vi%20mension%20en%20@escortenmx%20me%20das%20informaci%C3%B3n%20por%20favor">
+            Ir al Whatsapp de {{nombre}}
+        </a>
+      </div>-->
+      <div class="col-sm-6 col-md-6 mt-2" >
+        <a  id="btnTelefono" class="btn btn-success btn-sm"  href="tel:{{this.createmsg.telefono}}">
+            Marcar al numero de {{nombre}}
+        </a>
+      </div>
 
-
-    	 <div class="mx-auto mt-5 mb-2" style="width: 100px;">
-          	<a   class="btn btn-success btn-sm" #redirectButton href="{{theurl}}">
-        		Ir al Whatsapp de {{nombre}}
-   			</a>
-      </div> 
 
     </div>
 </div>

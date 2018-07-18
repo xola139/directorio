@@ -13,7 +13,7 @@ var config  = require('./config');
 mongoose.Promise = global.Promise;
 var Strategy = require('passport-twitter').Strategy;
 // Configure the Twitter strategy for use by Passport.
-//
+//https://flamingtext.com/logo/Design-Beauty
 // OAuth 1.0-based strategies require a `verify` function which receives the
 // credentials (`token` and `tokenSecret`) for accessing the Twitter API on the
 // user's behalf, along with the user's profile.  The function must invoke `cb`
@@ -83,6 +83,7 @@ app.use(require('cookie-parser')());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({'extended':'true'}));
 app.use(express.static(path.join(__dirname, 'dist')));
+
 app.use(require('express-session')({ secret: 'keyboard cat', resave: true, saveUninitialized: true }));
 
 
@@ -121,6 +122,7 @@ app.use('/messages', messages);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
+    console.log(err);
   var err = new Error('Not Found');
   err.status = 404;
   next(err);
@@ -133,6 +135,8 @@ app.use(function(req, res, next) {
 
 // error handler
 app.use(function(err, req, res, next) {
+
+  console.log(err.message);
   // set locals, only providing error in development
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};

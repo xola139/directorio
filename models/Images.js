@@ -2,7 +2,7 @@
 
 var ImagesSchema = new mongoose.Schema({
   
- id: String,
+  id: String,
   id_str:String,
   accountbackup:String,
   description:String,
@@ -10,6 +10,7 @@ var ImagesSchema = new mongoose.Schema({
   profile_image_url:String,
   profile_image_url_https: String,
   status:Boolean,
+  onlytwit:Boolean,
   autPost:Boolean,
   ciudad:String,
   telefono: String,

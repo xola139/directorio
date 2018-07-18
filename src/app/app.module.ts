@@ -82,7 +82,7 @@ const appRoutes: Routes = [
   { path: 'model/:id', component: ModelComponent },
   { path: 'tools', component: ToolsComponent },
   { path: 'perfil/:id', component: PerfilComponent },
-  { path: 'whatsapp/:id', component: RedirectComponent },
+  { path: 'contact/:id', component: RedirectComponent },
 
   
 

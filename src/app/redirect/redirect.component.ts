@@ -21,14 +21,15 @@ nombre:string;
     this.nombre = this.route.snapshot.params['id']
     this.getPerfil(this.nombre);
 
+    let element :HTMLElement = document.getElementById('btnTelefono') as HTMLElement;
 
 
   //	console.log("intentando ando!!!");
-/*  	 setTimeout(()=>{
+ 	 setTimeout(()=>{
       
-      this.redirectButton.nativeElement.click();
+      element.click();
 
-     },2000);*/
+     },5000);
   }
 
 
@@ -40,7 +41,7 @@ nombre:string;
         if(res!=null){  
           this.theurl = "https://api.whatsapp.com/send?phone=521"+this.createmsg.telefono+"&text=Hola%20vi%20mension%20en%20@escortenmx%20me%20das%20informaci%C3%B3n%20por%20favor";
           console.log(this.theurl);
-          this.redirectButton.nativeElement.click();
+          //this.redirectButton.nativeElement.click();
         }
       
       }, (err) => {

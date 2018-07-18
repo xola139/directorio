@@ -35,7 +35,7 @@
               <form (ngSubmit)="registerModelVip()" >
                 <div class="form-group">
                   <label for="name">ID:</label>
-                  <input type="text" class="form-control" [(ngModel)]="newModel['id']" name="id" required>
+                  <input type="text" class="form-control" [(ngModel)]="newModel['id']" name="id" required (keyup)="applyFilterModelo($event.target.value)">
                   
                 </div>
                 <a [href]="urlPerfil">{{urlPerfil}}</a>
@@ -200,14 +200,25 @@
       </div>
       <div class="modal-body">
         <div class="row" >
-          <div class="col-sm-3 col-md-3" >
-            <mat-checkbox [(ngModel)]="itemSelect.autPost" (change)="autPostChange($event)"  name="autPost" >Autoriza post twit</mat-checkbox>
+          <div class="col-sm-3 col-md-6" >
+            <mat-checkbox [(ngModel)]="itemSelect.autPost" (change)="autPostChange($event)"  id="autPost" name="autPost" >Autoriza post twit</mat-checkbox>
              
           </div>
-          <div class="col-sm-3 col-md-3" >
-            <mat-checkbox [(ngModel)]="itemSelect.status" (change)="enableUserChange($event)" name="status" >Habilita usuario en web</mat-checkbox>
+          
+          <div class="col-sm-3 col-md-6" >
+            <mat-checkbox [(ngModel)]="itemSelect.onlytwit" (change)="autPostChange($event)"   id="onlytwit" name="onlytwit" >Onlytwit</mat-checkbox>
+             
+          </div>
+          </div>
+          <div class="row" >
+          
+          <div class="col-sm-3 col-md-6" >
+            <mat-checkbox [(ngModel)]="itemSelect.status" (change)="enableUserChange($event)"  id="status" name="status" >Habilita usuario en web</mat-checkbox>
           </div>
 
+          <div class="col-sm-3 col-md-6" >
+            <mat-checkbox [(ngModel)]="itemSelect.opcionesTelefono.whatsappdirecto" (change)="autPostChange($event)"  id="whatsappdirecto" name="whatsappdirecto" >Direct Whats</mat-checkbox>
+          </div>
           
 
         </div>
@@ -250,9 +261,15 @@
               <div class="row" *ngIf="typeItemSelect== 'disponible'">
                 Like this images!
               </div>
+            
 
       </div>
+
       <div class="modal-footer">
+      <button type="button" >
+        <span aria-hidden="true">&times;</span>Borrar cuenta
+      </button>
+
        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>

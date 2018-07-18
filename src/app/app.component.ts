@@ -29,6 +29,7 @@ title = 'theapp';
 
 
   ngOnInit() {
+    
     this.loaderService.display(true);
     /*this.localStorage.getItem('usuario').subscribe((data) => {
     this.usuario = localStorage.getItem('usuario');

@@ -66,6 +66,7 @@ export class PerfilComponent implements OnInit  {
     {value: 'Nayarit', viewValue: 'Nayarit'},
     {value: 'Oaxaca', viewValue: 'Oaxaca'},
     {value: 'Puebla', viewValue: 'Puebla'},
+    {value: 'Playa del Carmen', viewValue: 'Playa del Carmen'},
     {value: 'Pachuca', viewValue: 'Pachuca'},
     {value: 'Queretaro', viewValue: 'Querétaro'},
     {value: 'Quintana Roo', viewValue: 'Quintana Roo'},

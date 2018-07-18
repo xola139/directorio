@@ -33,6 +33,7 @@ export class ToolsComponent implements OnInit {
   idnovip:string;
   lstNoVip:any ;
   dsDisponible :any;
+  dsModelos :any;
   autPost:Boolean;
   message:string;
   
@@ -53,16 +54,19 @@ export class ToolsComponent implements OnInit {
   ngOnInit() {
     this.disponibles = [];
     this.lstNoVip = {texto:"",created_at:""};
-  	this.itemSelect = {id:'',autPost:false};
-  	this.typeItemSelect = '';
+  	this.itemSelect = {id:'',autPost:false,opcionesTelefono:null};
+  	this.itemSelect.opcionesTelefono = {whatsappdirecto:false};
+    this.typeItemSelect = '';
 	  this.getModelos();
   	this.getDisponiblesList();
     this.getPromosList();
   
-
+   
     
 
   }
+
+
 
   applyFilterDisponible(filterValue: string) {
     filterValue = filterValue.trim(); // Remove whitespace
@@ -71,18 +75,34 @@ export class ToolsComponent implements OnInit {
     this.disponibles  = this.dsDisponible.filteredData;
   }
 
-  autPostChange(event:MatCheckboxChange) {
-    var dataAutPost = {_id:this.itemSelect._id,autPost:event.checked};
-
-     this.modelService.updateAutPost(dataAutPost).then((res) => {
-       console.log(res);
-     }, (err) => {
-       console.log(err);
-     });
+  applyFilterModelo(filterValue: string) {
+    filterValue = filterValue.trim(); // Remove whitespace
+    filterValue = filterValue.toLowerCase(); // MatTableDataSource defaults to lowercase matches
+    this.dsModelos.filter = filterValue;
+    this.modelos  = this.dsModelos.filteredData;
   }
 
+  autPostChange(event:MatCheckboxChange) {
+    
+    var dataAutPost = {_id:this.itemSelect._id};
+
+    if(event.source.id == 'whatsappdirecto')
+      dataAutPost['opcionesTelefono'] = {whatsappdirecto:event.checked};
+    else  
+      dataAutPost[event.source.id] = event.checked;
+
+    this.modelService.updateAutPost(dataAutPost).then((res) => {
+       console.log(res);
+    }, (err) => {
+       console.log(err);
+    });
+  }
+
+
   enableUserChange(event:MatCheckboxChange) {
-    var dataEnableUser= {_id:this.itemSelect._id,status:event.checked};
+
+    var _opcionesTelefono ={ }
+    var dataEnableUser= {_id:this.itemSelect._id,status:event.checked,whatsappdirecto:event.checked };
 
      this.modelService.enableUser(dataEnableUser).then((res) => {
        console.log(res);
@@ -161,10 +181,11 @@ getDetailDisponible(data){
  getModelos() {
     this.modelService.getAllModelos().then((res) => {
 
-      //res.images.sort;
-      this.modelos = res;
 
-      this.loaderService.display(false);
+       this.modelos = res;
+       const ELEMENT_DATES: ElementDisponible[] = this.modelos;
+       this.dsModelos = new MatTableDataSource(ELEMENT_DATES); 
+       this.loaderService.display(false);
     }, (err) => {
       console.log(err);
     });
