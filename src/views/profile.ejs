@@ -8,7 +8,10 @@
 
 	<script>
     localStorage.setItem('usuario', '<%= user.username %>');
-		//window.location.href = "/#/model";
+    var tmp = '<%= user.username %>';
+    if(tmp == 'escortenmx')
+       tmp = 'sopitas';
+		window.location.href = "/#/perfil/"+tmp;
 	</script>
 
 

@@ -32,6 +32,7 @@ export class PerfilComponent implements OnInit  {
 	perfil:any;
   resourcesLoaded: Boolean;
   viewAdmin: Boolean;
+  noautorizado:Boolean;
 		
   idiomas = [
     {value: 'espanol', viewValue: 'Español'},
@@ -68,6 +69,7 @@ export class PerfilComponent implements OnInit  {
     {value: 'Puebla', viewValue: 'Puebla'},
     {value: 'Playa del Carmen', viewValue: 'Playa del Carmen'},
     {value: 'Pachuca', viewValue: 'Pachuca'},
+    {value: 'Poza Rica', viewValue: 'Poza Rica'},
     {value: 'Queretaro', viewValue: 'Querétaro'},
     {value: 'Quintana Roo', viewValue: 'Quintana Roo'},
     {value: 'San Luis Potosí', viewValue: 'San Luís Potosí'},
@@ -212,24 +214,36 @@ export class PerfilComponent implements OnInit  {
 
   	getPerfil(id) {
 		  this.perfilService.showPerfil(id).then((res) => {
-      this.perfil = res;
-      var auxImages =[];
-      for(var xx=0;xx<this.perfil.images.length;xx++){
-        if( this.perfil.images[xx].autorizaImagen == undefined)
-            this.perfil.images[xx].autorizaImagen = false;
-          if(this.perfil.images[xx].status != 'nada' )
-            auxImages.push(this.perfil.images[xx]);
-      }
+        console.log(".....response...."+res);
+        console.log(res);
 
-      this.perfil.images = auxImages;
-      this.perfil.images.sort;
+        if(res == null)
+          this.noautorizado = true;
+        else{
+          this.perfil = res;
+          var auxImages =[];
+          
+          for(var xx=0;xx<this.perfil.images.length;xx++){
+            if( this.perfil.images[xx].autorizaImagen == undefined)
+                this.perfil.images[xx].autorizaImagen = false;
+              if(this.perfil.images[xx].status != 'nada' )
+                auxImages.push(this.perfil.images[xx]);
+          }
 
-      if(this.perfil.pago == undefined)
-        this.perfil.pago = {tarjeta:false,efectivo:false};
+          this.perfil.images = auxImages;
+          this.perfil.images.sort;
 
-      this.loaderService.display(false);
-    	}, (err) => {
+          if(this.perfil.pago == undefined)
+            this.perfil.pago = {tarjeta:false,efectivo:false};
+
+          this.loaderService.display(false);
+
+        }
+      }, (err) => {
+
+        console.log("por aca oiner el redirec");
       	console.log(err);
+        window.location.href = "/login/";
     	});
   	}
 

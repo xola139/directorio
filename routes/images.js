@@ -267,22 +267,42 @@ router.put('/guardar', function(req, res) {
 });
 
 /* GET SINGLE IMAGE BY ID */
+//require('connect-ensure-login').ensureLoggedIn()
+//require('connect-ensure-login').ensureLoggedIn()
+
+
 router.get('/:id', function(req, res, next) {
 
-    console.log("evento con get en images");
-    Images.findOne({
-        id: req.params.id
-    }, function(err, post) {
-        //  Images.findById(req.params.id, function (err, post) {
+    var _theid;
+    console.log("consooolasooooo....11111"+req.params.id);
+
+    
+    //TODO:Validar y colocar roles en usuarios
+    //se valida si es usuaruio admin para intercambiar el id que se requiere
+    if(req.user == undefined){
+        _theid = req.params.id
+    }else if(req.user.username == 'escortenmx')
+        _theid = req.params.id
+
+    Images.findOne( {$and: [
+    {id: _theid},
+    {status: true}
+    ]}, function(err, post) {
+        
         if (err) return next(err);
+
+        
         res.json(post);
     });
+    
 });
 
 /* UPDATE IMAGE */
-router.put('/:id', function(req, res, next) {
+router.put('/:id',require('connect-ensure-login').ensureLoggedIn(), function(req, res, next) {
+    console.log(req.user.username);
     Images.findByIdAndUpdate(req.params.id, req.body, function(err, post) {
         if (err) return next(err);
+            
         res.json(post);
     });
 });

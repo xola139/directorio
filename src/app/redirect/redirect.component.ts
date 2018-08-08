@@ -27,7 +27,8 @@ nombre:string;
   //	console.log("intentando ando!!!");
  	 setTimeout(()=>{
       
-      element.click();
+      //element.click();
+      this.redirectButton.nativeElement.click();
 
      },5000);
   }

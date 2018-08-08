@@ -87,7 +87,7 @@ export class ToolsComponent implements OnInit {
     var dataAutPost = {_id:this.itemSelect._id};
 
     if(event.source.id == 'whatsappdirecto')
-      dataAutPost['opcionesTelefono'] = {whatsappdirecto:event.checked};
+      dataAutPost['opcionesTelefono'].whatsappdirecto = event.checked;
     else  
       dataAutPost[event.source.id] = event.checked;
 

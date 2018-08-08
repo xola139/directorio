@@ -1,7 +1,20 @@
-<div class="container">
+
+<div  class="container">
+  <div class="row justify-content-md-center" *ngIf="noautorizado">
+      <div class="col-sd-12 col-md-10 mt-2 alert alert-success" role="alert">
+        <h4 class="alert-heading">Aviso!</h4>
+        <p>Parece que aun no estas autorizada para actualizar tu perfil, por favor envia un DM al Twitter de @escortenmx</p>
+        <hr>
+      </div>
+  </div>
+</div>
+
+
+<div  class="container" *ngIf="!noautorizado">
+  
     <div class="row">
-      <div class="col-md-12 col-md-12  bg-light" >
-         <label>{{perfil.id}}</label>
+      <div class="col-sd-12 col-md-12 mt-2 bg-light" >
+         <h5 class="card-title">{{perfil.id}}</h5>
       </div>
    </div>
 
@@ -157,26 +170,28 @@
                   </div>
                </div>
             </div>
+            
+           <div class="col-sm-12 col-md-12" >
             <button type="submit" data-toggle="modal" data-target="#exampleModalCenter" class="btn btn-success btn-sm" >
-               <mat-icon>save</mat-icon>Guardar información
-            </button>
-            <br>
-            <div class="row">
-               <div class="col-sm-12 col-md-12" >
-                  <label>Imagenes tomadas de Twitter</label>
-               </div>
-               <div class="col-sm-12 col-md-12  alert alert-warning alert-dismissible fade show"  role="alert">
-                     <p>  
-                       Elige la opcion que mas te convenga:<br>
-                       <strong>Foto:</strong> Se mostrara en galeria y se utilizara para mensionar en Twitter<br><hr>
-                        <strong>Satisfecho:</strong>La imagen muestra lo satisfecho que ha quedado tu cliente.<br><hr>
-                        <strong>No mostrar:</strong>No se volvera mostrar la imagen 
-                       <button #loginButton type="button" class="close" data-dismiss="alert" aria-label="Close">
-                         <span aria-hidden="true">&times;</span>
-                       </button>
-                      </p> 
-               </div>
+              <mat-icon>save</mat-icon>Guardar información
+              </button>
             </div>
+        
+           <div class="col-sm-12 col-md-12" >
+              <label>Imagenes tomadas de Twitter</label>
+           </div>
+           <div class="col-sm-12 col-md-12  alert alert-warning alert-dismissible fade show"  role="alert">
+                 <p>  
+                   Elige la opcion que mas te convenga:<br>
+                   <strong>Foto:</strong> Se mostrara en galeria y se utilizara para mensionar en Twitter<br><hr>
+                    <strong>Satisfecho:</strong>La imagen muestra lo satisfecho que ha quedado tu cliente.<br><hr>
+                    <strong>No mostrar:</strong>No se volvera mostrar la imagen 
+                   <button #loginButton type="button" class="close" data-dismiss="alert" aria-label="Close">
+                     <span aria-hidden="true">&times;</span>
+                   </button>
+                  </p> 
+           </div>
+            
             
             <div class="row">
                <div    class="col-sm-2 col-md-3 mb-2 mat-elevation-z2" *ngFor="let pic of perfil.images;let i = index">
@@ -197,13 +212,13 @@
                </div>
             </div>
 
-            <div>
-               <div   class="col-12" >
-                  <button type="submit" data-toggle="modal" data-target="#exampleModalCenter" class="btn btn-success btn-sm" >
-                     <mat-icon>save</mat-icon>Guardar información
-                  </button>
-               </div>
+            
+            <div   class="col-12" >
+              <button type="submit" data-toggle="modal" data-target="#exampleModalCenter" class="btn btn-success btn-sm" >
+                <mat-icon>save</mat-icon>Guardar información
+              </button>
             </div>
+            
         </div>
 
             
