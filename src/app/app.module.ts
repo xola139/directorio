@@ -69,6 +69,7 @@ import { ToolsComponent } from './tools/tools.component';
 import { GenericmodalComponent } from './genericmodal/genericmodal.component';
 import { RedirectComponent } from './redirect/redirect.component';
 import { AvisoComponent } from './aviso/aviso.component';
+import { RegistroComponent } from './registro/registro.component';
 
 
 
@@ -82,6 +83,7 @@ const appRoutes: Routes = [
   { path: 'model/:id', component: ModelComponent },
   { path: 'tools', component: ToolsComponent },
   { path: 'perfil/:id', component: PerfilComponent },
+  { path: 'registro/:id', component: RegistroComponent },
   { path: 'contact/:id', component: RedirectComponent },
 
   
@@ -99,6 +101,7 @@ const appRoutes: Routes = [
     GenericmodalComponent,
     RedirectComponent,
     AvisoComponent,
+    RegistroComponent,
     
     
     

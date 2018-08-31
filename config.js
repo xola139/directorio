@@ -1,5 +1,5 @@
 var config={
-	  twitter:{
+    twitter:{
                 key:'',
                 secret:'',
         
@@ -8,8 +8,9 @@ var config={
        }
         ,conectDB:{
                 link:''
-		}
-	
+    }
+  
 };
+
 
 module.exports= config;

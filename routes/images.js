@@ -231,6 +231,8 @@ router.put('/enableUser', function(req, res, next) {
 /* SAVE BOOK */
 router.put('/guardar', function(req, res) {
 
+    console.log("==============>");
+
     Images.find({
         id: req.body.id
     }, function(err, images) {
@@ -254,7 +256,6 @@ router.put('/guardar', function(req, res) {
                             if (err) console.log(err);
                             console.log("Guardo referencia!!" + dispo);
                         });
-
                     });
 
                     res.json(post);
@@ -281,7 +282,7 @@ router.get('/:id', function(req, res, next) {
     //se valida si es usuaruio admin para intercambiar el id que se requiere
     if(req.user == undefined){
         _theid = req.params.id
-    }else if(req.user.username == 'escortenmx')
+    }else if(req.user.username == '')
         _theid = req.params.id
 
     Images.findOne( {$and: [
@@ -298,7 +299,11 @@ router.get('/:id', function(req, res, next) {
 });
 
 /* UPDATE IMAGE */
-router.put('/:id',require('connect-ensure-login').ensureLoggedIn(), function(req, res, next) {
+//router.put('/:id',require('connect-ensure-login').ensureLoggedIn(), function(req, res, next) {
+router.put('/:id', function(req, res, next) {
+
+    console.log("###################====================>");
+
     console.log(req.user.username);
     Images.findByIdAndUpdate(req.params.id, req.body, function(err, post) {
         if (err) return next(err);
