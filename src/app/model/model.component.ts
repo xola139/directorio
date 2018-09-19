@@ -103,6 +103,8 @@ constructor( private loaderService: LoaderService,
  }
 
   getPictures(data,tipoFoto){
+    
+
     this.tipoFoto = tipoFoto;
     data.fotos;
     data.satisfechos;
@@ -111,8 +113,13 @@ constructor( private loaderService: LoaderService,
     else
       this.pictures = data.satisfechos;
 
+this.pictures = data.images;
+
     this.pictures.id = data.id;
-    
+   console.log(this.pictures);
+   console.log(document.getElementById(data.id_str));
+
+   //ldocument.getElementById(data.id_str)[0].scrollTop; 
   }
 
 
