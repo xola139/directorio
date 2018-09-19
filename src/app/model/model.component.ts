@@ -36,7 +36,7 @@ constructor( private loaderService: LoaderService,
  }
   
   ngOnInit() {
-
+    $('#modalLoader').modal('show');
     //http call starts
     this.loaderService.display(true);
 
@@ -48,12 +48,13 @@ constructor( private loaderService: LoaderService,
     
     this.getModelos();
     this.getPromos();
-
-    
-
-     
+    $('#modalLoader').modal('hide');
   }
 
+mostratLoader(){
+  this.loaderService.display(true);
+  $('#modalLoader').modal('show');
+}
 
   getModelos() {
     var _id = this.route.snapshot.params['id'];
@@ -64,8 +65,7 @@ constructor( private loaderService: LoaderService,
       var firstItem = [];
       var nextItem = [];
       for (let i = 0; i < Object.keys(datos).length; i++) {
-         
-          res[i].telefono= res[i].telefono != null ?res[i].telefono.replace(/\s/g, ""):"";
+           res[i].telefono= res[i].telefono != null ?res[i].telefono.replace(/\s/g, ""):"";
           res[i].satisfechos = [];
           res[i].fotos = [];
           res[i].calendario;
@@ -102,24 +102,16 @@ constructor( private loaderService: LoaderService,
    });
  }
 
-  getPictures(data,tipoFoto){
-    
 
-    this.tipoFoto = tipoFoto;
-    data.fotos;
-    data.satisfechos;
-    if(tipoFoto =="foto")
-      this.pictures = data.fotos;
-    else
-      this.pictures = data.satisfechos;
-
-this.pictures = data.images;
-
+  getPictures(data,tipoFoto,idImg){
+    this.pictures = data.images;
     this.pictures.id = data.id;
-   console.log(this.pictures);
-   console.log(document.getElementById(data.id_str));
 
-   //ldocument.getElementById(data.id_str)[0].scrollTop; 
+    setTimeout(() => {
+      var top = $('#'+idImg).position().top;
+      $('#exampleModalLong').animate({scrollTop:(top - 50)}, 'slow');
+      },1000);
+
   }
 
 

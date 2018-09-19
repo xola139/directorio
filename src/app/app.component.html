@@ -9,7 +9,7 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
       <div class="navbar-nav">
-        <a class="nav-item nav-link custom-color" (click)="toggleCollapsable()" routerLink="/model/o-o">Modelos</a>
+        <!--<a class="nav-item nav-link custom-color" (click)="toggleCollapsable()" routerLink="/model/o-o">Modelos</a>-->
         <a class="nav-item nav-link custom-color" (click)="toggleCollapsable()" routerLink="/disponibles">Disponibles</a>
         <a class="nav-item nav-link custom-color" (click)="toggleCollapsable()" routerLink="/promos">Promos<span class="sr-only">(current)</span></a>
         <a  href="http://localhost:7020/login" class="btn btn-info"><span class="fa fa-twitter"></span> Twitter</a> {{usuario}}
@@ -20,8 +20,18 @@
 </div>
 
 <router-outlet>
-    <div *ngIf="showLoader" class="mx-auto mt-5" style="width: 100px;">
-      <mat-spinner ></mat-spinner>
+    <div *ngIf="showLoader" class="mx-auto mt-5" style="width: 100px;position: fixed;z-index: 99;">
+      
     </div> 
 </router-outlet>
+
+
+<!-- Modal -->
+<div class="modal fade" id="modalLoader" tabindex="-1" role="dialog" aria-labelledby="modalLoader" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <mat-spinner ></mat-spinner>
+    </div>
+  </div>
+</div>
 

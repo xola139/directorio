@@ -1,4 +1,10 @@
 
+
+::ng-deep .mat-tab-body-wrapper {
+  max-height: 320px;
+  min-height: 320px;
+}
+
 .demo-tab-content {
   padding: 16px;
 }

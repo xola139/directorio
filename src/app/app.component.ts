@@ -29,20 +29,17 @@ title = 'theapp';
 
 
   ngOnInit() {
-    
+  
     this.loaderService.display(true);
-    this.localStorage.getItem('usuario').subscribe((data) => {
-    this.usuario = localStorage.getItem('usuario');
-    });
+    //this.localStorage.getItem('usuario').subscribe((data) => {
+    //this.usuario = localStorage.getItem('usuario');
+    //});
 
     this.loaderService.status.subscribe((val: boolean) => {
             this.showLoader = val;
     });
-
-    //http call starts
-    
-
     this.loaderService.display(false);
+//    $('#modalLoader').modal('hide');
   }
 
   toggleCollapsable(){
