@@ -102,17 +102,14 @@ constructor( private loaderService: LoaderService,
    });
  }
 
-  getPictures(data,tipoFoto){
-    this.tipoFoto = tipoFoto;
-    data.fotos;
-    data.satisfechos;
-    if(tipoFoto =="foto")
-      this.pictures = data.fotos;
-    else
-      this.pictures = data.satisfechos;
-
+  getPictures(data,tipoFoto,idImg){
+    this.pictures = data.images;
     this.pictures.id = data.id;
-    
+
+    setTimeout(() => {
+      var top = $('#'+idImg).position().top;
+      $('#exampleModalLong').animate({scrollTop:(top - 50)}, 'slow');
+      },1000);
   }
 
 

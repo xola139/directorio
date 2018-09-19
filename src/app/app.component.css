@@ -32,6 +32,7 @@
     border-style: solid;
     border-color: #9C27B0;
     border-width: thin;
+    max-height: 400px;
 }
 
 .custom-img-avatar{

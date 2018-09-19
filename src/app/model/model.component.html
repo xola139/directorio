@@ -1,33 +1,24 @@
 
  <div class="container">
     
-    <div class="row" >
-          <div class="col-sm-12 col-md-12 p-0 ">
-              <small>Esta viendo 10  promos de {{promos['length']}}</small>
-              <div id="carouselExampleCaptions" class="carousel slide" data-ride="carousel">
-                <div class="carousel-inner">
-                  <div class="carousel-item {{i == 1 ? 'active':''}} max-img-promo" *ngFor="let p of promos | slice:0:10;let i = index">
-                     <div class="row">
-                      <div class="col">
-                        <img class="d-block w-100 rounded  img-fluid" data-src="{{p.avatar}}" alt="First slide [800x400]" src="{{p.avatar}}" data-holder-rendered="true" style=" max-width: 100%;max-height: 100%;">
-                      </div>
-                      <div class="col">
-                          <h5>{{p.id}}</h5>
-                          <p class="text-primary small">{{p.promos.descripcion}}</p>
-                          <a  href="#/promos" mat-raised-button color="accent">Ver mas promos</a>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <a class="carousel-control-prev" href="#carouselExampleCaptions" role="button" data-slide="prev">
-                  <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                  <span class="sr-only">Previous</span>
-                </a>
-                <a class="carousel-control-next" href="#carouselExampleCaptions" role="button" data-slide="next">
-                  <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                  <span class="sr-only">Next</span>
-                </a>
-            </div>
+    <div class="row" >   <div class="col-sm-12 col-md-12 p-0 ">   <small>Esta
+    viendo 10  promos de..... {{promos['length']}}</small>   <div
+    id="carouselExampleCaptions" class="carousel slide" data-ride="carousel">
+    <div class="carousel-inner">   <div class="carousel-item {{i == 1 ?
+    'active':''}} max-img-promo" *ngFor="let p of promos | slice:0:10;let i =
+    index">  <div class="row">   <div class="col"> <img class="d-block w-100
+    rounded  img-fluid" data-src="{{p.avatar}}" alt="First slide [800x400]"
+    src="{{p.avatar}}" data-holder-rendered="true" style=" max-width: 100
+    %;max-height: 100%;">   </div>   <div class="col">   <h5>{{p.id}}</h5>
+    <p class="text-primary small">{{p.promos.descripcion}}</p>   <a
+    href="#/promos" mat-raised-button color="accent">Ver mas promos</a>
+    </div> </div>   </div> </div> <a class="carousel-control-prev"
+    href="#carouselExampleCaptions" role="button" data-slide="prev">   <span
+    class="carousel-control-prev-icon" aria-hidden="true"></span>   <span
+    class="sr-only">Previous</span> </a> <a class="carousel-control-next"
+    href="#carouselExampleCaptions" role="button" data-slide="next">   <span
+    class="carousel-control-next-icon" aria-hidden="true"></span>   <span
+    class="sr-only">Next</span> </a> </div>
             
           </div>
         
@@ -121,11 +112,11 @@
                       <mat-tab label="Tab 2">
                         <ng-template  class="custom-background" mat-tab-label >
                           <mat-icon class="custom-color-icon">image</mat-icon>
-                          <br><label class="custom-color-icon">Galeria({{data.fotos.length}})  </label>
+                          <br><label class="custom-color-icon">Galeria({{data.images.length}})  </label>
                         </ng-template>
                           <div style="height:500px;">
                             <div class="row" lazy-load-images>
-                              <img *ngFor="let pic of data.images;let i = index"  [attr.data-src]="pic.media_url_https"  alt="foto" (click)="getPictures(data,'foto')" data-toggle="modal" data-target="#exampleModalLong" class="col-2 img-thumbnail p-0 m-1"  style="height:80px">
+                              <img *ngFor="let pic of data.images;let i = index"  [attr.data-src]="pic.media_url_https"  alt="foto" (click)="getPictures(data,'foto',pic.id)" data-toggle="modal" data-target="#exampleModalLong" class="col-2 img-thumbnail p-0 m-1"  style="height:80px">
                             </div>
                             
                           </div>
@@ -170,7 +161,10 @@
           
             <mat-icon class="float-right" data-dismiss="modal">close</mat-icon>
           
-          <img  class="d-block w-100 img-fluid mb-2"   alt="Galeria" src="{{im.media_url_https}}"/>
+    
+
+          <img  id="{{im.id}}" class="d-block w-100 img-fluid mb-2"   alt="Galeria_{{im.id}}" src="{{im.media_url_https}}"/>
+    
 
         </div>
         <div *ngIf="pictures.length == 0">
