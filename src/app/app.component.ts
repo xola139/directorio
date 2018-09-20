@@ -35,6 +35,8 @@ title = 'theapp';
     //this.usuario = localStorage.getItem('usuario');
     //});
 
+    
+
     this.loaderService.status.subscribe((val: boolean) => {
             this.showLoader = val;
     });
