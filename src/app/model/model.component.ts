@@ -36,7 +36,7 @@ constructor( private loaderService: LoaderService,
  }
   
   ngOnInit() {
-    $('#modalLoader').modal('show');
+    //$('#modalLoader').modal('show');
     //http call starts
     this.loaderService.display(true);
 
@@ -48,12 +48,12 @@ constructor( private loaderService: LoaderService,
     
     this.getModelos();
     this.getPromos();
-    $('#modalLoader').modal('hide');
+    //$('#modalLoader').modal('hide');
   }
 
 mostratLoader(){
   this.loaderService.display(true);
-  $('#modalLoader').modal('show');
+  //$('#modalLoader').modal('show');
 }
 
   getModelos() {

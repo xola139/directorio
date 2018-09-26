@@ -298,19 +298,39 @@ router.get('/:id', function(req, res, next) {
     
 });
 
+
 /* UPDATE IMAGE */
 //router.put('/:id',require('connect-ensure-login').ensureLoggedIn(), function(req, res, next) {
 router.put('/:id', function(req, res, next) {
 
-    console.log("###################====================>");
-
-    console.log(req.user.username);
+    //console.log(req.user.username);
     Images.findByIdAndUpdate(req.params.id, req.body, function(err, post) {
         if (err) return next(err);
             
         res.json(post);
     });
 });
+
+
+//update data
+router.post('/:id', function(req, res, next) {
+    Images.findOne({
+        id: req.params.id
+        }, function(err, images) {
+            if (err) console.log(err);
+            else {
+                var _id = images._id;
+                delete images._id;
+                images.disponible = true;
+                Images.findByIdAndUpdate(images._id, images, function(err, post) {
+                    if (err) return next(err);
+                        
+                    res.json(post);
+                });
+            }
+    });
+});
+
 
 
 router.get('/profile',
