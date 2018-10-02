@@ -47,8 +47,9 @@ router.get('/by/:id', function(req, res, next) {
     var items = [];
     var firts = [];
     var resul;
-
-    Images.find({status: true }, function(err, images) {
+//{sort: {disponible: true}}
+//{ $and: [{$or:[ {status: true}, {onlytwit:true} ]}
+    Images.find({status: true },null,{sort: {disponible: -1}}, function(err, images) {
         if (err) return next(err);
 
         for (var i = 0; i < images.length; i++) {
@@ -99,6 +100,11 @@ router.put('/registrar', function(req, res) {
         count: 100
     };
 
+    registraNuevo(options,res);
+
+});
+
+function registraNuevo(options,res){
     Bot.get('statuses/user_timeline', options, function(err, data) {
         var newMedia = {};
         var arrImage = [];
@@ -106,7 +112,7 @@ router.put('/registrar', function(req, res) {
         newMedia.id = data[0].user.screen_name;
         newMedia.id_str = data[0].id;
         newMedia.description = data[0].user.description,
-            newMedia.profile_image_url = data[0].user.profile_image_url.replace("_normal", "");;
+        newMedia.profile_image_url = data[0].user.profile_image_url.replace("_normal", "");;
         newMedia.profile_image_url_https = data[0].user.profile_image_url_https.replace("_normal", "");
         newMedia.diasAtencion = {
             lunes: false,
@@ -125,7 +131,7 @@ router.put('/registrar', function(req, res) {
         newMedia.opcionesTelefono = {
             whatsapp: false,
             llamadas: false,
-            twitter: false
+            twitter: true
         };
         newMedia.idiomas = {
             espanol: false,
@@ -143,9 +149,9 @@ router.put('/registrar', function(req, res) {
             medidas: '',
             peso: ''
         };
-
-
-
+        newMedia.status = true;
+        newMedia.disponible = true;
+        newMedia.ciudad = options.ciudad;
 
         for (var i = 0; i < data.length; i++) {
             if (data[i].entities.media) {
@@ -158,14 +164,12 @@ router.put('/registrar', function(req, res) {
                 }
             }
         }
-
+console.log("tratando de insertar....");
         //removemos el item temporal
         Images.remove({
             id: newMedia.id
         }, function(err, _) {
             if (err) console.log(err)
-
-
 
             newMedia.images = arrImage;
             Images.create(newMedia, function(err, post) {
@@ -188,13 +192,8 @@ router.put('/registrar', function(req, res) {
             });
 
         });
-
-
-
-
     })
-
-});
+}
 
 
 /* UPDATE Autoriza post */
@@ -314,19 +313,33 @@ router.put('/:id', function(req, res, next) {
 
 //update data
 router.post('/:id', function(req, res, next) {
+    var _theid = req.params.id;
+    console.log(req.body)
     Images.findOne({
-        id: req.params.id
+        id: _theid
         }, function(err, images) {
             if (err) console.log(err);
             else {
-                var _id = images._id;
-                delete images._id;
-                images.disponible = true;
-                Images.findByIdAndUpdate(images._id, images, function(err, post) {
-                    if (err) return next(err);
-                        
-                    res.json(post);
-                });
+               if(images != null){
+                    var _id = images._id;
+                    delete images._id;
+                    images.disponible = true;
+                    Images.findByIdAndUpdate(images._id, images, function(err, post) {
+                        if (err) return next(err);
+                            
+                        res.json(post);
+                    });
+               }else{
+                console.log("##########No existe pero se quiere insertar###########");
+                    var options = {
+                        screen_name: _theid,
+                        count: 100,
+                        ciudad:req.body.ciudad
+                    };
+
+                    registraNuevo(options,res);
+               } 
+                
             }
     });
 });
