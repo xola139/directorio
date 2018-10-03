@@ -34,9 +34,9 @@
                   <div class="chip custom-background border-bottom" >
                     <img [hidden]="!hideme[i]" src="{{data.profile_image_url_https}}" alt="{{data.id}} " width="96" height="96"  class="mr-1 mat-elevation-z4">
                     <h5 class="mb-0 pl-1">{{data.id}} 
-                      <span class="badge badge-light" style="font-size: 10px;padding-bottom:2px;">en  {{data.ciudad}}</span>
+                      <span class="badge" >en  {{data.ciudad}}</span>
                     </h5>
-                    <div class="mb-1 pl-1">
+                    <div class="pl-1">
                         <a href="{{isMobile ? 'https://api.whatsapp.com/send?phone=521'+data.telefono :'#'}}"  target="{{isMobile ? '_blank':'_self'}}">
                           <span >{{data.telefono}}</span>
                         </a>
@@ -79,7 +79,7 @@
                   
                   <mat-tab-group >
                       <mat-tab label="Tab 1" >
-                          <ng-template  mat-tab-label   style="padding:1 px !important; " >
+                          <ng-template  mat-tab-label   class="mt-1" style="padding:1px !important;margin-top: 10px !important;" >
                             <mat-icon class="custom-color-icon">people</mat-icon>
                             <br><label class="custom-color-icon">Acerca  </label>
                           </ng-template>
@@ -87,7 +87,7 @@
                             {{data.description}}
                           </p>
                           
-                            <ul class="list-group">
+                            <ul *ngIf="data.nacionalidad" class="list-group">
                               <li class="list-group-item p-1"><b>Nacionalidad:</b> {{data.nacionalidad}}</li>
                               <li class="list-group-item p-1"><b>Idiomas:</b> {{data.idiomas.ingles != 'undefined' ? data.idiomas.ingles ? 'Ingles' :'' :''}} - {{data.idiomas.espanol ? 'Español':''}}</li>
                               <li class="list-group-item p-1"><b>Atención:</b> {{data.diasAtencion.fulltime == true ? 'Toda la semana':''}}{{ data.diasAtencion.lunes ? 'Lunes-' :''}}{{ data.diasAtencion.martes ? 'Martes-' :''}}{{ data.diasAtencion.miercoles ? 'Miercoles-':''}}{{ data.diasAtencion.jueves ? 'Jueves-' :''}}{{ data.diasAtencion.viernes ? 'Viernes-' :''}}{{ data.diasAtencion.sabado ? 'Sabado-':''}}{{ data.diasAtencion.domingo ? 'Domingo-':''}} </li>
