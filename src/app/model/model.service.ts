@@ -38,6 +38,19 @@ export class ModelService   {
     });
   }
 
+  getModelo(id) {
+    return new Promise((resolve, reject) => {
+        this.http.get(this.baseApiUrl + '/images/'+ id)
+          .map(res => res.json())
+          .subscribe(res => {
+            resolve(res)
+        }, (err) => {
+          reject(err);
+        });
+    });
+  }
+
+
   getAllModelos() {
     return new Promise((resolve, reject) => {
         this.http.get(this.baseApiUrl + '/images')

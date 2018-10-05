@@ -30,7 +30,7 @@ constructor( private loaderService: LoaderService,
              private route: ActivatedRoute ) {
   this.disponibles = [];
   this.promos = [];
-  this.verItems = 10;
+  this.verItems = 9;
   this.pictures = [];
   
  }
@@ -66,21 +66,10 @@ mostratLoader(){
       var nextItem = [];
       for (let i = 0; i < Object.keys(datos).length; i++) {
            res[i].telefono= res[i].telefono != null ?res[i].telefono.replace(/\s/g, ""):"";
-          res[i].satisfechos = [];
-          res[i].fotos = [];
-          res[i].calendario;
-
-          for (let x = 0; x < res[i].images.length; x++) {
-            if(res[i].images[x].status == 'foto')
-              res[i].fotos.push( res[i].images[x]);
-            else if(res[i].images[x].status == 'satisfecho')
-              res[i].satisfechos.push( res[i].images[x]);
-          }
-        
-        if(res[i].id == _id)
-            firstItem.push(res[i]);
-        else
-          nextItem.push(res[i]);
+          if(res[i].id == _id)
+              firstItem.push(res[i]);
+          else
+            nextItem.push(res[i]);
 
       }
       //res.unshift(this.firstItem);
@@ -119,7 +108,20 @@ mostratLoader(){
   getVerMas(){
 
     if(this.verItems < this.myData.length){
-      this.verItems +=3;
+      //this.verItems +=3;
+      for(var x=0;x< 3;x++){
+        this.verItems++;
+        this.modelService.getModelo(this.myData[this.verItems].id).then((res) => {
+          this.myData[this.verItems] = res
+        }, (err) => {
+          console.log(err);
+        });
+
+      }
+
+      
+
+
     }
   }
 

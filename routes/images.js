@@ -49,16 +49,21 @@ router.get('/by/:id', function(req, res, next) {
     var resul;
 //{sort: {disponible: true}}
 //{ $and: [{$or:[ {status: true}, {onlytwit:true} ]}
-    Images.find({status: true },null,{sort: {disponible: -1}}, function(err, images) {
+    Images.find( {$or: [
+    {validado: true},
+    {status: true}
+    ]},{sort: [{validado: -1},{disponible: -1}]}, function(err, images) {
         if (err) return next(err);
 
         for (var i = 0; i < images.length; i++) {
+            if( i >= 9)
+                images[i].images = []; 
+
             if (req.params.id == images[i].id) {
                 firts.push(images[i]);
             } else {
                 items.push(images[i]);
             }
-
         }
 
         if (firts.length >= 0) {
@@ -70,7 +75,31 @@ router.get('/by/:id', function(req, res, next) {
     });
 });
 
+router.get('/:id', function(req, res, next) {
 
+    var _theid;
+    console.log("consooolasooooo....11111"+req.params.id);
+
+    
+    //TODO:Validar y colocar roles en usuarios
+    //se valida si es usuaruio admin para intercambiar el id que se requiere
+    if(req.user == undefined){
+        _theid = req.params.id
+    }else if(req.user.username == '')
+        _theid = req.params.id
+
+    Images.findOne( {$and: [
+    {id: _theid},
+    {status: true}
+    ]}, function(err, post) {
+        
+        if (err) return next(err);
+
+        
+        res.json(post);
+    });
+    
+});
 
 
 router.get('/getMostrarEnDispoibles', function(req, res, next) {
@@ -271,31 +300,7 @@ router.put('/guardar', function(req, res) {
 //require('connect-ensure-login').ensureLoggedIn()
 
 
-router.get('/:id', function(req, res, next) {
 
-    var _theid;
-    console.log("consooolasooooo....11111"+req.params.id);
-
-    
-    //TODO:Validar y colocar roles en usuarios
-    //se valida si es usuaruio admin para intercambiar el id que se requiere
-    if(req.user == undefined){
-        _theid = req.params.id
-    }else if(req.user.username == '')
-        _theid = req.params.id
-
-    Images.findOne( {$and: [
-    {id: _theid},
-    {status: true}
-    ]}, function(err, post) {
-        
-        if (err) return next(err);
-
-        
-        res.json(post);
-    });
-    
-});
 
 
 /* UPDATE IMAGE */
