@@ -200,6 +200,14 @@
       </div>
       <div class="modal-body">
         <div class="row" >
+          
+
+
+          <div class="col-sm-3 col-md-6" >
+            <mat-checkbox [(ngModel)]="itemSelect.validado" (change)="autPostChange($event)"  id="validado" name="validado" >Validado</mat-checkbox>
+             
+          </div>
+
           <div class="col-sm-3 col-md-6" >
             <mat-checkbox [(ngModel)]="itemSelect.autPost" (change)="autPostChange($event)"  id="autPost" name="autPost" >Autoriza post twit</mat-checkbox>
              

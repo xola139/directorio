@@ -11,7 +11,7 @@ var ImagesSchema = new mongoose.Schema({
   profile_image_url_https: String,
   validado:Boolean,
   status:Boolean,
-  disponible: Boolean,
+  disponible:Boolean,
   onlytwit:Boolean,
   autPost:Boolean,
   ciudad:String,

@@ -18,14 +18,15 @@
 
 /*
 .custom-background{
-  
+ 
   background: #ff5db1;
   background: -moz-linear-gradient(top, #ff5db1 0%, #e91e63 100%); 
   background: -webkit-linear-gradient(top, #ff5db1 0%,#e91e63 100%); 
   background: linear-gradient(to bottom, #ff5db1 0%,#e91e63 100%); 
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ff5db1', endColorstr='#e91e63',GradientType=0 ); 
 
-}*/
+}
+*/
 
 .custom-color{
     color:#fff !important;
