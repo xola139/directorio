@@ -1,7 +1,7 @@
 
  <div class="container">
     
-    <div class="row" >   <div class="col-sm-12 col-md-12 p-0 ">   <small>Esta
+    <div class="row" *ngIf="promos.length > 0"  >     <div class="col-sm-12 col-md-12 p-0 ">   <small>Esta
     viendo 10  promos de..... {{promos['length']}}</small>   <div
     id="carouselExampleCaptions" class="carousel slide" data-ride="carousel">
     <div class="carousel-inner">   <div class="carousel-item {{i == 1 ?
@@ -28,7 +28,7 @@
               <div class="col-10 pr-0 pl-1 ">
                 <div class="chip custom-background border-bottom" >
                     <img [hidden]="!hideme[i]" src="{{data.profile_image_url_https}}" alt="{{data.id}} " width="96" height="96"  class="mr-1 mat-elevation-z4">
-                    <h5 class="mb-0 pl-1">{{data.id}} 
+                    <h5 class="mb-0 pl-1">{{data.id}}
                       <span class="badge" >en {{data.ciudad}}</span>
                     </h5>
                     <div class="pl-1">
@@ -145,19 +145,13 @@
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <div class="modal-body" #container>
-          
-         
-
-        <div *ngFor="let im of pictures;let indexim = index">
+      <div class="modal-body p-0" #container>
+          <div *ngFor="let im of pictures;let indexim = index">
           
             <mat-icon class="float-right" data-dismiss="modal">close</mat-icon>
 
-          <img  id="{{im.id}}" class="d-block w-100 img-fluid mb-2"   alt="Galeria_{{im.id}}" src="{{im.media_url_https}}"/>
-    
-
-
-        </div>
+            <img  id="{{im.id}}" class="d-block w-100 img-fluid mb-2"   alt="Galeria_{{im.id}}" src="{{im.media_url_https}}"/>
+          </div>
         <div *ngIf="pictures.length == 0">
         No existe informacion :(
         </div>

@@ -42,22 +42,19 @@ router.delete('/deletePostTwitter/:id', function(req, res, next) {
 
 
 /* GET ALL IMAGES */
-//db.tweets.find( {_id : { "$lt" : <50th _id> } } ).limit(50).sort({"_id":-1});
 router.get('/by/:id', function(req, res, next) {
     var items = [];
     var firts = [];
     var resul;
-//{sort: {disponible: true}}
-//{ $and: [{$or:[ {status: true}, {onlytwit:true} ]}
     Images.find( {$or: [
     {validado: true},
     {status: true}
-    ]},{sort: [{validado: -1},{disponible: -1}]}, function(err, images) {
+    ]},null,{sort: {validado: -1,status: -1}}, function(err, images) {
         if (err) return next(err);
 
         for (var i = 0; i < images.length; i++) {
             if( i >= 9)
-                images[i].images = []; 
+             images[i].images = []; 
 
             if (req.params.id == images[i].id) {
                 firts.push(images[i]);
