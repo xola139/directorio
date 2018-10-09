@@ -60,20 +60,8 @@ mostratLoader(){
     var _id = this.route.snapshot.params['id'];
 
     this.modelService.showModelos(_id).then((res) => {
-    
-      var datos = res;
-      var firstItem = [];
-      var nextItem = [];
-      for (let i = 0; i < Object.keys(datos).length; i++) {
-           res[i].telefono= res[i].telefono != null ?res[i].telefono.replace(/\s/g, ""):"";
-          if(res[i].id == _id)
-              firstItem.push(res[i]);
-          else
-            nextItem.push(res[i]);
-
-      }
-      //res.unshift(this.firstItem);
-      this.myData  = firstItem.concat(nextItem);
+         
+      this.myData  = res ; //firstItem.concat(nextItem);
           //http call ends
       this.loaderService.display(false);
 
