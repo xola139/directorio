@@ -41,15 +41,16 @@ router.delete('/deletePostTwitter/:id', function(req, res, next) {
 });
 
 
+
+
+
 /* GET ALL IMAGES */
 router.get('/by/:id', function(req, res, next) {
     var items = [];
     var firts = [];
     var resul;
-    Images.find( {$or: [
-    {validado: true},
-    {status: true}
-    ]},null,{sort: {validado: -1,status: -1}}, function(err, images) {
+    Images.find({$and:[{$or: [{validado: true  },  {status: true}]},{disponible: true}]},
+        null,{sort: {validado: -1,status: -1}}, function(err, images) {
         if (err) return next(err);
 
         for (var i = 0; i < images.length; i++) {

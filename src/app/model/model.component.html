@@ -1,26 +1,23 @@
 
  <div class="container">
     
-    <div class="row"   >     <div class="col-sm-12 col-md-12 p-0 ">   <small>Esta
-    viendo 10  promos de..... {{promos['length']}}</small>   <div
-    id="carouselExampleCaptions" class="carousel slide" data-ride="carousel">
-    <div class="carousel-inner">   <div class="carousel-item {{i == 1 ?
-    'active':''}} max-img-promo" *ngFor="let p of promos | slice:0:10;let i =
-    index">  <div class="row">   <div class="col"> <img class="d-block w-100
-    rounded  img-fluid" data-src="{{p.avatar}}" alt="First slide [800x400]"
-    src="{{p.avatar}}" data-holder-rendered="true" style=" max-width: 100
-    %;max-height: 100%;">   </div>   <div class="col">   <h5>{{p.id}}</h5>
-    <p class="text-primary small">{{p.promos.descripcion}}</p>   <a
-    href="#/promos" mat-raised-button color="accent">Ver mas promos</a>
-    </div> </div>   </div> </div> <a class="carousel-control-prev"
-    href="#carouselExampleCaptions" role="button" data-slide="prev">   <span
-    class="carousel-control-prev-icon" aria-hidden="true"></span>   <span
-    class="sr-only">Previous</span> </a> <a class="carousel-control-next"
-    href="#carouselExampleCaptions" role="button" data-slide="next">   <span
-    class="carousel-control-next-icon" aria-hidden="true"></span>   <span
-    class="sr-only">Next</span> </a> </div>
-            
-          </div>
+    <div class="row"   >    
+       <div class="col-sm-12 col-md-12 p-0 mt-2 " style="display: none;">   
+        <small>Elije una ciudad:</small>  
+
+        <div class="btn-group btn-group-toggle" data-toggle="buttons">
+          <label  class="btn btn-outline-secondary" (click)="chooseCiudad='CDMX';verPorCiudad()">
+            <input type="radio" name="options" id="option1" autocomplete="off" checked> CDMX
+          </label>
+          <label class="btn btn-outline-secondary" (click)="chooseCiudad='PUEBLA';verPorCiudad()">
+            <input type="radio" name="options" id="option2" autocomplete="off"> PUEBLA
+          </label>
+          <label class="btn btn-outline-secondary"  (click)="chooseCiudad='TODOS';verPorCiudad()">
+            <input type="radio" name="options" id="option3" autocomplete="off"> TODOS
+          </label>
+        </div>
+      </div>
+
         
         
           <div id="card_{{data.id}}" class="col-md-4 col-sm-12 mt-2 p-0 " *ngFor="let data of myData | slice:0:verItems ;let i = index">
@@ -29,13 +26,13 @@
                 <div class="chip custom-background border-bottom" >
                     <img [hidden]="!hideme[i]" src="{{data.profile_image_url_https}}" alt="{{data.id}} " width="96" height="96"  class="mr-1 mat-elevation-z4">
                     <h5 class="mb-0 pl-1">{{data.id}}
-                      <span class="badge" >en {{data.ciudad}}</span>
+                      <span class="badge p-0" >en {{data.ciudad}}</span>
                     </h5>
                     <div class="pl-1">
-                        <a href="{{isMobile ? 'https://api.whatsapp.com/send?phone=521'+data.telefono :'#'}}"  target="{{isMobile ? '_blank':'_self'}}">
+                        <a href="{{isMobile ? 'https://wa.me/521'+data.telefono+'&text=Hola vi mension en @escortenmx_ me das información por favor':'#'}}"  target="{{isMobile ? '_blank':'_self'}}">
                           <span >{{data.telefono}}</span>
                         </a>
-                        <a *ngIf="data.opcionesTelefono  && data.opcionesTelefono.whatsapp"  href="{{isMobile ? 'https://api.whatsapp.com/send?phone=521'+data.telefono :'#'}}" class="pl-2" target="{{isMobile ? '_blank':'_self'}}">
+                        <a *ngIf="data.opcionesTelefono  && data.opcionesTelefono.whatsapp"  href="{{isMobile ? 'https://wa.me/521'+data.telefono+'&text=Hola vi mension en @escortenmx_ me das información por favor':'#'}}" class="pl-2" target="{{isMobile ? '_blank':'_self'}}">
                           <img src="assets/whatsapp.png"  class="profile" matTooltip="Atiende WhatsApp papa!  manda mensaje ya!" alt="Atiende WhatsApp papa! manda mensaje ya!">
                         </a>
                         <a href="http://www.twitter.com/{{data.id}}" class="pl-2" target=" _blank">
@@ -58,7 +55,7 @@
           <div class="col pl-1 pr-1" style="top: -2px">
             <div class="collapse multi-collapse{{i}} show index-content" id="multiCollapse1">
               <div class="card card-body cars-custom p-1" >
-                <img class="card-img-top" src="{{data.profile_image_url_https}}" lazy-load="http://thinkfuture.com/wp-content/uploads/2013/10/loading_spinner.gif" threshold="200"  alt="El avatar"/>
+                <img class="card-img-top" src="{{data.profile_image_url_https}}" lazy-load="assets/loading_spinner.gif" threshold="200"  alt="El avatar"/>
                       <div class="card-body p-1">
                         
                       </div>
@@ -128,7 +125,7 @@
           
       </div>
       
-      <div class="mx-auto mt-5 mb-2" style="width: 100px;">
+      <div class="mx-auto mt-5 mb-5" style="width: 100px;">
           <button   type="button" mat-raised-button color="accent" (click)="getVerMas()">VER MAS</button>
       </div> 
      

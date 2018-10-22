@@ -21,7 +21,9 @@ export class ModelComponent implements OnInit {
   tipoFoto:any;
   hideme=[];
   isMobile :Boolean;
-  
+  items:any; 
+  chooseCiudad:any;
+  ciudades=[];
 
 
 constructor( private loaderService: LoaderService, 
@@ -56,22 +58,27 @@ mostratLoader(){
   //$('#modalLoader').modal('show');
 }
 
+  verPorCiudad(){
+    var _item = [];
+    for(var x=0;x< this.items.length;x++){
+      if(this.chooseCiudad =='TODOS' || this.items[x].ciudad == this.chooseCiudad ){
+        _item.push(this.items[x]); 
+      }
+    }
+    this.myData = _item;
+  }
+  
   getModelos() {
     var _id = this.route.snapshot.params['id'];
-
     this.modelService.showModelos(_id).then((res) => {
-         
-      this.myData  = res ; //firstItem.concat(nextItem);
-          //http call ends
-      this.loaderService.display(false);
-
-
+    this.myData = this.items = res ; 
+    this.loaderService.display(false);
     }, (err) => {
       console.log(err);
     });
   }
 
-   getPromos(){
+  getPromos(){
     this.modelService.getPromos().then((res) => {
      this.promos  = res;
    }, (err) => {
@@ -115,8 +122,7 @@ mostratLoader(){
 
   gotoCard(id){
       var top = $('#card_' + id).position().top;
-      //$(window).scrollTop( top - 60 );
-       $('html, body').animate({scrollTop:(top - 50)}, 'slow');
+      $('html, body').animate({scrollTop:(top - 60)}, 'slow');
       
       
       
