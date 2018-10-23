@@ -2,15 +2,13 @@
  <div class="container">
     
     <div class="row"   >    
-       <div class="col-sm-12 col-md-12 p-0 mt-2 " style="display: none;">   
+      {{lstCiudades}}
+       <div class="col-sm-12 col-md-12 p-0 mt-2" >   
         <small>Elije una ciudad:</small>  
 
-        <div class="btn-group btn-group-toggle" data-toggle="buttons">
-          <label  class="btn btn-outline-secondary" (click)="chooseCiudad='CDMX';verPorCiudad()">
-            <input type="radio" name="options" id="option1" autocomplete="off" checked> CDMX
-          </label>
-          <label class="btn btn-outline-secondary" (click)="chooseCiudad='PUEBLA';verPorCiudad()">
-            <input type="radio" name="options" id="option2" autocomplete="off"> PUEBLA
+        <div class="btn-group btn-group-toggle" data-toggle="buttons" style="display: inline;">
+          <label  class="btn btn-outline-secondary" *ngFor="let c of lstCiudades" (click)="chooseCiudad=c;verPorCiudad()" >
+            <input type="radio" name="options" id="option{{c}}" autocomplete="off" checked> {{c}}
           </label>
           <label class="btn btn-outline-secondary"  (click)="chooseCiudad='TODOS';verPorCiudad()">
             <input type="radio" name="options" id="option3" autocomplete="off"> TODOS
