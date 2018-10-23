@@ -26,13 +26,13 @@
                 <div class="chip custom-background border-bottom" >
                     <img [hidden]="!hideme[i]" src="{{data.profile_image_url_https}}" alt="{{data.id}} " width="96" height="96"  class="mr-1 mat-elevation-z4">
                     <h5 class="mb-0 pl-1">{{data.id}}
-                      <span class="badge p-0" >en {{data.ciudad}}</span>
+                      <span class="badge p-0" *ngIf="data.ciudad !=''">en {{data.ciudad}}</span>
                     </h5>
                     <div class="pl-1">
-                        <a href="{{isMobile ? 'https://wa.me/521'+data.telefono+'&text=Hola vi mension en @escortenmx_ me das información por favor':'#'}}"  target="{{isMobile ? '_blank':'_self'}}">
+                        <a href="{{isMobile ? 'https://wa.me/521'+data.telefono+'?text=Hola vi mension en @escortenmx_ me das información por favor':'#'}}"  target="{{isMobile ? '_blank':'_self'}}">
                           <span >{{data.telefono}}</span>
                         </a>
-                        <a *ngIf="data.opcionesTelefono  && data.opcionesTelefono.whatsapp"  href="{{isMobile ? 'https://wa.me/521'+data.telefono+'&text=Hola vi mension en @escortenmx_ me das información por favor':'#'}}" class="pl-2" target="{{isMobile ? '_blank':'_self'}}">
+                        <a *ngIf="data.opcionesTelefono  && data.opcionesTelefono.whatsapp"  href="{{isMobile ? 'https://wa.me/521'+data.telefono+'?text=Hola vi mension en @escortenmx_ me das información por favor':'#'}}" class="pl-2" target="{{isMobile ? '_blank':'_self'}}">
                           <img src="assets/whatsapp.png"  class="profile" matTooltip="Atiende WhatsApp papa!  manda mensaje ya!" alt="Atiende WhatsApp papa! manda mensaje ya!">
                         </a>
                         <a href="http://www.twitter.com/{{data.id}}" class="pl-2" target=" _blank">
