@@ -26,9 +26,22 @@ export class ModelService   {
   }
 
 
-   showModelos(id) {
+  showModelos(id) {
     return new Promise((resolve, reject) => {
         this.http.get(this.baseApiUrl + '/images/by/'+ id)
+          .map(res => res.json())
+          .subscribe(res => {
+            resolve(res)
+        }, (err) => {
+          reject(err);
+        });
+    });
+  }
+
+
+  getCiudades() {
+    return new Promise((resolve, reject) => {
+        this.http.get(this.baseApiUrl + '/images/getCiudades')
           .map(res => res.json())
           .subscribe(res => {
             resolve(res)

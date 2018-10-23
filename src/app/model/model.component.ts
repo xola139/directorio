@@ -24,6 +24,7 @@ export class ModelComponent implements OnInit {
   items:any; 
   chooseCiudad:any;
   ciudades=[];
+  lstCiudades:any;
 
 
 constructor( private loaderService: LoaderService, 
@@ -67,12 +68,24 @@ mostratLoader(){
     }
     this.myData = _item;
   }
+
+
+
   
   getModelos() {
     var _id = this.route.snapshot.params['id'];
     this.modelService.showModelos(_id).then((res) => {
     this.myData = this.items = res ; 
+    this.getLstCiudades();
     this.loaderService.display(false);
+    }, (err) => {
+      console.log(err);
+    });
+  }
+
+  getLstCiudades() {
+    this.modelService.getCiudades().then((res) => {
+    this.lstCiudades = res ; 
     }, (err) => {
       console.log(err);
     });

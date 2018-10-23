@@ -7,6 +7,9 @@ var config = require('../config');
 var _ = require('underscore');
 var Twit = require('twit');
 
+var lstCiudades = [];
+
+
 var Bot = new Twit({
     consumer_key: config.twitter.key,
     consumer_secret: config.twitter.secret,
@@ -53,7 +56,8 @@ router.get('/by/:id', function(req, res, next) {
         null,{sort: {validado: -1,status: -1}}, function(err, images) {
         if (err) return next(err);
 
-        for (var i = 0; i < images.length; i++) {
+        for (var i = 0; i < images.length; i++){
+
             if( i >= 9)
              images[i].images = []; 
 
@@ -62,6 +66,10 @@ router.get('/by/:id', function(req, res, next) {
             } else {
                 items.push(images[i]);
             }
+
+            if(lstCiudades.indexOf(images[i].ciudad) == -1 && images[i].ciudad != null)
+                    lstCiudades.push(images[i].ciudad);
+
         }
 
         if (firts.length >= 0) {
@@ -71,6 +79,10 @@ router.get('/by/:id', function(req, res, next) {
 
         res.json(resul);
     });
+});
+
+router.get('/getCiudades', function(req, res, next) {
+    res.json(lstCiudades);
 });
 
 router.get('/:id', function(req, res, next) {
