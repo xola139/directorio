@@ -51,6 +51,18 @@ export class ModelService   {
     });
   }
 
+  getPromocines() {
+    return new Promise((resolve, reject) => {
+        this.http.get(this.baseApiUrl + '/images/getPromos')
+          .map(res => res.json())
+          .subscribe(res => {
+            resolve(res)
+        }, (err) => {
+          reject(err);
+        });
+    });
+  }
+
   getModelo(id) {
     return new Promise((resolve, reject) => {
         this.http.get(this.baseApiUrl + '/images/'+ id)

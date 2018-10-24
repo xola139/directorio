@@ -8,6 +8,7 @@ var _ = require('underscore');
 var Twit = require('twit');
 
 var lstCiudades = [];
+var lstPromos = [];
 
 
 var Bot = new Twit({
@@ -67,8 +68,11 @@ router.get('/by/:id', function(req, res, next) {
                 items.push(images[i]);
             }
 
-            if(lstCiudades.indexOf(images[i].ciudad) == -1 && images[i].ciudad != null)
+            if(images[i].ciudad.trim().length > 0 && lstCiudades.indexOf(images[i].ciudad) == -1 && images[i].ciudad != null)
                     lstCiudades.push(images[i].ciudad);
+
+            if(images[i].tipo == 'promo')    
+                    lstPromos.push(images[i].id)
 
         }
 
@@ -81,14 +85,20 @@ router.get('/by/:id', function(req, res, next) {
     });
 });
 
+
+
 router.get('/getCiudades', function(req, res, next) {
     res.json(lstCiudades);
+});
+
+router.get('/getPromos', function(req, res, next) {
+    res.json(lstPromos);
 });
 
 router.get('/:id', function(req, res, next) {
 
     var _theid;
-    console.log("consooolasooooo....11111"+req.params.id);
+    
 
     
     //TODO:Validar y colocar roles en usuarios

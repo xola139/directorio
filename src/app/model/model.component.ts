@@ -92,12 +92,14 @@ mostratLoader(){
   }
 
   getPromos(){
-    this.modelService.getPromos().then((res) => {
+    this.modelService.getPromocines().then((res) => {
      this.promos  = res;
    }, (err) => {
      console.log(err);
    });
  }
+
+
 
 
   getPictures(data,tipoFoto,idImg){
