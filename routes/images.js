@@ -52,6 +52,8 @@ router.delete('/deletePostTwitter/:id', function(req, res, next) {
 router.get('/by/:id', function(req, res, next) {
     var items = [];
     var firts = [];
+    lstCiudades = [];
+    lstPromos = [];
     var resul;
     Images.find({$and:[{$or: [{validado: true  },  {status: true}]},{disponible: true}]},
         null,{sort: {validado: -1,status: -1}}, function(err, images) {
