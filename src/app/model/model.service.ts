@@ -51,7 +51,7 @@ export class ModelService   {
     });
   }
 
-  getPromocines() {
+  getPromociones() {
     return new Promise((resolve, reject) => {
         this.http.get(this.baseApiUrl + '/images/getPromos')
           .map(res => res.json())
