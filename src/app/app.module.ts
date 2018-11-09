@@ -15,6 +15,9 @@ import { LoaderService } from './loader.service';
 import { GoogleAnalyticsEventsService} from "./google-analytics-events.service";
 import { LazyLoadImagesModule } from 'ngx-lazy-load-images'; 
 
+// Import ngx-twitter-timeline
+import { NgxTwitterTimelineModule } from 'ngx-twitter-timeline';
+
 import { MatFormFieldModule, MatAutocompleteModule,
   MatButtonModule,
   MatButtonToggleModule,
@@ -153,7 +156,7 @@ const appRoutes: Routes = [
     MatToolbarModule,
     MatTooltipModule,
     LazyLoadImagesModule,
-    LottieAnimationViewModule.forRoot(),
+    NgxTwitterTimelineModule.forRoot(),
     RouterModule.forRoot(appRoutes)
   ],
   providers: [

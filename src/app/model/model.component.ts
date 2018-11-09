@@ -25,7 +25,7 @@ export class ModelComponent implements OnInit {
   chooseCiudad:any;
   ciudades=[];
   lstCiudades:any;
-
+  Allciudades:any;
 
 constructor( private loaderService: LoaderService, 
              private modelService: ModelService,
@@ -37,6 +37,12 @@ constructor( private loaderService: LoaderService,
   this.pictures = [];
   
  }
+
+
+
+
+
+
   
   ngOnInit() {
 
@@ -50,7 +56,7 @@ constructor( private loaderService: LoaderService,
     }
     
     this.getModelos();
-    this.getPromos();
+    this.Allciudades = this.modelService.getAllCiudades();
 
   }
 
@@ -91,25 +97,19 @@ mostratLoader(){
     });
   }
 
-  getPromos(){
-    this.modelService.getPromociones().then((res) => {
-     this.promos  = res;
-   }, (err) => {
-     console.log(err);
-   });
- }
+
 
  verPromos(){
   
 
-  var _item = [];
+    var _item = [];
     for(var x=0;x< this.items.length;x++){
-    if(this.promos.indexOf(this.items[x].id)> -1){
+      console.log("tipo "+this.items[x].tipo);
+      if(this.items[x].tipo == 'promo' ){
         _item.push(this.items[x]); 
       }
     }
     this.myData = _item;
-
  }
 
 
