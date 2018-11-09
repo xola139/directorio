@@ -92,7 +92,7 @@ mostratLoader(){
   }
 
   getPromos(){
-    this.modelService.getPromocines().then((res) => {
+    this.modelService.getPromociones().then((res) => {
      this.promos  = res;
    }, (err) => {
      console.log(err);
