@@ -99,6 +99,18 @@ mostratLoader(){
    });
  }
 
+ verPromos(){
+  
+
+  var _item = [];
+    for(var x=0;x< this.items.length;x++){
+    if(this.promos.indexOf(this.items[x].id)> -1){
+        _item.push(this.items[x]); 
+      }
+    }
+    this.myData = _item;
+
+ }
 
 
 

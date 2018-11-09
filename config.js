@@ -8,6 +8,7 @@ var config={
        }
         ,conectDB:{
                 link:''
+                			
     }
   
 };

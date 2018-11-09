@@ -73,9 +73,9 @@ router.get('/by/:id', function(req, res, next) {
             if(images[i].ciudad.trim().length > 0 && lstCiudades.indexOf(images[i].ciudad) == -1 && images[i].ciudad != null)
                     lstCiudades.push(images[i].ciudad);
 
-            if(images[i].tipo == 'promo')    
-                    lstPromos.push(images[i].id)
 
+            if(images[i].tipo == 'promo')
+                lstPromos.push(images[i].id)
         }
 
         if (firts.length >= 0) {
@@ -94,6 +94,7 @@ router.get('/getCiudades', function(req, res, next) {
 });
 
 router.get('/getPromos', function(req, res, next) {
+    console.log("=============>"+ lstPromos.length);
     res.json(lstPromos);
 });
 

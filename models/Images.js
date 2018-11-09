@@ -17,7 +17,7 @@ var ImagesSchema = new mongoose.Schema({
   ciudad:String,
   telefono: String,
   nacionalidad: String,
-  
+  tipo:String,
   idioma: String,
   horario: String,
   viajes: String,
