@@ -119,7 +119,9 @@
                           <mat-icon class="custom-color-icon">image</mat-icon>
                           <br><label class="custom-color-icon">Twits</label>
                         </ng-template>
-                                                
+                        
+                        <button   type="button" mat-raised-button color="accent" (click)="mostrarProfile()" data-toggle="modal" data-target="#exampleModalLong">VER MAS</button>
+                        <p>Ultimos 5 Twits</p>               
                         <ngx-twitter-timeline 
                             [data]="{sourceType: 'url', url: 'https://twitter.com/'+data.id}"
                             [opts]="{tweetLimit: 5}"
@@ -158,6 +160,10 @@
         </button>
       </div>
       <div class="modal-body p-0" #container>
+
+        
+      <iframe src="/#/registro/DianaRolove"></iframe>
+
           <div *ngFor="let im of pictures;let indexim = index">
           
             <mat-icon class="float-right" data-dismiss="modal">close</mat-icon>
