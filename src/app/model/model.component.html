@@ -27,7 +27,8 @@
                 <div class="chip custom-background border-bottom" >
                     <img [hidden]="!hideme[i]" src="{{data.profile_image_url_https}}" alt="{{data.id}} " width="96" height="96"  class="mr-1 mat-elevation-z4">
                     <h5 class="mb-0 pl-1">{{data.id}}
-                      <span class="badge p-0" *ngIf="data.ciudad !=''">en {{data.ciudad}}</span>
+                    
+                      <span class="badge p-0" >en {{data.ciudad}}</span>
                     </h5>
                     <div class="pl-1">
                         <a href="{{isMobile ? 'https://wa.me/521'+data.telefono+'?text=Hola vi mension en @escortenmx_ me das información por favor':'#'}}"  target="{{isMobile ? '_blank':'_self'}}">
@@ -120,7 +121,7 @@
                           <br><label class="custom-color-icon">Twits</label>
                         </ng-template>
                         
-                        <button   type="button" mat-raised-button color="accent" (click)="mostrarProfile()" data-toggle="modal" data-target="#exampleModalLong">VER MAS</button>
+                        <!--<button   type="button" mat-raised-button color="accent" (click)="mostrarProfile()" data-toggle="modal" data-target="#exampleModalLong">VER MAS</button>-->
                         <p>Ultimos 5 Twits</p>               
                         <ngx-twitter-timeline 
                             [data]="{sourceType: 'url', url: 'https://twitter.com/'+data.id}"

@@ -127,16 +127,8 @@ export class ModelComponent implements OnInit {
 
     getVerMas() {
         if (this.verItems < this.myData.length) {
-            //this.verItems +=3;
-            for (var x = 0; x < 3; x++) {
-                this.verItems++;
-                this.modelService.getModelo(this.myData[this.verItems].id).then((res) => {
-                    this.myData[this.verItems] = res
-                }, (err) => {
-                    console.log(err);
-                });
-
-            }
+            this.verItems +=3;
+            
         }
     }
 

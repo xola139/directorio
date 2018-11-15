@@ -61,21 +61,25 @@ router.get('/by/:id', function(req, res, next) {
 
         for (var i = 0; i < images.length; i++){
 
-            if( i >= 9)
-             images[i].images = []; 
+            if(images[i] !=null ){
+                images[i].profile_image_url_https = images[i].profile_image_url_https.replace("http:","https:");
 
-            if (req.params.id == images[i].id) {
-                firts.push(images[i]);
-            } else {
-                items.push(images[i]);
+                if( i >= 9)
+                 images[i].images = []; 
+
+                if (req.params.id == images[i].id) {
+                    firts.push(images[i]);
+                } else {
+                    items.push(images[i]);
+                }
+
+                if(images[i].ciudad.trim().length > 0 && lstCiudades.indexOf(images[i].ciudad) == -1 && images[i].ciudad != null)
+                        lstCiudades.push(images[i].ciudad);
+
+
+                if(images[i].tipo == 'promo')
+                    lstPromos.push(images[i].id)
             }
-
-            if(images[i].ciudad.trim().length > 0 && lstCiudades.indexOf(images[i].ciudad) == -1 && images[i].ciudad != null)
-                    lstCiudades.push(images[i].ciudad);
-
-
-            if(images[i].tipo == 'promo')
-                lstPromos.push(images[i].id)
         }
 
         if (firts.length >= 0) {
