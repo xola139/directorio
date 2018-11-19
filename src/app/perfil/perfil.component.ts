@@ -8,23 +8,19 @@ import { ErrorStateMatcher} from '@angular/material/core';
 import { FormBuilder,FormControl, FormGroupDirective, NgForm, Validators} from '@angular/forms';
 import { LoaderService } from '../loader.service';
 
-
-
-
 @Component({
   selector: 'app-perfil',
   templateUrl: './perfil.component.html',
   styleUrls: ['./perfil.component.css']
 })
+
 export class PerfilComponent implements OnInit  {
   @ViewChild('closeButton') closeButton:ElementRef;
-
-
   public lottieConfig: Object;
+  public verPerfil:any;
   private anim: any;
   private animationSpeed: number = 1;
   hidebutton: any[] = [];
-
 
   emailFormControl = new FormControl('', [Validators.required,Validators.email,]);
   edadFormControl = new FormControl('', [Validators.required,Validators.email,]);
@@ -33,7 +29,8 @@ export class PerfilComponent implements OnInit  {
   resourcesLoaded: Boolean;
   viewAdmin: Boolean;
   noautorizado:Boolean;
-		
+	noViewPictures:number;
+
   idiomas = [
     {value: 'espanol', viewValue: 'Español'},
     {value: 'ingles', viewValue: 'Ingles'}
@@ -127,7 +124,6 @@ export class PerfilComponent implements OnInit  {
       fulltime:['',[]],
       hfin:['',[]],
       hinicio:['',[]],
-      
       lunes:['',[]],
       martes:['',[]],
       miercoles:['',[]],
@@ -171,6 +167,8 @@ export class PerfilComponent implements OnInit  {
 
   
   	ngOnInit() {
+
+      this.noViewPictures = 10;
 			this.perfil = {};
       this.perfil.idiomas = [{espanol:false,ingles:false}];
       this.perfil.opcionesTelefono = {whatsapp:false,llamadas:false,twitter:false};
@@ -183,17 +181,15 @@ export class PerfilComponent implements OnInit  {
         this.horarios.push({value: i, viewValue: i +':00'});
       }	
   		
-      this.getPerfil(this.route.snapshot.params['id']);
-
+      
+      let p = this.verPerfil != null ? this.verPerfil :this.route.snapshot.params['id'];
+      this.getPerfil(p);
       
       if(this.route.snapshot.queryParams.aut)
         this.viewAdmin = true;
       else
         this.viewAdmin = false;
-
-
-		  
-       window.scrollTo(0, 0);
+      window.scrollTo(0, 0);
   	}
 
     borrarPostTwitter(x,p){
@@ -211,11 +207,17 @@ export class PerfilComponent implements OnInit  {
       
     }
 
+    getVerMasImagenes(){
+      if (this.noViewPictures < this.perfil.images.length) {
+        this.noViewPictures += 6;
+      }
+      
+    }
+
 
   	getPerfil(id) {
 		  this.perfilService.showPerfil(id).then((res) => {
-        console.log(".....response...."+res);
-        console.log(res);
+        
 
         if(res == null)
           this.noautorizado = true;
@@ -253,8 +255,10 @@ export class PerfilComponent implements OnInit  {
   	updatePerfil(id) {
       this.resourcesLoaded = true;
       this.perfil.status = true;
+      //delete this.perfil.images;
       this.perfil.perfil ={descripcionTwitter:true} ;//TODO:quitar cuando se trare de elejir entre twiiter y mesninado
-	    this.perfilService.updatePerfil(id, this.perfil).then((result) => {
+	    
+      this.perfilService.updatePerfil(id, this.perfil).then((result) => {
       let id = result['_id'];
       this.resourcesLoaded = false;
     	}, (err) => {
@@ -266,8 +270,9 @@ export class PerfilComponent implements OnInit  {
     if(event.value === 'calendario'){
       this.perfil.calendario =  urlCalendar;
     }
-    
-    this.perfil.images[indice].status =event.value;
+
+
+
   }
 
 

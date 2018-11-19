@@ -55,12 +55,12 @@
             </div>
           
           <div class="col pl-1 pr-1" style="top: -2px">
+            <button  *ngIf="viewAdmin"  type="button" mat-raised-button color="accent" data-toggle="modal" data-target="#exampleModalLong" (click)="mostrarProfile(data.id)" >update</button>
             <div class="collapse multi-collapse{{i}} show index-content" id="multiCollapse1">
+              
               <div class="card card-body cars-custom p-1" >
                 <img class="card-img-top" src="{{data.profile_image_url_https}}" lazy-load="assets/loading_spinner.gif" threshold="200"  alt="El avatar"/>
-                      <div class="card-body p-1">
-                        
-                      </div>
+                <div class="card-body p-1"></div>
               </div>
             </div>
                   
@@ -121,8 +121,8 @@
                           <br><label class="custom-color-icon">Twits</label>
                         </ng-template>
                         
-                        <!--<button   type="button" mat-raised-button color="accent" (click)="mostrarProfile()" data-toggle="modal" data-target="#exampleModalLong">VER MAS</button>-->
-                        <p>Ultimos 5 Twits</p>               
+                        
+                        <p>Ultimos</p>               
                         <ngx-twitter-timeline 
                             [data]="{sourceType: 'url', url: 'https://twitter.com/'+data.id}"
                             [opts]="{tweetLimit: 5}"
@@ -162,8 +162,8 @@
       </div>
       <div class="modal-body p-0" #container>
 
-        
-      <iframe src="/#/registro/DianaRolove"></iframe>
+        <div #containerperfil></div>
+   
 
           <div *ngFor="let im of pictures;let indexim = index">
           

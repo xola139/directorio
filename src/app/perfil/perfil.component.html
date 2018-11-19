@@ -52,13 +52,11 @@
                   <mat-checkbox [(ngModel)]="perfil.opcionesTelefono.llamadas" name="llamadas" formControlName="llamadas">LLamada</mat-checkbox>
                   <mat-checkbox [(ngModel)]="perfil.opcionesTelefono.whatsapp" name="Whatsapp" formControlName="whatsapp">Whatsapp</mat-checkbox>
                   <mat-checkbox [(ngModel)]="perfil.opcionesTelefono.twitter" name="twitter" formControlName="twitter">Twitter</mat-checkbox>
-                  <mat-form-field>
-                     <mat-select placeholder="¿En que ciudad atiendes?"  [(value)]="perfil.ciudad" formControlName="ciudad" name="ciudad" >
-                     <mat-option *ngFor="let ciudad of cudades" [value]="ciudad.value">
-                     {{ ciudad.viewValue }}
-                     </mat-option>
-                     </mat-select>
-                  </mat-form-field>
+                
+                  <select class="form-control"  [(ngModel)]="perfil.ciudad" formControlName="ciudad" name="ciudad">
+                    <option *ngFor="let ciudad of cudades" [value]="ciudad.value" > {{ ciudad.viewValue }}</option>
+                  </select>
+                  
                </div>
                <div class="form-group">
                   <label>Horarios de atención</label><br>
@@ -194,7 +192,7 @@
             
             
             <div class="row">
-               <div    class="col-sm-2 col-md-3 mb-2 mat-elevation-z2" *ngFor="let pic of perfil.images;let i = index">
+               <div    class="col-sm-2 col-md-3 mb-2 mat-elevation-z2" *ngFor="let pic of perfil.images | slice:0:noViewPictures ;let i = index">
                   <div  class="card mt-1">
                   <img class="card-img-top" src="{{pic.media_url_https}}" lazy-load="assets/loading_spinner.gif" threshold="200"  />
                      <div class="card-body p-0">
@@ -204,12 +202,13 @@
                               <mat-radio-button  (change)="radioChange($event,i,pic.media_url_https)" [checked]="pic.status ==='satisfecho'" value="satisfecho" name="images.status" >Satisfecho</mat-radio-button>
                               <mat-radio-button  (change)="radioChange($event,i,pic.media_url_https)" [checked]="pic.status ==='nada'" value="nada" name="images.status" >No mostrar</mat-radio-button>
                            </mat-radio-group>
-
                            <mat-checkbox *ngIf="viewAdmin" [(ngModel)]="perfil.images[i].autorizaImagen" [ngModelOptions]="{standalone: true}" (change)="autAdminChange($event,i)" name="images.autorizaImagen" >aut Admin</mat-checkbox>
-
                         </p>
                      </div>
                </div>
+            </div>
+            <div class="mx-auto mt-5 mb-5" style="width: 100px;">
+                <button   type="button" mat-raised-button color="accent" (click)="getVerMasImagenes()">VER MAS IMAGENES</button>
             </div>
 
             

@@ -1,11 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewContainerRef, ComponentFactoryResolver,ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Http } from '@angular/http';
 import { Observable } from "rxjs/Observable";
 import { ModelService } from './model.service';
 import * as $ from 'jquery';
 import { LoaderService } from '../loader.service';
-
+import { PerfilComponent } from '../perfil/perfil.component';
 
 @Component({
   selector: 'app-model',
@@ -13,6 +13,8 @@ import { LoaderService } from '../loader.service';
   styleUrls: ['./model.component.css','../app.component.css']
 })
 export class ModelComponent implements OnInit {
+   @ViewChild('containerperfil', { read: ViewContainerRef }) viewContainerRef: ViewContainerRef; 
+
     myData: any;
     verItems: number;
     disponibles: any;
@@ -26,11 +28,13 @@ export class ModelComponent implements OnInit {
     ciudades = [];
     lstCiudades: any;
     Allciudades: any;
+    viewAdmin: Boolean;
 
     constructor(private loaderService: LoaderService,
         private modelService: ModelService,
         private router: Router,
-        private route: ActivatedRoute) {
+        private route: ActivatedRoute,
+        private componentFactoryResolver: ComponentFactoryResolver) {
         this.disponibles = [];
         this.promos = [];
         this.verItems = 9;
@@ -52,6 +56,10 @@ export class ModelComponent implements OnInit {
         this.getModelos();
         this.Allciudades = this.modelService.getAllCiudades();
 
+
+        this.viewAdmin =  this.route.snapshot.queryParams.aut ? true:false
+        
+
     }
 
     mostratLoader() {
@@ -59,10 +67,14 @@ export class ModelComponent implements OnInit {
         //$('#modalLoader').modal('show');
     }
 
-    mostrarProfile() {
-      $('#exampleModalLong').on('shown.bs.modal',function(){      //correct here use 'shown.bs.modal' event which comes in bootstrap3
-        $(this).find('iframe').attr('src','/#/registro/DianaRolove')
-      })
+    mostrarProfile(id) {
+       
+    this.viewContainerRef.remove();
+    const factory = this.componentFactoryResolver.resolveComponentFactory(PerfilComponent);
+    const ref = this.viewContainerRef.createComponent(factory);
+    ref.instance.verPerfil = id;
+    ref.changeDetectorRef.detectChanges();
+  
     }
 
     
