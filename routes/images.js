@@ -64,8 +64,8 @@ router.get('/by/:id', function(req, res, next) {
             if(images[i] !=null ){
                 images[i].profile_image_url_https = images[i].profile_image_url_https.replace("http:","https:");
 
-                if( i >= 9)
-                 images[i].images = []; 
+  //              if( i >= 9)
+//                 images[i].images = []; 
 
                 if (req.params.id == images[i].id) {
                     firts.push(images[i]);
