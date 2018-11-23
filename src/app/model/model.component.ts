@@ -1,10 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Http } from '@angular/http';
 import { Observable } from "rxjs/Observable";
 import { ModelService } from './model.service';
 import * as $ from 'jquery';
 import { LoaderService } from '../loader.service';
+import { MatDialog} from '@angular/material';
 
 
 @Component({
@@ -13,6 +15,10 @@ import { LoaderService } from '../loader.service';
   styleUrls: ['./model.component.css','../app.component.css']
 })
 export class ModelComponent implements OnInit {
+    
+
+     url: SafeResourceUrl;
+
     myData: any;
     verItems: number;
     disponibles: any;
@@ -30,7 +36,8 @@ export class ModelComponent implements OnInit {
     constructor(private loaderService: LoaderService,
         private modelService: ModelService,
         private router: Router,
-        private route: ActivatedRoute) {
+        private route: ActivatedRoute,
+         public dialog: MatDialog,) {
         this.disponibles = [];
         this.promos = [];
         this.verItems = 9;
@@ -60,9 +67,11 @@ export class ModelComponent implements OnInit {
     }
 
     mostrarProfile() {
-      $('#exampleModalLong').on('shown.bs.modal',function(){      //correct here use 'shown.bs.modal' event which comes in bootstrap3
-        $(this).find('iframe').attr('src','/#/registro/DianaRolove')
-      })
+        
+        console.log();
+       
+    
+      
     }
 
     

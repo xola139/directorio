@@ -15,6 +15,8 @@ import { LoaderService } from './loader.service';
 import { GoogleAnalyticsEventsService} from "./google-analytics-events.service";
 import { LazyLoadImagesModule } from 'ngx-lazy-load-images'; 
 
+
+
 // Import ngx-twitter-timeline
 import { NgxTwitterTimelineModule } from 'ngx-twitter-timeline';
 
