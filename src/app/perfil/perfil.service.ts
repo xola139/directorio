@@ -35,6 +35,18 @@ export class PerfilService {
     });
   }
 
+  updatePerfilStatusImage(data) {
+    return new Promise((resolve, reject) => {
+      console.log(data);
+        this.http.put(this.baseApiUrl + '/images/update-status-image', data)
+          .map(res => res.json())
+          .subscribe(res => {
+            resolve(res);
+          }, (err) => {
+            reject(err);
+          });
+    });
+  }
 
  
 

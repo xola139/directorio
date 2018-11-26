@@ -1,12 +1,13 @@
-import { Component, OnInit, Input } from '@angular/core';
+
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
+import { Component, OnInit, ViewContainerRef, ComponentFactoryResolver,ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Http } from '@angular/http';
 import { Observable } from "rxjs/Observable";
 import { ModelService } from './model.service';
 import * as $ from 'jquery';
 import { LoaderService } from '../loader.service';
-import { MatDialog} from '@angular/material';
+import { PerfilComponent } from '../perfil/perfil.component';
 
 
 @Component({
@@ -15,9 +16,13 @@ import { MatDialog} from '@angular/material';
   styleUrls: ['./model.component.css','../app.component.css']
 })
 export class ModelComponent implements OnInit {
+
     
 
      url: SafeResourceUrl;
+
+   @ViewChild('containerperfil', { read: ViewContainerRef }) viewContainerRef: ViewContainerRef; 
+
 
     myData: any;
     verItems: number;
@@ -32,12 +37,15 @@ export class ModelComponent implements OnInit {
     ciudades = [];
     lstCiudades: any;
     Allciudades: any;
+    viewAdmin: Boolean;
 
     constructor(private loaderService: LoaderService,
         private modelService: ModelService,
         private router: Router,
         private route: ActivatedRoute,
-         public dialog: MatDialog,) {
+
+        private componentFactoryResolver: ComponentFactoryResolver) {
+
         this.disponibles = [];
         this.promos = [];
         this.verItems = 9;
@@ -59,6 +67,10 @@ export class ModelComponent implements OnInit {
         this.getModelos();
         this.Allciudades = this.modelService.getAllCiudades();
 
+
+        this.viewAdmin =  this.route.snapshot.queryParams.aut ? true:false
+        
+
     }
 
     mostratLoader() {
@@ -66,12 +78,16 @@ export class ModelComponent implements OnInit {
         //$('#modalLoader').modal('show');
     }
 
-    mostrarProfile() {
-        
-        console.log();
+
+    mostrarProfile(id) {
        
-    
-      
+    this.viewContainerRef.remove();
+    const factory = this.componentFactoryResolver.resolveComponentFactory(PerfilComponent);
+    const ref = this.viewContainerRef.createComponent(factory);
+    ref.instance.verPerfil = id;
+    ref.changeDetectorRef.detectChanges();
+  
+
     }
 
     

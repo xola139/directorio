@@ -64,8 +64,8 @@ router.get('/by/:id', function(req, res, next) {
             if(images[i] !=null ){
                 images[i].profile_image_url_https = images[i].profile_image_url_https.replace("http:","https:");
 
-                if( i >= 9)
-                 images[i].images = []; 
+  //              if( i >= 9)
+//                 images[i].images = []; 
 
                 if (req.params.id == images[i].id) {
                     firts.push(images[i]);
@@ -265,6 +265,29 @@ router.put('/autPost', function(req, res, next) {
         console.log("Update aut Post!!");
     })
 });
+
+
+router.put('/update-status-image', function(req, res, next) {
+
+    console.log(req.body);
+    var _id = req.body._id;
+    var _idimage = req.body.imageid;
+    var _status = req.body.imagestatus;
+    Images.findOneAndUpdate({
+        _id: _id,
+        "images.id": _idimage
+    }, {
+        $set: {
+            "images.$.status": _status
+        }
+    }, function(error, success) {
+        console.log(success);
+        if (error) throw error
+         res.json({mensaje:"Update status image"});   
+        console.log("Update status image");
+    })
+})
+
 
 
 /* UPDATE User */
