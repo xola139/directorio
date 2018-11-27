@@ -267,11 +267,8 @@ export class PerfilComponent implements OnInit  {
   }
 
   radioChange(event: MatRadioChange,indice,urlCalendar) {
-    if(event.value === 'calendario'){
-      this.perfil.calendario =  urlCalendar;
-    }
-
-
+    
+     this.perfil.images[indice].status =event.value;
 
   }
 

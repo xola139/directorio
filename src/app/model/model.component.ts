@@ -38,6 +38,7 @@ export class ModelComponent implements OnInit {
     lstCiudades: any;
     Allciudades: any;
     viewAdmin: Boolean;
+    viewMore:Boolean;
 
     constructor(private loaderService: LoaderService,
         private modelService: ModelService,
@@ -69,7 +70,7 @@ export class ModelComponent implements OnInit {
 
 
         this.viewAdmin =  this.route.snapshot.queryParams.aut ? true:false
-        
+        this.viewMore = true;
 
     }
 
@@ -153,7 +154,8 @@ export class ModelComponent implements OnInit {
     getVerMas() {
         if (this.verItems < this.myData.length) {
             this.verItems +=3;
-            
+        }else{
+            this.viewMore = false;
         }
     }
 

@@ -59,7 +59,9 @@ router.get('/by/:id', function(req, res, next) {
         null,{sort: {validado: -1,status: -1}}, function(err, images) {
         if (err) return next(err);
 
+        console.log("---------------_>"+images.length);
         for (var i = 0; i < images.length; i++){
+            console.log("<<<<<<<<<<<<<<<<<<<<<<<<"+images[i].id);
 
             if(images[i] !=null ){
                 images[i].profile_image_url_https = images[i].profile_image_url_https.replace("http:","https:");
@@ -73,11 +75,11 @@ router.get('/by/:id', function(req, res, next) {
                     items.push(images[i]);
                 }
 
-                if(images[i].ciudad.trim().length > 0 && lstCiudades.indexOf(images[i].ciudad) == -1 && images[i].ciudad != null)
+                if(images[i].ciudad!=undefined && images[i].ciudad.trim().length > 0 && lstCiudades.indexOf(images[i].ciudad) == -1 && images[i].ciudad != null)
                         lstCiudades.push(images[i].ciudad);
 
 
-                if(images[i].tipo == 'promo')
+                if(images[i].tipo!=undefined && images[i].tipo == 'promo')
                     lstPromos.push(images[i].id)
             }
         }
@@ -86,6 +88,8 @@ router.get('/by/:id', function(req, res, next) {
             resul = firts.concat(items);
         } else
             resul = items;
+
+            console.log("#################>"+resul);
 
         res.json(resul);
     });
