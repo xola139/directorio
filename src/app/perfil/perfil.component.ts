@@ -192,6 +192,13 @@ export class PerfilComponent implements OnInit  {
       window.scrollTo(0, 0);
   	}
 
+    enableUser(id){
+      var _data = { _id:id,estatus:false,disponible:false,validado:false };
+      this.modelService.enableUser(_data).then((res) => {
+        console.log(res);
+      });
+    } 
+
     borrarPostTwitter(x,p){
       console.log("Intentnando borrar twiester");
 

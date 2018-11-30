@@ -38,15 +38,9 @@ router.delete('/deletePostTwitter/:id', function(req, res, next) {
   console.log(req.params.id);
     Bot.post('statuses/destroy/:id', { id: req.params.id }, function(err, data, response) {
         if(err)console.log(err);
-
-        res.json(response);
+            res.json(response);
     });
-
 });
-
-
-
-
 
 /* GET ALL IMAGES */
 router.get('/by/:id', function(req, res, next) {
@@ -59,15 +53,10 @@ router.get('/by/:id', function(req, res, next) {
         null,{sort: {validado: -1,status: -1}}, function(err, images) {
         if (err) return next(err);
 
-        console.log("---------------_>"+images.length);
+        
         for (var i = 0; i < images.length; i++){
-            console.log("<<<<<<<<<<<<<<<<<<<<<<<<"+images[i].id);
-
             if(images[i] !=null ){
                 images[i].profile_image_url_https = images[i].profile_image_url_https.replace("http:","https:");
-
-  //              if( i >= 9)
-//                 images[i].images = []; 
 
                 if (req.params.id == images[i].id) {
                     firts.push(images[i]);
@@ -78,7 +67,6 @@ router.get('/by/:id', function(req, res, next) {
                 if(images[i].ciudad!=undefined && images[i].ciudad.trim().length > 0 && lstCiudades.indexOf(images[i].ciudad) == -1 && images[i].ciudad != null)
                         lstCiudades.push(images[i].ciudad);
 
-
                 if(images[i].tipo!=undefined && images[i].tipo == 'promo')
                     lstPromos.push(images[i].id)
             }
@@ -88,8 +76,6 @@ router.get('/by/:id', function(req, res, next) {
             resul = firts.concat(items);
         } else
             resul = items;
-
-            console.log("#################>"+resul);
 
         res.json(resul);
     });
@@ -102,7 +88,6 @@ router.get('/getCiudades', function(req, res, next) {
 });
 
 router.get('/getPromos', function(req, res, next) {
-    console.log("=============>"+ lstPromos.length);
     res.json(lstPromos);
 });
 
@@ -174,41 +159,6 @@ function registraNuevo(options,res){
         newMedia.description = data[0].user.description,
         newMedia.profile_image_url = data[0].user.profile_image_url.replace("_normal", "");;
         newMedia.profile_image_url_https = data[0].user.profile_image_url_https.replace("_normal", "");
-        newMedia.diasAtencion = {
-            lunes: false,
-            martes: false,
-            miercoles: false,
-            jueves: false,
-            viernes: false,
-            sabado: false,
-            domingo: false,
-            fulltime: false
-        };
-        newMedia.pago = {
-            tarjeta:false,
-            efectivo:false
-        };
-        newMedia.opcionesTelefono = {
-            whatsapp: false,
-            llamadas: false,
-            twitter: true
-        };
-        newMedia.idiomas = {
-            espanol: false,
-            ingles: false
-        };
-        newMedia.horarioAtencion = {
-            hinicio: 0,
-            hfin: 0,
-            fulltime: false
-        };
-        newMedia.cuerpo = {
-            estatura: '',
-            ojos: '',
-            cabello: '',
-            medidas: '',
-            peso: ''
-        };
         newMedia.status = true;
         newMedia.disponible = true;
         newMedia.ciudad = options.ciudad;
@@ -224,7 +174,7 @@ function registraNuevo(options,res){
                 }
             }
         }
-console.log("tratando de insertar....");
+        console.log("tratando de insertar....");
         //removemos el item temporal
         Images.remove({
             id: newMedia.id
@@ -238,13 +188,9 @@ console.log("tratando de insertar....");
                 res.json(post);
             });
 
-            var query = {
-                'id': newMedia.id
-            };
-            var _status = {
-                status: false
-            };
-            Disponibles.findOneAndUpdate(query, _status, {
+            
+            
+            Disponibles.findOneAndUpdate({ 'id': newMedia.id }, { status: false }, {
                 upsert: true
             }, function(err, doc) {
                 if (err) console.log(err);
@@ -267,6 +213,19 @@ router.put('/autPost', function(req, res, next) {
     }, req.body, function(err, image) {
         if (err) console.log(err);
         console.log("Update aut Post!!");
+    })
+});
+
+/* UPDATE User */
+router.put('/enableUser', function(req, res, next) {
+    var _id = req.body._id;
+    delete req.body._id;
+
+    Images.findByIdAndUpdate({
+        _id: _id
+    }, req.body, function(err, image) {
+        if (err) console.log(err);
+        console.log("Update disenable User!!");
     })
 });
 
@@ -294,27 +253,12 @@ router.put('/update-status-image', function(req, res, next) {
 
 
 
-/* UPDATE User */
-router.put('/enableUser', function(req, res, next) {
 
-    var _id = req.body._id;
-    delete req.body._id;
-
-    Images.findByIdAndUpdate({
-        _id: _id
-    }, req.body, function(err, image) {
-        if (err) console.log(err);
-        console.log("Update enable User!!");
-    })
-});
 
 
 
 /* SAVE BOOK */
 router.put('/guardar', function(req, res) {
-
-    console.log("==============>");
-
     Images.find({
         id: req.body.id
     }, function(err, images) {

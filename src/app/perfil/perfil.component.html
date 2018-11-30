@@ -16,10 +16,10 @@
           <h5 class="card-title">{{perfil.id}}</h5>
         </div>
         <div class="col-4">
-          <button type="button" (click)="updatePerfil(perfil._id)" data-toggle="modal" data-target="#exampleModalCenter" class="btn btn-success btn-sm" >
+          <button type="button" (click)="updatePerfil(perfil._id)" data-toggle="modal" data-target="#modalGuarda" class="btn btn-success btn-sm" >
             <mat-icon>save</mat-icon>
           </button>
-          <button type="submit" class="btn btn-success btn-sm"  *ngIf="viewAdmin" >
+          <button type="button" data-toggle="modal" data-target="#modalDeshabilita" class="btn btn-success btn-sm"  *ngIf="viewAdmin" >
             <mat-icon>remove</mat-icon>
           </button>
         </div>
@@ -219,7 +219,7 @@
             </div>
             
             <div   class="col-12" >
-              <button type="submit" data-toggle="modal" data-target="#exampleModalCenter" class="btn btn-success btn-sm" >
+              <button type="submit" data-toggle="modal" data-target="#modalGuarda" class="btn btn-success btn-sm" >
                 <mat-icon>save</mat-icon>Guardar información
               </button>
             </div>
@@ -255,8 +255,8 @@
    
 </div>
 <!-- Modal -->
-<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenter" aria-hidden="true">
-   <div class="modal-dialog modal-dialog-centered" role="document">
+<div class="modal fade" id="modalGuarda" tabindex="-1" role="dialog" aria-labelledby="modalGuarda" aria-hidden="true">
+   <div class="modal-dialog" role="document">
       <div class="modal-content">
          <div class="modal-header">
             <h5 class="modal-title" id="exampleModalLongTitle">Guardando</h5>
@@ -266,13 +266,6 @@
          </div>
          <div class="modal-body">
             <div class="mx-auto" style="width: 100px;">
-               <!--<lottie-animation-view
-               [options]="lottieConfig"
-               [width]="100"
-               [height]="100"
-               (animCreated)="handleAnimation($event)">
-               </lottie-animation-view>-->
-
                <mat-spinner *ngIf="resourcesLoaded === true" ></mat-spinner>
             </div>
             <div *ngIf="!resourcesLoaded === true" class="alert alert-success" role="alert">
@@ -282,6 +275,26 @@
          </div>
          <div class="modal-footer">
             <button #closeButton type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+         </div>
+      </div>
+   </div>
+</div>
+<!-- Modal eleccion deshabilitar-->
+<div class="modal fade" id="modalDeshabilita" tabindex="-1" role="dialog" aria-labelledby="modalDeshabilita" aria-hidden="true">
+   <div class="modal-dialog" role="document">
+      <div class="modal-content">
+         <div class="modal-header">
+            <h5 class="modal-title">Deshabilitar usuario</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+            </button>
+         </div>
+         <div class="modal-body alert-warning">
+             <p>¿Estas seguro que quieres deshabilitar este usuario {{perfil.id}}? </p>
+         </div>
+         <div class="modal-footer">
+            <button type="button" (click)="enableUser(perfil._id)"  data-dismiss="modal" class="btn btn-primary">De acuerdo</button>
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
          </div>
       </div>
    </div>
