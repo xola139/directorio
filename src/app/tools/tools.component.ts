@@ -58,8 +58,8 @@ export class ToolsComponent implements OnInit {
   	this.itemSelect.opcionesTelefono = {whatsappdirecto:false};
     this.typeItemSelect = '';
 	  this.getModelos();
-  	this.getDisponiblesList();
-    this.getPromosList();
+  	//this.getDisponiblesList();
+    //this.getPromosList();
   
    
     
@@ -142,12 +142,21 @@ export class ToolsComponent implements OnInit {
 
 
 getDetails(data,tipo){
+  
+  this.toolService.getDataValidado(data.id).then((res) => {
+    this.selectedImg =[];
+    data.images = res["images"];
+    data.telefono = res["telefono"];
+    data.wbitly = res["wbitly"];
+	  this.itemSelect = data;
+	  this.typeItemSelect = tipo;
+  }, (err) => {
+   console.log(err);
+ });
 
-  console.log(data);
-	this.selectedImg =[];
-  data.images.reverse();
-	this.itemSelect = data;
-	this.typeItemSelect = tipo;
+
+
+
 }
 
 
@@ -179,7 +188,7 @@ getDetailDisponible(data){
 }
 
  getModelos() {
-    this.modelService.getAllModelos().then((res) => {
+    this.toolService.getValidados().then((res) => {
 
 
        this.modelos = res;
@@ -271,6 +280,7 @@ selectBadge (e, id) {
   this.ratingHtml += "@"+this.itemSelect.id +"\n"+	"📲"+this.itemSelect.telefono.trim()+"\n"; 
   this.ratingHtml += "Disponible en  \n";
   this.ratingHtml += "#escortenmx  \n"
+  this.ratingHtml += this.itemSelect.wbitly+" \n"
   this.ratingHtml +=   this.urls  ;
 
   this.copyElementText('elem'+id);

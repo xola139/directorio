@@ -26,15 +26,15 @@ body:after{
 }
 
 
-/*.custom-background{
+.custom-background{
   background-color: #aaCc00 !important;
   background: -moz-linear-gradient(top, #aaCc00 0%, #aaCc00 99%); 
   background: -webkit-linear-gradient(top, #aaCc00 0%,#aaCc00 99%);
   background: linear-gradient(to bottom, #aaCc00 0%,#aaCc00 99%); 
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#aaCc00', endColorstr='#aaCc00',GradientType=0 );
-}*/
+}
 
-
+/*
 .custom-background{white
  
   background: #ff5db1;
@@ -43,7 +43,7 @@ body:after{
   background: linear-gradient(to bottom, #ff5db1 0%,#e91e63 100%); 
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ff5db1', endColorstr='#e91e63',GradientType=0 ); 
 
-}
+}*/
 
 
 .custom-color{

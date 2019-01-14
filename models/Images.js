@@ -4,6 +4,7 @@ var ImagesSchema = new mongoose.Schema({
   
   id: String,
   id_str:String,
+  wbitly:String,
   accountbackup:String,
   description:String,
   descripcionTwitter:Boolean,

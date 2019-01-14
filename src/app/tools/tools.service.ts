@@ -11,15 +11,38 @@ export class ToolService {
 
 
     saveMessage(data) {
-      console.log(data)
+      return new Promise((resolve, reject) => {
+          this.http.put(this.baseApiUrl +'/messages/register', data)
+            .map(res => res.json())
+            .subscribe(res => {
+              resolve(res);
+            }, (err) => {
+              reject(err);
+            });
+      });
+  }
+
+  getValidados() {
     return new Promise((resolve, reject) => {
-        this.http.put(this.baseApiUrl +'/messages/register', data)
+        this.http.get(this.baseApiUrl + '/images/getValidados')
           .map(res => res.json())
           .subscribe(res => {
-            resolve(res);
-          }, (err) => {
-            reject(err);
-          });
+            resolve(res)
+        }, (err) => {
+          reject(err);
+        });
+    });
+  }
+
+  getDataValidado(id) {
+    return new Promise((resolve, reject) => {
+        this.http.get(this.baseApiUrl + '/images/getDataValidado/'+id)
+          .map(res => res.json())
+          .subscribe(res => {
+            resolve(res)
+        }, (err) => {
+          reject(err);
+        });
     });
   }
 
