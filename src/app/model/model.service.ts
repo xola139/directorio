@@ -121,9 +121,11 @@ export class ModelService   {
   }
 
 
+
+
   getAllModelos() {
     return new Promise((resolve, reject) => {
-        this.http.get(this.baseApiUrl + '/images')
+        this.http.get(this.baseApiUrl + '/images/all')
           .map(res => res.json())
           .subscribe(res => {
             resolve(res)
@@ -132,7 +134,6 @@ export class ModelService   {
         });
     });
   }
-
 
 
 

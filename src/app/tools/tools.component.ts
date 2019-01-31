@@ -58,8 +58,8 @@ export class ToolsComponent implements OnInit {
   	this.itemSelect.opcionesTelefono = {whatsappdirecto:false};
     this.typeItemSelect = '';
 	  this.getModelos();
-  	this.getDisponiblesList();
-    this.getPromosList();
+  	//this.getDisponiblesList();
+    // this.getPromosList();
   
    
     
@@ -113,7 +113,7 @@ export class ToolsComponent implements OnInit {
 
 
   getDisponiblesList() {
-    this.disponibleService.getAllDisponibles().then((res) => {
+    this.modelService.getAllModelos().then((res) => {
     	console.log(res);
 
        this.disponibles = res;
@@ -143,11 +143,15 @@ export class ToolsComponent implements OnInit {
 
 getDetails(data,tipo){
 
-  console.log(data);
+  console.log(">>>>>"+ data);
 	this.selectedImg =[];
-  data.images.reverse();
-	this.itemSelect = data;
 	this.typeItemSelect = tipo;
+
+ this.modelService.getModelo(data.id).then((res) => {
+    
+   this.itemSelect = res;
+ });
+
 }
 
 

@@ -49,7 +49,8 @@ router.get('/by/:id', function(req, res, next) {
     lstCiudades = [];
     lstPromos = [];
     var resul;
-    Images.find({$and:[{$or: [{validado: true  },  {status: true}]},{disponible: true}]},
+    //Images.find({$and:[{$or: [{validado: true  },  {status: true}]},{disponible: true}]},
+    Images.find({$or:[{$or: [{validado: true  },  {status: true}]},{disponible: true}]},
         null,{sort: {validado: -1,status: -1}}, function(err, images) {
         if (err) return next(err);
 
@@ -80,6 +81,34 @@ router.get('/by/:id', function(req, res, next) {
         res.json(resul);
     });
 });
+
+
+
+router.get('/all', function(req, res, next) {
+
+    console.log("Entando a all")
+    var items = [];
+    
+    //Images.find({$and:[{$or: [{validado: true  },  {status: true}]},{disponible: true}]},
+    Images.find({$or: [{validado: true  },  {status: true}]},
+        null,{sort: {validado: -1,status: -1}}, function(err, images) {
+        if (err) return next(err);
+
+        
+        for (var i = 0; i < images.length; i++){
+            var ele = {};
+            ele._id = images[i]._id;
+            ele.id = images[i].id;
+            ele.profile_image_url = images[i].profile_image_url_https.replace("http:","https:");
+
+            items.push(ele);
+        }
+
+        res.json(items);
+    });
+});
+
+
 
 
 
@@ -118,12 +147,15 @@ router.get('/:id', function(req, res, next) {
 });
 
 
-router.get('/getMostrarEnDispoibles', function(req, res, next) {
-    Images.find({
-        status: true
-    }, function(err, images) {
+
+
+
+router.get('/getMostrarEnDisponibles', function(req, res, next) {
+    console.log(images.length + "1.-><<<<<<<<<<<<<<");
+    Images.find({$or: [{validado: true  },  {status: true}]}, function(err, images) {
         if (err) return next(err);
         var items = [];
+        console.log(images.length + "><<<<<<<<<<<<<<");
         for (var i = 0; i < images.length; i++) {
             var item = {};
             item.ciudad = images[i].ciudad;
