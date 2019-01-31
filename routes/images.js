@@ -43,6 +43,37 @@ router.delete('/deletePostTwitter/:id', function(req, res, next) {
 });
 
 /* GET ALL IMAGES */
+router.get('/getValidados', function(req, res, next) {
+    Images.find({$and:[{$or: [{validado: true  },  {status: true}]},{disponible: true}]},
+        {"id":"1","profile_image_url_https":"1"},{sort: {validado: -1,status: -1}}, function(err, images) {
+          
+          res.json(images);
+    })
+});
+
+router.get('/getDataValidado/:id', function(req, res, next) {
+
+    var _theid;
+    /*Images.findOne( {$and: [
+    {id: _theid},
+    {status: true}
+    ]}*/
+    _theid = req.params.id
+    var item = {};
+    Images.findOne({id: _theid},
+        function(err, respuesta) {
+        if (err) return next(err);
+        item.id = respuesta.id;
+        item.wbitly = respuesta.wbitly;
+        item.telefono = respuesta.telefono;
+        item.images = respuesta.images.slice(0,10);
+        item.ciudad = respuesta.ciudad;
+        res.json(item);
+    });
+    
+});
+
+/* GET ALL IMAGES */
 router.get('/by/:id', function(req, res, next) {
     var items = [];
     var firts = [];
