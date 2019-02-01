@@ -59,11 +59,7 @@ export class ToolsComponent implements OnInit {
     this.typeItemSelect = '';
 	  this.getModelos();
   	//this.getDisponiblesList();
-<<<<<<< HEAD
-    // this.getPromosList();
-=======
-    //this.getPromosList();
->>>>>>> 8811693d3f5ec8b5a6c7c69460cfa1c04929a45e
+
   
    
     
@@ -161,8 +157,7 @@ getDetails(data,tipo){
 
 
 
-<<<<<<< HEAD
-  console.log(">>>>>"+ data);
+
 	this.selectedImg =[];
 	this.typeItemSelect = tipo;
 
@@ -171,8 +166,7 @@ getDetails(data,tipo){
    this.itemSelect = res;
  });
 
-=======
->>>>>>> 8811693d3f5ec8b5a6c7c69460cfa1c04929a45e
+
 }
 
 
@@ -204,7 +198,7 @@ getDetailDisponible(data){
 }
 
  getModelos() {
-    this.toolService.getValidados().then((res) => {
+    this.modelService.getAllModelos().then((res) => {
 
 
        this.modelos = res;
