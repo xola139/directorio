@@ -9,15 +9,12 @@ import * as $ from 'jquery';
 import { LoaderService } from '../loader.service';
 import { PerfilComponent } from '../perfil/perfil.component';
 
-
 @Component({
   selector: 'app-model',
   templateUrl: './model.component.html',
   styleUrls: ['./model.component.css','../app.component.css']
 })
 export class ModelComponent implements OnInit {
-
-    
 
      url: SafeResourceUrl;
 
@@ -55,6 +52,19 @@ export class ModelComponent implements OnInit {
     }
 
     ngOnInit() {
+        
+
+        console.log("Entra para iniiciar...11111   "+localStorage.getItem("dataUSer"));
+
+        if(localStorage.getItem("dataUSer")) {
+            var _dataUser = JSON.parse(localStorage.dataUSer);
+            this.verItems = _dataUser.verItems;
+            
+        }else{
+            console.log("Entra para iniiciar...")
+            localStorage.dataUSer = JSON.stringify({verItems:9});
+            
+        }
 
         //http call starts
         this.loaderService.display(true);
@@ -67,10 +77,11 @@ export class ModelComponent implements OnInit {
 
         this.getModelos();
         this.Allciudades = this.modelService.getAllCiudades();
-
-
         this.viewAdmin =  this.route.snapshot.queryParams.aut ? true:false
         this.viewMore = true;
+
+        
+        
 
     }
 
@@ -110,6 +121,7 @@ export class ModelComponent implements OnInit {
             this.myData = this.items = res;
             this.getLstCiudades();
             this.loaderService.display(false);
+
         }, (err) => {
             console.log(err);
         });
@@ -154,6 +166,12 @@ export class ModelComponent implements OnInit {
     getVerMas() {
         if (this.verItems < this.myData.length) {
             this.verItems +=3;
+
+            var _dataUser = JSON.parse(localStorage.dataUSer);
+            _dataUser.verItems = this.verItems;
+            
+            localStorage.setItem("dataUSer", JSON.stringify(_dataUser));
+            
         }else{
             this.viewMore = false;
         }

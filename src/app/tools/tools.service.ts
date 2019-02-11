@@ -8,9 +8,7 @@ export class ToolService {
 
   constructor(private http: Http) { }
 
-
-
-    saveMessage(data) {
+  saveMessage(data) {
       return new Promise((resolve, reject) => {
           this.http.put(this.baseApiUrl +'/messages/register', data)
             .map(res => res.json())
@@ -20,6 +18,18 @@ export class ToolService {
               reject(err);
             });
       });
+  }
+
+  getMessages() {
+    return new Promise((resolve, reject) => {
+        this.http.get(this.baseApiUrl + '/messages/getMessages')
+          .map(res => res.json())
+          .subscribe(res => {
+            resolve(res)
+        }, (err) => {
+          reject(err);
+        });
+    });
   }
 
   getValidados() {

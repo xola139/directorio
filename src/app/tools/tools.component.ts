@@ -36,6 +36,8 @@ export class ToolsComponent implements OnInit {
   dsModelos :any;
   autPost:Boolean;
   message:string;
+  lstMsg:any;
+  isRegistrer:boolean;
   
   constructor(private loaderService: LoaderService, 
           @Inject(DOCUMENT) dom: Document,
@@ -46,6 +48,7 @@ export class ToolsComponent implements OnInit {
           private toolService: ToolService,) {
 
     this.dom = dom;
+    this.isRegistrer = true;
 
 
 
@@ -57,13 +60,9 @@ export class ToolsComponent implements OnInit {
   	this.itemSelect = {id:'',autPost:false,opcionesTelefono:null};
   	this.itemSelect.opcionesTelefono = {whatsappdirecto:false};
     this.typeItemSelect = '';
-	  this.getModelos();
+    this.getModelos();
+    this.getMessages(); 
   	//this.getDisponiblesList();
-
-  
-   
-    
-
   }
 
 
@@ -80,8 +79,18 @@ export class ToolsComponent implements OnInit {
     filterValue = filterValue.toLowerCase(); // MatTableDataSource defaults to lowercase matches
     this.dsModelos.filter = filterValue;
     this.modelos  = this.dsModelos.filteredData;
+    this.isRegistrer = this.modelos.length > 0 ? true:false;
   }
 
+
+  getMessages() {
+    this.toolService.getMessages().then((res) => {
+      this.lstMsg = res;
+    }, (err) => {
+      console.log(err);
+    });
+  }
+  
   autPostChange(event:MatCheckboxChange) {
     
     var dataAutPost = {_id:this.itemSelect._id};
@@ -284,9 +293,10 @@ selectBadge (e, id) {
 	this.urls = "";
 	
 	this.urls += this.itemSelect.images[id].expanded_url+"\n";
+
+  var _m = Math.floor((Math.random() * this.lstMsg.length) + 1)
   
-  
-  this.ratingHtml = "Agenda cita con ..";
+  this.ratingHtml =this.lstMsg[_m].message +"\n";
   this.ratingHtml += "@"+this.itemSelect.id +"\n"+	"📲"+this.itemSelect.telefono.trim()+"\n"; 
   this.ratingHtml += "Disponible en  \n";
   this.ratingHtml += "#escortenmx  \n"
@@ -303,6 +313,9 @@ selectBadge (e, id) {
 
 //  var newWindow = window.open('https://mobile.twitter.com/'+this.itemSelect.id );
 }
+
+
+
 
   selectPromos(e, id){
     

@@ -19,6 +19,12 @@ router.put('/register', function(req, res, next) {
 
 });
 
+router.get('/getMessages', function(req, res, next) {
+  Messages.find({status: true },null,{sort: {id: -1}}, function(err, messages) {
+      res.json(messages);
+  })
+});
+
 
 
 
