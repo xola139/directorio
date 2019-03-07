@@ -63,11 +63,18 @@ router.get('/getDataValidado/:id', function(req, res, next) {
     Images.findOne({id: _theid},
         function(err, respuesta) {
         if (err) return next(err);
+
+
+        for (var i = 0; i < respuesta.images.length; i++) {
+            respuesta.images = _.sortBy(respuesta.images, function(o) { return o.id; })
+        }
+
         item.id = respuesta.id;
         item.wbitly = respuesta.wbitly;
         item.telefono = respuesta.telefono;
         item.images = respuesta.images.slice(0,10);
         item.ciudad = respuesta.ciudad;
+        
         res.json(item);
     });
     

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit ,ViewChild,ElementRef} from '@angular/core';
 import { DisponibleService } from '../disponibles/disponible.service';
 import { ModelService } from '../model/model.service';
 import { MatSnackBar, MatTableDataSource,MatCheckboxChange } from '@angular/material';
@@ -38,6 +38,12 @@ export class ToolsComponent implements OnInit {
   message:string;
   lstMsg:any;
   isRegistrer:boolean;
+  numberImage:any;
+  
+   private currentTimeout: any;
+
+  @ViewChild('copyButton') copyButton:ElementRef;
+  @ViewChild('btnClose') btnClose : ElementRef 
   
   constructor(private loaderService: LoaderService, 
           @Inject(DOCUMENT) dom: Document,
@@ -49,10 +55,7 @@ export class ToolsComponent implements OnInit {
 
     this.dom = dom;
     this.isRegistrer = true;
-
-
-
-   }
+}
 
   ngOnInit() {
     this.disponibles = [];
@@ -90,7 +93,57 @@ export class ToolsComponent implements OnInit {
       console.log(err);
     });
   }
+
+
+copyJump(val: number){
+  this.numberImage = val;  
+  this.btnClose.nativeElement.click();
+}
+
+  /* To copy any Text */
+copyText(){
   
+  this.ratingHtml = "";
+  this.urls = "";
+  var _m = Math.floor((Math.random() * this.lstMsg.length) + 1)
+
+  this.itemSelect.telefono = this.itemSelect.telefono ? this.itemSelect.telefono.trim():"";
+  this.urls += this.itemSelect.images[this.numberImage].expanded_url+"\n";
+
+  
+  
+  this.ratingHtml =  this.lstMsg[_m].message +"\n";
+  this.ratingHtml += "@"+this.itemSelect.id +"\n";
+  this.ratingHtml += this.itemSelect.telefono.trim() +"\n"; 
+  this.ratingHtml += "Disponible en  \n" + this.itemSelect.ciudad != undefined ? this.itemSelect.ciudad:"" +"\n";
+  this.ratingHtml += "#escortenmx  \n"; 
+  this.ratingHtml += this.itemSelect.wbitly +" \n"
+  this.ratingHtml += this.urls  ;
+
+
+
+
+  let selBox = document.createElement('textarea');
+  selBox.style.position = 'fixed';
+  selBox.style.left = '0';
+  selBox.style.top = '0';
+  selBox.style.opacity = '0';
+  selBox.value = this.ratingHtml;
+  document.body.appendChild(selBox);
+  selBox.focus();
+  selBox.select();
+  document.execCommand('copy');
+  document.body.removeChild(selBox);
+
+
+
+
+
+
+  }
+
+
+
   autPostChange(event:MatCheckboxChange) {
     
     var dataAutPost = {_id:this.itemSelect._id};
@@ -162,19 +215,6 @@ getDetails(data,tipo){
   }, (err) => {
    console.log(err);
  });
-
-
-
-
-
-	this.selectedImg =[];
-	this.typeItemSelect = tipo;
-
- this.modelService.getModelo(data.id).then((res) => {
-    
-   this.itemSelect = res;
- });
-
 
 }
 
