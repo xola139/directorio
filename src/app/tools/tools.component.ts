@@ -115,9 +115,10 @@ copyText(){
   this.ratingHtml =  this.lstMsg[_m].message +"\n";
   this.ratingHtml += "@"+this.itemSelect.id +"\n";
   this.ratingHtml += this.itemSelect.telefono.trim() +"\n"; 
-  this.ratingHtml += "Disponible en  \n" + this.itemSelect.ciudad != undefined ? this.itemSelect.ciudad:"" +"\n";
+  this.ratingHtml += "🏩 Disponible en  \n"; //+ this.itemSelect.ciudad != undefined ? this.itemSelect.ciudad:"" +"\n";
   this.ratingHtml += "#escortenmx  \n"; 
-  this.ratingHtml += this.itemSelect.wbitly +" \n"
+  this.ratingHtml += "WhatsApp aqui! 👇👇👇👇  \n"; 
+  this.ratingHtml += "✉"+this.itemSelect.wbitly +" \n"
   this.ratingHtml += this.urls  ;
 
 
