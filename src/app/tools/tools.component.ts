@@ -100,29 +100,54 @@ copyJump(val: number){
   this.btnClose.nativeElement.click();
 }
 
-  /* To copy any Text */
-copyText(){
+
+copyDataModel(data){
+
+
+  var promise = new Promise(function(resolve, reject) {
+  // do a thing, possibly async, then…
+
+  if (this.getDetails(data,'copyFromModel')) {
+    resolve("Stuff worked!");
+  }
+  else {
+    reject(Error("It broke"));
+  }
+});
+
+
+
   
+  
+
+
+
+thepromise.then(function(result) {
+  console.log(result); // "Stuff worked!"
+}, function(err) {
+  console.log(err); // Error: "It broke"
+});
+
+
+
+  this.numberImage = -1;
   this.ratingHtml = "";
   this.urls = "";
   var _m = Math.floor((Math.random() * this.lstMsg.length) + 1)
 
   this.itemSelect.telefono = this.itemSelect.telefono ? this.itemSelect.telefono.trim():"";
-  this.urls += this.itemSelect.images[this.numberImage].expanded_url+"\n";
-
   
+  this.urls += this.numberImage != -1 ? this.itemSelect.images[this.numberImage].expanded_url+"\n":"";
   
   this.ratingHtml =  this.lstMsg[_m].message +"\n";
   this.ratingHtml += "@"+this.itemSelect.id +"\n";
   this.ratingHtml += this.itemSelect.telefono.trim() +"\n"; 
-  this.ratingHtml += "🏩 Disponible en  \n"; //+ this.itemSelect.ciudad != undefined ? this.itemSelect.ciudad:"" +"\n";
+  this.ratingHtml += "Disponible en  \n"; //+ this.itemSelect.ciudad != undefined ? this.itemSelect.ciudad:"" +"\n";
   this.ratingHtml += "#escortenmx  \n"; 
   this.ratingHtml += "WhatsApp aqui! 👇👇👇👇  \n"; 
-  this.ratingHtml += "✉"+this.itemSelect.wbitly +" \n"
-  this.ratingHtml += this.urls  ;
-
-
-
+  this.ratingHtml += this.itemSelect.wbitly +" \n"
+  
+  this.ratingHtml += this.numberImage != -1 ? this.urls:""  ;
 
   let selBox = document.createElement('textarea');
   selBox.style.position = 'fixed';
@@ -137,11 +162,45 @@ copyText(){
   document.body.removeChild(selBox);
 
 
-
-
-
-
   }
+
+}
+
+
+  /* To copy any Text */
+copyText(){
+  
+  this.ratingHtml = "";
+  this.urls = "";
+  var _m = Math.floor((Math.random() * this.lstMsg.length) + 1)
+
+  this.itemSelect.telefono = this.itemSelect.telefono ? this.itemSelect.telefono.trim():"";
+  
+  this.urls += this.numberImage != -1 ? this.itemSelect.images[this.numberImage].expanded_url+"\n":"";
+  
+  this.ratingHtml =  this.lstMsg[_m].message +"\n";
+  this.ratingHtml += "@"+this.itemSelect.id +"\n";
+  this.ratingHtml += this.itemSelect.telefono.trim() +"\n"; 
+  this.ratingHtml += "Disponible en  \n"; //+ this.itemSelect.ciudad != undefined ? this.itemSelect.ciudad:"" +"\n";
+  this.ratingHtml += "#escortenmx  \n"; 
+  this.ratingHtml += "WhatsApp aqui! 👇👇👇👇  \n"; 
+  this.ratingHtml += this.itemSelect.wbitly +" \n"
+  
+  this.ratingHtml += this.numberImage != -1 ? this.urls:""  ;
+
+  let selBox = document.createElement('textarea');
+  selBox.style.position = 'fixed';
+  selBox.style.left = '0';
+  selBox.style.top = '0';
+  selBox.style.opacity = '0';
+  selBox.value = this.ratingHtml;
+  document.body.appendChild(selBox);
+  selBox.focus();
+  selBox.select();
+  document.execCommand('copy');
+  document.body.removeChild(selBox);
+
+}
 
 
 
@@ -205,7 +264,6 @@ copyText(){
 
 
 getDetails(data,tipo){
-  
   this.toolService.getDataValidado(data.id).then((res) => {
     this.selectedImg =[];
     data.images = res["images"];
@@ -213,8 +271,10 @@ getDetails(data,tipo){
     data.wbitly = res["wbitly"];
 	  this.itemSelect = data;
 	  this.typeItemSelect = tipo;
+  
   }, (err) => {
    console.log(err);
+   
  });
 
 }
