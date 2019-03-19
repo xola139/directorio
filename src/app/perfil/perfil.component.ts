@@ -225,10 +225,11 @@ export class PerfilComponent implements OnInit  {
   	getPerfil(id) {
 		  this.perfilService.showPerfil(id).then((res) => {
         
-
+console.log("Perfileando ando!!!");
         if(res == null)
           this.noautorizado = true;
         else{
+          this.noautorizado = false;
           this.perfil = res;
           var auxImages =[];
           

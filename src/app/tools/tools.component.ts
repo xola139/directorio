@@ -40,8 +40,6 @@ export class ToolsComponent implements OnInit {
   isRegistrer:boolean;
   numberImage:any;
   
-   private currentTimeout: any;
-
   @ViewChild('copyButton') copyButton:ElementRef;
   @ViewChild('btnClose') btnClose : ElementRef 
   
@@ -104,51 +102,18 @@ copyJump(val: number){
 copyDataModel(data){
 
 
-  var promise = new Promise(function(resolve, reject) {
-  // do a thing, possibly async, then…
-
-  if (this.getDetails(data,'copyFromModel')) {
-    resolve("Stuff worked!");
-  }
-  else {
-    reject(Error("It broke"));
-  }
-});
-
-
-
-  
-  
-
-
-
-thepromise.then(function(result) {
-  console.log(result); // "Stuff worked!"
-}, function(err) {
-  console.log(err); // Error: "It broke"
-});
-
-
-
-  this.numberImage = -1;
-  this.ratingHtml = "";
-  this.urls = "";
+  console.log(data);
   var _m = Math.floor((Math.random() * this.lstMsg.length) + 1)
-
-  this.itemSelect.telefono = this.itemSelect.telefono ? this.itemSelect.telefono.trim():"";
-  
-  this.urls += this.numberImage != -1 ? this.itemSelect.images[this.numberImage].expanded_url+"\n":"";
-  
+  this.ratingHtml = "";
   this.ratingHtml =  this.lstMsg[_m].message +"\n";
-  this.ratingHtml += "@"+this.itemSelect.id +"\n";
-  this.ratingHtml += this.itemSelect.telefono.trim() +"\n"; 
-  this.ratingHtml += "Disponible en  \n"; //+ this.itemSelect.ciudad != undefined ? this.itemSelect.ciudad:"" +"\n";
+  this.ratingHtml += "@"+ data.id +"\n";
+  this.ratingHtml += data.telefono  +"\n"; 
+  this.ratingHtml += "Disponible en  \n" + data.ciudad ; 
   this.ratingHtml += "#escortenmx  \n"; 
   this.ratingHtml += "WhatsApp aqui! 👇👇👇👇  \n"; 
-  this.ratingHtml += this.itemSelect.wbitly +" \n"
-  
-  this.ratingHtml += this.numberImage != -1 ? this.urls:""  ;
-
+  this.ratingHtml += data.wbitly +" \n"
+  this.ratingHtml += "Agenda! 👇👇👇👇  \n"; 
+       
   let selBox = document.createElement('textarea');
   selBox.style.position = 'fixed';
   selBox.style.left = '0';
@@ -160,11 +125,20 @@ thepromise.then(function(result) {
   selBox.select();
   document.execCommand('copy');
   document.body.removeChild(selBox);
-
-
-  }
+  this.openSnackBar();
 
 }
+
+
+sleep(milliseconds) {
+  var start = new Date().getTime();
+  for (var i = 0; i < 1e7; i++) {
+    if ((new Date().getTime() - start) > milliseconds){
+      break;
+    }
+  }
+}
+
 
 
   /* To copy any Text */
@@ -264,7 +238,7 @@ copyText(){
 
 
 getDetails(data,tipo){
-  this.toolService.getDataValidado(data.id).then((res) => {
+    this.toolService.getDataValidado(data.id).then((res) => {
     this.selectedImg =[];
     data.images = res["images"];
     data.telefono = res["telefono"];

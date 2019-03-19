@@ -137,6 +137,9 @@ router.get('/all', function(req, res, next) {
             var ele = {};
             ele._id = images[i]._id;
             ele.id = images[i].id;
+            ele.ciudad = images[i].ciudad;
+            ele.telefono = images[i].telefono;
+            ele.wbitly = images[i].wbitly;
             ele.profile_image_url = images[i].profile_image_url_https.replace("http:","https:");
 
             items.push(ele);
@@ -171,10 +174,7 @@ router.get('/:id', function(req, res, next) {
     }else if(req.user.username == '')
         _theid = req.params.id
 
-    Images.findOne( {$and: [
-    {id: _theid},
-    {status: true}
-    ]}, function(err, post) {
+    Images.findOne( {id: _theid}, function(err, post) {
         
         if (err) return next(err);
 
