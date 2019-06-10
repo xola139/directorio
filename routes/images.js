@@ -4,6 +4,8 @@ var mongoose = require('mongoose');
 var Images = require('../models/Images.js');
 var Disponibles = require('../models/Disponibles.js');
 var config = require('../config');
+
+
 var _ = require('underscore');
 var Twit = require('twit');
 
@@ -74,6 +76,9 @@ router.get('/getDataValidado/:id', function(req, res, next) {
         item.telefono = respuesta.telefono;
         item.images = respuesta.images.slice(0,10);
         item.ciudad = respuesta.ciudad;
+        item.status = respuesta.status;
+        item.validado = respuesta.validado;
+        item.disponible = respuesta.disponible;
         
         res.json(item);
     });
@@ -123,13 +128,11 @@ router.get('/by/:id', function(req, res, next) {
 
 
 router.get('/all', function(req, res, next) {
-
-    console.log("Entando a all")
     var items = [];
     
     //Images.find({$and:[{$or: [{validado: true  },  {status: true}]},{disponible: true}]},
     Images.find({$or: [{validado: true  },  {status: true}]},
-        null,{sort: {validado: -1,status: -1}}, function(err, images) {
+        null,{sort: {validado: -1}}, function(err, images) {
         if (err) return next(err);
 
         
@@ -232,6 +235,12 @@ function registraNuevo(options,res){
         newMedia.status = true;
         newMedia.disponible = true;
         newMedia.ciudad = options.ciudad;
+        newMedia.cuerpo = {estatura: null,ojos: null,cabello: null,medidas: null,peso: null};
+        newMedia.horarioAtencion ={fulltime:null,hinicio:null,hfin:null};
+        newMedia.diasAtencion = { fulltime:null, lunes:null,martes:null,miercoles:null,jueves:null,viernes:null,sabado:null,domingo:null};
+        newMedia.pago = {tarjeta:null,efectivo:null};
+        newMedia.opcionesTelefono = {whatsapp:null,whatsappdirecto:null, llamadas:null,twitter:null };
+        newMedia.idiomas = {espanol:null,ingles:null};
 
         for (var i = 0; i < data.length; i++) {
             if (data[i].entities.media) {

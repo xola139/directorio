@@ -7,6 +7,7 @@ import { DOCUMENT } from "@angular/platform-browser";
 import { PromosService } from '../promos/promos.service';
 import { LoaderService } from '../loader.service';
 import { ToolService } from './tools.service';
+import { ciudades } from '../util';
 
 
 
@@ -39,6 +40,9 @@ export class ToolsComponent implements OnInit {
   lstMsg:any;
   isRegistrer:boolean;
   numberImage:any;
+  cudades = ciudades.ciudades;
+  ciudad:any;
+
   
   @ViewChild('copyButton') copyButton:ElementRef;
   @ViewChild('btnClose') btnClose : ElementRef 
@@ -49,11 +53,13 @@ export class ToolsComponent implements OnInit {
           private modelService:ModelService,
           public snackBar: MatSnackBar,
           private promosService: PromosService,
-          private toolService: ToolService,) {
+          private toolService: ToolService) {
 
     this.dom = dom;
     this.isRegistrer = true;
 }
+
+  
 
   ngOnInit() {
     this.disponibles = [];
@@ -93,26 +99,31 @@ export class ToolsComponent implements OnInit {
   }
 
 
-copyJump(val: number){
+copyJump(val: number,pic){
   this.numberImage = val;  
   this.btnClose.nativeElement.click();
+
+  var pom = document.createElement('a');
+  pom.setAttribute('href', 'data:application/octet-stream,' + encodeURIComponent(pic.media_url_https));
+  pom.setAttribute('download', 'filename');
+  pom.style.display = 'none';
+  document.body.appendChild(pom);
+  pom.click();
+  document.body.removeChild(pom);  
+  
 }
 
 
 copyDataModel(data){
-
-
-  console.log(data);
   var _m = Math.floor((Math.random() * this.lstMsg.length) + 1)
   this.ratingHtml = "";
   this.ratingHtml =  this.lstMsg[_m].message +"\n";
   this.ratingHtml += "@"+ data.id +"\n";
   this.ratingHtml += data.telefono  +"\n"; 
-  this.ratingHtml += "Disponible en  \n" + data.ciudad ; 
-  this.ratingHtml += "#escortenmx  \n"; 
-  this.ratingHtml += "WhatsApp aqui! 👇👇👇👇  \n"; 
+  this.ratingHtml += "Disponible en  " +data.ciudad+ "\n" ; 
+  this.ratingHtml += "WhatsApp aqui!   \n"; 
   this.ratingHtml += data.wbitly +" \n"
-  this.ratingHtml += "Agenda! 👇👇👇👇  \n"; 
+  this.ratingHtml += "Agenda!  \n"; 
        
   let selBox = document.createElement('textarea');
   selBox.style.position = 'fixed';
@@ -155,9 +166,9 @@ copyText(){
   this.ratingHtml =  this.lstMsg[_m].message +"\n";
   this.ratingHtml += "@"+this.itemSelect.id +"\n";
   this.ratingHtml += this.itemSelect.telefono.trim() +"\n"; 
-  this.ratingHtml += "Disponible en  \n"; //+ this.itemSelect.ciudad != undefined ? this.itemSelect.ciudad:"" +"\n";
-  this.ratingHtml += "#escortenmx  \n"; 
-  this.ratingHtml += "WhatsApp aqui! 👇👇👇👇  \n"; 
+  this.ratingHtml += "Disponible en  \n"; 
+  
+  this.ratingHtml += "WhatsApp aqui!  \n"; 
   this.ratingHtml += this.itemSelect.wbitly +" \n"
   
   this.ratingHtml += this.numberImage != -1 ? this.urls:""  ;
@@ -178,14 +189,26 @@ copyText(){
 
 
 
+  updateCiudad(event:MatCheckboxChange){
+    var dataAutPost = {_id:this.itemSelect._id};
+    dataAutPost[event['currentTarget'].name] = event['currentTarget'].value;
+    this.modelService.updateAutPost(dataAutPost).then((res) => {
+       console.log(res);
+    }, (err) => {
+       console.log(err);
+    });
+  }
+
   autPostChange(event:MatCheckboxChange) {
     
+    
     var dataAutPost = {_id:this.itemSelect._id};
-
+    
     if(event.source.id == 'whatsappdirecto')
       dataAutPost['opcionesTelefono'].whatsappdirecto = event.checked;
-    else  
+    else 
       dataAutPost[event.source.id] = event.checked;
+   
 
     this.modelService.updateAutPost(dataAutPost).then((res) => {
        console.log(res);
@@ -242,9 +265,16 @@ getDetails(data,tipo){
     this.selectedImg =[];
     data.images = res["images"];
     data.telefono = res["telefono"];
-    data.wbitly = res["wbitly"];
+    data.ciudad = res["ciudad"];
+    data.status = res["status"];
+    data.validado = res["validado"];
+    data.disponible = res["disponible"];
+
 	  this.itemSelect = data;
 	  this.typeItemSelect = tipo;
+    this.ciudad =  res["ciudad"];
+
+
   
   }, (err) => {
    console.log(err);

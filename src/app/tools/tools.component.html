@@ -47,9 +47,12 @@
               <img (click)="getDetails(d,'modelo')" src="{{d.profile_image_url}}" alt="disponible" width="96" height="96" data-toggle="modal" data-target="#detailModalLong">
               <br>
               {{d.id}}
-              <button (click)="copyDataModel(d)" value="Copy" >Copy</button>
-              <button #copyButton (click)="copyText()" value="Select and copy">Select and copy</button>
-
+              <div class="col-md-12 col-sm-12">
+                  <button (click)="copyDataModel(d)" value="Copy" >Copy Message</button>
+              </div>
+              <div class="col-md-12 col-sm-12">
+                  <button #copyButton (click)="copyText()" value="Select and copy">Select and copy</button>
+              </div>  
             </div>
           </div>
         </div>
@@ -101,44 +104,59 @@
       <div class="modal-body">
         <div class="row" >
           
-
+          Ciudad: {{itemSelect.ciudad}}
+          <select class="form-control"  [(ngModel)]="itemSelect.ciudad"  name="id" name="ciudad" (change)="updateCiudad($event)">
+            <option *ngFor="let ciudad of cudades" [value]="ciudad.value" > {{ ciudad.viewValue }}</option>
+          </select>
 
           <div class="col-sm-3 col-md-6" >
-            <mat-checkbox [(ngModel)]="itemSelect.validado" (change)="autPostChange($event)"  id="validado" name="validado" >Validado</mat-checkbox>
-             
+            <mat-checkbox [(ngModel)]="itemSelect.validado" (change)="autPostChange($event)" id="validado" name="validado" >Validado</mat-checkbox>
+          </div>
+          <div class="col-sm-3 col-md-6" >
+            <mat-checkbox [(ngModel)]="itemSelect.status" (change)="enableUserChange($event)" id="status" name="status" >Status</mat-checkbox>
+          </div>
+          <div class="col-sm-3 col-md-6" >
+            <mat-checkbox [(ngModel)]="itemSelect.disponible" (change)="enableUserChange($event)" id="disponible" name="disponible" >Disponible</mat-checkbox>
           </div>
 
           <div class="col-sm-3 col-md-6" >
-            <mat-checkbox [(ngModel)]="itemSelect.autPost" (change)="autPostChange($event)"  id="autPost" name="autPost" >Autoriza post twit</mat-checkbox>
+            <mat-checkbox [(ngModel)]="itemSelect.autPost" (change)="autPostChange($event)" id="autPost" name="autPost" >Autoriza post twit</mat-checkbox>
              
           </div>
           
           <div class="col-sm-3 col-md-6" >
-            <mat-checkbox [(ngModel)]="itemSelect.onlytwit" (change)="autPostChange($event)"   id="onlytwit" name="onlytwit" >Onlytwit</mat-checkbox>
+            <mat-checkbox [(ngModel)]="itemSelect.onlytwit" (change)="autPostChange($event)" id="onlytwit" name="onlytwit" >Onlytwit</mat-checkbox>
              
           </div>
           </div>
           <div class="row" >
           
-          <div class="col-sm-3 col-md-6" >
-            <mat-checkbox [(ngModel)]="itemSelect.status" (change)="enableUserChange($event)"  id="status" name="status" >Habilita usuario en web</mat-checkbox>
-          </div>
-
           
+        </div>
 
+        <p>
+          <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+            Twits
+          </button>
+        </p>
+        <div class="collapse" id="collapseExample">
+          <div class="card card-body">
+            <ngx-twitter-timeline [data]="{sourceType: 'url', url: 'https://twitter.com/'+ itemSelect.id}" [opts]="{tweetLimit: 5}"></ngx-twitter-timeline>
+          </div>
         </div>
         
 
       
         
       <p>{{itemSelect.descripcion}}</p>
+      
 
              <div class="row" >
                 <div class="col-sm-6 col-md-4" *ngFor="let pic of itemSelect.images ;let i = index">
                   <div class="card">
                     <div class="card-body p-0">
                       <img class="card-img-top" src="{{pic.media_url_https}}" alt="imagen twitter" >
-                       <button (click)="copyJump(i)" value="click to copy" >Copy</button>
+                       <button (click)="copyJump(i,pic)" value="click to copy" >Copy</button>
                     </div>
                   </div>
               </div>
